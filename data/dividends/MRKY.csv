@@ -1,0 +1,5 @@
+registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2014-07-14,0.00014,RUB,manual_disclosure,,
+2016-06-22,0.002853,RUB,skill_fill_yahoo,yahoo_ex_div,
+2018-06-19,0.005464,RUB,skill_fill_yahoo,yahoo_ex_div,
+2019-06-19,0.00684170205,RUB,moex_iss,,

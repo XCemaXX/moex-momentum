@@ -1,0 +1,12 @@
+registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2015-07-01,0.366502,RUB,skill_fill_yahoo,yahoo_ex_div,
+2016-06-10,0.477757,RUB,skill_fill_yahoo,yahoo_ex_div,
+2017-06-13,2.096255,RUB,skill_fill_yahoo,yahoo_ex_div,
+2018-06-13,2.672409,RUB,skill_fill_yahoo,yahoo_ex_div,
+2019-06-18,2.2074818066537,RUB,moex_iss,,
+2020-11-30,3.389774687119,RUB,moex_iss,,
+2021-07-19,3.459319108275298,RUB,moex_iss,,
+2022-12-23,1.44269928417545,RUB,moex_iss,,
+2023-07-17,3.14748465561717,RUB,moex_iss,,
+2024-07-15,5.61877758372581,RUB,moex_iss,,
+2025-07-03,6.28976390233287,RUB,moex_iss,,

@@ -1,0 +1,11 @@
+registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2012-04-21,0.15,RUB,skill_fill_dohod,,
+2012-08-24,0.14982,RUB,skill_fill_yahoo,yahoo_ex_div,
+2019-12-24,0.78,RUB,skill_fill_dohod,,
+2020-06-26,1.42,RUB,moex_iss,,
+2020-11-30,2.55,RUB,moex_iss,,
+2021-06-25,1.95,RUB,moex_iss,,
+2022-06-21,4.5,RUB,moex_iss,,
+2023-12-03,2.0,RUB,moex_iss,,
+2024-06-15,2.0,RUB,moex_iss,,
+2024-10-11,4.0,RUB,moex_iss,,

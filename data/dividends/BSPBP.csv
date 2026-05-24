@@ -1,0 +1,14 @@
+registry_close,amount,currency,source,registry_close_source
+2019-06-10,0.11,RUB,moex_iss,
+2020-06-08,0.11,RUB,moex_iss,
+2020-12-11,0.11,RUB,moex_iss,
+2021-06-07,0.22,RUB,moex_iss,
+2022-06-14,0.11,RUB,moex_iss,
+2022-08-29,0.11,RUB,moex_iss,
+2023-05-10,0.22,RUB,moex_iss,
+2023-10-09,0.22,RUB,moex_iss,
+2024-05-06,0.22,RUB,moex_iss,
+2024-09-30,0.22,RUB,moex_iss,
+2025-05-05,0.22,RUB,moex_iss,
+2025-10-06,0.22,RUB,skill_fill_disclosure,
+2026-05-12,0.22,RUB,skill_fill_yahoo,yahoo_ex_div

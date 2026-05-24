@@ -1,0 +1,53 @@
+[
+  {
+    "old_secid": "YNDX",
+    "new_secid": "YDEX",
+    "renamed": "2024-07-24",
+    "type": "redomicile",
+    "reason": "NL→RU редомициляция. Разные ISIN (NL0009805522 → RU000A107T19), юридически новая бумага. Price-history разрывная, NO bridge через changeover.json. Дата = первый торговый день YDEX на TQBR (см. /securities/YDEX.json: history_from=2024-07-08, регулярная торговля с 2024-07-24)."
+  },
+  {
+    "old_secid": "FIVE",
+    "new_secid": "X5",
+    "renamed": "2025-01-09",
+    "type": "redomicile",
+    "reason": "NL→RU редомициляция X5 Retail Group. История разрывная, FIVE делистнут с MOEX 2024."
+  },
+  {
+    "old_secid": "MAIL",
+    "new_secid": "VKCO",
+    "renamed": "2021-10-12",
+    "type": "redomicile",
+    "reason": "Mail.ru Group → ВК. Юридически новая структура (МКПАО) при делистинге GDR. Разные ISIN, история разрывная."
+  },
+  {
+    "old_secid": "HHRU",
+    "new_secid": "HEAD",
+    "renamed": "2024-09-25",
+    "type": "redomicile",
+    "reason": "HeadHunter Group PLC → МКАО «Хэдхантер». Делистинг GDR, новая обыкновенная RU-акция."
+  },
+  {
+    "old_secid": "POLY",
+    "new_secid": "POLY",
+    "renamed": "2024-10-15",
+    "type": "redomicile",
+    "reason": "Polymetal делистнут с MOEX 2024-10-15. SECID не сменился, но торги прекратились — отметка нужна, чтобы фаза 4 знала когда обрезать prices. (По факту это не редомициляция, а делистинг — но format минимальный, type=redomicile с new=old подходит как маркер.)"
+  },
+  {
+    "old_secid": "BELU",
+    "new_secid": "BELU",
+    "renamed": "2024-08-20",
+    "type": "bonus_issue",
+    "ratio": 0.125,
+    "reason": "1:8 bonus issue (на 1 акцию выдано 7 бонусных) — gap эквивалентен сплиту 1:8, не попал в /iss/statistics/engines/stock/splits.json. Coefficient = 0.125 (=1/8 = before/after для post-cons коррекции pre-цен)."
+  },
+  {
+    "old_secid": "IRAO",
+    "new_secid": "IRAO",
+    "renamed": "2015-01-20",
+    "type": "reverse_split",
+    "ratio": 100.0,
+    "reason": "Консолидация 100:1 (увеличение номинала с 0.02809767 до 2.809767 ₽). Приостановка торгов 25.12.2014, возобновление 20.01.2015. Регистрация выпуска 1-04-33498-E от 23.12.2014. Подтверждено: пресс-релиз ОАО «Интер РАО» (interrao.ru/press-center/news/detail.php?ID=4252) и Инвестиционная Палата. Цены до/после в данных: 0.00712 (2014-12-18) → 0.7641 (2015-01-20), ratio ≈ 107 — расхождение от 100 объясняется рыночным движением в течение 22-дневного gap. before=100, after=1, coef=100 умножает pre-2015-01-20 closes до post-cons шкалы."
+  }
+]

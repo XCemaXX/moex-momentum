@@ -1,0 +1,9 @@
+registry_close,amount,currency,source,registry_close_source
+2024-03-21,75.68,RUB,moex_iss,
+2024-07-09,28.6,RUB,moex_iss,
+2024-09-22,45.0,RUB,moex_iss,
+2025-01-08,45.0,RUB,moex_iss,
+2025-03-21,53.3,RUB,moex_iss,
+2025-07-08,80.0,RUB,moex_iss,
+2025-12-22,18.0,RUB,skill_fill_tbank,tbank_reestr
+2026-03-23,102.0,RUB,skill_fill_tbank,tbank_reestr

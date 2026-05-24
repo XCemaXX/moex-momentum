@@ -1,0 +1,7 @@
+registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2011-05-29,0.19,RUB,skill_fill_yahoo,yahoo_ex_div,
+2012-05-31,0.1,RUB,skill_fill_yahoo,yahoo_ex_div,
+2013-05-24,0.1,RUB,skill_fill_yahoo,yahoo_ex_div,
+2013-06-07,0.1,RUB,skill_fill_yahoo,yahoo_ex_div,
+2014-07-03,0.1,RUB,skill_fill_yahoo,yahoo_ex_div,
+2024-05-08,16.0,RUB,moex_iss,,

@@ -1,0 +1,77 @@
+{
+  "_doc": "Tickers for which external broker/exchange dividend feeds (Yahoo, tbank) are wholesale wrong (typically erroneous reverse-split-adjustment in upstream data). Blacklisted sources are excluded from cascade merge entirely. ISS+dohod never blacklisted — they ARE ground truth. Add new entries with explicit reason + ISS overlap evidence.",
+  "tickers": {
+    "VTBR": {
+      "exclude": ["yahoo", "tbank"],
+      "reason": "Phantom reverse-split: Yahoo ×4900, tbank ×4997. VTBR never split. Ground truth: 0.00109868 RUB/share for 2019-06 per ISS, confirmed by VTB 2013 annual report (0.00143 RUB at nominal 0.01 RUB), VKLADER table, Forbes FY2011 AGM coverage.",
+      "evidence_overlap_ym": "2019-06",
+      "iss_amount": 0.00109867761463259,
+      "external_amount": 5.49,
+      "added_at": "2026-05-16"
+    },
+    "HIMCP": {
+      "exclude": ["yahoo"],
+      "reason": "Yahoo 2014-07 = 1.755 vs dohod 0.0175 (×100). Tbank has no records for HIMCP — not blacklisted there.",
+      "evidence_overlap_ym": "2014-07",
+      "dohod_amount": 0.0175,
+      "external_amount": 1.755,
+      "added_at": "2026-05-16"
+    },
+    "PHOR": {
+      "exclude": ["yahoo"],
+      "reason": "Yahoo 2024-07 = 309 vs dohod 15 (×20). Likely Yahoo wrong-share-class scaling or tranche aggregation. Tbank has no records for PHOR.",
+      "evidence_overlap_ym": "2024-07",
+      "dohod_amount": 15.0,
+      "external_amount": 309.0,
+      "added_at": "2026-05-16"
+    },
+    "PLZL": {
+      "exclude": ["tbank"],
+      "reason": "Tbank ×10 systematic bug on pre-2025-03-27 PLZL records (likely double-applying the 2025 1:10 split adjustment). Verified against Polyus IR + dohod + smart-lab + Forbes — ISS values match official board declarations exactly. Polyus had only ONE split in history (2025-03-27). Yahoo for PLZL works fine, not blacklisted.",
+      "evidence_overlap_ym": "2017-07",
+      "iss_amount": 152.41,
+      "external_amount": 1524.10,
+      "added_at": "2026-05-16"
+    },
+    "UDMN": {
+      "exclude": ["tbank"],
+      "reason": "Tbank misdated UDMN dividends by one year — 2020-07 record (182.54 RUB per ISS for FY2019) is reported as 1022.48 RUB which is actually the 2021-07 FY2020 figure. Year-shift bug. Verified via dohod + Udmurtneft IR.",
+      "evidence_overlap_ym": "2020-07",
+      "iss_amount": 182.54,
+      "external_amount": 1022.48,
+      "added_at": "2026-05-16"
+    },
+    "RTKM": {
+      "exclude": ["yahoo"],
+      "reason": "Yahoo 2015-07 = 0.65 vs ISS 3.34 (×0.195). Likely Yahoo's pipeline confused Rostelecom common (RTKM) with prefs (RTKMP) or applied ADR ratio incorrectly. ISS canonical per dohod + smart-lab + Rostelecom IR.",
+      "evidence_overlap_ym": "2015-07",
+      "iss_amount": 3.34,
+      "external_amount": 0.65,
+      "added_at": "2026-05-16"
+    },
+    "NKHP": {
+      "exclude": ["yahoo", "tbank"],
+      "reason": "Both Yahoo and tbank carry 30.43 for 2024-10-07 vs ISS 22.19. ISS confirmed by Forbes article on AGM vote for H1-2024 = 22.19 RUB. Both external feeds likely fetched from a common upstream that mis-aggregates.",
+      "evidence_overlap_ym": "2024-10",
+      "iss_amount": 22.19,
+      "external_amount": 30.43,
+      "added_at": "2026-05-16"
+    },
+    "RKKE": {
+      "exclude": ["yahoo"],
+      "reason": "Yahoo systematically reports net-of-13%-tax (ratio 0.8745 vs tbank gross). Legacy CSV matches tbank exactly for 2010-2016 payouts (26/100/280/172/95/135). Yahoo also adds 2 phantom records (2014-07-30, 2015-01-30 both 83.07) not present in legacy or tbank. Tbank is authoritative; ISS has no records for RKKE.",
+      "evidence_overlap_ym": "2010-05",
+      "tbank_amount": 26.0,
+      "yahoo_amount": 22.735226,
+      "added_at": "2026-05-16"
+    },
+    "UNAC": {
+      "exclude": ["tbank"],
+      "reason": "Tbank truncates sub-millikopeck amounts (2014-07: yahoo=0.000779 matches legacy CSV exactly; tbank=0.0008 is rounded to 4 decimals). For kopeck-precision tickers yahoo is authoritative. ISS has no records for UNAC.",
+      "evidence_overlap_ym": "2014-07",
+      "yahoo_amount": 0.000779,
+      "tbank_amount": 0.0008,
+      "added_at": "2026-05-16"
+    }
+  }
+}

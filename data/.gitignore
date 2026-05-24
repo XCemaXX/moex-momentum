@@ -1,0 +1,6 @@
+# Raw source-of-truth (committed): tickers*, manifest.json, prices_iss/, dividends/,
+# indices/, splits/. Everything in those dirs is tracked — overlay JSONs included.
+#
+# Momentum compute outputs: regenerable via `momentum compute monthly && momentum compute backtest`.
+# Per task 014 policy: NOT committed.
+momentum/

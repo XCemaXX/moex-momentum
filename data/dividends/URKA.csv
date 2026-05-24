@@ -1,0 +1,10 @@
+registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2010-05-11,1.7,RUB,manual_disclosure,,
+2011-05-24,4.55,RUB,manual_disclosure,,
+2011-11-02,4.0,RUB,manual_disclosure,,
+2012-04-26,4.0,RUB,manual_disclosure,,
+2012-11-06,4.71,RUB,manual_disclosure,,
+2013-04-25,3.9,RUB,manual_disclosure,,
+2013-10-29,2.21,RUB,moex_iss,,
+2014-06-20,1.63,RUB,moex_iss,,
+2015-01-15,2.96,RUB,moex_iss,,

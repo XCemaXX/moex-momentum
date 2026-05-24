@@ -1,0 +1,4 @@
+registry_close,amount,currency,source,registry_close_source
+2018-06-01,0.015104,RUB,skill_fill_yahoo,yahoo_ex_div
+2019-06-03,0.12,RUB,moex_iss,
+2020-07-13,0.06,RUB,moex_iss,

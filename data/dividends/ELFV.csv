@@ -1,0 +1,10 @@
+registry_close,amount,currency,source,registry_close_source
+2006-05-06,0.0066,RUB,skill_fill_tbank,tbank_reestr
+2006-08-15,0.0105,RUB,skill_fill_tbank,tbank_reestr
+2007-04-13,0.0063,RUB,skill_fill_tbank,tbank_reestr
+2014-07-07,0.0559,RUB,skill_fill_tbank,tbank_reestr
+2015-06-29,0.080731,RUB,skill_fill_tbank,tbank_reestr
+2017-06-28,0.06822,RUB,skill_fill_tbank,tbank_reestr
+2018-06-22,0.14493,RUB,skill_fill_tbank,tbank_reestr
+2019-07-08,0.141471,RUB,moex_iss,
+2020-07-09,0.085,RUB,moex_iss,

@@ -1,0 +1,3912 @@
+[
+  {
+    "ticker": "RKKE",
+    "registry_close": "2010-05-05",
+    "action": "drop",
+    "match": {
+      "amount": 22.735226,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo net-of-tax (legacy=tbank=26.0 gross). Blacklisted.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "RKKE",
+    "registry_close": "2011-05-10",
+    "action": "drop",
+    "match": {
+      "amount": 87.44318,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo net-of-tax (legacy=tbank=100.0 gross).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "RKKE",
+    "registry_close": "2012-05-03",
+    "action": "drop",
+    "match": {
+      "amount": 244.8409,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo net-of-tax (legacy=tbank=280.0 gross).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "RKKE",
+    "registry_close": "2013-05-24",
+    "action": "drop",
+    "match": {
+      "amount": 150.40227,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo net-of-tax (legacy=tbank=172.0 gross).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "RKKE",
+    "registry_close": "2014-07-30",
+    "action": "drop",
+    "match": {
+      "amount": 83.071014,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo phantom 2014-07 record (no legacy entry, no tbank pair).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "RKKE",
+    "registry_close": "2015-01-30",
+    "action": "drop",
+    "match": {
+      "amount": 83.071014,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo phantom dup of 2014-07 amount (legacy 2015-02 = tbank 95.0).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "RKKE",
+    "registry_close": "2016-07-13",
+    "action": "drop",
+    "match": {
+      "amount": 118.04829,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo net-of-tax (legacy=tbank=135.0 gross).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "UNAC",
+    "registry_close": "2014-07-10",
+    "action": "drop",
+    "match": {
+      "amount": 0.0008,
+      "source": "skill_fill_tbank"
+    },
+    "reason": "Tbank rounds sub-millikopeck (legacy=yahoo=0.000779). Tbank blacklisted for UNAC.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "PRIM",
+    "registry_close": "2111-01-01",
+    "action": "drop",
+    "match": {
+      "amount": 0.07,
+      "source": "moex_iss"
+    },
+    "reason": "ISS placeholder date for pending dividend (year 2111 is sentinel for TBD). PRIM pays annually in Sept; this likely represents the 2024 dividend with no confirmed registry date yet. Drop until ISS supplies real date.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "NPOF",
+    "registry_close": "2111-01-01",
+    "action": "drop",
+    "match": {
+      "amount": 1400.0,
+      "source": "moex_iss"
+    },
+    "reason": "ISS placeholder date (year 2111 = TBD sentinel) for pending NPOF dividend. Drop until ISS provides real registry close.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2014-06-23",
+    "action": "augment",
+    "add": {
+      "amount": 3.83,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2013 final 3.83 + Q1 2014 2.43 on same registry date (Severstal IR press release 2014-06-23 AGM). ISS captured only Q1 tranche. See agent_context/dividend_conflict_patterns.md bucket 2.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2015-06-05",
+    "action": "augment",
+    "add": {
+      "amount": 14.65,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2014 final 14.65 + Q1 2015 12.81 on same registry. dohod + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2016-07-05",
+    "action": "augment",
+    "add": {
+      "amount": 20.27,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2015 final 20.27 + Q1 2016 8.25 on same registry. dohod + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2017-06-20",
+    "action": "augment",
+    "add": {
+      "amount": 27.73,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2016 final 27.73 + Q1 2017 24.44 on same registry. dohod + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2018-06-19",
+    "action": "augment",
+    "add": {
+      "amount": 27.72,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2017 final 27.72 + Q1 2018 38.32 on same registry. dohod + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2020-06-16",
+    "action": "augment",
+    "add": {
+      "amount": 27.35,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2019 final 26.26 (already in ISS) + Q1 2020 27.35 on same registry. dohod + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2021-06-01",
+    "action": "augment",
+    "add": {
+      "amount": 46.77,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: Q4 2020 36.27 (already in ISS) + Q1 2021 46.77 on same registry. dohod + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2024-06-18",
+    "action": "augment",
+    "add": {
+      "amount": 38.3,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2023 final 191.51 (already in ISS, post-3y-sanctions-skip resumption per AGM 2024-06-07) + Q1 2024 interim 38.30 on same registry. dohod confirms.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "NLMK",
+    "registry_close": "2016-06-14",
+    "action": "augment",
+    "add": {
+      "amount": 2.43,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: Q4 2015 residual 2.43 (FY2015 final 6.95 − 9M interim 4.52) + Q1 2016 1.13 (already in ISS) on same registry. NLMK press release confirms.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "NLMK",
+    "registry_close": "2017-06-14",
+    "action": "augment",
+    "add": {
+      "amount": 3.38,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: Q4 2016 3.38 + Q1 2017 2.35 (already in ISS) on same registry. smart-lab + tbank confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "NLMK",
+    "registry_close": "2018-06-20",
+    "action": "augment",
+    "add": {
+      "amount": 3.36,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: Q4 2017 3.36 + Q1 2018 5.73 (already in ISS) on same registry. smart-lab + tbank confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "HYDR",
+    "registry_close": "2014-07-08",
+    "action": "replace",
+    "from": {
+      "amount": 0.01,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.013588,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation bug (2014-2017 era, kopeck-priced utilities). Canonical 0.013588 confirmed by dohod + Yahoo + smart-lab. See agent_context/dividend_ticker_verdicts.md HYDR entry.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MSNG",
+    "registry_close": "2016-06-17",
+    "action": "replace",
+    "from": {
+      "amount": 0.06,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.0566,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. dohod 0.0566, Yahoo 0.05665.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MSNG",
+    "registry_close": "2017-06-14",
+    "action": "replace",
+    "from": {
+      "amount": 0.08,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.0848,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. dohod 0.0848.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MSNG",
+    "registry_close": "2018-06-18",
+    "action": "replace",
+    "from": {
+      "amount": 0.17,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.1659,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. dohod 0.1659, Yahoo 0.16595.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MSRS",
+    "registry_close": "2015-07-06",
+    "action": "replace",
+    "from": {
+      "amount": 0.04,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.0422,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. dohod 0.0422.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MSRS",
+    "registry_close": "2017-06-21",
+    "action": "replace",
+    "from": {
+      "amount": 0.03,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.0312,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. dohod 0.0312.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MSRS",
+    "registry_close": "2018-06-18",
+    "action": "replace",
+    "from": {
+      "amount": 0.03,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.0316,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. dohod 0.0316.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "NMTP",
+    "registry_close": "2014-07-09",
+    "action": "replace",
+    "from": {
+      "amount": 0.02,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.0234,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. dohod 0.0234, Yahoo 0.023364.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "NMTP",
+    "registry_close": "2015-07-13",
+    "action": "replace",
+    "from": {
+      "amount": 0.23,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.2336,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal rounding. dohod 0.2336.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "NMTP",
+    "registry_close": "2016-07-05",
+    "action": "replace",
+    "from": {
+      "amount": 0.05,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.0519,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. dohod 0.0519.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "IRAO",
+    "registry_close": "2016-06-21",
+    "action": "replace",
+    "from": {
+      "amount": 0.02,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.0178,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal rounding-up. dohod 0.0178.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "IRAO",
+    "registry_close": "2017-06-20",
+    "action": "replace",
+    "from": {
+      "amount": 0.15,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.1468,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal rounding. dohod 0.1468.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "FEES",
+    "registry_close": "2016-07-11",
+    "action": "replace",
+    "from": {
+      "amount": 0.01,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.0133,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. dohod 0.0133.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MRKV",
+    "registry_close": "2017-06-26",
+    "action": "replace",
+    "from": {
+      "amount": 0.01,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.007044,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal round-up. dohod 0.007044 matches Yahoo exactly.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "VRSB",
+    "registry_close": "2022-07-14",
+    "action": "replace",
+    "from": {
+      "amount": 3.940284,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 14.692585,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS captured only FY2021 tranche (3.94). Real sum = 3.940284 (FY2021) + 3.8735 (Q1 2022) + 6.878801 (retained earnings) = 14.692585 per AGM 2022-06-24. investing.com + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "VRSBP",
+    "registry_close": "2022-07-14",
+    "action": "replace",
+    "from": {
+      "amount": 3.940284,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 14.692585,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Same as VRSB — TNS charter mandates VRSBP pref dividend = VRSB ordinary. investing.com confirms 14.692585.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "KBSB",
+    "registry_close": "2022-07-14",
+    "action": "replace",
+    "from": {
+      "amount": 13.99037,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 18.19,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS captured only one tranche of multi-tranche July 2022. Sum 18.19 confirmed by smart-lab. Same pattern as VRSB/VRSBP (TNS-energo group 2022).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "AQUA",
+    "registry_close": "2021-07-11",
+    "action": "augment",
+    "add": {
+      "amount": 4.0,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2020 final 5.0 (already in ISS) + Q1 2021 interim 4.0 on same registry. dohod + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "LKOH",
+    "registry_close": "2022-12-21",
+    "action": "augment",
+    "add": {
+      "amount": 256.0,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2021 undistributed 537 (already in ISS) + 9M 2022 interim 256 on same registry. dohod + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MAGN",
+    "registry_close": "2021-06-17",
+    "action": "augment",
+    "add": {
+      "amount": 1.795,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: Q4 2020 final 0.945 (already in ISS) + Q1 2021 interim 1.795 on same registry. dohod + smart-lab confirm.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MRSB",
+    "registry_close": "2018-07-09",
+    "action": "augment",
+    "add": {
+      "amount": 0.0185868,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2017 regular 0.0116502 (already in ISS) + FY2017 undistributed 0.0185868 on same registry. smart-lab confirms.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "POSI",
+    "registry_close": "2024-05-24",
+    "action": "augment",
+    "add": {
+      "amount": 4.56,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: 47.33 (already in ISS) + 4.56 on same registry. dohod + smart-lab confirm sum = 51.89.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "EUTR",
+    "registry_close": "2024-07-09",
+    "action": "augment",
+    "add": {
+      "amount": 2.5,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2023 16.72 (already in ISS) + Q1 2024 2.50 on same registry. smart-lab confirms.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "EUTR",
+    "registry_close": "2025-07-17",
+    "action": "augment",
+    "add": {
+      "amount": 3.0,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: Q4 2024 14.19 (already in ISS) + Q1 2025 3.00 on same registry. smart-lab confirms.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "TGKN",
+    "registry_close": "2024-06-04",
+    "action": "augment",
+    "add": {
+      "amount": 0.0002104,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2023 0.00107832 (already in ISS) + Q1 2024 0.0002104 on same registry. dohod confirms both.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "HNFG",
+    "registry_close": "2024-12-09",
+    "action": "augment",
+    "add": {
+      "amount": 9.62,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: Q1-Q2 2024 / 2023 remainder 8.38 (already in ISS) + Q3 2024 9.62 on same registry. tbank sum = 18.00 confirms.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "ABRD",
+    "registry_close": "2023-07-17",
+    "action": "augment",
+    "add": {
+      "amount": 6.14,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: FY2022 annual 0.19 (already in ISS) + Q1 2023 6.14 on same registry. dohod sum=6.33 confirms. (ABRD nominal=1 RUB — original blacklist hypothesis of phantom-split was wrong; removed from _external_blacklist.)",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "AVAN",
+    "registry_close": "2023-02-14",
+    "action": "augment",
+    "add": {
+      "amount": 7.54,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Multi-tranche: special 31.66 (already in ISS) + FY2022 annual 7.54 on same registry. dohod + rbc.ru confirm total 39.20.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "HYDR",
+    "registry_close": "2015-07-07",
+    "action": "replace",
+    "from": {
+      "amount": 0.02,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.015619,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal rounding bug. Canonical 0.015619 (dohod 0.0156, Yahoo 0.015619).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "HYDR",
+    "registry_close": "2016-07-08",
+    "action": "replace",
+    "from": {
+      "amount": 0.04,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.038863,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal truncation. Canonical 0.038863 (dohod 0.0389, Yahoo 0.038863).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "HYDR",
+    "registry_close": "2017-07-10",
+    "action": "replace",
+    "from": {
+      "amount": 0.05,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.046625,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS 2-decimal rounding. Canonical 0.046625 (dohod 0.0466, Yahoo 0.046625, smart-lab 0.0466245).",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MTLRP",
+    "registry_close": "2017-07-11",
+    "action": "replace",
+    "from": {
+      "amount": 5.14,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 10.28,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS stale half-figure. AGM 2017-06-30 approved 856M RUB total = 10.28/share for FY2016 preferred. Confirmed by dohod + RBC + investmint.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "LSRG",
+    "registry_close": "2017-06-20",
+    "action": "replace",
+    "from": {
+      "amount": 40.0,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 78.0,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS stale half-figure. Confirmed 78 RUB by dohod, BCS, RBC. See agent_context/dividend_disputes_research_round2.md.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "SELG",
+    "registry_close": "2019-12-24",
+    "action": "replace",
+    "from": {
+      "amount": 0.4,
+      "source": "moex_iss"
+    },
+    "to": {
+      "amount": 0.78,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "ISS stale half-figure (0.5x exact ratio). Confirmed 0.78 RUB by dohod. See agent_context/dividend_disputes_research_round2.md.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "SFIN",
+    "registry_close": "2024-11-30",
+    "action": "drop",
+    "match": {
+      "amount": 113.8,
+      "source": "moex_iss"
+    },
+    "reason": "ISS stale pre-approval recommendation. Initial board rec 113.8 doubled to 227.6 on 2024-11-06 before EGM 2024-12-12; final registry 2024-12-23. No 113.8 payment occurred.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "HIMCP",
+    "registry_close": "2018-07-10",
+    "action": "drop",
+    "match": {
+      "amount": 0.1379,
+      "source": "moex_iss"
+    },
+    "reason": "Same payout as 2018-08-01 dohod 0.1379 — ISS uses ex-date, dohod uses payment date. 22-day gap exceeds dedup tolerance. Keep dohod entry.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2023-07-11",
+    "action": "drop",
+    "match": {
+      "amount": 216.0,
+      "source": "moex_iss"
+    },
+    "reason": "ISS stale half-figure (ratio 216/264 ≈ 0.818, dohod 264 matches AGM-approved per-share). See agent_context/dividend_disputes_research_round2.md.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2022-10-03",
+    "action": "drop",
+    "match": {
+      "amount": 390.0,
+      "source": "skill_fill_smartlab"
+    },
+    "reason": "Smart-lab duplicates the mid-year 390 payment on the final-Q registry date. ISS-correct sequence is 2022-07-11=390 + 2022-10-03=780.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "NKNC",
+    "registry_close": "2020-04-29",
+    "action": "drop",
+    "match": {
+      "amount": 9.07,
+      "source": "moex_iss"
+    },
+    "reason": "Duplicate of registry 2020-07-10 9.07 (FY2019 AGM). ISS stores the board-recommendation date as a separate row. Confirmed by dohod + smart-lab.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "NKNCP",
+    "registry_close": "2020-04-29",
+    "action": "drop",
+    "match": {
+      "amount": 9.07,
+      "source": "moex_iss"
+    },
+    "reason": "Same board-rec duplicate as NKNC 2020-04-29 (preferred shares track common 1:1 here).",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "KZOS",
+    "registry_close": "2020-05-06",
+    "action": "drop",
+    "match": {
+      "amount": 4.5468,
+      "source": "moex_iss"
+    },
+    "reason": "Duplicate of registry 2020-07-10 4.5468 (FY2019). dohod has single 4.55 entry. Same board-rec-date artefact as NKNC 2020.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "KZOSP",
+    "registry_close": "2020-05-06",
+    "action": "drop",
+    "match": {
+      "amount": 0.25,
+      "source": "moex_iss"
+    },
+    "reason": "Duplicate of registry 2020-07-10 0.25 (FY2019 preferred fixed minimum).",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "MOEX",
+    "registry_close": "2023-05-12",
+    "action": "drop",
+    "match": {
+      "amount": 4.84,
+      "source": "moex_iss"
+    },
+    "reason": "Duplicate of registry 2023-06-16 4.84 (FY2022 AGM). 2023-05-12 is the announcement/T-1 date. Confirmed by dohod, smart-lab, moex.com press release.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "EUTR",
+    "registry_close": "2023-07-01",
+    "action": "drop",
+    "match": {
+      "amount": 6.7,
+      "source": "moex_iss"
+    },
+    "reason": "Pre-IPO record. EUTR IPO 2023-11-21; first public dividend was 8.88 RUB registry 2023-12-10. The 6.70 entry on 2023-07-01 cannot be a tradable-share payment.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "MFON",
+    "registry_close": "2014-07-10",
+    "action": "augment",
+    "add": {
+      "amount": 64.51,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "Final FY2013 dividend, AGM 2014-06-30 (39.996 bn RUB / 64.51 RUB/share). Missing from ISS. Confirmed by 1prime.ru/20140430/783964547 + investing.com MFON history.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "MFON",
+    "registry_close": "2016-07-11",
+    "action": "augment",
+    "add": {
+      "amount": 48.38,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "Final FY2015 dividend (29.9 bn RUB / 48.38 RUB/share), AGM 2016-06-30 alongside 8.06 RUB Q1-2016 interim. ISS captured only the 8.06 leg. Confirmed by comnews.ru 102107 + investing.com (aggregated 56.44 = 48.38+8.06).",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "AKRN",
+    "registry_close": "2025-06-09",
+    "action": "augment",
+    "add": {
+      "amount": 427.0,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "Second tranche on same registry as 107.0 (interim FY2024+1Q2025). Confirmed by dohod + interfax + tbank. ISS captured only the 107.0 leg.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "AKRN",
+    "registry_close": "2025-12-09",
+    "action": "augment",
+    "add": {
+      "amount": 189.0,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "9M-2025 interim, approved Nov 2025. Confirmed by smart-lab/1238285 + vedomosti + akm.ru.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "AVAN",
+    "registry_close": "2025-10-07",
+    "action": "augment",
+    "add": {
+      "amount": 24.79,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "H1-2025 interim. Confirmed by dohod + finviewer. Settled past today.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "AVAN",
+    "registry_close": "2025-12-23",
+    "action": "augment",
+    "add": {
+      "amount": 16.1,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "9M-2025 interim. Confirmed by dohod + finviewer.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "LEAS",
+    "registry_close": "2025-12-15",
+    "action": "augment",
+    "add": {
+      "amount": 58.0,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "9M-2025 interim, EGM Nov 2025. Confirmed by interfax/1061939 + smart-lab/1239872 + investfuture.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2025-10-20",
+    "action": "augment",
+    "add": {
+      "amount": 42.0,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "H1-2025 interim. Confirmed by smart-lab/1211617 + alfabank + mcclinics.ru.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2025-10-10",
+    "action": "augment",
+    "add": {
+      "amount": 6.54,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "H1-2025 interim. Confirmed by dohod + tbank/AlgoMaster + kommersant.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2025-12-20",
+    "action": "augment",
+    "add": {
+      "amount": 9.0,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "9M-2025 interim. Confirmed by dohod + tbank/T-Investments + smart-lab.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "DATA",
+    "registry_close": "2025-06-06",
+    "action": "augment",
+    "add": {
+      "amount": 2.57,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "Q1-2025 interim, same registry as 0.86 final-2024. ISS captured only one of two simultaneous payments. Confirmed by dohod + arenadata.tech + akm.ru.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "PLZL",
+    "registry_close": "2025-10-13",
+    "action": "augment",
+    "add": {
+      "amount": 70.85,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "H1-2025 interim. Confirmed by smart-lab/1211985 + finam + kommersant.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "PLZL",
+    "registry_close": "2025-12-22",
+    "action": "augment",
+    "add": {
+      "amount": 36.0,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "9M-2025 interim. Confirmed by tass + vedomosti + kommersant + tbank.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "BSPBP",
+    "registry_close": "2025-10-06",
+    "action": "augment",
+    "add": {
+      "amount": 0.22,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "H1-2025 preferred fixed dividend. Confirmed by dohod + bspb.ru/news/2025/250822 + kommersant + interfax.",
+    "resolved_at": "2026-05-12"
+  },
+  {
+    "ticker": "MISB",
+    "registry_close": "2022-07-13",
+    "action": "augment",
+    "add": {
+      "amount": 1.92,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "TNS Energo Mari El: Two separate AGM decisions both paid on 2022-07-13. Existing 0.566038 = 1Q2022 tranche. Missing record = 2021-FY-final tranche, 1.92 RUB EQ for both common and pref classes per RBC quote/ticker/59336 + smart-lab/q/MISB + TNS Energo Type-A pref charter (10% net profit clause with raise-to-common provision; FY2021 formula yielded equal payout for both classes). Bucket 2 multi-AGM same-day pattern.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MISBP",
+    "registry_close": "2022-07-13",
+    "action": "augment",
+    "add": {
+      "amount": 1.92,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "TNS Energo Mari El pref: same 2021-FY-final tranche as MISB on 2022-07-13. Charter Type-A pref clause yielded equal payout (1.92 EQ) for both classes in FY2021. Existing 0.566038 = 1Q2022 tranche, kept. See MISB 2022-07-13 entry for full context.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "AKRN",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Bucket 1A quasi-treasury gross-up: external = ISS / (1 - 3776844/40534000) = ISS * 1.10275. Yahoo back-scales all historical dividends 2014-2022 using post-June-2021 buyback free-float. Verified ratio 1.102751 across 18 records (stdev ~3e-8). Sources: interfax.ru/russia/783921, quote.rbc.ru/news/short_article/61151ec59a7947f286100890, dohod.ru/ik/analytics/dividend/akrn.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "GMKN",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Bucket 1B capital-reduction mis-class: external = ISS * 158245476/152863397 = ISS * 1.035208. Yahoo back-scales pre-cancellation dividends (2013-2020) using post-2022 share count after Nornickel cancelled 4,590,852 (2021-10-06) + 791,227 (2022) treasury shares. Verified ratio across 16 records (stdev ~5e-7). Sources: ar2021.nornickel.ru/shareholders/share-capital, forbes.ru/news/243434, dohod.ru/ik/analytics/dividend/gmkn.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "BELU",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Bucket 1F: Yahoo applies wrong factor 7/8=0.875 to all pre-2024-12 dividends. Actual 2024 bonus was 7-for-1 (total shares 8x), correct back-adjust = 1/8 not 7/8. ISS canonical confirmed via dohod + smart-lab on 4 spot-checks (32/90/400/225 RUB). Source: smart-lab.ru/blog/news/1023444.php.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "RASP",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Bucket 1B: Yahoo back-adjusts pre-2022 dividends by 1/(1-0.025)=1.02564 due to ~2.5% Raspadskaya treasury cancellation post Evraz minority buyback. ISS canonical confirmed via dohod + smart-lab on 4 spot-checks. Sources: spglobal.com (Evraz/Raspadskaya), evraz.com shareholder manual.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "AFLT",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Bucket 1C: Yahoo TERP back-adjust factor ~0.8158 for all pre-Oct-2020 dividends, triggered by Aeroflot Oct-2020 SPO (1.334bn new shares at 60 RUB vs ~73.5 RUB market). ISS canonical (as-paid) confirmed via dohod + smart-lab on 4 spot-checks. Sources: cbonds.com/stocks/RU0009062285, ir.aeroflot.com/en/news-detail/article/57672.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "SVCB",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_tbank"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Bucket 1E: tbank rounds Sovcombank per-share amounts to 2 decimals; ISS stores full precision (e.g. 0.262531 vs tbank 0.25). Non-constant ratios 0.90-0.98 rule out simple split-factor. ISS canonical confirmed via dohod + smart-lab. Source: dohod.ru/ik/analytics/dividend/svcb.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "LKOH",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "ISS 50.0 matches dohod for Lukoil 2013 interim. Yahoo 45.5 is data error (no Lukoil split or SPO in 2013, no TERP basis). Source: dohod.ru/ik/analytics/dividend/lkoh. (matches across ISS-vs-Yahoo ±1day registry drift via ym pattern)",
+    "verified_at": "2026-05-16",
+    "applies_to_ym_pattern": "2013-08"
+  },
+  {
+    "ticker": "MAGN",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "ISS 0.31 matches dohod for MMK FY2015 final. Yahoo 1.242 (=0.31x4) is data error (no MMK split or special in 2016). Source: dohod.ru/ik/analytics/dividend/magn. (matches via ym pattern, Yahoo registry differs by 1 day)",
+    "verified_at": "2026-05-16",
+    "applies_to_ym_pattern": "2016-06"
+  },
+  {
+    "ticker": "PIKK",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "ISS 22.71 matches dohod for PIK 2018. Yahoo 45.42 is 2x duplicate, data error. Source: dohod.ru/ik/analytics/dividend/pikk. (matches via ym pattern, Yahoo registry differs by 1 day)",
+    "verified_at": "2026-05-16",
+    "applies_to_ym_pattern": "2018-09"
+  },
+  {
+    "ticker": "RDRB",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Bucket 1A variant: Yahoo applies systematic 5%-net haircut (ratio 0.95001 on both 2019-06 and 2020-07 records); ISS gross confirmed by smart-lab. Source: smart-lab.ru/q/RDRB/dividend/.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "SVAV",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Yahoo amounts inconsistent (1.088x and 1.034x) and not reproducible; ISS 52.52 (2014-06-11) and 45.39 (2023-07-10) confirmed by smart-lab and dohod. Source: smart-lab.ru/q/SVAV/dividend/.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "CNTL",
+    "action": "ignore",
+    "applies_to_ym_pattern": "2023-07",
+    "match": {
+      "source": "skill_fill_tbank"
+    },
+    "reason": "Bucket 1E: tbank rounds 0.034 -> 0.03 (2-decimal truncation); ISS 0.034 confirmed by interfax dividend page for Centralny Telegraf 2023.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "CNTLP",
+    "action": "ignore",
+    "applies_to_ym_pattern": "2023-07",
+    "match": {
+      "source": "skill_fill_tbank"
+    },
+    "reason": "Bucket 1E: tbank rounds 0.034 -> 0.03 (2-decimal truncation); ISS 0.034 confirmed by interfax. Pref pays same as common per Centralny Telegraf 2022 small-profit charter rule.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "GCHE",
+    "action": "ignore",
+    "applies_to_ym_pattern": "2021-04",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo 134.00 = ISS 120.42 (reg 2021-04-05) + 13.58 (reg 2021-04-07) aggregated. The yahoo conflict is sum-aggregation across two close registry dates. NOTE: the second tranche 13.58 may be missing from our production data; flagged separately. Source: dohod.ru/ik/analytics/dividend/gche.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "IRKT",
+    "action": "ignore",
+    "applies_to_ym_pattern": "2018-07",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo 0.753 unverifiable; ISS 1.14 confirmed by dohod, smart-lab, and BCS for Irkut 2018. Source: dohod.ru/ik/analytics/dividend/irkt.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "MRKY",
+    "action": "ignore",
+    "applies_to_ym_pattern": "2019-06",
+    "match": {
+      "source": "skill_fill_tbank"
+    },
+    "reason": "tbank 0.008175 unverified; ISS 0.0068417 confirmed by dohod, smart-lab, and RBC for Rosseti Yug 2019. Source: dohod.ru/ik/analytics/dividend/mrky.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "TGKN",
+    "action": "ignore",
+    "applies_to_ym_pattern": "2024-06",
+    "reason": "Bucket 2 multi-tranche: ISS 0.001078322 is aggregated multi-tranche on 2024-06-04 (confirmed interfax); dohod and tbank each capture only one tranche each, but the structural sum-detector handles when both proposed. This entry covers residual single-source conflicts.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "VRSBP",
+    "action": "ignore",
+    "applies_to_ym_pattern": "2022-07",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo 7.81 unexplained; dohod 14.69 on 2022-07-14 confirmed by investmint/interfax/RBC for VRSB pref. Source: investmint.ru/vrsbp/.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "GCHE",
+    "registry_close": "2021-04-05",
+    "action": "augment",
+    "add": {
+      "amount": 13.58,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Cherkizovo AGM 2021 approved two simultaneous dividends on registry 2021-04-05: 120.42 RUB FY2020 final (already in ISS) + 13.58 RUB distribution of undistributed FY2019 profit. ISS feed missed the second leg. Sum 134.00 confirmed by TASS, finanz.ru, smart-lab consolidation, dohod per-tranche table. Bucket 2 multi-tranche.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "NLMK",
+    "registry_close": "2015-06-16",
+    "action": "augment",
+    "add": {
+      "amount": 1.56,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "NLMK AGM 2015-06-03 approved two simultaneous dividends on registry 2015-06-16: 1.64 RUB Q1-2015 interim (already in ISS) + 1.56 RUB FY2014 final (missing). Confirmed by ProFinance + metalinfo coverage of 2015-04-24 BoD recommendation, plus dohod per-tranche listing. Yahoo aggregate 3.20 = 1.56 + 1.64 corroborates. Bucket 2 multi-tranche.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "MISB",
+    "action": "ignore",
+    "applies_to_ym_pattern": "2022-07",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo 2.528302 is unreconcilable with the verified two-AGM decomposition (1Q2022 0.566 + FY2021 1.92 = 2.486 RUB total). Per agent A initial research: Yahoo mixes pref+common amounts. ISS+augments canonical.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "MISBP",
+    "action": "ignore",
+    "applies_to_ym_pattern": "2022-07",
+    "match": {
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Same as MISB — Yahoo 2.528302 unreconcilable; verified decomposition 1Q2022 (0.566) + FY2021 (1.92) = 2.486. ISS+augments canonical.",
+    "verified_at": "2026-05-16"
+  },
+  {
+    "ticker": "RTSB",
+    "registry_close": "2022-07-20",
+    "action": "augment",
+    "add": {
+      "amount": 0.003534,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "TNS Energo Rostov Q1-2022 interim tranche. Same registry 2022-07-20 as FY2021 final (0.009056 already in ISS) and extraordinary top-up (0.027611, separate augment). investfunds.ru/stocks/TNS-Energo-Rostov-na-Donu/ lists 3 separate rows with period label '2022, 3 месяца (I кв.)'. Sum 0.040201 matches Yahoo aggregate (3-source agreement: Yahoo, smart-lab, dohod). Per-tranche split on investfunds only — primary e-disclosure 403'd. Bucket 2 multi-tranche.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "RTSB",
+    "registry_close": "2022-07-20",
+    "action": "augment",
+    "add": {
+      "amount": 0.027611,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "TNS Energo Rostov 2022 extraordinary top-up. investfunds period label '2022, Внеплановые'. Smart-lab/dohod aggregate this with FY2021 charter into 0.0366669 single row, total matches. See RTSB 2022-07-20 0.003534 augment for full context.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "RTSBP",
+    "registry_close": "2022-07-20",
+    "action": "augment",
+    "add": {
+      "amount": 0.003534,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "TNS Energo Rostov pref Q1-2022 interim. Charter Type-A raise-to-common triggered (FY2021 profit small → formula < common), pref:common = 1:1. Source: investfunds.ru/stocks/TNS-Energo-Rostov-na-Donu-pref/.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "RTSBP",
+    "registry_close": "2022-07-20",
+    "action": "augment",
+    "add": {
+      "amount": 0.027611,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "TNS Energo Rostov pref 2022 extraordinary top-up. pref:common = 1:1 per charter raise-to-common. Source: investfunds.ru.",
+    "resolved_at": "2026-05-16"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2025-04-20",
+    "action": "drop",
+    "match": {
+      "amount": 171.0,
+      "source": "moex_iss"
+    },
+    "reason": "Board recommendation rejected by AGM 24.06.2025 — phantom record. Confirmed via Vedomosti, Finam, PhosAgro IR and smart-lab dividend calendar.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2022-07-11",
+    "action": "drop",
+    "match": {
+      "amount": 390.0,
+      "source": "moex_iss"
+    },
+    "reason": "Wrong-date phantom: real registry 2022-10-03 (per dohod and smart-lab). Our ISS record splits one true payment into a wrong date.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MOEX",
+    "registry_close": "2023-05-11",
+    "action": "drop",
+    "match": {
+      "amount": 4.84,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Cross-source dedup miss (36d gap). Real payment 2023-06-16 per ISS; smart-lab confirms single 2023 payment 4.84. Yahoo attributed announcement date as ex-div.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TRMK",
+    "registry_close": "2019-06-03",
+    "action": "drop",
+    "match": {
+      "amount": 2.55,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Cross-source dedup miss (45d gap). Real registry 2019-07-18 per ISS, finversia, dohod. Yahoo attributed AGM/announcement date.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MRKU",
+    "registry_close": "2022-10-14",
+    "action": "drop",
+    "match": {
+      "amount": 0.0249,
+      "source": "skill_fill_tbank"
+    },
+    "reason": "Cross-source dedup miss (108d gap). Real registry 2022-06-28 per ISS, smart-lab. Tbank likely recorded payment-distribution date.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2025-07-05",
+    "action": "drop",
+    "match": {
+      "amount": 201.0,
+      "source": "moex_iss"
+    },
+    "reason": "Board recommendation 15.05.2025 not approved at AGM 24.06.2025; superseded by 273 RUB H1 2025 dividend (registry 2025-10-01). Verified via Neftegaz, RBC, TASS, Finam press releases + dohod yearly total 360 = 87 + 273.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GAZP",
+    "registry_close": "2022-07-20",
+    "action": "drop",
+    "match": {
+      "amount": 52.53,
+      "source": "moex_iss"
+    },
+    "reason": "ГОСА 30.06.2022 не утвердил рекомендованные 52.53 RUB за 2021FY (-32% по акциям). Replaced by 51.03 H1 2022 special approved 30.09.2022. Verified via Vedomosti, Fontanka, dohod (which shows only 51.03 for 2022).",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GCHE",
+    "registry_close": "2022-04-05",
+    "action": "drop",
+    "match": {
+      "amount": 130.27,
+      "source": "moex_iss"
+    },
+    "reason": "Board recommendation 17.02.2022 withdrawn in March 2022 (post-sanctions); AGM eventually approved 148.05 RUB for 2021FY (registry 2022-12-12). Verified via TheUKPoultrySite, TASS, BCS Express, dohod.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PRMB",
+    "registry_close": "2020-06-29",
+    "action": "drop",
+    "match": {
+      "amount": 800.0,
+      "source": "moex_iss"
+    },
+    "reason": "AGM 17.06.2020 Bank Primorye (PRMB pre-Promomed-IPO) rejected 800 RUB FY2019 dividend (95.4% против). Verified via Konkurent, Interfax-Russia, dohod (no 2020-06-29 row).",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PLZL",
+    "registry_close": "2023-06-16",
+    "action": "drop",
+    "match": {
+      "amount": 436.79,
+      "source": "moex_iss"
+    },
+    "reason": "AGM 06.06.2023 declared void (no quorum); reconvened AGM voted not to pay FY2022 dividend. Verified via TASS, MarketScreener, dohod (2023=0).",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "NLMK",
+    "registry_close": "2020-05-06",
+    "action": "drop",
+    "match": {
+      "amount": 5.16,
+      "source": "moex_iss"
+    },
+    "reason": "Original Q4 2019 recommendation 5.16 RUB halved by board 24.04.2020; EGM 29.05.2020 approved 3.12 RUB instead (already in data as 2020-06-09). Verified via 1prime, Finversia, Finam, dohod.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2022-05-31",
+    "action": "drop",
+    "match": {
+      "amount": 109.81,
+      "source": "moex_iss"
+    },
+    "reason": "Severstal suspended all 2022 dividends post-sanctions. Board originally recommended 109.81 RUB Q4 2021 (announced 18.10.2021) but management withdrew; AGM did not approve. Verified via Interfax, severstal.com IR, Kommersant, dohod (2022=0).",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2022-04-22",
+    "action": "drop",
+    "match": {
+      "amount": 109.81,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Same withdrawn recommendation as 2022-05-31 ISS phantom — yahoo populated ex-div date for board-recommended-but-AGM-rejected payment.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OGKB",
+    "registry_close": "2025-07-10",
+    "action": "drop",
+    "match": {
+      "amount": 0.0598167018,
+      "source": "moex_iss"
+    },
+    "reason": "ISS dated record on AGM/announcement date; real registry close 2025-11-04 (yahoo 2025-11-05 ex-div is correct). Bonus complication: May 2025 AGM rejected 0.06 RUB recommendation; EGM 17.10.2025 approved 0.0598 instead, registry 04.11.2025. Verified via smart-lab, dohod, T-Bank social.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "LKOH",
+    "registry_close": "2015-04-28",
+    "action": "drop",
+    "match": {
+      "amount": 94.0,
+      "source": "moex_iss"
+    },
+    "reason": "Duplicate: ISS dated on announcement date 28.04.2015 of FY2014-final dividend; real registry close 2015-07-14 (already in our data). Same announcement-vs-registry ISS quirk as OGKB 2025.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "AVAN",
+    "registry_close": "2025-04-28",
+    "action": "drop",
+    "match": {
+      "amount": 21.07,
+      "source": "moex_iss"
+    },
+    "reason": "ISS amount wrong: real Q4 2024 dividend = 28.50 RUB on same date (smart-lab + dohod). Origin of 21.07 figure unclear (does not match net-of-13%-tax = 24.80).",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "CNTL",
+    "registry_close": "2017-07-06",
+    "action": "drop",
+    "match": {
+      "amount": 0.016425,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo systematically 2x for CNTL post-2016 records (tbank=0.0082123 matches dohod and smart-lab). Likely yahoo share-class adjustment artifact applied only to post-gap records.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "CNTL",
+    "registry_close": "2018-06-15",
+    "action": "drop",
+    "match": {
+      "amount": 0.060138,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Same yahoo 2x bug as 2017 — tbank=0.030069 matches dohod/smart-lab.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "AVAN",
+    "registry_close": "2025-04-28",
+    "action": "augment",
+    "add": {
+      "amount": 28.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Q4 2024 dividend, real amount 28.50 RUB (vs phantom ISS 21.07 dropped). Confirmed via smart-lab + dohod (28.5 on same registry 2025-04-28).",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2017-05-05",
+    "action": "augment",
+    "add": {
+      "amount": 10.62,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "05.05.2017 | 2016 год | 10.62 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2017-09-08",
+    "action": "augment",
+    "add": {
+      "amount": 8.26,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "08.09.2017 | 2кв 2017 | 8.26 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2018-05-11",
+    "action": "augment",
+    "add": {
+      "amount": 17.1,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "11.05.2018 | 4кв 2017 | 17.1 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2018-09-07",
+    "action": "augment",
+    "add": {
+      "amount": 11.05,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "07.09.2018 | 1кв 2018 | 11.05 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2019-05-10",
+    "action": "augment",
+    "add": {
+      "amount": 20.28,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "10.05.2019 | 4кв 2018 | 20.28 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2019-09-06",
+    "action": "augment",
+    "add": {
+      "amount": 16.75,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "smart-lab Q2-2019 interim 16.75 RUB ex-div 2019-09-06. [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2020-02-14",
+    "action": "augment",
+    "add": {
+      "amount": 12.65,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "14.02.2020 | 2019 н/расп | 12.65 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2020-05-11",
+    "action": "augment",
+    "add": {
+      "amount": 31.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "11.05.2020 | 4кв 2019 | 31.5 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2020-09-04",
+    "action": "augment",
+    "add": {
+      "amount": 29.8,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "04.09.2020 | 2кв 2020 | 29.8 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2021-05-07",
+    "action": "augment",
+    "add": {
+      "amount": 66.3,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "07.05.2021 | 4кв 2020 | 66.3 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "POLY",
+    "registry_close": "2021-09-10",
+    "action": "augment",
+    "add": {
+      "amount": 33.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "10.09.2021 | 2кв 2021 | 33.2 [https://smart-lab.ru/q/POLY/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2013-12-02",
+    "action": "augment",
+    "add": {
+      "amount": 10.59,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "02.12.2013 | 3кв 2013 | 10.59 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2014-06-13",
+    "action": "augment",
+    "add": {
+      "amount": 21.28,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "13.06.2014 | 2014 н/расп | 11.14 ; 02.06.2014 | 1кв 2014 | 10.14 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2014-08-18",
+    "action": "augment",
+    "add": {
+      "amount": 16.71,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "18.08.2014 | 2кв 2014 | 16.71 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2014-11-24",
+    "action": "augment",
+    "add": {
+      "amount": 19.14,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "24.11.2014 | 3кв 2014 | 19.14 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2015-05-26",
+    "action": "augment",
+    "add": {
+      "amount": 13.37,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "26.05.2015 | 1кв 2015 | 13.37 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2017-03-29",
+    "action": "augment",
+    "add": {
+      "amount": 34.27,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "29.03.2017 | 4кв 2015 | 34.27 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2016-05-26",
+    "action": "augment",
+    "add": {
+      "amount": 14.72,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "26.05.2016 | 1кв 2016 | 14.72 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2016-08-29",
+    "action": "augment",
+    "add": {
+      "amount": 14.52,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "29.08.2016 | 2кв 2016 | 14.52 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2016-12-05",
+    "action": "augment",
+    "add": {
+      "amount": 14.04,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "05.12.2016 | 3кв 2016 | 14.04 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2017-04-03",
+    "action": "augment",
+    "add": {
+      "amount": 11.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "03.04.2017 | 4кв 2016 | 11 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2017-05-29",
+    "action": "augment",
+    "add": {
+      "amount": 12.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "29.05.2017 | 1кв 2017 | 12.5 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2017-08-29",
+    "action": "augment",
+    "add": {
+      "amount": 12.41,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "29.08.2017 | 2кв 2017 | 12.41 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2019-05-28",
+    "action": "augment",
+    "add": {
+      "amount": 18.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "28.05.2019 | 1кв 2019 | 18.2 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2019-08-30",
+    "action": "augment",
+    "add": {
+      "amount": 18.48,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "30.08.2019 | 2кв 2019 | 18.48 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2019-12-02",
+    "action": "augment",
+    "add": {
+      "amount": 17.8,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "02.12.2019 | 3кв 2019 | 17.8 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2020-04-06",
+    "action": "augment",
+    "add": {
+      "amount": 17.31,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "06.04.2020 | 4кв 2019 | 17.31 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2020-06-02",
+    "action": "augment",
+    "add": {
+      "amount": 10.04,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "02.06.2020 | 1кв 2020 | 10.04 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2020-09-22",
+    "action": "augment",
+    "add": {
+      "amount": 24.15,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "22.09.2020 | 2кв 2020 | 24.15 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2020-12-01",
+    "action": "augment",
+    "add": {
+      "amount": 26.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "01.12.2020 | 3кв 2020 | 26 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2021-04-27",
+    "action": "augment",
+    "add": {
+      "amount": 23.37,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "27.04.2021 | 4кв 2020 | 23.37 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2021-06-22",
+    "action": "augment",
+    "add": {
+      "amount": 16.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "22.06.2021 | 1кв 2021 | 16.2 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2021-09-07",
+    "action": "augment",
+    "add": {
+      "amount": 22.25,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "07.09.2021 | 2кв 2021 | 22.25 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2021-12-06",
+    "action": "augment",
+    "add": {
+      "amount": 22.44,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "06.12.2021 | 3кв 2021 | 22.44 [https://smart-lab.ru/q/QIWI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2010-05-03",
+    "action": "augment",
+    "add": {
+      "amount": 4.42,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "4.42 | May 3, 2010 | May 3, 2010 [https://vsdelke.ru/dividendy/globaltrans.html]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2011-05-13",
+    "action": "augment",
+    "add": {
+      "amount": 10.34,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "10.34 | May 13, 2011 | May 13, 2011 [https://vsdelke.ru/dividendy/globaltrans.html]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2012-05-04",
+    "action": "augment",
+    "add": {
+      "amount": 18.86,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "18.86 | May 4, 2012 | May 4, 2012 [https://vsdelke.ru/dividendy/globaltrans.html]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2013-04-19",
+    "action": "augment",
+    "add": {
+      "amount": 22.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Paid | Final | – | 17 Apr 2013 | 02 May 2013 | USD | 66c [https://www.dividendmax.com/united-kingdom/london-stock-exchange/industrial-transportation/globaltrans-investment-plc-gdr-reg-s/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2014-04-28",
+    "action": "augment",
+    "add": {
+      "amount": 22.28,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Paid | Final | 31 Mar 2014 | 24 Apr 2014 | 02 May 2014 | USD | 58c [https://www.dividendmax.com/united-kingdom/london-stock-exchange/industrial-transportation/globaltrans-investment-plc-gdr-reg-s/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2016-04-28",
+    "action": "augment",
+    "add": {
+      "amount": 12.41,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Paid | Final | 01 Apr 2016 | 27 Apr 2016 | 04 May 2016 | USD | 19.04c [https://www.dividendmax.com/united-kingdom/london-stock-exchange/industrial-transportation/globaltrans-investment-plc-gdr-reg-s/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2017-04-24",
+    "action": "augment",
+    "add": {
+      "amount": 39.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "24.04.2017 | 39.2 | 2016 | 443.5 | 8.8% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2017-08-29",
+    "action": "augment",
+    "add": {
+      "amount": 44.8,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "29.08.2017 | 44.8 | 2Q 2017 | 591.32 | 7.6% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2018-04-23",
+    "action": "augment",
+    "add": {
+      "amount": 44.85,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "23.04.2018 | 44.85 | 2017 | 714 | 6.3% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2018-09-04",
+    "action": "augment",
+    "add": {
+      "amount": 45.9,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "04.09.2018 | 45.9 | 2Q 2018 | 742.5 | 6.2% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2019-04-18",
+    "action": "augment",
+    "add": {
+      "amount": 46.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "18.04.2019 | 46.5 | 2018 | 665 | 7.0% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2019-09-09",
+    "action": "augment",
+    "add": {
+      "amount": 46.55,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "09.09.2019 | 46.55 | 2Q 2019 | 604.9 | 7.7% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2020-04-30",
+    "action": "augment",
+    "add": {
+      "amount": 46.55,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "30.04.2020 | 46.55 | 2019 | 421 | 11.1% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2020-09-08",
+    "action": "augment",
+    "add": {
+      "amount": 46.55,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "08.09.2020 | 46.55 | 2Q 2020 | 458 | 10.2% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2021-04-29",
+    "action": "augment",
+    "add": {
+      "amount": 28.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "29.04.2021 | 28 | 2020 | 461.8 | 6.1% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GLTR",
+    "registry_close": "2021-09-07",
+    "action": "augment",
+    "add": {
+      "amount": 22.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "07.09.2021 | 22.5 | 2Q 2021 | 599.45 | 3.8% [https://smart-lab.ru/q/GLTR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2015-05-21",
+    "action": "augment",
+    "add": {
+      "amount": 23.48,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "May 21, 2015 | May 29, 2015 | 23.48355 | Final | 9.73% [https://www.investing.com/equities/ros-agro-plc-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2015-10-02",
+    "action": "augment",
+    "add": {
+      "amount": 15.29,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "02.10.2015 | 15.29 | RUB | Full Year 2014 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2016-05-27",
+    "action": "augment",
+    "add": {
+      "amount": 39.69,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "27.05.2016 | 39.69 | RUB | Full Year 2015 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2016-09-23",
+    "action": "augment",
+    "add": {
+      "amount": 14.91,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "23.09.2016 | 14.91 | RUB | 2Q 2016 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2017-04-13",
+    "action": "augment",
+    "add": {
+      "amount": 34.35,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "13.04.2017 | 34.35 | RUB | Full Year 2016 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2017-09-14",
+    "action": "augment",
+    "add": {
+      "amount": 13.84,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "14.09.2017 | 13.84 | RUB | 2Q 2017 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2018-04-12",
+    "action": "augment",
+    "add": {
+      "amount": 16.27,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "12.04.2018 | 16.27 | RUB | 4Q 2017 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2018-09-14",
+    "action": "augment",
+    "add": {
+      "amount": 7.63,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "14.09.2018 | 7.63 | RUB | 2Q 2018 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2019-04-26",
+    "action": "augment",
+    "add": {
+      "amount": 25.24,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "26.04.2019 | 25.24 | RUB | Full Year 2018 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2019-09-13",
+    "action": "augment",
+    "add": {
+      "amount": 12.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "13.09.2019 | 12.5 | RUB | 2Q 2019 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2020-04-17",
+    "action": "augment",
+    "add": {
+      "amount": 21.18,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "17.04.2020 | 21.18 | RUB | 4Q 2019 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2020-09-18",
+    "action": "augment",
+    "add": {
+      "amount": 13.9,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "18.09.2020 | 13.9 | RUB | 2Q 2020 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2021-04-16",
+    "action": "augment",
+    "add": {
+      "amount": 76.44,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "16.04.2021 | 76.44 | RUB | 4Q 2020 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2021-09-10",
+    "action": "augment",
+    "add": {
+      "amount": 65.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "10.09.2021 | 65.5 | RUB | 2Q 2021 [https://smart-lab.ru/q/RAGR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2011-09-12",
+    "action": "augment",
+    "add": {
+      "amount": 2.93,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "12.09.2011 | 2.93 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2012-02-23",
+    "action": "augment",
+    "add": {
+      "amount": 3.05,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "23.02.2012 | 3.05 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2013-02-15",
+    "action": "augment",
+    "add": {
+      "amount": 5.69,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "15.02.2013 | 5.69 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2014-02-18",
+    "action": "augment",
+    "add": {
+      "amount": 7.98,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "18.02.2014 | 7.98 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2014-10-17",
+    "action": "augment",
+    "add": {
+      "amount": 3.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "17.10.2014 | 3.00 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2015-09-11",
+    "action": "augment",
+    "add": {
+      "amount": 6.11,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "11.09.2015 | 6.11 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2016-07-08",
+    "action": "augment",
+    "add": {
+      "amount": 5.46,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "08.07.2016 | 5.46 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2017-01-20",
+    "action": "augment",
+    "add": {
+      "amount": 5.44,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "20.01.2017 | 5.44 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2018-01-25",
+    "action": "augment",
+    "add": {
+      "amount": 6.97,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "25.01.2018 | 6.97 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2019-10-03",
+    "action": "augment",
+    "add": {
+      "amount": 3.61,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "03.10.2019 | 3.61 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2020-11-04",
+    "action": "augment",
+    "add": {
+      "amount": 2.27,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "04.11.2020 | 2.27 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OKEY",
+    "registry_close": "2022-08-01",
+    "action": "augment",
+    "add": {
+      "amount": 1.87,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "01.08.2022 | 1.87 | RUB [https://www.dohod.ru/ik/analytics/dividend/okey]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "ETLN",
+    "registry_close": "2019-08-30",
+    "action": "augment",
+    "add": {
+      "amount": 12.67,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "30.08.2019 | 12.66673 | I | 20.09.2019 | 0.00% [https://ru.investing.com/equities/etalon-group-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "ETLN",
+    "registry_close": "2020-11-20",
+    "action": "augment",
+    "add": {
+      "amount": 12.61,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "| Registry Close Date | Payment Per Share | Currency | | 10.12.2021 | 9.31 | RUB | | 20.11.2020 | 12.61 | RUB | [https://www.dohod.ru/ik/analytics/dividend/etln]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "ETLN",
+    "registry_close": "2021-12-10",
+    "action": "augment",
+    "add": {
+      "amount": 9.31,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "| 10.12.2021 | 9.31 | RUB | [https://www.dohod.ru/ik/analytics/dividend/etln]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GEMC",
+    "registry_close": "2021-09-27",
+    "action": "augment",
+    "add": {
+      "amount": 72.22,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "| Registry Close Date | Payment per Share | Currency | | 15.12.2021 | 35.56 | RUB | | 27.09.2021 | 72.22 | RUB | [https://www.dohod.ru/ik/analytics/dividend/gemc]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "GEMC",
+    "registry_close": "2021-12-15",
+    "action": "augment",
+    "add": {
+      "amount": 35.56,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "| 15.12.2021 | 35.56 | RUB | [https://www.dohod.ru/ik/analytics/dividend/gemc]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "T",
+    "registry_close": "2020-03-27",
+    "action": "augment",
+    "add": {
+      "amount": 15.73,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "| 12.03.2020 | 27.03.2020 | 2020 | 15.73 | [https://www.dohod.ru/ik/analytics/dividend/t]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "T",
+    "registry_close": "2020-05-29",
+    "action": "augment",
+    "add": {
+      "amount": 10.35,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "| 13.05.2020 | 29.05.2020 | 2020 | 10.35 | [https://www.dohod.ru/ik/analytics/dividend/t]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "T",
+    "registry_close": "2020-08-21",
+    "action": "augment",
+    "add": {
+      "amount": 14.72,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "| 07.08.2020 | 21.08.2020 | 2020 | 14.72 | [https://www.dohod.ru/ik/analytics/dividend/t]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "T",
+    "registry_close": "2020-11-27",
+    "action": "augment",
+    "add": {
+      "amount": 19.29,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "| 13.11.2020 | 27.11.2020 | 2020 | 19.29 | [https://www.dohod.ru/ik/analytics/dividend/t]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "T",
+    "registry_close": "2021-03-26",
+    "action": "augment",
+    "add": {
+      "amount": 17.51,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "| 12.03.2021 | 26.03.2021 | 2021 | 17.51 | [https://www.dohod.ru/ik/analytics/dividend/t]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2013-06-07",
+    "action": "augment",
+    "add": {
+      "amount": 4.02,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2012 | 07.06.2013 | 07.06.2013 | 12.06.2013 | 301,702 thsd RUB | 4.02 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2014-05-23",
+    "action": "augment",
+    "add": {
+      "amount": 2.53,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2013 | 23.05.2014 | 23.05.2014 | 30.05.2014 | 189,883 thsd RUB | 2.53 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2015-06-05",
+    "action": "augment",
+    "add": {
+      "amount": 4.01,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2014 | 05.06.2015 | 05.06.2015 | 03.07.2015 | 301,251 thsd RUB | 4.01 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2016-04-22",
+    "action": "augment",
+    "add": {
+      "amount": 6.66,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2015 | 15.04.2016 | 22.04.2016 | 20.05.2016 | 500,333 thsd RUB | 6.66 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2016-09-09",
+    "action": "augment",
+    "add": {
+      "amount": 3.8,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "6m 2016 | 02.09.2016 | 09.09.2016 | 18.10.2016 | 285,475 thsd RUB | 3.80 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2017-04-28",
+    "action": "augment",
+    "add": {
+      "amount": 4.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2016 | 21.04.2017 | 28.04.2017 | 23.05.2017 | 338,063 thsd RUB | 4.50 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2017-09-19",
+    "action": "augment",
+    "add": {
+      "amount": 4.67,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "6m 2017 | 08.09.2017 | 19.09.2017 | 24.10.2017 | 350,833 thsd RUB | 4.67 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2018-04-25",
+    "action": "augment",
+    "add": {
+      "amount": 6.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2017 | 17.04.2018 | 25.04.2018 | 22.05.2018 | 450,750 thsd RUB | 6.00 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2019-05-24",
+    "action": "augment",
+    "add": {
+      "amount": 10.65,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2018 | 23.04.2019 | 24.05.2019 | 25.06.2019 | 800,081 thsd RUB | 10.65 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2021-05-05",
+    "action": "augment",
+    "add": {
+      "amount": 19.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "05.05.2021 | 19.33 RUB [https://www.dohod.ru/ik/analytics/dividend/mdmg]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2021-09-24",
+    "action": "augment",
+    "add": {
+      "amount": 18.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "24.09.2021 | 18.06 RUB [https://www.dohod.ru/ik/analytics/dividend/mdmg]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2022-11-07",
+    "action": "augment",
+    "add": {
+      "amount": 8.55,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "6m 2022 | 26.10.2022 | 07.11.2022 | 29.11.2022 | 642,319 thsd RUB | 8.55 RUB per GDR [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DGBZP",
+    "registry_close": "2010-05-21",
+    "action": "augment",
+    "add": {
+      "amount": 0.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Dorogobuzh shareholders met on May 21, 2010 to approve dividend distributions for fiscal year 2009 ... Dorogobuzh would distribute dividends exclusively to preferred shareholders at a rate of 0.2 rubles per share [https://html.duckduckgo.com/html/?q=Дорогобуж+привилегированные+%22за+2009+год%22+дивиденд]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DGBZP",
+    "registry_close": "2011-06-30",
+    "action": "augment",
+    "add": {
+      "amount": 1.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Дорогобуж выплатит дивиденды за 2010 год только по префам - из расчета 1 руб на акцию ... Dividend payments were limited to preferred shares only ... Announcements were made in mid-2011 regarding 2010 financial results [https://html.duckduckgo.com/html/?q=Акрон+Дорогобуж+дивиденды+2010+итогам]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DGBZP",
+    "registry_close": "2012-10-15",
+    "action": "augment",
+    "add": {
+      "amount": 1.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "По результатам 2011 года будут выплачены дивиденды в размере 1,2 рубля на каждую привилегированную акцию Дорогобуж ... The Board of Directors recommended the dividend in October 2011, and the shareholder meeting convened on December 7, 2011 ... The actual payment occurred in 2012 [https://html.duckduckgo.com/html/?q=Дорогобуж+дивиденды+2011+год+привилегированные+рубль]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DGBZP",
+    "registry_close": "2013-04-24",
+    "action": "augment",
+    "add": {
+      "amount": 1.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Акционеры ОАО 'Дорогобуж'...приняли решение выплатить дивиденды по результатам 2012 года в размере 1,2 рубля на одну привилегированную ... PRIME News confirms the company's leadership proposed this same distribution amount to the shareholder assembly on April 24, 2013. [https://html.duckduckgo.com/html/?q=Дорогобуж+дивиденды+2012+привилегированные+итогам]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DGBZP",
+    "registry_close": "2014-06-15",
+    "action": "augment",
+    "add": {
+      "amount": 1.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "mfd.ru reports: Акционеры ОАО 'Дорогобуж'...приняли решение выплатить дивиденды по результатам 2013 года в размере 1,2 рубля на одну привилегированную ... FINAM.ru indicates the Board of Directors recommended a выплату дивидендов в размере 1,2 руб. на одну привилегированную акцию [https://html.duckduckgo.com/html/?q=Дорогобуж+привилегированные+акции+дивиденды+2013]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DGBZP",
+    "registry_close": "2015-05-29",
+    "action": "augment",
+    "add": {
+      "amount": 0.32,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "BlackTerminal - 'Дивиденды в размере 32 (тридцать две) копейки на одну привилегированную акцию по результатам 2014 года' (May 29, 2015) ... Дорогобуж выплатит дивиденды за 2014 год в размере 32 копеек на акцию [https://html.duckduckgo.com/html/?q=DGBZP+%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D0%B5%D0%BD%D0%B4%D1%8B+2015+%D0%94%D0%BE%D1%80%D0%BE%D0%B3%D0%BE%D0%B1%D1%83%D0%B6]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "KBTK",
+    "registry_close": "2012-05-15",
+    "action": "augment",
+    "add": {
+      "amount": 6.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "cashstat.net - Detailed dividend history showing 2012: 6 rubles, 2013: 5 rubles, 2014: 5 rubles, 2015: 2.5 rubles per share [https://html.duckduckgo.com/html/?q=KBTK+%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D0%B5%D0%BD%D0%B4%D1%8B+2012+2013+2014+2015+%D0%9A%D1%83%D0%B7%D0%B1%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D1%8F]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "KBTK",
+    "registry_close": "2013-05-15",
+    "action": "augment",
+    "add": {
+      "amount": 5.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "cashstat.net - Detailed dividend history showing 2012: 6 rubles, 2013: 5 rubles, 2014: 5 rubles, 2015: 2.5 rubles per share [https://html.duckduckgo.com/html/?q=KBTK+%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D0%B5%D0%BD%D0%B4%D1%8B+2012+2013+2014+2015+%D0%9A%D1%83%D0%B7%D0%B1%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D1%8F]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "KBTK",
+    "registry_close": "2014-05-15",
+    "action": "augment",
+    "add": {
+      "amount": 5.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "neftegaz.ru - Кузбасская топливная компания направит на выплату дивидендов по итогам 2013 г 496,3 млн руб или 5 руб/акция [https://html.duckduckgo.com/html/?q=KBTK+%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D0%B5%D0%BD%D0%B4%D1%8B+2012+2013+2014+2015+%D0%9A%D1%83%D0%B7%D0%B1%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D1%8F]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "KBTK",
+    "registry_close": "2015-07-15",
+    "action": "augment",
+    "add": {
+      "amount": 2.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "cashstat.net - Detailed dividend history showing 2012: 6 rubles, 2013: 5 rubles, 2014: 5 rubles, 2015: 2.5 rubles per share [https://html.duckduckgo.com/html/?q=KBTK+%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D0%B5%D0%BD%D0%B4%D1%8B+2012+2013+2014+2015+%D0%9A%D1%83%D0%B7%D0%B1%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D1%8F]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "KBTK",
+    "registry_close": "2017-06-05",
+    "action": "augment",
+    "add": {
+      "amount": 6.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "KBTK | 01.06.2017 | 05.06.2017 | 2016 | 6₽ | 126.5 | 4.7% [https://smart-lab.ru/q/KBTK/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "KBTK",
+    "registry_close": "2018-07-09",
+    "action": "augment",
+    "add": {
+      "amount": 10.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "ПАО «Кузбасская топливная компания» направит 992,5 млн руб. на выплату дивидендов за 2017 год ... владелец каждой обыкновенной акции номинальной стоимостью 0,2 руб. получит по 10 руб. ... A second option proposed by the board would have distributed 595.5 million rubles at 6 rubles per share, but sha [https://www.kommersant.ru/doc/3669737]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MSSB",
+    "registry_close": "2010-08-13",
+    "action": "augment",
+    "add": {
+      "amount": 0.102064,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "13.08.2010 | I | 0.102064 | 12.11.2010 ... Акционеры ОАО 'Мосэнергосбыт' на внеочередном общем собрании приняли решение выплатить по итогам I полугодия 2010 г. дивиденды в размере 0,1020646850 руб. [https://ru.investing.com/equities/mosenergosbyt-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MSSB",
+    "registry_close": "2012-05-14",
+    "action": "augment",
+    "add": {
+      "amount": 0.1341,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "14.05.2012 | 12M | 0.1341 | 19.08.2012 [https://ru.investing.com/equities/mosenergosbyt-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MSSB",
+    "registry_close": "2013-05-14",
+    "action": "augment",
+    "add": {
+      "amount": 0.017699,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "14.05.2013 | 12M | 0.017699 | 26.08.2013 [https://ru.investing.com/equities/mosenergosbyt-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MSSB",
+    "registry_close": "2014-06-27",
+    "action": "augment",
+    "add": {
+      "amount": 0.010619,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "27.06.2014 | 12M | 0.010619 | 26.08.2014 [https://ru.investing.com/equities/mosenergosbyt-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTI",
+    "registry_close": "2016-07-19",
+    "action": "augment",
+    "add": {
+      "amount": 0.008318,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTI | 2016-07-18 | 2016-07-19 | 2016-08-23 | 0.008318 [https://a2-finance.com/en/issuers/rosseti/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTI",
+    "registry_close": "2017-07-19",
+    "action": "augment",
+    "add": {
+      "amount": 0.006214,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTI | 19.07.2017 | 2016 | 0.00621446 [https://smart-lab.ru/q/RSTI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTI",
+    "registry_close": "2018-07-09",
+    "action": "augment",
+    "add": {
+      "amount": 0.011965,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTI | 09.07.2018 | Q1 2018 | 0.011965 [https://smart-lab.ru/q/RSTI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTI",
+    "registry_close": "2019-07-08",
+    "action": "augment",
+    "add": {
+      "amount": 0.02443,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTI | 08.07.2019 | Q1 2019 | 0.02443 [https://smart-lab.ru/q/RSTI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTI",
+    "registry_close": "2020-06-15",
+    "action": "augment",
+    "add": {
+      "amount": 0.0885156,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTI | 15.06.2020 | Q4 2019 | 0.0885155625 [https://smart-lab.ru/q/RSTI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTI",
+    "registry_close": "2021-07-17",
+    "action": "augment",
+    "add": {
+      "amount": 0.024533,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTI | 2021-07-16 | 2021-07-17 | 2021-08-23 | 0.024533 [https://a2-finance.com/en/issuers/rosseti/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTIP",
+    "registry_close": "2016-07-19",
+    "action": "augment",
+    "add": {
+      "amount": 0.074526,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTIP | 2016-07-18 | 2016-07-19 | 2016-08-23 | 0.074526 [https://a2-finance.com/en/issuers/rosseti/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTIP",
+    "registry_close": "2017-07-19",
+    "action": "augment",
+    "add": {
+      "amount": 0.368355,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTIP | 19.07.2017 | 2016 | 0.368355281 [https://smart-lab.ru/q/RSTI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTIP",
+    "registry_close": "2018-07-09",
+    "action": "augment",
+    "add": {
+      "amount": 0.04287,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTIP | 09.07.2018 | Q1 2018 | 0.04287 [https://smart-lab.ru/q/RSTI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTIP",
+    "registry_close": "2019-07-08",
+    "action": "augment",
+    "add": {
+      "amount": 0.07997,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTIP | 08.07.2019 | Q1 2019 | 0.07997 [https://smart-lab.ru/q/RSTI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTIP",
+    "registry_close": "2020-06-15",
+    "action": "augment",
+    "add": {
+      "amount": 0.189304,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTIP | 15.06.2020 | Q4 2019 | 0.189304 [https://smart-lab.ru/q/RSTI/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RSTIP",
+    "registry_close": "2021-07-17",
+    "action": "augment",
+    "add": {
+      "amount": 0.058826,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RSTIP | 2021-07-16 | 2021-07-17 | 2021-08-23 | 0.058826 [https://a2-finance.com/en/issuers/rosseti/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "BEGY",
+    "registry_close": "2010-04-29",
+    "action": "augment",
+    "add": {
+      "amount": 1.087,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "29.04.2010 | 0,03701648 | 12M | 16.09.2010 [https://ru.investing.com/equities/bashkirenergo-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "BEGY",
+    "registry_close": "2011-05-05",
+    "action": "augment",
+    "add": {
+      "amount": 0.944,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "05.05.2011 | 0,03462251 | 12M | 23.08.2011 [https://ru.investing.com/equities/bashkirenergo-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "BEGY",
+    "registry_close": "2011-10-13",
+    "action": "augment",
+    "add": {
+      "amount": 0.92,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "13.10.2011 | 0,02959951 | 12M | 29.12.2011 [https://ru.investing.com/equities/bashkirenergo-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MMBM",
+    "registry_close": "2012-04-23",
+    "action": "augment",
+    "add": {
+      "amount": 18.4,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "23.04.2012 | 18,40 | 12M | 09.06.2012 | 46,00% [https://ru.investing.com/equities/bank-of-moscow-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MMBM",
+    "registry_close": "2013-04-22",
+    "action": "augment",
+    "add": {
+      "amount": 25.21,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "22.04.2013 | 25,21 | 12M | 09.06.2013 | 2,93% [https://ru.investing.com/equities/bank-of-moscow-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MMBM",
+    "registry_close": "2014-06-27",
+    "action": "augment",
+    "add": {
+      "amount": 95.68,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "27.06.2014 | 95,68 | 12M | – | 8,84% [https://ru.investing.com/equities/bank-of-moscow-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TAER",
+    "registry_close": "2012-05-04",
+    "action": "augment",
+    "add": {
+      "amount": 0.44,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "04.05.2012 | 0,44 | 12M | 30.07.2012 [https://ru.investing.com/equities/ak-transaero-oao-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TAER",
+    "registry_close": "2013-04-30",
+    "action": "augment",
+    "add": {
+      "amount": 0.59,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "30.04.2013 | 0,59 | 12M | 30.07.2013 [https://ru.investing.com/equities/ak-transaero-oao-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TAER",
+    "registry_close": "2014-07-02",
+    "action": "augment",
+    "add": {
+      "amount": 0.9,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "02.07.2014 | 0,90 | 12M [https://ru.investing.com/equities/ak-transaero-oao-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VSMZ",
+    "registry_close": "2010-04-30",
+    "action": "augment",
+    "add": {
+      "amount": 41.525,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "30.04.2010 | 38,6489953 | 12M | 22.12.2010 [https://ru.investing.com/equities/vmz-oao-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VSMZ",
+    "registry_close": "2011-04-29",
+    "action": "augment",
+    "add": {
+      "amount": 106.4,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "29.04.2011 | 95,42844684 | 12M | 30.06.2011 | 5,45% [https://ru.investing.com/equities/vmz-oao-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "YKEN",
+    "registry_close": "2011-04-13",
+    "action": "augment",
+    "add": {
+      "amount": 0.00939,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "13.04.2011 | 0.00939 | RUB | 12M | 30.06.2011 [https://ru.investing.com/equities/yakutskenergo-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2010-04-16",
+    "action": "augment",
+    "add": {
+      "amount": 0.00058,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2010 | 2009 | 0.00058 | 6.067 [https://www.dohod.ru/ik/analytics/dividend/vtbr]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2011-04-21",
+    "action": "augment",
+    "add": {
+      "amount": 0.00058,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2011 | 2010 | 0.00058 | 6.067 [https://www.dohod.ru/ik/analytics/dividend/vtbr]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2012-04-26",
+    "action": "augment",
+    "add": {
+      "amount": 0.00088,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2012 | 2011 | 0.00088 | 9.205 [https://www.dohod.ru/ik/analytics/dividend/vtbr]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2013-05-13",
+    "action": "augment",
+    "add": {
+      "amount": 0.00143,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2013 | 2012 | 0.00143 | 14.959 [https://www.dohod.ru/ik/analytics/dividend/vtbr]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2014-07-01",
+    "action": "augment",
+    "add": {
+      "amount": 0.00116,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2014 | 2013 | 0.00116 | 15.034 [https://www.dohod.ru/ik/analytics/dividend/vtbr]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2015-07-06",
+    "action": "augment",
+    "add": {
+      "amount": 0.00117,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2015 | 2014 | 0.00117 | 15.164 [https://www.dohod.ru/ik/analytics/dividend/vtbr]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2016-07-04",
+    "action": "augment",
+    "add": {
+      "amount": 0.00117,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2016 | 2015 | 0.00117 | 15.164 [https://www.dohod.ru/ik/analytics/dividend/vtbr]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2017-05-10",
+    "action": "augment",
+    "add": {
+      "amount": 0.00117,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2016 | 10.05.2017 | 0.00117 [https://smart-lab.ru/q/VTBR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2018-06-04",
+    "action": "augment",
+    "add": {
+      "amount": 0.00345349,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2017 | 04.06.2018 | 0.00345349 [https://smart-lab.ru/q/VTBR/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2015-12-20",
+    "action": "augment",
+    "add": {
+      "amount": 14.79,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "18.11.2015 | 20.12.2015 | 14.79 руб [https://www.dohod.ru/ik/analytics/dividend/nkhp]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2016-06-24",
+    "action": "augment",
+    "add": {
+      "amount": 2.61,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "04.05.2016 | 24.06.2016 | 2.61 руб [https://www.dohod.ru/ik/analytics/dividend/nkhp]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2016-12-21",
+    "action": "augment",
+    "add": {
+      "amount": 9.46,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "07.11.2016 | 21.12.2016 | 9.46 руб [https://www.dohod.ru/ik/analytics/dividend/nkhp]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2017-07-10",
+    "action": "augment",
+    "add": {
+      "amount": 2.36,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "06.07.2017 | 10.07.2017 | 2016 год | 2.359939 [https://smart-lab.ru/q/NKHP/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2017-09-08",
+    "action": "augment",
+    "add": {
+      "amount": 7.41,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "06.09.2017 | 08.09.2017 | 2кв 2017 | 7.406955 [https://smart-lab.ru/q/NKHP/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2017-12-15",
+    "action": "augment",
+    "add": {
+      "amount": 6.8,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "13.12.2017 | 15.12.2017 | 3кв 2017 | 6.8 [https://smart-lab.ru/q/NKHP/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2018-06-26",
+    "action": "augment",
+    "add": {
+      "amount": 5.66,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "22.06.2018 | 26.06.2018 | 4кв 2017 | 5.65712 [https://smart-lab.ru/q/NKHP/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "URKA",
+    "registry_close": "2010-05-11",
+    "action": "augment",
+    "add": {
+      "amount": 1.7,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2010, год | 10.05.2010 | 11.05.2010 | 1.7 RUB [https://investfunds.ru/stocks/Uralkali/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "URKA",
+    "registry_close": "2011-05-24",
+    "action": "augment",
+    "add": {
+      "amount": 4.55,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2011, 9 месяцев | 24.05.2011 | 24.05.2011 | 4.55 RUB [https://investfunds.ru/stocks/Uralkali/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "URKA",
+    "registry_close": "2011-11-02",
+    "action": "augment",
+    "add": {
+      "amount": 4.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2011, год | 02.11.2011 | 02.11.2011 | 4 RUB [https://investfunds.ru/stocks/Uralkali/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "URKA",
+    "registry_close": "2012-04-26",
+    "action": "augment",
+    "add": {
+      "amount": 4.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2012, 9 месяцев | 26.04.2012 | 26.04.2012 | 4 RUB [https://investfunds.ru/stocks/Uralkali/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "URKA",
+    "registry_close": "2012-11-06",
+    "action": "augment",
+    "add": {
+      "amount": 4.71,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2012, год | 05.11.2012 | 06.11.2012 | 4.71 RUB [https://investfunds.ru/stocks/Uralkali/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "URKA",
+    "registry_close": "2013-04-25",
+    "action": "augment",
+    "add": {
+      "amount": 3.9,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2013, 9 месяцев | 25.04.2013 | 25.04.2013 | 3.9 RUB [https://investfunds.ru/stocks/Uralkali/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DSKY",
+    "registry_close": "2014-07-19",
+    "action": "augment",
+    "add": {
+      "amount": 1.15,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Ex-Dividend Date: 2014-07-18 | Record Date: 2014-07-19 | Amount: ₽1.15 [https://a2-finance.com/en/issuers/childs-world/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DSKY",
+    "registry_close": "2014-11-28",
+    "action": "augment",
+    "add": {
+      "amount": 2.204,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Ex-Dividend Date: 2014-11-27 | Record Date: 2014-11-28 | Amount: ₽0.3819 ... ₽1.5439 ... ₽0.2782 [https://a2-finance.com/en/issuers/childs-world/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DSKY",
+    "registry_close": "2015-07-19",
+    "action": "augment",
+    "add": {
+      "amount": 1.1354,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Ex-Dividend Date: 2015-07-17 | Record Date: 2015-07-19 | Amount: ₽1.1354 [https://a2-finance.com/en/issuers/childs-world/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DSKY",
+    "registry_close": "2015-12-15",
+    "action": "augment",
+    "add": {
+      "amount": 2.8871,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Ex-Dividend Date: 2015-12-14 | Record Date: 2015-12-15 | Amount: ₽0.9656 ... ₽1.9215 [https://a2-finance.com/en/issuers/childs-world/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DSKY",
+    "registry_close": "2016-07-17",
+    "action": "augment",
+    "add": {
+      "amount": 1.77,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Ex-Dividend Date: 2016-07-15 | Record Date: 2016-07-17 | Amount: ₽1.77 [https://a2-finance.com/en/issuers/childs-world/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "DSKY",
+    "registry_close": "2016-12-12",
+    "action": "augment",
+    "add": {
+      "amount": 4.22,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Ex-Dividend Date: 2016-12-09 | Record Date: 2016-12-12 | Amount: ₽4.22 [https://a2-finance.com/en/issuers/childs-world/dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PRTK",
+    "registry_close": "2014-09-25",
+    "action": "augment",
+    "add": {
+      "amount": 1.9,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "25.09.2014 | 1.90 RUB | I | 5.05% [https://ru.investing.com/equities/protek_rts-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PRTK",
+    "registry_close": "2016-06-27",
+    "action": "augment",
+    "add": {
+      "amount": 16.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "ПРОТЕК планирует выплатить дивиденды по итогам 2015 года 11 руб. + 5 руб. из нераспределенной прибыли прошлых лет на одну обыкновенную акцию (закрытие реестра на получение дивидендов 27.06.2016) [https://xn--80aeiahhn9aobclif2kuc.xn--p1ai/22-04-2016/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PRTK",
+    "registry_close": "2016-12-12",
+    "action": "augment",
+    "add": {
+      "amount": 7.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "09.12.2016 | 7.50 RUB | I | 22.38% [https://ru.investing.com/equities/protek_rts-dividends]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PRTK",
+    "registry_close": "2017-12-11",
+    "action": "augment",
+    "add": {
+      "amount": 5.67,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "07.12.2017 | 11.12.2017 | Q3 2017 | 5.67 | 4.9% [https://smart-lab.ru/q/PRTK/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VZRZ",
+    "registry_close": "2012-05-31",
+    "action": "augment",
+    "add": {
+      "amount": 0.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "dividends payment in the amount of 5% of nominal value for ordinary shares and 20% of nominal value for preferred shares (charter-mandated baseline applied across 2011-2014 results) [https://www.eqs-news.com/news/corporate/bank-vozrozhdenie-agm-approves-dividends-for-2013/f042d6e5-7a45-43d8-84f3-af8862fe0446_en]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VZRZ",
+    "registry_close": "2013-05-31",
+    "action": "augment",
+    "add": {
+      "amount": 0.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "5% of nominal value for ordinary shares and 20% of nominal value for preferred shares (charter-mandated baseline applied across 2011-2014 results) [https://www.eqs-news.com/news/corporate/bank-vozrozhdenie-agm-approves-dividends-for-2013/f042d6e5-7a45-43d8-84f3-af8862fe0446_en]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VZRZ",
+    "registry_close": "2014-07-08",
+    "action": "augment",
+    "add": {
+      "amount": 0.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "dividends payment in the amount of 5% of nominal value for ordinary shares and 20% of nominal value for preferred shares ... The Meeting set July 8, 2014 as the date of compelling the list of persons entitled to receive dividends. Total amount of dividends to be paid totals 14,463,357 rubles [https://www.eqs-news.com/news/corporate/bank-vozrozhdenie-agm-approves-dividends-for-2013/f042d6e5-7a45-43d8-84f3-af8862fe0446_en]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "VZRZ",
+    "registry_close": "2015-06-30",
+    "action": "augment",
+    "add": {
+      "amount": 0.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Bank Возрождение может выплатить дивиденды за 2014 год в размере 0,5 рубля на акцию (Board of Directors recommendation, 21.04.2015) [https://www.finam.ru/analysis/newsitem/bank-vozrozhdenie-mozhet-vyplatit-dividendy-za-2014-god-v-razmere-0-5-rublya-na-akciyu-20150421-185121/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "ROSB",
+    "registry_close": "2024-05-27",
+    "action": "augment",
+    "add": {
+      "amount": 2.9,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "ROSB | 24.05.2024 | 27.05.2024 | 2023 | 2.9 | 117.8 | 2.5% [https://smart-lab.ru/q/ROSB/dividend/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "OGKB",
+    "registry_close": "2011-05-03",
+    "action": "augment",
+    "add": {
+      "amount": 0.0048759,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "26.04.2011 | 03.05.2011 | 0.0048759 | 2011 [https://www.dohod.ru/ik/analytics/dividend/ogkb]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TATN",
+    "registry_close": "2010-02-01",
+    "action": "augment",
+    "add": {
+      "amount": 6.56,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "30.04.2010 | 01.02.2010 | 6.56 RUB | 2010 [https://www.dohod.ru/ik/analytics/dividend/tatn]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TATN",
+    "registry_close": "2011-05-06",
+    "action": "augment",
+    "add": {
+      "amount": 5.02,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "28.02.2011 | 06.05.2011 | 5.02 RUB | 2011 [https://www.dohod.ru/ik/analytics/dividend/tatn]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TATNP",
+    "registry_close": "2010-02-01",
+    "action": "augment",
+    "add": {
+      "amount": 6.56,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "30.04.2010 | 01.02.2010 | 6.56 RUB | 2010 [https://www.dohod.ru/ik/analytics/dividend/tatnp]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MFGSP",
+    "registry_close": "2010-05-14",
+    "action": "augment",
+    "add": {
+      "amount": 1.8,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2009 | 14.05.2010 | 1.8 RUB [https://investfunds.ru/stocks/Slavneft-Megionneftegaz-pref/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MFGSP",
+    "registry_close": "2011-05-13",
+    "action": "augment",
+    "add": {
+      "amount": 0.85,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2010 | 13.05.2011 | 0.85 RUB [https://investfunds.ru/stocks/Slavneft-Megionneftegaz-pref/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "RASP",
+    "registry_close": "2010-04-22",
+    "action": "augment",
+    "add": {
+      "amount": 5.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "14.04.2010 | 22.04.2010 | 5 RUB [https://www.dohod.ru/ik/analytics/dividend/rasp]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PLZL",
+    "registry_close": "2013-11-14",
+    "action": "augment",
+    "add": {
+      "amount": 2.623,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "21.10.2013 | 14.11.2013 | 2013 | 2.62 [https://www.dohod.ru/ik/analytics/dividend/plzl]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2020-09-16",
+    "action": "augment",
+    "add": {
+      "amount": 18.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "IR: 2019-final 18.50 RUB per GDR, record 16.09.2020. [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MDMG",
+    "registry_close": "2020-09-18",
+    "action": "augment",
+    "add": {
+      "amount": 9.8,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "IR: 6m-2020 interim 9.80 RUB per GDR, record 18.09.2020. [https://www.mcclinics.com/investors/dividends/]",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2015-05-27",
+    "action": "drop",
+    "match": {
+      "source": "moex_iss",
+      "amount": 48.0
+    },
+    "reason": "Phantom; PHOR Q1-2015 real registry was 2015-07-25 (smart-lab dividend table). Price-gap on 2015-05-27 showed price rise, not drop.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2015-06-19",
+    "action": "drop",
+    "match": {
+      "source": "moex_iss",
+      "amount": 15.0
+    },
+    "reason": "Phantom; PHOR Q2-2015 real registry was 2015-10-17.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2015-07-25",
+    "action": "drop",
+    "match": {
+      "source": "skill_fill_dohod",
+      "amount": 48.0
+    },
+    "reason": "Phantom dohod entry; 48 RUB Q3-2015 paid 2016-01-26 (already in JSONL).",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2015-10-17",
+    "action": "drop",
+    "match": {
+      "source": "moex_iss",
+      "amount": 57.0
+    },
+    "reason": "Phantom; 57 RUB not in PHOR 2015 cycle per smart-lab.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MGNT",
+    "registry_close": "2014-10-29",
+    "action": "drop",
+    "match": {
+      "source": "moex_iss",
+      "amount": 152.07
+    },
+    "reason": "Phantom; legacy CSV records MGNT 2014-10 as 78.3 RUB; 152.07 is the December event misdated to October.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "LNZLP",
+    "registry_close": "2012-04-30",
+    "action": "drop",
+    "match": {
+      "source": "skill_fill_tbank",
+      "amount": 281.56
+    },
+    "reason": "Phantom; 2012-08-22 has matching 15% price gap (matches expected 15.2% from 281.56/1848.9); 2012-04-30 has no gap and LNZL common has no sibling spring 2012 div.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "LKOH",
+    "registry_close": "2017-06-08",
+    "action": "drop",
+    "match": {
+      "source": "skill_fill_yahoo",
+      "amount": 120.0
+    },
+    "reason": "Phantom; info.txt LKOH 2017 history records only one 120 RUB payment in July.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "MSRS",
+    "registry_close": "2022-12-29",
+    "action": "drop",
+    "match": {
+      "source": "skill_fill_yahoo",
+      "amount": 0.0849
+    },
+    "reason": "Phantom; price-gap analysis shows real ex-div on 2023-01-05 (registry 2023-01-08), -6.84% drop matches expected 7.5%.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "AKRN",
+    "registry_close": "2008-04-14",
+    "action": "drop",
+    "match": {
+      "source": "skill_fill_tbank",
+      "amount": 40.0
+    },
+    "reason": "Phantom; price rose 3.75% on 2008-04-14, no ex-div signal. Real event on 2008-05-12.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "KAZTP",
+    "registry_close": "2018-01-08",
+    "action": "drop",
+    "match": {
+      "source": "skill_fill_dohod",
+      "amount": 1.0
+    },
+    "reason": "Phantom for KAZTP pref; price showed no ex-div drop on 2018-01-08.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TATNP",
+    "registry_close": "2010-05-11",
+    "action": "drop",
+    "match": {
+      "source": "skill_fill_yahoo",
+      "amount": 6.56
+    },
+    "reason": "Phantom; legacy CSV records TATNP 2010 only in February (6.56 RUB). TATN common also has single Feb 2010 event. May drop attributed to general market sell-off, not ex-div.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TATN",
+    "registry_close": "2023-07-04",
+    "action": "drop",
+    "match": {
+      "source": "moex_iss",
+      "amount": 27.71
+    },
+    "reason": "Phantom; real registry 2023-07-11 per smart-lab and dohod for FY2022 Q4 27.71 RUB.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TATNP",
+    "registry_close": "2023-07-04",
+    "action": "drop",
+    "match": {
+      "source": "moex_iss",
+      "amount": 27.71
+    },
+    "reason": "Phantom; real registry 2023-07-11 per smart-lab and dohod for FY2022 Q4 27.71 RUB.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TATN",
+    "registry_close": "2023-07-11",
+    "action": "augment",
+    "add": {
+      "amount": 27.71,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "FY2022 Q4 dividend 27.71 RUB per smart-lab.ru/q/TATN/dividend/ and dohod.ru/ik/analytics/dividend/tatn.",
+    "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "TATNP",
+    "registry_close": "2023-07-11",
+    "action": "augment",
+    "add": {
+      "amount": 27.71,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "FY2022 Q4 dividend 27.71 RUB (TATNP mirrors TATN per Tatneft policy).",
+    "resolved_at": "2026-05-17"
+  }
+]

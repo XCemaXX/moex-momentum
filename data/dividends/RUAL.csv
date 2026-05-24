@@ -1,0 +1,9 @@
+registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2015-10-27,1.1975126,RUB,skill_fill_yahoo,yahoo_ex_div,
+2015-10-28,0.016,USD,skill_fill_tbank,tbank_reestr,
+2016-09-29,1.1971488,RUB,skill_fill_yahoo,yahoo_ex_div,
+2016-09-30,0.01645,USD,skill_fill_tbank,tbank_reestr,
+2017-09-07,0.0197,USD,skill_fill_tbank,tbank_reestr,
+2017-09-07,1.4336675,RUB,skill_fill_yahoo,yahoo_ex_div,
+2022-10-19,1.4555,RUB,skill_fill_yahoo,yahoo_ex_div,
+2022-10-20,0.02,USD,moex_iss,,

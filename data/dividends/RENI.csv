@@ -1,0 +1,6 @@
+registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2023-10-10,7.7,RUB,moex_iss,,
+2024-07-05,2.3,RUB,moex_iss,,
+2024-12-20,3.6,RUB,moex_iss,,
+2025-07-15,6.4,RUB,moex_iss,,
+2025-12-19,4.1,RUB,skill_fill_yahoo,yahoo_ex_div,

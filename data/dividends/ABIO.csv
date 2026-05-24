@@ -1,0 +1,6 @@
+registry_close,amount,currency,source,registry_close_source
+2014-06-30,0.15,RUB,skill_fill_tbank,tbank_reestr
+2016-06-30,0.3,RUB,skill_fill_tbank,tbank_reestr
+2023-07-19,1.0,RUB,moex_iss,
+2024-06-17,1.2,RUB,moex_iss,
+2026-06-22,1.2,RUB,skill_fill_tbank,tbank_reestr
