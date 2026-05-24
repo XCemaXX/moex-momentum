@@ -1,0 +1,56 @@
+name: pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install uv
+        run: pip install uv
+      - name: Sync deps
+        run: uv sync --frozen
+      - name: Recompute monthly returns
+        # data/momentum/monthly/ is gitignored — regenerate from committed raw CSV.
+        run: uv run momentum compute monthly --from-scratch
+      - name: Recompute backtest (q_values + holdings)
+        # data/momentum/{signal}/ is gitignored — recompute. Both signals: the
+        # default pages use curve_fit, compare.html needs simple too.
+        run: |
+          uv run momentum compute backtest --signal curve_fit
+          uv run momentum compute backtest --signal simple
+      - name: Compute weight sweep
+        # data/momentum/sweep/q1_nav.csv — fan of 11 a/b weights for compare.html.
+        run: uv run python scripts/compute_weight_sweep.py
+      - name: Build site
+        run: uv run momentum site build --out _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

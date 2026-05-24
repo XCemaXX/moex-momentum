@@ -1,0 +1,450 @@
+{% extends "base.html" %}
+{% block head_extra %}
+<style>
+  .month-picker { margin: 0.6em 0 1.2em; display: flex; align-items: center; gap: 0.4em; }
+  .month-picker select { font-size: 14px; padding: 0.3em 0.5em; }
+  .month-picker button {
+    font-size: 14px; padding: 0.3em 0.7em; cursor: pointer;
+    background: #fff; border: 1px solid #ccc; border-radius: 4px;
+    color: #1f77b4; min-width: 2.2em;
+  }
+  .month-picker button:hover:not(:disabled) { background: #f0f0f0; }
+  .month-picker button:disabled { color: #ccc; cursor: not-allowed; }
+  .q-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1em;
+  }
+  /* Card per quartile with a coloured top stripe — colours mirror the chart traces. */
+  .q-grid section {
+    border: 1px solid #e0e0e0; border-radius: 6px;
+    border-top: 4px solid var(--q-color);
+    background: #fff; padding: 0.7em 0.9em 0.9em;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .q-grid section.q1 { --q-color: #1f77b4; }
+  .q-grid section.q2 { --q-color: #2ca02c; }
+  .q-grid section.q3 { --q-color: #ff7f0e; }
+  .q-grid section.q4 { --q-color: #9467bd; }
+  .q-grid section h3 {
+    margin: 0 0 0.6em; padding-bottom: 0.4em;
+    font-size: 15px; color: var(--q-color);
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .q-grid section h3 .count { color: #888; font-weight: 400; font-size: 13px; margin-left: 0.4em; }
+  .q-grid table { font-size: 13px; }
+  .q-grid td.ticker { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .empty { color: #999; font-style: italic; padding: 0.5em 0; }
+
+  /* Single global toggle wraps the whole 4-card grid. */
+  details.q-grid-wrap > summary {
+    cursor: pointer; list-style: none;
+    font-size: 14px; color: #1f77b4; padding: 0.3em 0;
+    display: inline-flex; align-items: center; gap: 0.4em;
+    user-select: none;
+  }
+  details.q-grid-wrap > summary::-webkit-details-marker { display: none; }
+  details.q-grid-wrap > summary::before {
+    content: "▶"; font-size: 10px; color: #999; transition: transform 0.15s;
+    display: inline-block;
+  }
+  details.q-grid-wrap[open] > summary::before { transform: rotate(90deg); }
+  details.q-grid-wrap > .q-grid { margin-top: 0.8em; }
+
+  /* Q1 monthly diff section. */
+  .q1-diff { margin-top: 1.6em; }
+  .q1-diff h2 { margin: 0 0 0.6em; font-size: 17px; }
+  .q1-diff .subtitle { color: #666; font-size: 13px; margin: -0.4em 0 0.8em; }
+  .q1-diff .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; }
+  .q1-diff .col {
+    border: 1px solid #e0e0e0; border-radius: 6px; padding: 0.7em 0.9em;
+    background: #fff;
+  }
+  .q1-diff .col.buy  { border-top: 4px solid #2ca02c; }
+  .q1-diff .col.sell { border-top: 4px solid #d62728; }
+  .q1-diff .col h3 { margin: 0 0 0.5em; font-size: 14px; }
+  .q1-diff .col.buy  h3 { color: #2ca02c; }
+  .q1-diff .col.sell h3 { color: #d62728; }
+  .q1-diff table { font-size: 13px; }
+  .q1-diff td.ticker { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .q1-diff td.reason { color: #666; font-size: 12px; }
+
+  /* Pending-inclusion block: liquid tickers too young for the universe. */
+  .pending-wrap { margin-top: 1.6em; }
+  details.q-grid-wrap > .pending { margin-top: 0.8em; }
+  .pending .cutoff { color: #666; font-size: 13px; margin: 0 0 0.8em; }
+  .pending .cutoff b { color: #444; }
+  .pending ul { list-style: none; padding: 0; margin: 0; font-size: 13px; }
+  .pending li { padding: 0.28em 0; border-bottom: 1px solid #f3f3f3; }
+  .pending .tk { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-weight: 600; }
+  .pending .nm { color: #555; }
+  .pending .info { color: #666; }
+  .pending .wq { font-weight: 600; }
+  .pending .wq.q1 { color: #1f77b4; }
+  .pending .wq.q2 { color: #2ca02c; }
+  .pending .wq.q3 { color: #ff7f0e; }
+  .pending .wq.q4 { color: #9467bd; }
+
+  /* Reserve space for JS-populated blocks so they don't shift layout on load
+     (CLS). Skeleton cards share .q-grid layout, so the 4/2/1-column reflow
+     stays correct at every width without media queries. Heights are approximate
+     — under-reserve costs only minor residual shift, over-reserve only adds
+     whitespace; nothing breaks if they are off. */
+  .q-grid section.skeleton { min-height: 520px; }
+  #pending { min-height: 120px; }
+  #q1-diff { min-height: 300px; }
+</style>
+{% endblock %}
+{% block body %}
+<main>
+<h1>Состав Q1–Q4 по итогам месяца</h1>
+<p>
+Сигнал <code>{{ signal }}</code> считается на close последнего торгового дня выбранного месяца.
+Q1 — топ momentum, Q4 — дно. Универс месяца — survivorship-free, с фильтром по медианному обороту.
+Последняя строка = актуальный портфель на следующий месяц (см. <a href="methodology.html#конвенция-периода">методику</a>).
+</p>
+
+<div class="month-picker">
+<label for="month-select">Месяц: </label>
+<button type="button" id="month-prev" title="Предыдущий месяц">‹</button>
+<select id="month-select"></select>
+<button type="button" id="month-next" title="Следующий месяц">›</button>
+</div>
+
+<details class="q-grid-wrap" open>
+<summary>Составы Q1–Q4</summary>
+<div class="q-grid" id="q-grid">
+<section class="q1 skeleton"></section>
+<section class="q2 skeleton"></section>
+<section class="q3 skeleton"></section>
+<section class="q4 skeleton"></section>
+</div>
+</details>
+
+<details class="q-grid-wrap pending-wrap" open>
+<summary>Ожидающие включения</summary>
+<div class="pending" id="pending"></div>
+</details>
+
+<section class="q1-diff" id="q1-diff"></section>
+
+<script>
+(async function () {
+  const grid = document.getElementById("q-grid");
+  const diffBox = document.getElementById("q1-diff");
+  const pendingBox = document.getElementById("pending");
+  const sel = document.getElementById("month-select");
+  const btnPrev = document.getElementById("month-prev");
+  const btnNext = document.getElementById("month-next");
+  const resp = await fetch("data.json");
+  if (!resp.ok) {
+    grid.innerHTML = '<p class="empty">data.json not available</p>';
+    return;
+  }
+  const data = await resp.json();
+  const months = data.months;
+  for (const m of months) {
+    const opt = document.createElement("option");
+    opt.value = m;
+    opt.textContent = m;
+    sel.appendChild(opt);
+  }
+  sel.value = months[months.length - 1];
+
+  // Index ticker → quartile for a given month, so diff reasons are O(1).
+  function nextMonth(period) {
+    // "2026-04" → "2026-05"; "2026-12" → "2027-01".
+    const [y, m] = period.split("-").map(Number);
+    const ny = m === 12 ? y + 1 : y;
+    const nm = m === 12 ? 1 : m + 1;
+    return ny + "-" + String(nm).padStart(2, "0");
+  }
+
+  function quartileMap(month_data) {
+    const m = new Map();
+    for (const q of ["Q1", "Q2", "Q3", "Q4"]) {
+      for (const [ticker] of (month_data[q] || [])) m.set(ticker, q);
+    }
+    return m;
+  }
+
+  function canonicalLookup(month_data) {
+    const m = new Map();
+    for (const q of ["Q1", "Q2", "Q3", "Q4"]) {
+      for (const [ticker, canonical] of (month_data[q] || [])) m.set(ticker, canonical);
+    }
+    return m;
+  }
+
+  function renderQGrid(month_data) {
+    const labels = { Q1: "Q1 — top momentum", Q2: "Q2", Q3: "Q3", Q4: "Q4 — bottom" };
+    grid.innerHTML = "";
+    for (const q of ["Q1", "Q2", "Q3", "Q4"]) {
+      const rows = month_data[q] || [];
+      const section = document.createElement("section");
+      section.className = q.toLowerCase();
+      const h = document.createElement("h3");
+      h.appendChild(document.createTextNode(labels[q]));
+      const count = document.createElement("span");
+      count.className = "count";
+      count.textContent = "(" + rows.length + ")";
+      h.appendChild(count);
+      section.appendChild(h);
+      if (rows.length === 0) {
+        const p = document.createElement("p");
+        p.className = "empty";
+        p.textContent = "—";
+        section.appendChild(p);
+      } else {
+        const table = document.createElement("table");
+        for (const [ticker, canonical] of rows) {
+          const tr = document.createElement("tr");
+          const td1 = document.createElement("td");
+          td1.className = "ticker";
+          td1.textContent = ticker;
+          const td2 = document.createElement("td");
+          td2.textContent = canonical || "";
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          table.appendChild(tr);
+        }
+        section.appendChild(table);
+      }
+      grid.appendChild(section);
+    }
+  }
+
+  function buildDiffTable(entries) {
+    const table = document.createElement("table");
+    for (const [ticker, canonical, reason] of entries) {
+      const tr = document.createElement("tr");
+      const td1 = document.createElement("td");
+      td1.className = "ticker";
+      td1.textContent = ticker;
+      const td2 = document.createElement("td");
+      td2.textContent = canonical || "";
+      const td3 = document.createElement("td");
+      td3.className = "reason";
+      td3.textContent = reason;
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      table.appendChild(tr);
+    }
+    return table;
+  }
+
+  function renderDiff(month) {
+    diffBox.innerHTML = "";
+    const idx = months.indexOf(month);
+    const h = document.createElement("h2");
+    h.textContent = "Изменения Q1";
+    diffBox.appendChild(h);
+
+    if (idx <= 0) {
+      const p = document.createElement("p");
+      p.className = "empty";
+      p.textContent = "Нет данных за предыдущий месяц.";
+      diffBox.appendChild(p);
+      return;
+    }
+    const prevMonth = months[idx - 1];
+    const curr = data.holdings[month];
+    const prev = data.holdings[prevMonth];
+
+    const subtitle = document.createElement("p");
+    subtitle.className = "subtitle";
+    subtitle.textContent = "Ребаланс на close " + month + " (для держания в " + nextMonth(month) + "), относительно состава по итогам " + prevMonth + ":";
+    diffBox.appendChild(subtitle);
+
+    const prevQ = quartileMap(prev);
+    const currQ = quartileMap(curr);
+    const prevCanon = canonicalLookup(prev);
+    const currCanon = canonicalLookup(curr);
+
+    const prevQ1Set = new Set((prev.Q1 || []).map(([t]) => t));
+    const currQ1Set = new Set((curr.Q1 || []).map(([t]) => t));
+
+    // Buy: in current Q1, not in previous Q1. Reason = where in prev (Q2/Q3/Q4) or 'new'.
+    const buys = [];
+    for (const t of currQ1Set) {
+      if (prevQ1Set.has(t)) continue;
+      const prevWhere = prevQ.get(t);
+      const reason = prevWhere
+        ? "был в " + prevWhere
+        : "новичок в универсе";
+      buys.push([t, currCanon.get(t) || "", reason]);
+    }
+    buys.sort((a, b) => a[0].localeCompare(b[0]));
+
+    // Sell: in previous Q1, not in current Q1. Reason = where in curr or 'out of universe'.
+    const sells = [];
+    for (const t of prevQ1Set) {
+      if (currQ1Set.has(t)) continue;
+      const currWhere = currQ.get(t);
+      const reason = currWhere
+        ? "ушёл в " + currWhere
+        : "делистнут / выпал из универса";
+      sells.push([t, prevCanon.get(t) || "", reason]);
+    }
+    sells.sort((a, b) => a[0].localeCompare(b[0]));
+
+    const cols = document.createElement("div");
+    cols.className = "cols";
+
+    const buyCol = document.createElement("div");
+    buyCol.className = "col buy";
+    const buyH = document.createElement("h3");
+    buyH.textContent = "Купить (+" + buys.length + ")";
+    buyCol.appendChild(buyH);
+    if (buys.length === 0) {
+      const p = document.createElement("p");
+      p.className = "empty";
+      p.textContent = "—";
+      buyCol.appendChild(p);
+    } else {
+      buyCol.appendChild(buildDiffTable(buys));
+    }
+
+    const sellCol = document.createElement("div");
+    sellCol.className = "col sell";
+    const sellH = document.createElement("h3");
+    sellH.textContent = "Продать (−" + sells.length + ")";
+    sellCol.appendChild(sellH);
+    if (sells.length === 0) {
+      const p = document.createElement("p");
+      p.className = "empty";
+      p.textContent = "—";
+      sellCol.appendChild(p);
+    } else {
+      sellCol.appendChild(buildDiffTable(sells));
+    }
+
+    cols.appendChild(buyCol);
+    cols.appendChild(sellCol);
+    diffBox.appendChild(cols);
+  }
+
+  function fmtRub(v) {
+    if (v == null) return "—";
+    if (v >= 1e9) return (v / 1e9).toFixed(1).replace(".", ",") + " млрд ₽";
+    return Math.round(v / 1e6) + " млн ₽";
+  }
+
+  // Russian plural for "месяц".
+  function plMonths(n) {
+    const n10 = n % 10, n100 = n % 100;
+    if (n10 === 1 && n100 !== 11) return "месяц";
+    if (n10 >= 2 && n10 <= 4 && (n100 < 10 || n100 >= 20)) return "месяца";
+    return "месяцев";
+  }
+
+  function renderPending(month) {
+    pendingBox.innerHTML = "";
+    const meta = (data.universe_meta || {})[month];
+    const cut = document.createElement("p");
+    cut.className = "cutoff";
+    if (meta && meta.cut_rub != null) {
+      // Build via text nodes, not innerHTML — month/marginal are data strings.
+      const b = document.createElement("b");
+      b.textContent = fmtRub(meta.cut_rub) + "/мес";
+      cut.append(
+        "Порог топ-100 за " + month + ": медианный оборот выше ",
+        b,
+        " (100-е имя: " + (meta.marginal || "—") +
+          "). Ниже — ликвидные тикеры моложе 12 месяцев, для которых q ещё не считается.",
+      );
+    } else {
+      cut.textContent = "Порог отсечения за " + month + " недоступен.";
+    }
+    pendingBox.appendChild(cut);
+
+    // Most months on the exchange first; ticker as a stable tie-break.
+    const entries = (((data.pending || {})[month]) || [])
+      .slice()
+      .sort((a, b) => b.age - a.age || a.ticker.localeCompare(b.ticker));
+    if (entries.length === 0) {
+      const p = document.createElement("p");
+      p.className = "empty";
+      p.textContent = "Нет кандидатов в этом месяце.";
+      pendingBox.appendChild(p);
+      return;
+    }
+    const ul = document.createElement("ul");
+    for (const e of entries) {
+      const li = document.createElement("li");
+      const tk = document.createElement("span");
+      tk.className = "tk";
+      tk.textContent = e.ticker;
+      li.appendChild(tk);
+      if (e.canonical) {
+        const nm = document.createElement("span");
+        nm.className = "nm";
+        nm.textContent = " " + e.canonical;
+        li.appendChild(nm);
+      }
+      const ageTxt = " — вышла на биржу " + e.age + " " + plMonths(e.age) + " назад";
+      const info = document.createElement("span");
+      info.className = "info";
+      if (e.status === "estimated" && e.would_be_q) {
+        info.textContent = ageTxt + ", входила бы в ";
+        li.appendChild(info);
+        const wq = document.createElement("span");
+        wq.className = "wq " + e.would_be_q.toLowerCase();
+        wq.textContent = e.would_be_q;
+        li.appendChild(wq);
+      } else {
+        info.textContent = ageTxt;
+        li.appendChild(info);
+      }
+      ul.appendChild(li);
+    }
+    pendingBox.appendChild(ul);
+  }
+
+  function updateNavButtons() {
+    const idx = months.indexOf(sel.value);
+    btnPrev.disabled = idx <= 0;
+    btnNext.disabled = idx >= months.length - 1;
+  }
+
+  function render(month) {
+    const month_data = data.holdings[month];
+    if (!month_data) {
+      grid.innerHTML = '<p class="empty">no data for ' + month + '</p>';
+      diffBox.innerHTML = "";
+      pendingBox.innerHTML = "";
+      updateNavButtons();
+      return;
+    }
+    renderQGrid(month_data);
+    renderPending(month);
+    renderDiff(month);
+    updateNavButtons();
+  }
+
+  function step(delta) {
+    const idx = months.indexOf(sel.value);
+    const next = idx + delta;
+    if (next < 0 || next >= months.length) return;
+    sel.value = months[next];
+    render(sel.value);
+  }
+
+  btnPrev.addEventListener("click", () => step(-1));
+  btnNext.addEventListener("click", () => step(1));
+  sel.addEventListener("change", () => render(sel.value));
+  // Mouse wheel over the dropdown steps months. preventDefault stops the
+  // page from scrolling and OS-native value-on-wheel.
+  sel.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+      step(e.deltaY > 0 ? 1 : -1);
+    },
+    { passive: false }
+  );
+  render(sel.value);
+})();
+</script>
+</main>
+{% endblock %}

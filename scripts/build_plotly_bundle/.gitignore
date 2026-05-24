@@ -1,0 +1,4 @@
+node_modules/
+plotly.min.js
+plotly.min.css
+package-lock.json

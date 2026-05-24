@@ -1,0 +1,5 @@
+*
+!.gitignore
+!mfd_ticker_ids.json
+!moex_isin_map.json
+!drift_report.md

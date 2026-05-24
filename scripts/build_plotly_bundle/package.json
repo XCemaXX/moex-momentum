@@ -1,0 +1,14 @@
+{
+  "name": "moex-plotly-custom-bundle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Custom plotly.js bundle (scatter+bar+sankey) for MOEX momentum pipeline.",
+  "scripts": {
+    "build": "esbuild index.js --bundle --minify --global-name=Plotly --platform=browser --define:global=globalThis --loader:.css=empty --outfile=plotly.min.js"
+  },
+  "dependencies": {
+    "esbuild": "0.24.0",
+    "jsdom": "^22.1.0",
+    "plotly.js": "3.5.0"
+  }
+}

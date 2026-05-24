@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# HTTP cache for all fetchers (regenerable):
+#   .fill_cache/iss/      — ISS endpoints (tickers refresh, prices, dividends, splits, indices)
+#   .fill_cache/dohod/    — dohod.ru HTML
+#   .fill_cache/tbank/    — Tinkoff SPA
+#   .fill_cache/yahoo/    — Yahoo chart API
+.fill_cache/
+
+# one-shot validation against hand-compiled raw_sources — see task 005.
+validate_with_raw/
+
+# Local-only regression anchor: needs raw_sources/ (not public) + computed
+# holdings. Runs in local dev where both exist; kept out of the published repo.
+tests/test_author_quantiles.py

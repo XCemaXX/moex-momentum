@@ -1,0 +1,31 @@
+name: lint
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install uv
+        run: pip install uv
+      - name: Sync deps
+        run: uv sync --frozen
+      - name: ruff format check
+        if: ${{ !cancelled() }}
+        run: uv run ruff format --check
+      - name: ruff lint
+        if: ${{ !cancelled() }}
+        run: uv run ruff check
+      - name: mypy
+        if: ${{ !cancelled() }}
+        run: uv run mypy src
+      - name: pytest
+        if: ${{ !cancelled() }}
+        run: uv run pytest

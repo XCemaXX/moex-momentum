@@ -1,0 +1,7 @@
+# Generated site artefacts. methodology.md and any committed source files
+# stay tracked; everything below is rebuilt by `momentum site build`.
+pages/_preview/
+pages/*.html
+pages/data.json
+# pages/plotly.min.js is committed — custom bundle built by
+# scripts/build_plotly_bundle/build.sh, regenerated only when plotly bumps.

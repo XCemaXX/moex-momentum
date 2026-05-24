@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block head_extra %}
+<style>
+  .chart-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 0.2em 0 0.4em; }
+  .toolbar-btn {
+    border: 1px solid #d0d0d0; background: #f4f4f4; color: #333;
+    padding: 0.2em 0.7em; border-radius: 3px; font-size: 13px; cursor: pointer;
+  }
+  .period-bar { display: flex; gap: 0.3em; }
+  .period-bar button.active { background: #1f77b4; color: #fff; border-color: #1f77b4; }
+  .sticky-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1em; margin-top: 0.6em; }
+  .sticky-card { border: 1px solid #eee; border-radius: 5px; overflow: hidden; }
+  .sticky-card h3 { margin: 0; padding: 0.4em 0.6em; color: #fff; font-size: 15px; }
+  .sticky-card td.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .sticky-card td.num, .sticky-card th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .sticky-card .until { color: #888; font-size: 12px; white-space: nowrap; }
+</style>
+{% endblock %}
+{% block body %}
+<main>
+<h1>Переходы между квантилями</h1>
+<p>
+Сколько тикеров перетекает между квантилями от месяца к месяцу, за выбранный период.
+Левые узлы — квантиль в месяце <i>t</i> (плюс <b>Новые</b> — вошёл в юниверс), правые — в месяце <i>t</i>+1
+(плюс <b>Выбыли</b> — выбыл из юниверса). Диагональ Qᵢ→Qᵢ — «масса стабильности»: чем толще, тем чаще имена
+остаются в своём квантиле. Период переключает и диаграмму, и список «упёртых» ниже.
+</p>
+
+<div class="chart-toolbar">
+  <button type="button" id="toggle-chart" class="toolbar-btn">Свернуть диаграмму</button>
+  <div class="period-bar">
+  {% for s in sticky_sets %}
+    <button type="button" class="toolbar-btn{% if s.window == 'all' %} active{% endif %}" data-window="{{ s.window }}">{{ s.window }}</button>
+  {% endfor %}
+  </div>
+</div>
+<div id="chart-wrap">{{ chart_html|safe }}</div>
+
+<h2>Самые «упёртые» тикеры</h2>
+<p>Топ-10 по самому длинному непрерывному пребыванию в одном квантиле. Период: <b id="sticky-period"></b>.</p>
+<p style="color:#888;font-size:13px;margin-top:-0.4em"><b>Мес</b> — длина серии в месяцах, <b>По</b> — последний месяц серии (начало = «По» минус «Мес»).</p>
+{% for s in sticky_sets %}
+<div class="sticky-set" data-window="{{ s.window }}" data-period="{{ s.period }}"{% if s.window != "all" %} hidden{% endif %}>
+  <div class="sticky-grid">
+  {% for card in s.cards %}
+    <div class="sticky-card">
+      <h3 style="background: {{ card.color }}">{{ card.q }}</h3>
+      <table>
+        <thead>
+          <tr><th>Тикер</th><th>Название</th><th class="num">Мес</th><th>По</th></tr>
+        </thead>
+        <tbody>
+        {% for row in card.rows %}
+          <tr>
+            <td class="mono">{{ row.ticker }}</td>
+            <td>{{ row.canonical }}</td>
+            <td class="num">{{ row.length }}</td>
+            <td class="until">{{ row.until }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% endfor %}
+</main>
+
+<script>
+(function () {
+  const SANKEY = {{ sankey_payloads|safe }};
+  const bar = document.querySelector(".period-bar");
+  const sets = document.querySelectorAll(".sticky-set");
+  const period = document.getElementById("sticky-period");
+
+  function select(win) {
+    const p = SANKEY[win];
+    if (p) {
+      Plotly.restyle("chart-transitions", {
+        "link.source": [p.source], "link.target": [p.target], "link.value": [p.value],
+        "link.color": [p.color], "link.customdata": [p.customdata]
+      }, [0]);
+      Plotly.relayout("chart-transitions", {"title.text": p.title});
+    }
+    sets.forEach(s => { s.hidden = s.dataset.window !== win; });
+    bar.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.window === win));
+    const active = [...sets].find(s => s.dataset.window === win);
+    if (active && period) period.textContent = active.dataset.period;
+  }
+  bar.addEventListener("click", e => {
+    const win = e.target.dataset.window;
+    if (win) select(win);
+  });
+
+  // Collapse / expand the Sankey; keep the period controls + sticky list usable.
+  const toggle = document.getElementById("toggle-chart");
+  const wrap = document.getElementById("chart-wrap");
+  toggle.addEventListener("click", () => {
+    if (wrap.hasAttribute("hidden")) {
+      wrap.removeAttribute("hidden");
+      toggle.textContent = "Свернуть диаграмму";
+      if (window.Plotly) Plotly.Plots.resize("chart-transitions");
+    } else {
+      wrap.setAttribute("hidden", "");
+      toggle.textContent = "Развернуть диаграмму";
+    }
+  });
+
+  // Initial period label = the visible ("all") window.
+  const shown = [...sets].find(s => !s.hidden);
+  if (shown && period) period.textContent = shown.dataset.period;
+})();
+</script>
+{% endblock %}

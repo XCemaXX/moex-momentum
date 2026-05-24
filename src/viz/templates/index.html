@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+<main>
+<h1>MOEX Momentum — квартильная стратегия</h1>
+<p>
+Backtest momentum-стратегии на российских акциях по методике
+<a href="https://t.me/kpd_investments/285" target="_blank" rel="noopener">t.me/kpd_investments</a>.
+Универс пересчитывается каждый месяц (survivorship-free), бенчмарк — MCFTRR (MOEX TR-индекс после налога).
+Подробности — на странице <a href="methodology.html">Методика</a>.
+</p>
+
+<h2>Динамика Q1–Q4 vs MCFTRR</h2>
+{{ chart_dyn|safe }}
+
+<h2>Q1 vs MCFTRR alpha</h2>
+{{ chart_alpha|safe }}
+
+<p style="margin-top: 2em; color: #666; font-size: 13px;">
+Сборка сайта: {{ build_iso }}. Данные backtest: {{ first_month }} – {{ last_month }}.
+</p>
+</main>
+{% endblock %}
