@@ -38,6 +38,9 @@ jobs:
       - name: Compute weight sweep
         # data/momentum/sweep/q1_nav.csv — fan of 11 a/b weights for compare.html.
         run: uv run python scripts/compute_weight_sweep.py
+      - name: Compute top-K concentration fan
+        # data/momentum/topn_fan/fan_concentration.csv — top-K fan for compare.html.
+        run: uv run python scripts/compute_topn_fan.py
       - name: Build site
         run: uv run momentum site build --out _site
       - uses: actions/configure-pages@v5

@@ -238,3 +238,37 @@ def test_write_backtest_roundtrip(tmp_path: Path) -> None:
     # Spot-check one holdings file.
     sample = json.loads(holdings_files[0].read_text(encoding="utf-8"))
     assert set(sample.keys()) == {"Q1", "Q2", "Q3", "Q4"}
+
+
+def test_backtest_persists_scores(tmp_path: Path) -> None:
+    """Task 025: per-month scores are captured and written to scores.csv;
+    A (strongest) outranks H (weakest) and the file round-trips by (month,ticker)."""
+    monthly_dir = tmp_path / "monthly"
+    indices_dir = tmp_path / "indices"
+    _seed_synthetic_panel(monthly_dir, indices_dir, n_months=15)
+    tickers_dict = {tk: {"type": "share"} for tk in "ABCDEFGH"}
+    res = backtest(
+        SimpleSignal(),
+        monthly_dir=monthly_dir,
+        indices_dir=indices_dir,
+        tickers_dict=tickers_dict,
+        start=pd.Period("2022-01", "M"),
+    )
+    assert res.scores, "scores not captured"
+    first_t = sorted(res.scores)[0]
+    per = res.scores[first_t]
+    assert set(per) >= {"A", "H"}
+    assert per["A"] > per["H"]  # construction: A strongest, H weakest
+    # Coverage invariant: every held ticker has a score, else site _order_by_score
+    # would silently tail it alphabetically and mis-rank the row.
+    held = set().union(*res.holdings[first_t].values())
+    assert held <= set(per)
+
+    out_dir = tmp_path / "out"
+    write_backtest(res, output_dir=out_dir)
+    scores_csv = out_dir / "scores.csv"
+    assert scores_csv.exists()
+    df = pd.read_csv(scores_csv)
+    assert list(df.columns) == ["month", "ticker", "score"]
+    row = df[(df["month"] == str(first_t)) & (df["ticker"] == "A")].iloc[0]
+    assert math.isclose(float(row["score"]), per["A"], rel_tol=1e-9)

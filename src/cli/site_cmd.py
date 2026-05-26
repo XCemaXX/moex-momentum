@@ -59,6 +59,8 @@ def site_build(
     curve_fit_q = computed_dir / "curve_fit" / "q_values.csv"
     sweep_q = computed_dir / "sweep" / "q1_nav.csv"
     compare_ready = simple_q.exists() and curve_fit_q.exists() and sweep_q.exists()
+    # Optional concentration fan (task 024): added to compare.html when present.
+    fan_concentration = computed_dir / "topn_fan" / "fan_concentration.csv"
     if not compare_ready:
         typer.echo(
             "note: compare.html skipped — needs data/momentum/{simple,curve_fit}/q_values.csv "
@@ -71,6 +73,8 @@ def site_build(
     # but its content is signal-independent (read from the active signal's dir).
     pending_path = computed_dir / signal / "pending.json"
     universe_meta_path = computed_dir / signal / "universe_meta.csv"
+    # Per-month momentum scores (task 025): data.json orders Q1-Q4 by them.
+    scores_path = computed_dir / signal / "scores.csv"
 
     pages = build_site(
         q_values_path=q_path,
@@ -83,7 +87,9 @@ def site_build(
         compare_simple_path=simple_q if compare_ready else None,
         compare_curve_fit_path=curve_fit_q if compare_ready else None,
         compare_sweep_path=sweep_q if compare_ready else None,
+        fan_concentration_path=fan_concentration if fan_concentration.exists() else None,
         pending_path=pending_path if pending_path.exists() else None,
         universe_meta_path=universe_meta_path if universe_meta_path.exists() else None,
+        scores_path=scores_path if scores_path.exists() else None,
     )
     typer.echo(f"site {signal}: {len(pages)} artefacts → {out_dir}")

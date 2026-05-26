@@ -102,4 +102,48 @@ def weight_sweep(*, sweep_path: Path, group: str = "sweep") -> list[Series]:
     return out
 
 
-__all__ = ["Series", "q1_signals", "weight_sweep"]
+def topn_fan_concentration(*, path: Path, group: str = "fan_concentration") -> list[Series]:
+    """Concentration fan (task 024): top-K by score from the fixed top-100 liquid
+    pool, columns `k<int>`, K 5…30. The full Q1 (K=25) is flagged as the baseline."""
+    baseline = 25  # full quartile of the top-100 universe
+    df = pd.read_csv(path)
+    df["month"] = pd.PeriodIndex(df["month"], freq="M")
+    df = df.set_index("month").sort_index()
+    cols = sorted(
+        (c for c in df.columns if c.startswith("k") and c != "MCFTRR"),
+        key=lambda c: int(c[1:]),
+    )
+    out: list[Series] = []
+    for c in cols:
+        k = int(c[1:])
+        label = f"top-{k}" + (" (≈Q1)" if k == baseline else "")
+        out.append(
+            Series(
+                id=f"{group}_{c}",
+                label=label,
+                nav=df[c],
+                kind="strategy",
+                default_visible=True,
+                dims={
+                    "quartile": "Q1",
+                    "weighting": "equal",
+                    "formula": "curve_fit",
+                    "filter": "none",
+                    "topn": "100",
+                    "hold": str(k),
+                },
+                group=group,
+            )
+        )
+    out.append(
+        Series(f"mcftrr_{group}", "MCFTRR (benchmark)", df["MCFTRR"], "benchmark", True, {}, group)
+    )
+    return out
+
+
+__all__ = [
+    "Series",
+    "q1_signals",
+    "topn_fan_concentration",
+    "weight_sweep",
+]

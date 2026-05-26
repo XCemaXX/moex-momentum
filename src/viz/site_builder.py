@@ -32,7 +32,11 @@ from viz.plotly_charts import (
     plot_registry_figure,
     transition_sankey_payloads,
 )
-from viz.series_registry import q1_signals, weight_sweep
+from viz.series_registry import (
+    q1_signals,
+    topn_fan_concentration,
+    weight_sweep,
+)
 
 # Custom-bundled plotly.min.js (scatter+bar+sankey only). Pinned by SHA so a
 # silent swap to the 4.7 MB full bundle is caught in tests.
@@ -166,19 +170,52 @@ def _load_universe_meta(path: Path | None) -> dict[str, dict[str, Any]]:
     return out
 
 
+def _load_scores(path: Path | None) -> dict[str, dict[str, float]]:
+    """Read scores.csv → {month: {ticker: score}} (full precision). Missing → empty."""
+    if path is None or not path.exists():
+        return {}
+    out: dict[str, dict[str, float]] = {}
+    with path.open(encoding="utf-8", newline="") as fh:
+        for row in csv.DictReader(fh):
+            out.setdefault(row["month"], {})[row["ticker"]] = float(row["score"])
+    return out
+
+
+def _order_by_score(members: list[str], month_scores: dict[str, float]) -> list[str]:
+    """Rank by full-precision score DESC, ties → ticker ASC (matches
+    `quartile_split`). Members without a score keep the tail in input order."""
+    scored = sorted(
+        (t for t in members if t in month_scores),
+        key=lambda t: (-month_scores[t], t),
+    )
+    return scored + [t for t in members if t not in month_scores]
+
+
 def _build_data_json(
     holdings: dict[str, dict[str, list[str]]],
     tickers: dict[str, Any],
     pending: dict[str, list[dict[str, Any]]],
     universe_meta: dict[str, dict[str, Any]],
+    scores: dict[str, dict[str, float]],
 ) -> dict[str, Any]:
-    """Embed canonical names inline so q_history.html needs no extra fetch."""
+    """Embed canonical names inline so q_history.html needs no extra fetch.
+
+    INVARIANT (task 025): the Q1-Q4 array order is the authoritative rank by
+    FULL-precision score (DESC, ties → ticker ASC) — the same key as
+    `quartile_split`/`score_ranking`, so a top-K slice matches task 024. The
+    score VALUE is not shipped: order alone carries the rank. The page restores
+    this order for "sort by q-factor" and re-sorts by ticker for "sort by name";
+    it must never reconstruct the rank any other way. Without scores (older
+    output) rows keep the holdings' alphabetical order — backward compatible.
+    """
     months = sorted(holdings)
     out_holdings: dict[str, dict[str, list[list[str]]]] = {}
     for m in months:
+        month_scores = scores.get(m, {})
         per_q: dict[str, list[list[str]]] = {}
         for q in ("Q1", "Q2", "Q3", "Q4"):
-            per_q[q] = [[t, _canonical(tickers, t)] for t in holdings[m].get(q, [])]
+            ordered = _order_by_score(holdings[m].get(q, []), month_scores)
+            per_q[q] = [[t, _canonical(tickers, t)] for t in ordered]
         out_holdings[m] = per_q
 
     out_pending: dict[str, list[dict[str, Any]]] = {}
@@ -207,6 +244,19 @@ def _render_methodology_md(md_path: Path) -> str:
     return rendered
 
 
+def _fan_embed(concentration_path: Path | None) -> str:
+    """Embed for the optional concentration fan (task 024). Missing CSV → empty
+    string, so the template skips that section."""
+    if not (concentration_path and concentration_path.exists()):
+        return ""
+    fig = plot_registry_figure(
+        topn_fan_concentration(path=concentration_path),
+        title="Концентрация: top-K из top-100, K 5…30",
+        gradient=True,
+    )
+    return _chart_embed(fig, div_id="chart-topn-concentration")
+
+
 def build_site(
     *,
     q_values_path: Path,
@@ -219,14 +269,17 @@ def build_site(
     compare_simple_path: Path | None = None,
     compare_curve_fit_path: Path | None = None,
     compare_sweep_path: Path | None = None,
+    fan_concentration_path: Path | None = None,
     pending_path: Path | None = None,
     universe_meta_path: Path | None = None,
+    scores_path: Path | None = None,
 ) -> dict[str, Path]:
     """Render the full site to `out_dir`. Returns map of logical name → path.
 
     `compare_*_path` are signal-independent sources for the explorer page
-    (task 20): when all three exist, compare.html is rendered. The per-signal
-    pages above stay tied to `signal`."""
+    (task 20): when all three exist, compare.html is rendered. `fan_concentration_path`
+    adds the optional concentration fan (task 024) to that page when present. The
+    per-signal pages above stay tied to `signal`."""
     env = _env()
     q_values = load_q_values(q_values_path)
     holdings = _load_holdings(holdings_dir)
@@ -316,21 +369,20 @@ def build_site(
             gradient=True,
             formula="score = (a·r(12-1) + (1−a)·r(6-1)) / σ(12),  a = 1.0 … 0.0",
         )
-        render(
-            "compare.html",
-            "compare.html",
-            {
-                "title": "Experiments",
-                "chart_headline": _chart_embed(fig_headline, div_id="chart-compare-headline"),
-                "chart_sweep": _chart_embed(fig_sweep, div_id="chart-compare-sweep"),
-            },
-        )
+        ctx: dict[str, Any] = {
+            "title": "Experiments",
+            "chart_headline": _chart_embed(fig_headline, div_id="chart-compare-headline"),
+            "chart_sweep": _chart_embed(fig_sweep, div_id="chart-compare-sweep"),
+            "chart_topn_concentration": _fan_embed(fan_concentration_path),
+        }
+        render("compare.html", "compare.html", ctx)
 
     data_json = _build_data_json(
         holdings,
         tickers,
         _load_pending(pending_path),
         _load_universe_meta(universe_meta_path),
+        _load_scores(scores_path),
     )
     data_path = out_dir / "data.json"
     _atomic_write(

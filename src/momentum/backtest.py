@@ -49,6 +49,9 @@ class BacktestResult:
     universe_meta: dict[pd.Period, dict[str, object]] = field(default_factory=dict)
     # Display-only (task 008): young liquid tickers with no q yet, per month.
     pending: dict[pd.Period, list[PendingEntry]] = field(default_factory=dict)
+    # Per-month momentum score by ticker (task 025): the rank quartile_split used,
+    # kept full-precision so the site can re-order Q1-Q4 and slice top-K.
+    scores: dict[pd.Period, dict[str, float]] = field(default_factory=dict)
 
 
 def quartile_split(scores: pd.Series) -> dict[str, list[str]]:
@@ -169,6 +172,7 @@ def backtest(
     holdings: dict[pd.Period, dict[str, list[str]]] = {}
     universe_meta: dict[pd.Period, dict[str, object]] = {}
     pending: dict[pd.Period, list[PendingEntry]] = {}
+    scores_by_month: dict[pd.Period, dict[str, float]] = {}
     rows: list[dict[str, object]] = []
     mcftrr_nav = 1.0
 
@@ -201,6 +205,7 @@ def backtest(
             scores = signal.compute(returns_panel.loc[:, universe], t)
             quartiles = quartile_split(scores)
             holdings[t] = quartiles
+            scores_by_month[t] = {str(tk): float(v) for tk, v in scores.dropna().items()}
             cut = liquidity_cut(value_panel, t, universe) if not value_panel.empty else None
             universe_meta[t] = {
                 "n": len(universe),
@@ -240,7 +245,11 @@ def backtest(
     df = pd.DataFrame(rows).drop_duplicates(subset=["month"], keep="last")
     df = df.set_index("month").sort_index()
     return BacktestResult(
-        q_values=df, holdings=holdings, universe_meta=universe_meta, pending=pending
+        q_values=df,
+        holdings=holdings,
+        universe_meta=universe_meta,
+        pending=pending,
+        scores=scores_by_month,
     )
 
 
@@ -266,6 +275,18 @@ def write_backtest(
             output_dir / "universe_meta.csv",
             meta_rows,
             fieldnames=("month", "n", "cut_rub", "marginal"),
+        )
+
+    if result.scores:
+        # Full-precision scores (task 025): the site re-orders Q1-Q4 by this and
+        # rounds for display only. Long-form month,ticker,score.
+        score_rows: list[dict[str, object]] = [
+            {"month": str(p), "ticker": tk, "score": s}
+            for p, per_month in sorted(result.scores.items())
+            for tk, s in per_month.items()
+        ]
+        write_records_atomic(
+            output_dir / "scores.csv", score_rows, fieldnames=("month", "ticker", "score")
         )
 
     if write_pending:

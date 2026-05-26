@@ -33,7 +33,38 @@
   .q-grid section h3 .count { color: #888; font-weight: 400; font-size: 13px; margin-left: 0.4em; }
   .q-grid table { font-size: 13px; }
   .q-grid td.ticker { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .q-grid td.rownum {
+    color: #aaa; text-align: right; padding-right: 0.5em; width: 1.6em;
+    font-variant-numeric: tabular-nums;
+  }
   .empty { color: #999; font-style: italic; padding: 0.5em 0; }
+
+  /* top-K picker — drives the Q1 diff below ("as if I held top-K"). */
+  .topk-picker {
+    display: flex; align-items: center; gap: 0.4em; flex-wrap: wrap;
+    margin: 1.6em 0 0; font-size: 14px;
+  }
+  .topk-picker label { color: #444; }
+  .topk-picker input { width: 4em; font-size: 14px; padding: 0.25em 0.4em; }
+  .topk-picker .presets { display: inline-flex; gap: 0.3em; }
+  .topk-picker button {
+    font-size: 13px; padding: 0.25em 0.6em; cursor: pointer;
+    background: #fff; border: 1px solid #ccc; border-radius: 4px; color: #1f77b4;
+  }
+  .topk-picker button:hover { background: #f0f0f0; }
+  .topk-picker button.active { background: #1f77b4; color: #fff; border-color: #1f77b4; }
+
+  /* Sort toggle for the Q1-Q4 cards: q-factor (momentum rank) vs ticker name. */
+  .sort-toggle {
+    display: flex; align-items: center; gap: 0.4em; flex-wrap: wrap;
+    margin: 0.6em 0 0; font-size: 13px; color: #666;
+  }
+  .sort-toggle button {
+    font-size: 13px; padding: 0.2em 0.6em; cursor: pointer;
+    background: #fff; border: 1px solid #ccc; border-radius: 4px; color: #1f77b4;
+  }
+  .sort-toggle button:hover { background: #f0f0f0; }
+  .sort-toggle button.active { background: #1f77b4; color: #fff; border-color: #1f77b4; }
 
   /* Single global toggle wraps the whole 4-card grid. */
   details.q-grid-wrap > summary {
@@ -112,6 +143,11 @@ Q1 — топ momentum, Q4 — дно. Универс месяца — survivors
 
 <details class="q-grid-wrap" open>
 <summary>Составы Q1–Q4</summary>
+<div class="sort-toggle" id="sort-toggle">
+<span>Сортировка:</span>
+<button type="button" data-sort="score" class="active">по q-фактору</button>
+<button type="button" data-sort="name">по имени</button>
+</div>
 <div class="q-grid" id="q-grid">
 <section class="q1 skeleton"></section>
 <section class="q2 skeleton"></section>
@@ -125,6 +161,17 @@ Q1 — топ momentum, Q4 — дно. Универс месяца — survivors
 <div class="pending" id="pending"></div>
 </details>
 
+<div class="topk-picker" id="topk-picker">
+<label for="topk-input">Держать top-</label>
+<input type="number" id="topk-input" min="1" step="1" placeholder="все">
+<span class="presets">
+<button type="button" data-k="10">10</button>
+<button type="button" data-k="15">15</button>
+<button type="button" data-k="20">20</button>
+<button type="button" data-k="full">Полный Q1</button>
+</span>
+</div>
+
 <section class="q1-diff" id="q1-diff"></section>
 
 <script>
@@ -135,6 +182,11 @@ Q1 — топ momentum, Q4 — дно. Универс месяца — survivors
   const sel = document.getElementById("month-select");
   const btnPrev = document.getElementById("month-prev");
   const btnNext = document.getElementById("month-next");
+  const sortToggle = document.getElementById("sort-toggle");
+  const topkPicker = document.getElementById("topk-picker");
+  const topkInput = document.getElementById("topk-input");
+  let sortMode = "score"; // grid order: "score" (q-factor rank) | "name"
+  let topK = null;        // diff: null = full Q1, else hold top-K by score
   const resp = await fetch("data.json");
   if (!resp.ok) {
     grid.innerHTML = '<p class="empty">data.json not available</p>';
@@ -179,7 +231,15 @@ Q1 — топ momentum, Q4 — дно. Универс месяца — survivors
     const labels = { Q1: "Q1 — top momentum", Q2: "Q2", Q3: "Q3", Q4: "Q4 — bottom" };
     grid.innerHTML = "";
     for (const q of ["Q1", "Q2", "Q3", "Q4"]) {
-      const rows = month_data[q] || [];
+      // Rows arrive pre-sorted by momentum score (DESC) — see _build_data_json.
+      // The original index is the q-factor rank; keep it so it survives a name
+      // sort and stays the "#" column either way.
+      let rows = (month_data[q] || []).map(([ticker, canonical], i) => ({
+        ticker, canonical, rank: i + 1,
+      }));
+      if (sortMode === "name") {
+        rows = rows.slice().sort((a, b) => a.ticker.localeCompare(b.ticker));
+      }
       const section = document.createElement("section");
       section.className = q.toLowerCase();
       const h = document.createElement("h3");
@@ -196,13 +256,17 @@ Q1 — топ momentum, Q4 — дно. Универс месяца — survivors
         section.appendChild(p);
       } else {
         const table = document.createElement("table");
-        for (const [ticker, canonical] of rows) {
+        for (const r of rows) {
           const tr = document.createElement("tr");
+          const tdNum = document.createElement("td");
+          tdNum.className = "rownum";
+          tdNum.textContent = r.rank;
           const td1 = document.createElement("td");
           td1.className = "ticker";
-          td1.textContent = ticker;
+          td1.textContent = r.ticker;
           const td2 = document.createElement("td");
-          td2.textContent = canonical || "";
+          td2.textContent = r.canonical || "";
+          tr.appendChild(tdNum);
           tr.appendChild(td1);
           tr.appendChild(td2);
           table.appendChild(tr);
@@ -233,11 +297,29 @@ Q1 — топ momentum, Q4 — дно. Универс месяца — survivors
     return table;
   }
 
+  // Held subset for the chosen K. Q1 arrays are pre-sorted by score, so top-K
+  // is just the first K rows. topK === null means the full Q1.
+  function topKList(q1arr) {
+    const k = (topK === null) ? q1arr.length : Math.min(topK, q1arr.length);
+    return q1arr.slice(0, k);
+  }
+
+  // ticker → 1-based rank within Q1 (array is pre-sorted by score).
+  function rankMap(q1arr) {
+    const m = new Map();
+    q1arr.forEach(([t], i) => m.set(t, i + 1));
+    return m;
+  }
+
   function renderDiff(month) {
     diffBox.innerHTML = "";
     const idx = months.indexOf(month);
+    // Clamp displayed K to the real Q1 size: a manual K above |Q1| must not
+    // render "top-999" while the held set is silently clamped.
+    const currQ1n = (data.holdings[month].Q1 || []).length;
+    const shownK = (topK === null) ? null : Math.min(topK, currQ1n);
     const h = document.createElement("h2");
-    h.textContent = "Изменения Q1";
+    h.textContent = (shownK === null) ? "Изменения Q1" : "Изменения top-" + shownK;
     diffBox.appendChild(h);
 
     if (idx <= 0) {
@@ -251,39 +333,55 @@ Q1 — топ momentum, Q4 — дно. Универс месяца — survivors
     const curr = data.holdings[month];
     const prev = data.holdings[prevMonth];
 
+    const currQ1 = curr.Q1 || [];
+    const prevQ1 = prev.Q1 || [];
+    const currHeld = topKList(currQ1);
+    const prevHeld = topKList(prevQ1);
+
     const subtitle = document.createElement("p");
     subtitle.className = "subtitle";
-    subtitle.textContent = "Ребаланс на close " + month + " (для держания в " + nextMonth(month) + "), относительно состава по итогам " + prevMonth + ":";
+    const asIf = (shownK === null) ? "" : " — как если бы держали top-" + shownK;
+    subtitle.textContent = "Ребаланс на close " + month + " (для держания в " + nextMonth(month) + "), относительно состава по итогам " + prevMonth + asIf + ":";
     diffBox.appendChild(subtitle);
 
     const prevQ = quartileMap(prev);
     const currQ = quartileMap(curr);
     const prevCanon = canonicalLookup(prev);
     const currCanon = canonicalLookup(curr);
+    const prevRank = rankMap(prevQ1);
+    const currRank = rankMap(currQ1);
 
-    const prevQ1Set = new Set((prev.Q1 || []).map(([t]) => t));
-    const currQ1Set = new Set((curr.Q1 || []).map(([t]) => t));
+    const prevQ1Set = new Set(prevQ1.map(([t]) => t));
+    const currQ1Set = new Set(currQ1.map(([t]) => t));
+    const prevHeldSet = new Set(prevHeld.map(([t]) => t));
+    const currHeldSet = new Set(currHeld.map(([t]) => t));
 
-    // Buy: in current Q1, not in previous Q1. Reason = where in prev (Q2/Q3/Q4) or 'new'.
+    // Buy: in the current held set, not in the previous one. A name already in
+    // Q1 last month but below the cutoff shows its previous rank.
     const buys = [];
-    for (const t of currQ1Set) {
-      if (prevQ1Set.has(t)) continue;
-      const prevWhere = prevQ.get(t);
-      const reason = prevWhere
-        ? "был в " + prevWhere
-        : "новичок в универсе";
+    for (const [t] of currHeld) {
+      if (prevHeldSet.has(t)) continue;
+      let reason;
+      if (prevQ1Set.has(t)) reason = "был в Q1 (#" + prevRank.get(t) + ")";
+      else {
+        const prevWhere = prevQ.get(t);
+        reason = prevWhere ? "был в " + prevWhere : "новичок в универсе";
+      }
       buys.push([t, currCanon.get(t) || "", reason]);
     }
     buys.sort((a, b) => a[0].localeCompare(b[0]));
 
-    // Sell: in previous Q1, not in current Q1. Reason = where in curr or 'out of universe'.
+    // Sell: in the previous held set, not in the current one. A name still in Q1
+    // but dropped below the cutoff shows its current rank.
     const sells = [];
-    for (const t of prevQ1Set) {
-      if (currQ1Set.has(t)) continue;
-      const currWhere = currQ.get(t);
-      const reason = currWhere
-        ? "ушёл в " + currWhere
-        : "делистнут / выпал из универса";
+    for (const [t] of prevHeld) {
+      if (currHeldSet.has(t)) continue;
+      let reason;
+      if (currQ1Set.has(t)) reason = "остался в Q1 (#" + currRank.get(t) + ")";
+      else {
+        const currWhere = currQ.get(t);
+        reason = currWhere ? "ушёл в " + currWhere : "делистнут / выпал из универса";
+      }
       sells.push([t, prevCanon.get(t) || "", reason]);
     }
     sells.sort((a, b) => a[0].localeCompare(b[0]));
@@ -443,6 +541,42 @@ Q1 — топ momentum, Q4 — дно. Универс месяца — survivors
     },
     { passive: false }
   );
+
+  // Grid sort toggle (q-factor order vs ticker name); diff is unaffected.
+  sortToggle.querySelectorAll("button").forEach((b) => {
+    b.addEventListener("click", () => {
+      sortMode = b.dataset.sort;
+      sortToggle
+        .querySelectorAll("button")
+        .forEach((x) => x.classList.toggle("active", x.dataset.sort === sortMode));
+      renderQGrid(data.holdings[sel.value]);
+    });
+  });
+
+  // top-K picker drives the diff only. null = full Q1.
+  function highlightPresets() {
+    topkPicker.querySelectorAll("button").forEach((b) => {
+      const active = b.dataset.k === "full" ? topK === null : topK === Number(b.dataset.k);
+      b.classList.toggle("active", active);
+    });
+  }
+  topkPicker.querySelectorAll("button").forEach((b) => {
+    b.addEventListener("click", () => {
+      topK = b.dataset.k === "full" ? null : Number(b.dataset.k);
+      topkInput.value = topK === null ? "" : topK;
+      highlightPresets();
+      renderDiff(sel.value);
+    });
+  });
+  topkInput.addEventListener("input", () => {
+    const n = Number(topkInput.value);
+    topK =
+      topkInput.value.trim() === "" || !Number.isFinite(n) || n < 1 ? null : Math.floor(n);
+    highlightPresets();
+    renderDiff(sel.value);
+  });
+  highlightPresets();
+
   render(sel.value);
 })();
 </script>
