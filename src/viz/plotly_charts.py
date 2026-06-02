@@ -59,8 +59,10 @@ def load_q_values(path: Path) -> pd.DataFrame:
 
 def _x_dates(index: pd.Index) -> list[dt.datetime]:
     # Plotly accepts datetime objects directly — keeps range selector etc. working.
+    # normalize() drops the 23:59:59.999 of how="end": that boundary rounds up to
+    # the next month in Plotly's month hover (May point showing as "Jun").
     period_index = pd.PeriodIndex(index, freq="M")
-    return [p.to_timestamp(how="end").to_pydatetime() for p in period_index]
+    return [p.to_timestamp(how="end").normalize().to_pydatetime() for p in period_index]
 
 
 _REBASE_WINDOWS_YEARS: tuple[int | None, ...] = (1, 3, 5, 10, None)

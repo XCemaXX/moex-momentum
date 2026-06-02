@@ -49,16 +49,50 @@ momentum compute backtest      # quartile sort + NAV (default signal: curve_fit)
 momentum site build            # render docs/pages/*.html
 ```
 
-To refresh data from MOEX ISS (idempotent — re-running adds only deltas):
+### Monthly update
+
+Run this once a month, in order. It is idempotent — reruns add only deltas.
 
 ```bash
-momentum tickers refresh
+# 1. Ticker dictionary — --force-refresh bypasses the cache (no TTL); without it
+#    a month-old snapshot gives stale board windows → false delisted_after →
+#    price ingest silently stalls.
+momentum tickers refresh --force-refresh
+
+# 2. Prices / splits / indices — delta pulls from the last stored date.
 momentum ingest prices
 momentum ingest splits
-momentum ingest dividends
 momentum ingest indices
+
+# 3. Dividends from ISS — scoped to the last 3 months so a rerun never
+#    re-introduces old ISS near-duplicates into the curated files.
+momentum ingest dividends --force-refresh --months 3
+
+# 4. Apply curated fixes (_conflicts_resolved.json): drops known ISS dups,
+#    applies disclosure corrections. Required after step 3.
+momentum corporate apply-conflicts
+
+# 5. Detector (WARN-only) + recompute + site.
 momentum corporate detect      # flags |daily return| > 30% with no split/dividend
+momentum compute monthly --from-scratch   # rebless baselines after ingest
+momentum compute backtest --signal curve_fit
+momentum compute backtest --signal simple
+python scripts/compute_weight_sweep.py
+python scripts/compute_topn_fan.py
+momentum site build
 ```
+
+Notes:
+
+- **ISS lags on dividends by months.** The major names get their spring dividends
+  from external feeds (`skill_fill_*`), not ISS. Recent payouts arrive via
+  `momentum ingest fill-dividends --ticker T …` (dohod) and manual `augment`
+  entries in `_conflicts_resolved.json` — `ingest dividends` alone will not show them.
+- `--since` on prices/indices is a **forward floor only**: it can skip ahead but
+  never backfills a range already stored. To re-pull a suspect older range, delete
+  those rows from the CSV first, then ingest.
+- Editing `src/config.py` or `src/tickers.py` takes effect immediately (editable
+  install); no reinstall needed.
 
 ## CLI reference
 
@@ -66,14 +100,15 @@ The entry point is `momentum` (`cli:app`). Every command is idempotent.
 
 | Command | Purpose |
 |---|---|
-| `momentum tickers refresh` | Bootstrap the ticker dictionary from ISS |
+| `momentum tickers refresh` | Bootstrap the ticker dictionary from ISS (`--force-refresh` to bypass the no-TTL cache) |
 | `momentum tickers mark-unavailable` | Move empty-history tickers to the unavailable log |
 | `momentum ingest prices` | Async fetch daily OHLCV from ISS (union of boards) |
 | `momentum ingest splits` | Splits + bonus issues (ISS + manual override) |
-| `momentum ingest dividends` | Dividend payouts from ISS; regenerate gap report |
+| `momentum ingest dividends` | Dividend payouts from ISS (`--months N` scopes the merge window); regenerate gap report |
 | `momentum ingest fill-dividends` | Fill gaps from external sources (dohod.ru, …) |
 | `momentum ingest indices` | Benchmark index series (default MCFTRR) |
 | `momentum corporate detect` | Split/dividend anomaly detector (fail-loud) |
+| `momentum corporate apply-conflicts` | Apply `_conflicts_resolved.json` (drop/replace/augment) to dividend files |
 | `momentum compute monthly` | Prices + adjustments → monthly total-return series |
 | `momentum compute backtest` | Q1–Q4 quartile backtest (`--signal curve_fit\|simple`) |
 | `momentum site build` | Render the GitHub Pages site to `docs/pages/` |

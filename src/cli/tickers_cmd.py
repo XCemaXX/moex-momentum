@@ -58,12 +58,19 @@ def tickers_refresh(
     unavailable_file: Path = typer.Option(Path("data/tickers_unavailable.jsonl"), "--unavailable"),
     seed_aliases: Path | None = typer.Option(None, "--seed-aliases"),
     cache_dir: Path = typer.Option(Path(".fill_cache/iss"), "--cache-dir"),
+    force_refresh: bool = typer.Option(
+        False,
+        "--force-refresh",
+        help="Re-fetch past the dictionary cache (no TTL). Use for monthly refreshes "
+        "so board windows / delisted_after reflect current ISS, not a stale snapshot.",
+    ),
 ) -> None:
     """ISS bootstrap of the ticker dictionary.
 
     SECIDs from `tickers_unavailable.jsonl` are skipped at the listing stage and
     not returned to the main dictionary. All ISS responses are cached under
-    `--cache-dir` (default `.fill_cache/iss/`). To force a refetch, delete cache-dir.
+    `--cache-dir` (default `.fill_cache/iss/`). The cache has no TTL: pass
+    `--force-refresh` (or delete cache-dir) to refetch.
     """
     import tickers as t
     from ingest.dictionary import (
@@ -75,7 +82,13 @@ def tickers_refresh(
     existing = t.load(output)
     skip = frozenset(t.load_unavailable(unavailable_file).keys())
     with make_iss_client() as client:
-        updated = bootstrap(existing, client=client, cache_dir=cache_dir, skip_secids=skip)
+        updated = bootstrap(
+            existing,
+            client=client,
+            cache_dir=cache_dir,
+            skip_secids=skip,
+            force_refresh=force_refresh,
+        )
     if seed_aliases is not None:
         seed = json.loads(seed_aliases.read_text(encoding="utf-8"))
         updated = merge_external_aliases(updated, seed)

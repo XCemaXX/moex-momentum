@@ -32,22 +32,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-# Flat layout: each subdir under src/ ships as its own importable top-level name.
-packages = [
-    "src/adjustments",
-    "src/cli",
-    "src/ingest",
-    "src/momentum",
-    "src/storage",
-    "src/viz",
-]
-[tool.hatch.build.targets.wheel.sources]
-"src" = ""
-[tool.hatch.build.targets.wheel.force-include]
-# Bare top-level modules under src/ that aren't packages.
-"src/config.py" = "config.py"
-"src/tickers.py" = "tickers.py"
-"src/viz/templates" = "viz/templates"
+# Flat layout: everything under src/ ships at top level (sources strips the
+# prefix). One uniform rule for packages AND bare modules (config.py, tickers.py)
+# — no force-include, which copies bare modules into site-packages and shadows
+# the editable src path, hiding edits until a reinstall.
+only-include = ["src"]
+sources = ["src"]
 
 [tool.ruff]
 line-length = 100

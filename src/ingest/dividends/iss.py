@@ -21,6 +21,7 @@ import asyncio
 import json
 import logging
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from typing import Any, cast
 
@@ -64,8 +65,9 @@ async def _cached_aget(
     params: dict[str, str],
     cache_dir: Path | None,
     cache_key: str,
+    force: bool = False,
 ) -> dict[str, Any] | None:
-    if cache_dir is not None:
+    if cache_dir is not None and not force:
         cp = _cache_path(cache_dir, cache_key)
         if cp.exists():
             with cp.open(encoding="utf-8") as f:
@@ -120,6 +122,7 @@ async def _fetch_dividends(
     secid: str,
     *,
     cache_dir: Path | None,
+    force: bool = False,
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     start = 0
@@ -132,6 +135,7 @@ async def _fetch_dividends(
             params={"start": str(start)},
             cache_dir=cache_dir,
             cache_key=cache_key,
+            force=force,
         )
         if payload is None:
             break
@@ -166,11 +170,21 @@ async def ingest_one(
     *,
     output_dir: Path,
     cache_dir: Path | None,
+    since: date | None = None,
+    force: bool = False,
 ) -> DividendsManifest:
-    """Ingest dividends for one ticker. Idempotent."""
+    """Ingest dividends for one ticker. Idempotent.
+
+    `since` keeps the merge to ISS rows with registry_close >= it. The endpoint
+    returns full history with near-dup rows curation drops; without the bound a
+    re-run keeps re-introducing them into the curated file.
+    """
     out_path = output_dir / f"{ticker}.csv"
     existing = read_records(out_path, casts=DIV_CASTS)
-    fetched = await _fetch_dividends(client, ticker, cache_dir=cache_dir)
+    fetched = await _fetch_dividends(client, ticker, cache_dir=cache_dir, force=force)
+    if since is not None:
+        cutoff = since.isoformat()
+        fetched = [r for r in fetched if r["registry_close"] >= cutoff]
     merged = _merge(existing, fetched)
     if merged != existing:
         if merged:
@@ -190,6 +204,8 @@ async def ingest(
     output_dir: Path,
     cache_dir: Path | None,
     ticker_filter: list[str] | None = None,
+    since: date | None = None,
+    force: bool = False,
     max_concurrency: int = ISS_MAX_CONCURRENCY,
 ) -> dict[str, DividendsManifest]:
     selected = sorted(ticker_filter) if ticker_filter else sorted(tickers_dict.keys())
@@ -201,7 +217,14 @@ async def ingest(
 
         async def _task(t: str) -> tuple[str, DividendsManifest]:
             async with semaphore:
-                m = await ingest_one(client, t, output_dir=output_dir, cache_dir=cache_dir)
+                m = await ingest_one(
+                    client,
+                    t,
+                    output_dir=output_dir,
+                    cache_dir=cache_dir,
+                    since=since,
+                    force=force,
+                )
             LOG.info("%s: %d div rows (first=%s last=%s)", t, m.rows, m.first, m.last)
             return t, m
 

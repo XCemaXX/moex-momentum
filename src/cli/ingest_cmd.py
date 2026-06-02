@@ -8,6 +8,7 @@ from pathlib import Path
 import typer
 
 from cli._app import ingest_app
+from config import ISS_DIVIDEND_REFRESH_MONTHS
 
 
 @ingest_app.command("prices")
@@ -139,14 +140,26 @@ def ingest_dividends(
     gaps_file: Path = typer.Option(Path("data/dividends/_gaps.json"), "--gaps"),
     prices_dir: Path = typer.Option(Path("data/prices_iss"), "--prices-dir"),
     ticker: list[str] = typer.Option([], "--ticker", "-t"),
+    months: int = typer.Option(
+        ISS_DIVIDEND_REFRESH_MONTHS,
+        "--months",
+        help="Merge only ISS rows with registry_close within the last N months "
+        "(0 = full history). Keeps a re-run from re-introducing old ISS near-dups "
+        "that curation already dropped.",
+    ),
+    force_refresh: bool = typer.Option(
+        False, "--force-refresh", help="Re-fetch past the dividends cache (no TTL)."
+    ),
     max_concurrency: int = typer.Option(10, "--concurrency"),
 ) -> None:
     """Async ingest of dividends from MOEX ISS. Idempotent.
 
     Without `--ticker` (full ingest), `_gaps.json` is regenerated from prices vs
-    dividends ranges, filtered by `_acked_no_div.json`.
+    dividends ranges, filtered by `_acked_no_div.json`. ISS lags months behind on
+    dividends; recent payouts come from `fill-dividends` + `corporate apply-conflicts`.
     """
     import asyncio
+    from datetime import date
 
     import tickers as t_mod
     from adjustments.dividend_gaps import compute_gaps, load_acked, save_gaps
@@ -157,6 +170,16 @@ def ingest_dividends(
         typer.echo(f"{tickers_file} is empty — run `momentum tickers refresh` first")
         raise typer.Exit(1)
 
+    since_d: date | None = None
+    if months > 0:
+        today = date.today()
+        mo = today.month - months
+        yr = today.year
+        while mo <= 0:
+            mo += 12
+            yr -= 1
+        since_d = date(yr, mo, 1)
+
     selected = list(ticker) if ticker else None
     result = asyncio.run(
         ingest(
@@ -164,6 +187,8 @@ def ingest_dividends(
             output_dir=output_dir,
             cache_dir=cache_dir,
             ticker_filter=selected,
+            since=since_d,
+            force=force_refresh,
             max_concurrency=max_concurrency,
         )
     )

@@ -55,6 +55,12 @@ ISS_BASE_URL: str = "https://iss.moex.com/iss"
 ISS_HTTP_TIMEOUT_SECONDS: float = 30.0
 ISS_MAX_CONCURRENCY: int = 10
 
+# Monthly dividend refresh merges only ISS rows whose registry_close lands in
+# this trailing window. The ISS endpoint returns full history with near-dup rows
+# (same payout, adjacent dates) that curation drops; a wider window keeps
+# re-introducing them on every re-run. 0 = full history.
+ISS_DIVIDEND_REFRESH_MONTHS: int = 3
+
 # Incremental monthly recompute window: only this many trailing months are
 # recomputed by default; older rows are copied as-is and protected by a
 # baseline-hash gate. `momentum compute monthly --from-scratch` overrides.

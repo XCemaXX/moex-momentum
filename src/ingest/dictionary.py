@@ -69,9 +69,15 @@ def _cached_get(
     params: dict[str, str] | None = None,
     cache_dir: Path | None,
     cache_key: str,
+    force: bool = False,
 ) -> dict[str, Any] | None:
-    """GET with on-disk cache. Returns `None` for 404 (not cached)."""
-    if cache_dir is not None:
+    """GET with on-disk cache. Returns `None` for 404 (not cached).
+
+    `force` re-fetches even on a cache hit (still rewrites the cache). The cache
+    has no TTL, so a monthly refresh over an old cache would otherwise replay a
+    stale ISS snapshot — wrong board windows, false delisted_after.
+    """
+    if cache_dir is not None and not force:
         cp = _cache_path(cache_dir, cache_key)
         if cp.exists():
             with cp.open(encoding="utf-8") as f:
@@ -95,6 +101,8 @@ def _drain_listing(
     client: httpx.Client,
     cache_dir: Path | None,
     skip_secids: frozenset[str] = frozenset(),
+    *,
+    force: bool = False,
 ) -> list[str]:
     """Unique SECIDs with at least one row having non-empty history_from/till."""
     seen: set[str] = set()
@@ -106,6 +114,7 @@ def _drain_listing(
             params={"start": str(start)},
             cache_dir=cache_dir,
             cache_key=f"listing/page_{start:05d}",
+            force=force,
         )
         if data is None:
             break
@@ -216,8 +225,12 @@ def _add_rebrand(entry: TickerEntry, rebrand: Rebrand) -> None:
     history.sort(key=lambda h: h["renamed"])
 
 
-def _drain_changeover(client: httpx.Client, cache_dir: Path | None) -> list[tuple[str, str, str]]:
-    data = _cached_get(client, CHANGEOVER_PATH, cache_dir=cache_dir, cache_key="changeover")
+def _drain_changeover(
+    client: httpx.Client, cache_dir: Path | None, *, force: bool = False
+) -> list[tuple[str, str, str]]:
+    data = _cached_get(
+        client, CHANGEOVER_PATH, cache_dir=cache_dir, cache_key="changeover", force=force
+    )
     assert data is not None, "changeover.json must not return 404"
     block = data["changeover"]
     cols: list[str] = block["columns"]
@@ -241,6 +254,7 @@ def bootstrap(
     cache_dir: Path | None = None,
     today: date | None = None,
     skip_secids: frozenset[str] = frozenset(),
+    force_refresh: bool = False,
 ) -> TickersDict:
     """ISS-refresh: canonical/aliases (NAME+LATNAME) /boards/history (changeover) /delisted_after.
 
@@ -248,18 +262,23 @@ def bootstrap(
     preserved — _merge_aliases/_add_rebrand dedupe them.
 
     `cache_dir` — if set, all HTTP responses are cached. A repeat run over the cache
-    makes no network requests. For refetch — delete cache_dir.
+    makes no network requests. `force_refresh` re-fetches past the cache (no TTL) —
+    use it for monthly refreshes so board windows / delisted_after stay current.
     """
     today = today or date.today()
     result: TickersDict = copy.deepcopy(existing)
 
-    secids = _drain_listing(client, cache_dir, skip_secids=skip_secids)
+    secids = _drain_listing(client, cache_dir, skip_secids=skip_secids, force=force_refresh)
     LOG.info("listing: %d unique SECIDs", len(secids))
 
     for i, secid in enumerate(secids):
         if i and i % PROGRESS_LOG_EVERY == 0:
             LOG.info("securities: %d / %d", i, len(secids))
-        cache_hit = cache_dir is not None and _cache_path(cache_dir, f"securities/{secid}").exists()
+        cache_hit = (
+            not force_refresh
+            and cache_dir is not None
+            and _cache_path(cache_dir, f"securities/{secid}").exists()
+        )
         if i and not cache_hit:
             time.sleep(ISS_REQUEST_DELAY_S)
         payload = _cached_get(
@@ -267,6 +286,7 @@ def bootstrap(
             f"/securities/{secid}.json",
             cache_dir=cache_dir,
             cache_key=f"securities/{secid}",
+            force=force_refresh,
         )
         if payload is None:
             LOG.warning("secid %s: 404, skip", secid)
@@ -297,7 +317,7 @@ def bootstrap(
 
     LOG.info("dictionary: %d shares after TYPE filter", len(result))
 
-    changes = _drain_changeover(client, cache_dir)
+    changes = _drain_changeover(client, cache_dir, force=force_refresh)
     LOG.info("changeover: %d records", len(changes))
     applied = 0
     for action_date, old, new in changes:
