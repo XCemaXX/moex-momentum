@@ -6,17 +6,22 @@
   },
   {
     "ticker": "ABIO",
-    "year": 2014,
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ABIO",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ABIO",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "ABIO",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ABIO",
-    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -56,7 +61,7 @@
   },
   {
     "ticker": "ABRD",
-    "year": 2014,
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
@@ -66,22 +71,27 @@
   },
   {
     "ticker": "ABRD",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ABRD",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ABRD",
-    "year": 2018,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "ACKO",
     "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ACKO",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ACKO",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ACKO",
+    "year": 2020,
     "reason": "no_record_for_year"
   },
   {
@@ -126,22 +136,7 @@
   },
   {
     "ticker": "AFKS",
-    "year": 2008,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "AFKS",
     "year": 2009,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "AFKS",
-    "year": 2010,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "AFKS",
-    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
@@ -155,18 +150,8 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "AFLT",
-    "year": 2001,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "AFLT",
-    "year": 2002,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "AFLT",
-    "year": 2003,
+    "ticker": "AFKS",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -205,8 +190,93 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "AFLT",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKHA",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKHA",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKHA",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKHA",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKHA",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKHA",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKHA",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKHA",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKHA",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKRN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "AKRN",
     "year": 2023,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AKRN",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ALBK",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ALBK",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ALBK",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ALBK",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ALBK",
+    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -232,6 +302,16 @@
   {
     "ticker": "ALBK",
     "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ALNU",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ALNU",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -282,6 +362,36 @@
   {
     "ticker": "ALRS",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ALRS",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AMEZ",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AMEZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AMEZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AMEZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AMEZ",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -350,6 +460,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "APRI",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "APTK",
     "year": 2008,
     "reason": "no_record_for_year"
@@ -367,6 +482,16 @@
   {
     "ticker": "APTK",
     "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "APTK",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "APTK",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -430,6 +555,26 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "APTK",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AQUA",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AQUA",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AQUA",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "AQUA",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -457,6 +602,11 @@
   {
     "ticker": "AQUA",
     "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AQUA",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -491,6 +641,21 @@
   },
   {
     "ticker": "ARMD",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ARMD",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ARMD",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ARMD",
     "year": 2015,
     "reason": "no_record_for_year"
   },
@@ -512,6 +677,26 @@
   {
     "ticker": "ARMD",
     "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ARSA",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ARSA",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ARSA",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ARSA",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -550,6 +735,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "ARSA",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "ARSB",
     "year": 2006,
     "reason": "no_record_for_year"
@@ -597,6 +787,46 @@
   {
     "ticker": "ASRE",
     "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ASSB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ASSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ASSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ASSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ASSB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ASSB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ASSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ASSB",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -617,11 +847,6 @@
   {
     "ticker": "ASSB",
     "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ASSB",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -650,8 +875,23 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "ASSB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "AVAN",
     "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAN",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAN",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -667,6 +907,36 @@
   {
     "ticker": "AVAN",
     "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAZ",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAZ",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAZ",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -712,6 +982,16 @@
   {
     "ticker": "AVAZP",
     "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAZP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "AVAZP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -780,18 +1060,23 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "BANE",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "BANEP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "BAZA",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "BEGY",
     "year": 2009,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "BEGY",
-    "year": 2010,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "BEGY",
-    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
@@ -876,6 +1161,11 @@
   },
   {
     "ticker": "BGDE",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "BGDE",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -911,7 +1201,7 @@
   },
   {
     "ticker": "BISV",
-    "year": 2014,
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
@@ -936,27 +1226,32 @@
   },
   {
     "ticker": "BISVP",
-    "year": 2014,
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "BISVP",
-    "year": 2015,
+    "ticker": "BLNG-2008",
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "BISVP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "BISVP",
-    "year": 2017,
+    "ticker": "BLNG-2008",
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "BLNG",
     "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "BLNG",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "BLNG",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -1017,6 +1312,11 @@
   {
     "ticker": "BLNG",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "BLNG",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -1086,6 +1386,16 @@
   },
   {
     "ticker": "BRZL",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "BRZL",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "BRZL",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -1145,28 +1455,23 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "BSPB",
-    "year": 2014,
+    "ticker": "BRZL",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "BSPB",
-    "year": 2015,
+    "ticker": "BSPBP",
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "BSPB",
-    "year": 2016,
+    "ticker": "BSPBP",
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "BSPB",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "BSPB",
-    "year": 2018,
+    "ticker": "BSPBP",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
@@ -1201,7 +1506,7 @@
   },
   {
     "ticker": "CARM",
-    "year": 2025,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -1255,6 +1560,36 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "CBOM",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHEP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHEP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHEP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHEP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHEP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "CHEP",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -1292,6 +1627,16 @@
   {
     "ticker": "CHEP",
     "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHGZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHGZ",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -1355,6 +1700,16 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "CHGZ",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHKZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "CHKZ",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -1366,12 +1721,17 @@
   },
   {
     "ticker": "CHKZ",
-    "year": 2016,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "CHKZ",
-    "year": 2017,
+    "ticker": "CHMF",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHMF",
+    "year": 2022,
     "reason": "no_record_for_year"
   },
   {
@@ -1385,6 +1745,36 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "CHMF",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHMK",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHMK",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHMK",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHMK",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHMK",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "CHMK",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -1442,6 +1832,11 @@
   {
     "ticker": "CHMK",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHMK",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -1502,6 +1897,36 @@
   {
     "ticker": "CHSBP",
     "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHZN",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHZN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHZN",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHZN",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHZN",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CHZN",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -1541,6 +1966,46 @@
   },
   {
     "ticker": "CLSB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSB",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -1567,6 +2032,46 @@
   {
     "ticker": "CLSB",
     "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSBP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSBP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSBP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSBP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSBP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSBP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CLSBP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -1610,16 +2115,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "CNRU",
-    "year": 2025,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "CNTL",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "CNTL",
     "year": 2015,
     "reason": "no_record_for_year"
@@ -1627,16 +2122,6 @@
   {
     "ticker": "CNTL",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "CNTL",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "CNTL",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -1650,28 +2135,38 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "CNTLP",
-    "year": 2014,
+    "ticker": "CNTL",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "CNTLP",
-    "year": 2015,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "CNTLP",
-    "year": 2016,
+    "ticker": "CTLK",
+    "year": 2005,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "CNTLP",
-    "year": 2017,
+    "ticker": "CTLK",
+    "year": 2006,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "CNTLP",
-    "year": 2018,
+    "ticker": "CTLK",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CTLK",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "CTLK",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -1760,6 +2255,86 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "DALM",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DASB",
+    "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "DASB",
     "year": 2021,
     "reason": "no_record_for_year"
@@ -1772,6 +2347,11 @@
   {
     "ticker": "DELI",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DELI",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -1831,12 +2411,17 @@
   },
   {
     "ticker": "DGBZP",
-    "year": 2014,
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "DGBZP",
-    "year": 2015,
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DGBZP",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -1856,6 +2441,11 @@
   },
   {
     "ticker": "DIOD",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DIOD",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -1871,7 +2461,17 @@
   },
   {
     "ticker": "DIOD",
-    "year": 2017,
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DIXY",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DIXY",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -1897,6 +2497,11 @@
   {
     "ticker": "DIXY",
     "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DLSV",
+    "year": 2004,
     "reason": "no_record_for_year"
   },
   {
@@ -1927,6 +2532,11 @@
   {
     "ticker": "DLSV",
     "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DLSVP",
+    "year": 2004,
     "reason": "no_record_for_year"
   },
   {
@@ -1996,6 +2606,36 @@
   },
   {
     "ticker": "DVEC",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DVEC",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DVEC",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DVEC",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DVEC",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DVEC",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DVEC",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -2051,6 +2691,21 @@
   },
   {
     "ticker": "DZRD",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DZRD",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DZRD",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DZRD",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -2100,8 +2755,13 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "DZRD",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "DZRDP",
-    "year": 2014,
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
@@ -2111,17 +2771,12 @@
   },
   {
     "ticker": "DZRDP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "DZRDP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "DZRDP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "DZRDP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -2186,22 +2841,7 @@
   },
   {
     "ticker": "ELFV",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ELFV",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ELFV",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ELFV",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -2227,6 +2867,76 @@
   {
     "ticker": "ELFV",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELFV",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELMT",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ELTZ",
+    "year": 2023,
     "reason": "no_record_for_year"
   },
   {
@@ -2257,6 +2967,46 @@
   {
     "ticker": "ENPG",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ENPG",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ENRU",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ENRU",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ENRU",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ENRU",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ENRU",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ENRU",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ENRU",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -2327,6 +3077,16 @@
   {
     "ticker": "EONR",
     "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "EONR",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "EONR",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -2351,6 +3111,21 @@
   },
   {
     "ticker": "ETGK",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ETGK",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ETGK",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ETGK",
     "year": 2011,
     "reason": "no_record_for_year"
   },
@@ -2361,16 +3136,6 @@
   },
   {
     "ticker": "ETLN",
-    "year": 2020,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ETLN",
-    "year": 2021,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ETLN",
     "year": 2022,
     "reason": "no_record_for_year"
   },
@@ -2387,6 +3152,11 @@
   {
     "ticker": "ETLN",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ETLN",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -2396,17 +3166,27 @@
   },
   {
     "ticker": "FEES",
-    "year": 2014,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "FEES",
-    "year": 2015,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "FEES",
-    "year": 2017,
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FEES",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FEES",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -2427,6 +3207,36 @@
   {
     "ticker": "FEES",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FEES",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FESH",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FESH",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FESH",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FESH",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FESH",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -2490,6 +3300,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "FESH",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "FIKO",
     "year": 2005,
     "reason": "no_record_for_year"
@@ -2497,6 +3312,16 @@
   {
     "ticker": "FLKO",
     "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FLKO",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "FLKO",
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
@@ -2525,6 +3350,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "FLOT",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "FTRE",
     "year": 2017,
     "reason": "no_record_for_year"
@@ -2541,6 +3371,16 @@
   },
   {
     "ticker": "GAZA",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GAZA",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GAZA",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -2591,7 +3431,27 @@
   },
   {
     "ticker": "GAZA",
+    "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GAZA",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GAZA",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GAZAP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GAZAP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -2626,7 +3486,17 @@
   },
   {
     "ticker": "GAZAP",
+    "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GAZAP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GAZAP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -2645,23 +3515,33 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "GCHE",
-    "year": 2014,
+    "ticker": "GAZP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "GCHE",
-    "year": 2015,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "GCHE",
-    "year": 2016,
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "GCHE",
-    "year": 2017,
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GCHE",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GCHE",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -2680,8 +3560,13 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "GEMC",
-    "year": 2021,
+    "ticker": "GECO",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GEMA",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -2705,6 +3590,46 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "GEMC",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GLRX",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GMKN",
+    "year": 2002,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GMKN",
+    "year": 2003,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GMKN",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GMKN",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GMKN",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GMKN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "GMKN",
     "year": 2024,
     "reason": "no_record_for_year"
@@ -2712,6 +3637,36 @@
   {
     "ticker": "GMKN",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GMKN",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GRAZ",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GRAZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GRAZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GRAZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GRAZ",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -2736,12 +3691,47 @@
   },
   {
     "ticker": "GRNT",
-    "year": 2017,
+    "year": 2021,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "GRNT",
-    "year": 2021,
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTLC",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTLC",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTLC",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTLC",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTLC",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTLC",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTLC",
+    "year": 2019,
     "reason": "no_record_for_year"
   },
   {
@@ -2752,6 +3742,26 @@
   {
     "ticker": "GTLC",
     "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTPR",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTPR",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTPR",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTPR",
+    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -2787,6 +3797,11 @@
   {
     "ticker": "GTRK",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GTRK",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -2821,12 +3836,57 @@
   },
   {
     "ticker": "GUMM",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GUMM",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "GUMM",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "GUMM",
     "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "HALS",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "HALS",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "HALS",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "HALS",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "HALS",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "HALS",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "HALS",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -2882,11 +3942,6 @@
   {
     "ticker": "HBENP",
     "year": 2006,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "HEAD",
-    "year": 2025,
     "reason": "no_record_for_year"
   },
   {
@@ -2901,21 +3956,6 @@
   },
   {
     "ticker": "HIMCP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "HIMCP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "HIMCP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "HIMCP",
     "year": 2023,
     "reason": "no_record_for_year"
   },
@@ -2930,8 +3970,38 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "HIMCP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "HYDR",
     "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "HYDR",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IDVP",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IDVP",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IDVP",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IDVP",
+    "year": 2019,
     "reason": "no_record_for_year"
   },
   {
@@ -2992,6 +4062,21 @@
   {
     "ticker": "IGST",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IGST",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IGSTP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IGSTP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -3052,6 +4137,11 @@
   {
     "ticker": "IGSTP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IGSTP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -3065,63 +4155,18 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "INGR",
-    "year": 2014,
+    "ticker": "IRAO-2009",
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "INGR",
-    "year": 2015,
+    "ticker": "IRAO-2009",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "INGR",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "INGR",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "INGR",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "INGR",
-    "year": 2019,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "INGR",
-    "year": 2020,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "INGR",
-    "year": 2021,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "INGR",
-    "year": 2022,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "INGR",
-    "year": 2023,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "INGR",
-    "year": 2024,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "INGR",
-    "year": 2025,
+    "ticker": "IRAO",
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
@@ -3132,11 +4177,6 @@
   {
     "ticker": "IRAO",
     "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "IRAO",
-    "year": 2015,
     "reason": "no_record_for_year"
   },
   {
@@ -3161,17 +4201,32 @@
   },
   {
     "ticker": "IRGZ",
-    "year": 2014,
+    "year": 2004,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "IRGZ",
-    "year": 2015,
+    "year": 2005,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "IRGZ",
-    "year": 2016,
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IRGZ",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IRGZ",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IRGZ",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -3201,22 +4256,12 @@
   },
   {
     "ticker": "IRKT",
-    "year": 2014,
+    "year": 2006,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "IRKT",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "IRKT",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "IRKT",
-    "year": 2017,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -3255,18 +4300,28 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "IRKT",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "ISKJ",
-    "year": 2014,
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ISKJ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ISKJ",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "ISKJ",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "ISKJ",
-    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -3300,11 +4355,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "ISKJ",
-    "year": 2023,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "IUES",
     "year": 2011,
     "reason": "no_record_for_year"
@@ -3312,6 +4362,11 @@
   {
     "ticker": "IVAT",
     "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "IVAT",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -3386,6 +4441,31 @@
   },
   {
     "ticker": "JNOS",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "JNOS",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "JNOS",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "JNOS",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "JNOS",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "JNOS",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -3402,11 +4482,6 @@
   {
     "ticker": "JNOS",
     "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "JNOS",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -3445,6 +4520,16 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "JNOS",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "JNOSP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "JNOSP",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -3456,32 +4541,7 @@
   },
   {
     "ticker": "JNOSP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "JNOSP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KAZT",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KAZT",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KAZT",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KAZT",
-    "year": 2017,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -3490,23 +4550,8 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KAZTP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KAZTP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KAZTP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KAZTP",
-    "year": 2017,
+    "ticker": "KAZT",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -3515,6 +4560,31 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "KAZTP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KBSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KBSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KBSB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KBSB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "KBSB",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -3527,11 +4597,6 @@
   {
     "ticker": "KBSB",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KBSB",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
@@ -3545,28 +4610,23 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KBTK",
-    "year": 2014,
+    "ticker": "KBSB",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "KBTK",
-    "year": 2015,
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KBTK",
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "KBTK",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KBTK",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KBTK",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -3582,6 +4642,36 @@
   {
     "ticker": "KBTK",
     "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHE",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHE",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHE",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHE",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHE",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHE",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -3645,6 +4735,36 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "KCHE",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHEP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHEP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHEP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHEP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHEP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "KCHEP",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -3702,6 +4822,11 @@
   {
     "ticker": "KCHEP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KCHEP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -3715,28 +4840,28 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KGKC",
-    "year": 2016,
+    "ticker": "KFBA",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "KGKC",
-    "year": 2017,
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KGKCP",
+    "ticker": "KGKC",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "KGKCP",
-    "year": 2016,
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "KGKCP",
-    "year": 2017,
+    "year": 2014,
     "reason": "no_record_for_year"
   },
   {
@@ -3760,6 +4885,96 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "KISB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISB",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISBP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISBP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISBP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISBP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISBP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISBP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISBP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KISBP",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "KLEN",
     "year": 2007,
     "reason": "no_record_for_year"
@@ -3767,6 +4982,71 @@
   {
     "ticker": "KLGR",
     "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLNA",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLNA",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLNA",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLNA",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLNA",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLNA",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLNA",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLSB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLSB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLSB",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -3827,6 +5107,11 @@
   {
     "ticker": "KLSB",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KLSB",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -3840,8 +5125,48 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "KLVZ",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "KMAZ",
-    "year": 2014,
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMAZ",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMAZ",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMAZ",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMAZ",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMAZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMAZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMAZ",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
@@ -3852,11 +5177,6 @@
   {
     "ticker": "KMAZ",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KMAZ",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
@@ -3877,6 +5197,31 @@
   {
     "ticker": "KMAZ",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMAZ",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMEZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMEZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMEZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMEZ",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -3937,6 +5282,11 @@
   {
     "ticker": "KMEZ",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KMEZ",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -3966,6 +5316,31 @@
   },
   {
     "ticker": "KOGK",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KOGK",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KOGK",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KOGK",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KOGK",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KOGK",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -4012,6 +5387,11 @@
   {
     "ticker": "KOGK",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KOGK",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -4032,6 +5412,16 @@
   {
     "ticker": "KOLE",
     "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KOMM",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KOMM",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -4091,6 +5481,16 @@
   },
   {
     "ticker": "KRKN",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KRKN",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KRKN",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -4150,28 +5550,18 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KRKNP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KRKNP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KRKNP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KRKNP",
-    "year": 2017,
+    "ticker": "KRKN",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "KRKNP",
     "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KRKNP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -4181,6 +5571,16 @@
   },
   {
     "ticker": "KRKO",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KRKOP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KRKOP",
     "year": 2013,
     "reason": "no_record_for_year"
   },
@@ -4245,6 +5645,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "KRKOP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "KRNG",
     "year": 2003,
     "reason": "no_record_for_year"
@@ -4292,6 +5697,41 @@
   {
     "ticker": "KRNGP",
     "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KROT",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KROT",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KROT",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KROT",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KROT",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KROT",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KROT",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -4307,11 +5747,6 @@
   {
     "ticker": "KROT",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KROT",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
@@ -4332,6 +5767,11 @@
   {
     "ticker": "KROT",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KROT",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -4366,22 +5806,12 @@
   },
   {
     "ticker": "KROTP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KROTP",
     "year": 2015,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "KROTP",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KROTP",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
@@ -4400,23 +5830,28 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "KROTP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KRSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "KRSB",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "KRSB",
-    "year": 2015,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KRSB",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KRSB",
-    "year": 2017,
+    "ticker": "KRSBP",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -4426,22 +5861,32 @@
   },
   {
     "ticker": "KRSBP",
-    "year": 2015,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KRSBP",
-    "year": 2016,
+    "ticker": "KRSG",
+    "year": 2006,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KRSBP",
-    "year": 2017,
+    "ticker": "KRSG",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KRSBP",
-    "year": 2022,
+    "ticker": "KRSG",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KRSG",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KRSG",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -4496,21 +5941,6 @@
   },
   {
     "ticker": "KTSB",
-    "year": 2011,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KTSB",
-    "year": 2012,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KTSB",
-    "year": 2013,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KTSB",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -4531,7 +5961,27 @@
   },
   {
     "ticker": "KTSB",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KTSB",
     "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KTSB",
+    "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KTSB",
+    "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KTSB",
+    "year": 2022,
     "reason": "no_record_for_year"
   },
   {
@@ -4557,36 +6007,6 @@
   {
     "ticker": "KTSBP",
     "year": 2009,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KTSBP",
-    "year": 2010,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KTSBP",
-    "year": 2011,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KTSBP",
-    "year": 2012,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KTSBP",
-    "year": 2013,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KTSBP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KTSBP",
-    "year": 2015,
     "reason": "no_record_for_year"
   },
   {
@@ -4621,7 +6041,17 @@
   },
   {
     "ticker": "KTSBP",
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KTSBP",
     "year": 2023,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KUBE",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -4771,22 +6201,7 @@
   },
   {
     "ticker": "KUZB",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KUZB",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KUZB",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KUZB",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
@@ -4802,6 +6217,26 @@
   {
     "ticker": "KUZB",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KUZB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KZBE-2008",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KZBE-2008",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KZBE-2008",
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
@@ -4840,6 +6275,21 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "KZBE",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KZBE",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "KZBE",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "KZBN",
     "year": 2008,
     "reason": "no_record_for_year"
@@ -4865,56 +6315,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KZOS",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KZOS",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KZOS",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KZOS",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KZOS",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KZOSP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KZOSP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KZOSP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KZOSP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "KZOSP",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "LBDO",
     "year": 2005,
     "reason": "no_record_for_year"
@@ -4935,6 +6335,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "LEAS",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "LENT",
     "year": 2022,
     "reason": "no_record_for_year"
@@ -4952,6 +6357,11 @@
   {
     "ticker": "LENT",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LENT",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -4961,6 +6371,21 @@
   },
   {
     "ticker": "LIFE",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LIFE",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LIFE",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LIFE",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -5011,7 +6436,67 @@
   },
   {
     "ticker": "LIFE",
+    "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LIFE",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LIFE",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LKOH",
+    "year": 2002,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LKOH",
+    "year": 2003,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LKOH",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LKOH",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LKOH",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LKOH",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LKOH",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LKOH",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LMBZ",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LNZL",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -5061,22 +6546,7 @@
   },
   {
     "ticker": "LNZLP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "LNZLP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "LNZLP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "LNZLP",
-    "year": 2017,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -5086,6 +6556,26 @@
   },
   {
     "ticker": "LPSB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LPSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LPSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LPSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LPSB",
     "year": 2015,
     "reason": "no_record_for_year"
   },
@@ -5135,8 +6625,53 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "LPSB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "LSNG",
-    "year": 2014,
+    "year": 2000,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSNG",
+    "year": 2001,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSNG",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSNG",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSNG",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSNG",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSNG",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSNG",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSNG",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
@@ -5150,18 +6685,13 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "LSNG",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "LSNG",
-    "year": 2018,
+    "ticker": "LSNGP",
+    "year": 2000,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "LSNGP",
-    "year": 2014,
+    "year": 2001,
     "reason": "no_record_for_year"
   },
   {
@@ -5172,36 +6702,41 @@
   {
     "ticker": "LSNGP",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "LSNGP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "LSNGP",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "LSRG",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSRG",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSRG",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSRG",
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LSRG",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LVHK",
     "year": 2013,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "LSRG",
-    "year": 2022,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "LVHK",
     "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "LVHK",
-    "year": 2015,
     "reason": "no_record_for_year"
   },
   {
@@ -5211,17 +6746,27 @@
   },
   {
     "ticker": "LVHK",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "LVHK",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "LVHK",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "LVHK",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MAGE",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MAGE",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MAGE",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -5285,6 +6830,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MAGE",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MAGEP",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -5345,6 +6895,21 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MAGEP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MAGN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MAGN",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MAGN",
     "year": 2023,
     "reason": "no_record_for_year"
@@ -5352,6 +6917,11 @@
   {
     "ticker": "MAGN",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MAGN",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -5370,6 +6940,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MBNK",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MDMBP",
     "year": 2008,
     "reason": "no_record_for_year"
@@ -5391,17 +6966,52 @@
   },
   {
     "ticker": "MDMG",
-    "year": 2021,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MDMG",
-    "year": 2022,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MDMG",
     "year": 2023,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MDMG",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MERF",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MERF",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MERF",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MERF",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MERF",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MERF",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MERF",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MERF",
+    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -5535,6 +7145,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MFGS",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MFGSP",
     "year": 2003,
     "reason": "no_record_for_year"
@@ -5567,16 +7182,6 @@
   {
     "ticker": "MFGSP",
     "year": 2009,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MFGSP",
-    "year": 2010,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MFGSP",
-    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
@@ -5640,13 +7245,23 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MFGSP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MFON",
-    "year": 2014,
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MFON",
     "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MGKL",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -5657,6 +7272,26 @@
   {
     "ticker": "MGNT",
     "year": 2023,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MGNT",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MGNZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MGNZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MGNZ",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -5741,22 +7376,12 @@
   },
   {
     "ticker": "MGTS",
-    "year": 2014,
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MGTS",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MGTS",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MGTS",
-    "year": 2017,
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -5790,33 +7415,18 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MGTSP",
-    "year": 2010,
+    "ticker": "MGTS",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MGTSP",
-    "year": 2011,
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MGTSP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MGTSP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MGTSP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MGTSP",
-    "year": 2017,
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -5847,6 +7457,21 @@
   {
     "ticker": "MGTSP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MGTSP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MGVM",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MGVM",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -5886,22 +7511,17 @@
   },
   {
     "ticker": "MISB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MISB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MISB",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MISB",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MISB",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MISB",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -5910,38 +7530,108 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MISB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MISBP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MISBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MISBP",
     "year": 2015,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MISBP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MISBP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MISBP",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MISBP",
     "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MISBP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MMBM",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MMBM",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MMBM",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MMBM",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MMBM",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MMBM",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MMBM",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MMBM",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MNPZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MNPZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MNPZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MNPZ",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MNPZ",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MMBM",
-    "year": 2015,
+    "ticker": "MOBB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MOBB",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -5981,12 +7671,22 @@
   },
   {
     "ticker": "MOEX",
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MORI",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MORI",
     "year": 2013,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MOEX",
-    "year": 2022,
+    "ticker": "MORI",
+    "year": 2014,
     "reason": "no_record_for_year"
   },
   {
@@ -5997,6 +7697,21 @@
   {
     "ticker": "MORI",
     "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MOTZ",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MOTZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MOTZ",
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
@@ -6041,6 +7756,16 @@
   },
   {
     "ticker": "MRKA",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKA",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKA",
     "year": 2010,
     "reason": "no_record_for_year"
   },
@@ -6051,32 +7776,62 @@
   },
   {
     "ticker": "MRKC",
-    "year": 2014,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKC",
-    "year": 2015,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKC",
-    "year": 2016,
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKC",
-    "year": 2017,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MRKC",
-    "year": 2018,
+    "ticker": "MRKH",
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MRKK",
-    "year": 2014,
+    "ticker": "MRKH",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKH",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKHP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKHP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKHP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKHP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKHP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -6135,28 +7890,33 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MRKP",
-    "year": 2014,
+    "ticker": "MRKK",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKP",
-    "year": 2015,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKP",
-    "year": 2016,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKP",
-    "year": 2017,
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKP",
-    "year": 2018,
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKS",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
@@ -6166,22 +7926,12 @@
   },
   {
     "ticker": "MRKS",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MRKS",
     "year": 2016,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKS",
     "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MRKS",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -6210,28 +7960,23 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MRKU",
-    "year": 2014,
+    "ticker": "MRKS",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKU",
-    "year": 2015,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKU",
-    "year": 2016,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKU",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MRKU",
-    "year": 2018,
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
@@ -6240,23 +7985,28 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MRKV",
-    "year": 2014,
+    "ticker": "MRKU",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKV",
-    "year": 2015,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKV",
-    "year": 2016,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKV",
-    "year": 2018,
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKV",
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
@@ -6271,6 +8021,11 @@
   },
   {
     "ticker": "MRKY",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKY",
     "year": 2010,
     "reason": "no_record_for_year"
   },
@@ -6281,7 +8036,12 @@
   },
   {
     "ticker": "MRKY",
-    "year": 2014,
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKY",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -6291,17 +8051,7 @@
   },
   {
     "ticker": "MRKY",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MRKY",
     "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MRKY",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -6335,23 +8085,38 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MRKY",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MRKZ",
-    "year": 2014,
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKZ",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRKZ",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MRKZ",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MRKZ",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MRKZ",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
@@ -6385,18 +8150,38 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MRKZ",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRSB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MRSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MRSB",
     "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MRSB",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MRSB",
-    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -6411,37 +8196,97 @@
   },
   {
     "ticker": "MRSB",
-    "year": 2025,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MSNG",
-    "year": 2000,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MSNG",
-    "year": 2001,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MSNG",
-    "year": 2002,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MSNG",
-    "year": 2003,
+    "ticker": "MSRS",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSRS",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MSSB",
-    "year": 2014,
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSSB",
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MSSB",
     "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSST",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSST",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSST",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSST",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSST",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSST",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MSST",
+    "year": 2019,
     "reason": "no_record_for_year"
   },
   {
@@ -6520,6 +8365,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MSTT",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MTLR",
     "year": 2013,
     "reason": "no_record_for_year"
@@ -6585,6 +8435,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "MTLR",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "MTLRP",
     "year": 2022,
     "reason": "no_record_for_year"
@@ -6602,6 +8457,11 @@
   {
     "ticker": "MTLRP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MTLRP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -6611,37 +8471,32 @@
   },
   {
     "ticker": "MTSS",
-    "year": 2011,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MTSS",
+    "ticker": "MUGS",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MUGS",
     "year": 2013,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MTSS",
+    "ticker": "MUGS",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MTSS",
+    "ticker": "MUGS",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MTSS",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MTSS",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "MUGS",
-    "year": 2015,
+    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -6656,6 +8511,21 @@
   },
   {
     "ticker": "MUGSP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MUGSP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MUGSP",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MUGSP",
     "year": 2015,
     "reason": "no_record_for_year"
   },
@@ -6672,6 +8542,16 @@
   {
     "ticker": "MUGSP",
     "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MVID",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "MVID",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -6705,23 +8585,13 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "NAUK",
-    "year": 2014,
+    "ticker": "MVID",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "NAUK",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NAUK",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NAUK",
-    "year": 2017,
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -6737,6 +8607,56 @@
   {
     "ticker": "NAUK",
     "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NAUK",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NEKK",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NEKK",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NEKK",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NEKK",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NEKK",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NEKK",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NFAZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NFAZ",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NFAZ",
+    "year": 2014,
     "reason": "no_record_for_year"
   },
   {
@@ -6792,6 +8712,11 @@
   {
     "ticker": "NFAZ",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NFAZ",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -6871,27 +8796,12 @@
   },
   {
     "ticker": "NKHP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NKHP",
-    "year": 2017,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "NKNC",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NKNC",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NKNC",
-    "year": 2016,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
@@ -6906,17 +8816,7 @@
   },
   {
     "ticker": "NKNCP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NKNCP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NKNCP",
-    "year": 2016,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
@@ -6927,6 +8827,16 @@
   {
     "ticker": "NKNCP",
     "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NKSH",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NKSH",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -6990,6 +8900,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "NKSH",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "NLMK",
     "year": 2022,
     "reason": "no_record_for_year"
@@ -7000,13 +8915,38 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "NLMK",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "NMGS",
     "year": 2006,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "NMOS",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NMOS",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NMOS",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NMOS",
     "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NMTP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -7031,17 +8971,27 @@
   },
   {
     "ticker": "NNSB",
-    "year": 2014,
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NNSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NNSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NNSB",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "NNSB",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NNSB",
-    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -7090,18 +9040,28 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "NNSB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "NNSBP",
-    "year": 2014,
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NNSBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NNSBP",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "NNSBP",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NNSBP",
-    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -7147,6 +9107,11 @@
   {
     "ticker": "NNSBP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NNSBP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -7166,6 +9131,21 @@
   },
   {
     "ticker": "NOTK",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NOTK",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NOTK",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NOTK",
     "year": 2010,
     "reason": "no_record_for_year"
   },
@@ -7176,7 +9156,12 @@
   },
   {
     "ticker": "NSVZ",
-    "year": 2014,
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NSVZ",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -7232,6 +9217,11 @@
   {
     "ticker": "NSVZ",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NSVZ",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -7261,12 +9251,42 @@
   },
   {
     "ticker": "NVNG",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NVNG",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NVNG",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NVNG",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NVNG",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "NVNG",
     "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NVNGP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "NVNGP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -7285,38 +9305,13 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "NVTK",
-    "year": 2010,
+    "ticker": "NZGZ",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "NVTK",
-    "year": 2011,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NVTK",
+    "ticker": "NZGZ",
     "year": 2013,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NVTK",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NVTK",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NVTK",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NVTK",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
@@ -7332,6 +9327,46 @@
   {
     "ticker": "OBUV",
     "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ODVA",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ODVA",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ODVA",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ODVA",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ODVA",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ODVA",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ODVA",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ODVA",
+    "year": 2019,
     "reason": "no_record_for_year"
   },
   {
@@ -7376,6 +9411,11 @@
   },
   {
     "ticker": "OGK2",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGK2",
     "year": 2010,
     "reason": "no_record_for_year"
   },
@@ -7406,7 +9446,27 @@
   },
   {
     "ticker": "OGK6",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGK6",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGK6",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGK6",
     "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKA",
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
@@ -7431,12 +9491,22 @@
   },
   {
     "ticker": "OGKB",
-    "year": 2010,
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "OGKB",
-    "year": 2011,
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKB",
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
@@ -7446,22 +9516,12 @@
   },
   {
     "ticker": "OGKB",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "OGKB",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "OGKB",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "OGKB",
     "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKB",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -7501,6 +9561,41 @@
   },
   {
     "ticker": "OGKE",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKE",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKE",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKE",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKE",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKE",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKE",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OGKE",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -7532,6 +9627,26 @@
   {
     "ticker": "OMSBP",
     "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMSH",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMSH",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMSH",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMSH",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -7606,6 +9721,51 @@
   },
   {
     "ticker": "OMZZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZ",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZP",
     "year": 2013,
     "reason": "no_record_for_year"
   },
@@ -7642,6 +9802,36 @@
   {
     "ticker": "OMZZP",
     "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OMZZP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OPIN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OPIN",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OPIN",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OPIN",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OPIN",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -7736,6 +9926,31 @@
   },
   {
     "ticker": "OSMP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OSMP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OSMP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OSMP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OSMP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "OSMP",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -7790,8 +10005,13 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "OZON",
-    "year": 2025,
+    "ticker": "PAZA",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PAZA",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -7846,7 +10066,17 @@
   },
   {
     "ticker": "PAZA",
+    "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PAZA",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PAZA",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -7885,6 +10115,41 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "PHOR",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PHST",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PHST",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PHST",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PHST",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PHST",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PHST",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "PHST",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -7897,6 +10162,41 @@
   {
     "ticker": "PHST",
     "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PIKK",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PIKK",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PIKK",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PIKK",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PIKK",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PIKK",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PIKK",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -7932,6 +10232,11 @@
   {
     "ticker": "PIKK",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PIKK",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -7976,7 +10281,62 @@
   },
   {
     "ticker": "PLSM",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLSM",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLSM",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLSM",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLSM",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLSM",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLSM",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLSM",
     "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLZL",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLZL",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLZL",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLZL",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -7997,6 +10357,16 @@
   {
     "ticker": "PLZL",
     "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLZL",
+    "year": 2023,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PLZL",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -8046,52 +10416,22 @@
   },
   {
     "ticker": "PMSB",
-    "year": 2014,
+    "year": 2006,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "PMSB",
-    "year": 2015,
+    "ticker": "PMTL",
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "PMSB",
-    "year": 2016,
+    "ticker": "PMTL",
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "PMSB",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PMSB",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PMSBP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PMSBP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PMSBP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PMSBP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PMSBP",
-    "year": 2018,
+    "ticker": "PMTL",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -8141,22 +10481,12 @@
   },
   {
     "ticker": "POLY",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "POLY",
     "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "POLY",
-    "year": 2019,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "POLY",
-    "year": 2020,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "POLY",
-    "year": 2021,
     "reason": "no_record_for_year"
   },
   {
@@ -8177,6 +10507,11 @@
   {
     "ticker": "POSI",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRFN",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -8211,6 +10546,21 @@
   },
   {
     "ticker": "PRFN",
+    "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRFN",
+    "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRFN",
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRFN",
     "year": 2023,
     "reason": "no_record_for_year"
   },
@@ -8222,6 +10572,11 @@
   {
     "ticker": "PRFN",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRFN",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -8276,6 +10631,26 @@
   },
   {
     "ticker": "PRIN",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRIN",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRIN",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRIN",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRIN",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -8296,17 +10671,12 @@
   },
   {
     "ticker": "PRMB",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PRMB",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PRMB",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRMB",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -8336,22 +10706,22 @@
   },
   {
     "ticker": "PRTK",
-    "year": 2014,
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRTK",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "PRTK",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "PRTK",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PRTK",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "PRTK",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
@@ -8450,6 +10820,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "RAGR",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "RAOVP",
     "year": 2010,
     "reason": "no_record_for_year"
@@ -8457,6 +10832,21 @@
   {
     "ticker": "RAOVP",
     "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RASP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RASP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RASP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -8500,6 +10890,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "RASP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "RAVN",
     "year": 2019,
     "reason": "no_record_for_year"
@@ -8516,12 +10911,22 @@
   },
   {
     "ticker": "RBCI",
+    "year": 2002,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RBCI",
     "year": 2003,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "RBCI",
     "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RBCM",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -8582,6 +10987,36 @@
   {
     "ticker": "RBCM",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RBCM",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RDRB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "REBR",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "REBR",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "REBR",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "REBR",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -8600,6 +11035,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "RENI",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "RGSS",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -8647,6 +11087,11 @@
   {
     "ticker": "RGSS",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RGSS",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -8696,17 +11141,12 @@
   },
   {
     "ticker": "RKKE",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RKKE",
     "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RKKE",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RKKE",
-    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -8752,6 +11192,51 @@
   {
     "ticker": "RKKE",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RKKE",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMN",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMN",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMN",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMN",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMN",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMN",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMN",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMN",
+    "year": 2020,
     "reason": "no_record_for_year"
   },
   {
@@ -8761,7 +11246,67 @@
   },
   {
     "ticker": "RLMNP",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMNP",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMNP",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMNP",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMNP",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMNP",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMNP",
+    "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RLMNP",
     "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNAV",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNAV",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNAV",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNAV",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNAV",
+    "year": 2014,
     "reason": "no_record_for_year"
   },
   {
@@ -8820,6 +11365,41 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "RNFT",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNHS",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNHS",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNHS",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNHSP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNHSP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RNHSP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "ROLO",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -8880,6 +11460,51 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "ROLO",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "ROSB",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -8930,8 +11555,48 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "ROSB",
-    "year": 2024,
+    "ticker": "ROSN",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSN",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSN",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROSN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROST",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROST",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROST",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROST",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROST",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -8992,6 +11657,11 @@
   {
     "ticker": "ROST",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ROST",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -9001,6 +11671,26 @@
   },
   {
     "ticker": "RSEA",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSEA",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSEA",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSEA",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSEA",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -9011,6 +11701,31 @@
   },
   {
     "ticker": "RSTI",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTI",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTI",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTI",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTI",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTI",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -9021,37 +11736,32 @@
   },
   {
     "ticker": "RSTI",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTI",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTI",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTI",
-    "year": 2019,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTI",
-    "year": 2020,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTI",
-    "year": 2021,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTI",
     "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTIP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTIP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTIP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTIP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RSTIP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -9066,37 +11776,12 @@
   },
   {
     "ticker": "RSTIP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTIP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTIP",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTIP",
-    "year": 2019,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTIP",
-    "year": 2020,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTIP",
-    "year": 2021,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RSTIP",
     "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RTGZ",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -9160,38 +11845,23 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "RTKM",
-    "year": 2001,
+    "ticker": "RTGZ",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "RTKM",
-    "year": 2002,
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "RTKM",
-    "year": 2003,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RTKM",
-    "year": 2013,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "RTKMP",
-    "year": 2001,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RTKMP",
-    "year": 2002,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RTKMP",
-    "year": 2003,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -9201,17 +11871,32 @@
   },
   {
     "ticker": "RTSB",
-    "year": 2014,
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RTSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RTSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RTSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RTSB",
+    "year": 2010,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "RTSB",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RTSB",
-    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -9235,18 +11920,33 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "RTSB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "RTSBP",
-    "year": 2014,
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RTSBP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RTSBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RTSBP",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "RTSBP",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RTSBP",
-    "year": 2016,
     "reason": "no_record_for_year"
   },
   {
@@ -9267,6 +11967,11 @@
   {
     "ticker": "RTSBP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RTSBP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -9311,21 +12016,6 @@
   },
   {
     "ticker": "RUAL",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RUAL",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RUAL",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RUAL",
     "year": 2018,
     "reason": "no_record_for_year"
   },
@@ -9360,8 +12050,78 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "RUAL",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUGR",
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "RUGR",
     "year": 2023,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUSI",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -9417,6 +12177,36 @@
   {
     "ticker": "RUSI",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUSI",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUSP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUSP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUSP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUSP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RUSP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -9471,12 +12261,22 @@
   },
   {
     "ticker": "RZSB",
-    "year": 2014,
+    "year": 2006,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "RZSB",
-    "year": 2015,
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RZSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "RZSB",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -9486,17 +12286,37 @@
   },
   {
     "ticker": "RZSB",
-    "year": 2017,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "RZSB",
-    "year": 2018,
+    "ticker": "SAGO",
+    "year": 2001,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAGO",
+    "year": 2002,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "SAGO",
     "year": 2003,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAGO",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAGO",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAGO",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -9546,12 +12366,37 @@
   },
   {
     "ticker": "SAGO",
-    "year": 2025,
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAGOP",
+    "year": 2001,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAGOP",
+    "year": 2002,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "SAGOP",
     "year": 2003,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAGOP",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAGOP",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAGOP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -9601,12 +12446,32 @@
   },
   {
     "ticker": "SAGOP",
-    "year": 2025,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "SARE",
     "year": 2003,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SARE",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SARE",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SARE",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SARE",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -9670,8 +12535,33 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "SARE",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "SAREP",
     "year": 2003,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAREP",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAREP",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAREP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAREP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -9732,6 +12622,11 @@
   {
     "ticker": "SAREP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SAREP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -9741,32 +12636,7 @@
   },
   {
     "ticker": "SBER",
-    "year": 2013,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBER",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBER",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBER",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBER",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBER",
-    "year": 2018,
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
@@ -9807,56 +12677,6 @@
   {
     "ticker": "SBERP",
     "year": 2007,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2008,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2009,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2010,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2011,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2013,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SBERP",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -9956,6 +12776,11 @@
   },
   {
     "ticker": "SELG",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SELG",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -9985,8 +12810,13 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "SELG",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "SELGP",
-    "year": 2014,
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
@@ -9995,13 +12825,28 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "SELGP",
-    "year": 2016,
+    "ticker": "SELL",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "SELGP",
-    "year": 2017,
+    "ticker": "SELL",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SELL",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SELL",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SELL",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -10021,22 +12866,27 @@
   },
   {
     "ticker": "SEMZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SEMZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SEMZ",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SEMZ",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "SFIN",
     "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SFIN",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SFIN",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -10085,6 +12935,31 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "SGZH",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBG",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBG",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBG",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBG",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "SIBG",
     "year": 2020,
     "reason": "no_record_for_year"
@@ -10105,6 +12980,41 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "SIBN",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBN",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBN",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBN",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBN",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SIBN",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "SILM",
     "year": 2009,
     "reason": "no_record_for_year"
@@ -10127,6 +13037,11 @@
   {
     "ticker": "SILV",
     "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SITR",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
@@ -10142,6 +13057,16 @@
   {
     "ticker": "SKRN",
     "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SKYC",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SKYC",
+    "year": 2014,
     "reason": "no_record_for_year"
   },
   {
@@ -10200,6 +13125,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "SLEN",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "SMGR",
     "year": 2006,
     "reason": "no_record_for_year"
@@ -10217,6 +13147,11 @@
   {
     "ticker": "SMLT",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SMLT",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -10276,12 +13211,97 @@
   },
   {
     "ticker": "SNGS",
+    "year": 2000,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGS",
+    "year": 2001,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGS",
+    "year": 2002,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGS",
     "year": 2003,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGS",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGS",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGS",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGS",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGSP",
+    "year": 2000,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGSP",
+    "year": 2001,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGSP",
+    "year": 2002,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "SNGSP",
     "year": 2003,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGSP",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGSP",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGSP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNGSP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNOS",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNOS",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SNOS",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
@@ -10310,6 +13330,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "SOFL",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "SOVT",
     "year": 2010,
     "reason": "no_record_for_year"
@@ -10335,6 +13360,16 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "SPBE",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SPTL",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "SPTL",
     "year": 2006,
     "reason": "no_record_for_year"
@@ -10351,7 +13386,27 @@
   },
   {
     "ticker": "SPTLP",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SPTLP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SPTLP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SPTLP",
     "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "STKM",
+    "year": 2004,
     "reason": "no_record_for_year"
   },
   {
@@ -10372,6 +13427,11 @@
   {
     "ticker": "STKM",
     "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "STKMP",
+    "year": 2004,
     "reason": "no_record_for_year"
   },
   {
@@ -10426,6 +13486,31 @@
   },
   {
     "ticker": "STSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "STSB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "STSB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "STSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "STSB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "STSB",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -10480,13 +13565,18 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "STSBP",
-    "year": 2014,
+    "ticker": "STSB",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "STSBP",
-    "year": 2015,
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "STSBP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -10496,7 +13586,7 @@
   },
   {
     "ticker": "STSBP",
-    "year": 2017,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -10516,6 +13606,31 @@
   },
   {
     "ticker": "SUMZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVAV",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVAV",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVAV",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVAV",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVAV",
     "year": 2012,
     "reason": "no_record_for_year"
   },
@@ -10557,6 +13672,11 @@
   {
     "ticker": "SVAV",
     "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVCB",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -10615,6 +13735,96 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "SVET",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVETP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSB",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSBP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSBP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSBP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSBP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSBP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSBP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SVSBP",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "SVTZ",
     "year": 2009,
     "reason": "no_record_for_year"
@@ -10636,6 +13846,36 @@
   },
   {
     "ticker": "SYNG",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SYNG",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SYNG",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SYNG",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SYNG",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SYNG",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SYNG",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -10652,6 +13892,31 @@
   {
     "ticker": "SYNG",
     "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SZPR",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SZPR",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SZPR",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SZPR",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "SZPR",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -10691,16 +13956,6 @@
   },
   {
     "ticker": "T",
-    "year": 2020,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "T",
-    "year": 2021,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "T",
     "year": 2022,
     "reason": "no_record_for_year"
   },
@@ -10727,6 +13982,16 @@
   {
     "ticker": "TAENP",
     "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TAER",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TAER",
+    "year": 2015,
     "reason": "no_record_for_year"
   },
   {
@@ -10771,202 +14036,252 @@
   },
   {
     "ticker": "TANL",
-    "year": 2020,
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TASB",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2019,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2020,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2021,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2022,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2023,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2024,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASB",
-    "year": 2025,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2019,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2020,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2021,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2022,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2023,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2024,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TASBP",
-    "year": 2025,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2002,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2003,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2004,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2005,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2006,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2007,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2008,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2009,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2010,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
-    "year": 2011,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATN",
+    "ticker": "TANL",
     "year": 2013,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATN",
+    "ticker": "TANL",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATN",
+    "ticker": "TANL",
     "year": 2015,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATN",
+    "ticker": "TANL",
     "year": 2016,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATN",
+    "ticker": "TANL",
     "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TANL",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TANL",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TANL",
+    "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2023,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2017,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2019,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2020,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2023,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TASBP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TATN",
+    "year": 2002,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TATN",
+    "year": 2003,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TATN",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TATN",
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
@@ -10981,17 +14296,7 @@
   },
   {
     "ticker": "TATNP",
-    "year": 2004,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATNP",
     "year": 2005,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATNP",
-    "year": 2006,
     "reason": "no_record_for_year"
   },
   {
@@ -11000,43 +14305,33 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATNP",
+    "ticker": "TAVR",
     "year": 2008,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATNP",
+    "ticker": "TAVR",
     "year": 2009,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATNP",
+    "ticker": "TAVR",
     "year": 2010,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATNP",
+    "ticker": "TAVR",
     "year": 2011,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATNP",
-    "year": 2014,
+    "ticker": "TAVR",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TATNP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATNP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TATNP",
-    "year": 2017,
+    "ticker": "TAVR",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11045,13 +14340,28 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TCSG",
-    "year": 2020,
+    "ticker": "TCBN",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TCSG",
-    "year": 2021,
+    "ticker": "TCBN",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TCBN",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TCBN",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TCBN",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11086,27 +14396,7 @@
   },
   {
     "ticker": "TGKA",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TGKA",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TGKA",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TGKA",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TGKA",
-    "year": 2018,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -11117,6 +14407,36 @@
   {
     "ticker": "TGKA",
     "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKA",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKB",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11180,6 +14500,36 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "TGKB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKBP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKBP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKBP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKBP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKBP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "TGKBP",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -11240,6 +14590,46 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "TGKBP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKD",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKD",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKD",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKD",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKD",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKD",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKD",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "TGKD",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -11282,6 +14672,26 @@
   {
     "ticker": "TGKD",
     "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKDP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKDP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKDP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKDP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11331,7 +14741,62 @@
   },
   {
     "ticker": "TGKE",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKE",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKE",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKE",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKE",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKE",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKE",
     "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKF",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKF",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKF",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKF",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKF",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11342,6 +14807,41 @@
   {
     "ticker": "TGKH",
     "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKI",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKI",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKI",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKI",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKI",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKI",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKI",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11386,6 +14886,11 @@
   },
   {
     "ticker": "TGKK",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKK",
     "year": 2010,
     "reason": "no_record_for_year"
   },
@@ -11397,6 +14902,41 @@
   {
     "ticker": "TGKK",
     "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKN",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKN",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKN",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKN",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKN",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TGKN",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11445,6 +14985,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "TGKN",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "TGKO",
     "year": 2016,
     "reason": "no_record_for_year"
@@ -11510,13 +15055,33 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TNSE",
-    "year": 2015,
+    "ticker": "TNBP",
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TNSE",
-    "year": 2016,
+    "ticker": "TNBP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TNBP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TNBPP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TNBPP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TNBPP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11565,6 +15130,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "TNSE",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "TOME",
     "year": 2005,
     "reason": "no_record_for_year"
@@ -11581,27 +15151,27 @@
   },
   {
     "ticker": "TORS",
-    "year": 2014,
+    "year": 2006,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "TORS",
-    "year": 2015,
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "TORS",
-    "year": 2016,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "TORS",
-    "year": 2017,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "TORS",
-    "year": 2018,
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11615,28 +15185,33 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TORSP",
-    "year": 2014,
+    "ticker": "TORS",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "TORSP",
-    "year": 2015,
+    "year": 2006,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "TORSP",
-    "year": 2016,
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "TORSP",
-    "year": 2017,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "TORSP",
-    "year": 2018,
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TORSP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -11645,6 +15220,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "TORSP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "TOSB",
     "year": 2006,
     "reason": "no_record_for_year"
@@ -11702,41 +15282,6 @@
   {
     "ticker": "TOSBP",
     "year": 2012,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TRCN",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TRCN",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TRCN",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TRCN",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TRCN",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TRCN",
-    "year": 2019,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TRCN",
-    "year": 2020,
     "reason": "no_record_for_year"
   },
   {
@@ -11747,6 +15292,11 @@
   {
     "ticker": "TRMK",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TRMK",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -11776,47 +15326,57 @@
   },
   {
     "ticker": "TRNFP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TRNFP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TRNFP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUCH",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUCH",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUCH",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TRNFP",
+    "ticker": "TUCH",
     "year": 2015,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TRNFP",
+    "ticker": "TUCH",
     "year": 2016,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TRNFP",
+    "ticker": "TUCH",
     "year": 2017,
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "TTLK",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TTLK",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TTLK",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TTLK",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TTLK",
+    "ticker": "TUCH",
     "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUCH",
+    "year": 2019,
     "reason": "no_record_for_year"
   },
   {
@@ -11841,6 +15401,36 @@
   },
   {
     "ticker": "TUZA",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUZA",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUZA",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUZA",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUZA",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUZA",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TUZA",
     "year": 2015,
     "reason": "no_record_for_year"
   },
@@ -11895,6 +15485,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "TUZA",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "TVRE",
     "year": 2005,
     "reason": "no_record_for_year"
@@ -11980,18 +15575,88 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "TZUM",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TZUM",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TZUM",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TZUM",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TZUM",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TZUM",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TZUM",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "TZUM",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UAZA",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UAZA",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UAZA",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UAZA",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UAZA",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UAZA",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UAZA",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UAZA",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "UAZA",
     "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "UCSS",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "UCSS",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -12052,6 +15717,101 @@
   {
     "ticker": "UDMN",
     "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSB",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSBP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSBP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSBP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSBP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSBP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSBP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UDSBP",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UFMO",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UFMO",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -12070,6 +15830,26 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "UGLD",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UKUZ",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UKUZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UKUZ",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "UKUZ",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -12130,13 +15910,28 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "UNAC",
-    "year": 2014,
+    "ticker": "UKUZ",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "UNAC",
-    "year": 2015,
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UNAC",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UNAC",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UNAC",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -12190,6 +15985,21 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "UNAC",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UNKL",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UNKL",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "UNKL",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -12250,23 +16060,8 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "UPRO",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "UPRO",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "UPRO",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "UPRO",
-    "year": 2017,
+    "ticker": "UNKL",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -12287,6 +16082,26 @@
   {
     "ticker": "UPRO",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UPRO",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "URFD",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "URFD",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "URFD",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -12326,6 +16141,16 @@
   },
   {
     "ticker": "URKZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "URKZ",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "URKZ",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -12382,6 +16207,11 @@
   {
     "ticker": "URKZ",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "URKZ",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -12446,6 +16276,11 @@
   },
   {
     "ticker": "URSIP",
+    "year": 2004,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "URSIP",
     "year": 2005,
     "reason": "no_record_for_year"
   },
@@ -12466,7 +16301,17 @@
   },
   {
     "ticker": "URSIP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "URSIP",
     "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "USBN",
+    "year": 2012,
     "reason": "no_record_for_year"
   },
   {
@@ -12522,6 +16367,36 @@
   {
     "ticker": "USBN",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "USBN",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTAR",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTAR",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTAR",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTAR",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTAR",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -12582,6 +16457,16 @@
   {
     "ticker": "UTAR",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTAR",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTEL",
+    "year": 2002,
     "reason": "no_record_for_year"
   },
   {
@@ -12591,12 +16476,47 @@
   },
   {
     "ticker": "UTELP",
+    "year": 2002,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTELP",
     "year": 2005,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "UTII",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTII",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTII",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTII",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTII",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTII",
     "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UTSY",
+    "year": 2015,
     "reason": "no_record_for_year"
   },
   {
@@ -12666,12 +16586,72 @@
   },
   {
     "ticker": "UWGN",
+    "year": 2022,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UWGN",
+    "year": 2023,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UWGN",
+    "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UWGN",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "UWGN",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "VDGR",
     "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VDSB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VDSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VDSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VDSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VDSB",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VDSB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VDSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VDSB",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -12722,6 +16702,11 @@
   {
     "ticker": "VEON-RX",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VEON-RX",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -12761,6 +16746,41 @@
   },
   {
     "ticker": "VGSB",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSB",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSB",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSB",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSB",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -12820,6 +16840,36 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "VGSB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSBP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSBP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSBP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VGSBP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "VGSBP",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -12880,6 +16930,21 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "VGSBP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VJGZ",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VJGZ",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "VJGZ",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -12940,6 +17005,21 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "VJGZ",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VJGZP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VJGZP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "VJGZP",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -13000,6 +17080,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "VJGZP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "VKCO",
     "year": 2020,
     "reason": "no_record_for_year"
@@ -13027,6 +17112,11 @@
   {
     "ticker": "VKCO",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VKCO",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -13041,27 +17131,22 @@
   },
   {
     "ticker": "VLHZ",
-    "year": 2014,
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VLHZ",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VLHZ",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "VLHZ",
     "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VLHZ",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VLHZ",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VLHZ",
-    "year": 2018,
     "reason": "no_record_for_year"
   },
   {
@@ -13161,6 +17246,31 @@
   },
   {
     "ticker": "VRAO",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRAO",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRAO",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRAO",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRAO",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRAO",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -13187,6 +17297,16 @@
   {
     "ticker": "VRAOP",
     "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRAOP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRAOP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -13226,12 +17346,37 @@
   },
   {
     "ticker": "VRPH",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRPH",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRPH",
     "year": 2014,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "VRSB",
-    "year": 2014,
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRSB",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRSB",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRSB",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -13241,27 +17386,27 @@
   },
   {
     "ticker": "VRSB",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VRSB",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VRSB",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VRSB",
     "year": 2021,
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "VRSB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "VRSBP",
-    "year": 2014,
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRSBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRSBP",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -13271,22 +17416,12 @@
   },
   {
     "ticker": "VRSBP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VRSBP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VRSBP",
-    "year": 2018,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VRSBP",
     "year": 2021,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VRSBP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -13306,27 +17441,17 @@
   },
   {
     "ticker": "VSMO",
-    "year": 2024,
+    "year": 2025,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "VSMO",
-    "year": 2025,
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "VSMZ",
     "year": 2009,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VSMZ",
-    "year": 2010,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VSMZ",
-    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
@@ -13390,6 +17515,11 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "VSYD",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "VSYDP",
     "year": 2015,
     "reason": "no_record_for_year"
@@ -13445,28 +17575,8 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "VTBR",
-    "year": 2013,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VTBR",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VTBR",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VTBR",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VTBR",
-    "year": 2018,
+    "ticker": "VSYDP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -13482,6 +17592,11 @@
   {
     "ticker": "VTBR",
     "year": 2024,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTBR",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -13496,12 +17611,52 @@
   },
   {
     "ticker": "VTEL",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTEL",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTEL",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTEL",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTEL",
     "year": 2010,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "VTELP",
     "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTELP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTELP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTELP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTELP",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -13546,6 +17701,36 @@
   },
   {
     "ticker": "VTGK",
+    "year": 2016,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTPR",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTRS",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTRS",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTRS",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTRS",
+    "year": 2015,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VTRS",
     "year": 2016,
     "reason": "no_record_for_year"
   },
@@ -13596,12 +17781,32 @@
   },
   {
     "ticker": "VZRZ",
-    "year": 2014,
+    "year": 2006,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "VZRZ",
-    "year": 2015,
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZ",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZ",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZ",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZ",
+    "year": 2011,
     "reason": "no_record_for_year"
   },
   {
@@ -13612,6 +17817,46 @@
   {
     "ticker": "VZRZP",
     "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "VZRZP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -13691,52 +17936,22 @@
   },
   {
     "ticker": "WTCM",
-    "year": 2014,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "WTCM",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "WTCM",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "WTCM",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "WTCM",
-    "year": 2018,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "WTCMP",
-    "year": 2014,
+    "year": 2008,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "WTCMP",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "WTCMP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "WTCMP",
-    "year": 2017,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "WTCMP",
-    "year": 2018,
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -13745,28 +17960,13 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "WUSH",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "YAEN",
     "year": 2004,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "YAKG",
-    "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "YAKG",
-    "year": 2015,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "YAKG",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "YAKG",
-    "year": 2017,
     "reason": "no_record_for_year"
   },
   {
@@ -13802,6 +18002,11 @@
   {
     "ticker": "YAKG",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YAKG",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -13816,6 +18021,21 @@
   },
   {
     "ticker": "YASH",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YASH",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YASH",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YASH",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -13831,6 +18051,46 @@
   },
   {
     "ticker": "YKEN",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKEN",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKEN",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKEN",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKEN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKEN",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKEN",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKEN",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKEN",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -13890,6 +18150,26 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "YKEN",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKENP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKENP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKENP",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "YKENP",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -13947,6 +18227,11 @@
   {
     "ticker": "YKENP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YKENP",
+    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -14016,12 +18301,27 @@
   },
   {
     "ticker": "YRSB",
-    "year": 2015,
+    "year": 2007,
     "reason": "no_record_for_year"
   },
   {
     "ticker": "YRSB",
-    "year": 2016,
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSB",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSB",
+    "year": 2014,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSB",
+    "year": 2015,
     "reason": "no_record_for_year"
   },
   {
@@ -14067,6 +18367,26 @@
   {
     "ticker": "YRSB",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSB",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSBP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSBP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSBP",
+    "year": 2009,
     "reason": "no_record_for_year"
   },
   {
@@ -14081,11 +18401,6 @@
   },
   {
     "ticker": "YRSBP",
-    "year": 2016,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "YRSBP",
     "year": 2017,
     "reason": "no_record_for_year"
   },
@@ -14127,6 +18442,61 @@
   {
     "ticker": "YRSBP",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSBP",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2005,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "YRSL",
+    "year": 2014,
     "reason": "no_record_for_year"
   },
   {
@@ -14171,6 +18541,16 @@
   },
   {
     "ticker": "ZILL",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZILL",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZILL",
     "year": 2014,
     "reason": "no_record_for_year"
   },
@@ -14230,6 +18610,51 @@
     "reason": "no_record_for_year"
   },
   {
+    "ticker": "ZILL",
+    "year": 2026,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZN",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZN",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZN",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZN",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZN",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZN",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZN",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZN",
+    "year": 2013,
+    "reason": "no_record_for_year"
+  },
+  {
     "ticker": "ZMZN",
     "year": 2014,
     "reason": "no_record_for_year"
@@ -14252,6 +18677,46 @@
   {
     "ticker": "ZMZN",
     "year": 2018,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZNP",
+    "year": 2006,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZNP",
+    "year": 2007,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZNP",
+    "year": 2008,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZNP",
+    "year": 2009,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZNP",
+    "year": 2010,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZNP",
+    "year": 2011,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZNP",
+    "year": 2012,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZMZNP",
+    "year": 2013,
     "reason": "no_record_for_year"
   },
   {
@@ -14347,6 +18812,11 @@
   {
     "ticker": "ZVEZ",
     "year": 2025,
+    "reason": "no_record_for_year"
+  },
+  {
+    "ticker": "ZVEZ",
+    "year": 2026,
     "reason": "no_record_for_year"
   }
 ]
