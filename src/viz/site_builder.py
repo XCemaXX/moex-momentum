@@ -17,17 +17,23 @@ import shutil
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
 from jinja2 import Environment, PackageLoader, select_autoescape
 from markdown_it import MarkdownIt
 
+from config import COMMISSION_PER_SIDE, TOP_K_CONCENTRATION
 from mages.curve import build_mages_frame
 from mages.loader import load_quarters
 from mages.weighted_q1 import build_mages_table, build_weighted_frame
+from momentum.topn_fan import nav_from_selections, score_ranking
 from momentum.transitions import Q_LABELS, sticky_tickers, transition_windows
+from momentum.universe import load_panel
 from tickers import load as load_tickers
 from viz.mages_charts import plot_mages_vs_mcftrr, plot_weighted_q1
 from viz.plotly_charts import (
     _COLORS,
+    Q1_TOP15_COLOR,
+    _plot_strategy_vs_mcftrr,
     _transition_subtitle,
     load_q_values,
     plot_q1_minus_mcftrr,
@@ -53,9 +59,9 @@ NAV_LINKS: list[tuple[str, str]] = [
     ("Q1 vs MCFTRR alpha", "q1_minus_mcftrr.html"),
     ("Quartile composition", "q_history.html"),
     ("Quartile flows", "transitions.html"),
-    ("Mages index", "mages_index.html"),
     ("Methodology", "methodology.html"),
     ("Experiments", "compare.html"),
+    ("Mages index", "mages_index.html"),
 ]
 
 
@@ -196,6 +202,58 @@ def _order_by_score(members: list[str], month_scores: dict[str, float]) -> list[
     return scored + [t for t in members if t not in month_scores]
 
 
+def _q1top15_nav(
+    scores: dict[str, dict[str, float]], monthly_dir: Path, *, k: int
+) -> pd.Series | None:
+    """NAV of the top-K-by-score concentration strategy (task 026).
+
+    Built at render time from scores.csv (full top-100 universe per month, task
+    025) + the monthly returns panel — same build-time-curve pattern the mages
+    page uses. Reproduces the `k{K}` column of the task-024 concentration fan
+    (same universe, signal, tie-break), so the home page needs no research CSV.
+    """
+    if not scores:
+        return None
+    returns_panel = load_panel(monthly_dir)[0]
+    if returns_panel.empty:
+        return None
+    selections = {pd.Period(m, "M"): score_ranking(pd.Series(per))[:k] for m, per in scores.items()}
+    start = min(selections)
+    months = returns_panel.index[returns_panel.index >= start]
+    if len(months) == 0:
+        return None
+    curve = nav_from_selections(
+        returns_panel, months, selections, commission=COMMISSION_PER_SIDE, label=f"top{k}"
+    )
+    return curve.nav
+
+
+def _top15_assets(
+    scores: dict[str, dict[str, float]],
+    monthly_dir: Path | None,
+    q_values: pd.DataFrame,
+    label: str,
+) -> tuple[pd.Series | None, str]:
+    """Q1 top15 NAV (reindexed to q_values) + its alpha-chart embed.
+
+    Computed inline from scores + the monthly panel, so the page never depends on
+    the research-only concentration CSV. The NAV feeds the extra line on the home
+    dynamics chart; the embed sits below the Q1 alpha chart. Absent scores
+    (pre-task-025 output) or panel → (None, "") and both are skipped.
+    """
+    if not scores or monthly_dir is None:
+        return None, ""
+    nav = _q1top15_nav(scores, monthly_dir, k=TOP_K_CONCENTRATION)
+    if nav is None:
+        return None, ""
+    top15 = nav.reindex(q_values.index)
+    frame = pd.DataFrame({label: top15, "MCFTRR": q_values["MCFTRR"]})
+    fig = _plot_strategy_vs_mcftrr(
+        frame, label, strat_name=label, title=f"{label} vs MCFTRR alpha", strat_color=Q1_TOP15_COLOR
+    )
+    return top15, _chart_embed(fig, div_id="chart-top15-alpha")
+
+
 def _build_data_json(
     holdings: dict[str, dict[str, list[str]]],
     tickers: dict[str, Any],
@@ -307,6 +365,31 @@ def _mages_page_context(
     }
 
 
+def _compare_page_context(
+    simple_path: Path,
+    curve_fit_path: Path,
+    sweep_path: Path,
+    fan_concentration_path: Path | None,
+) -> dict[str, Any]:
+    """Experiments page (task 20): headline signals + weight-sweep + the optional
+    concentration fan (task 024)."""
+    headline = q1_signals(simple_path=simple_path, curve_fit_path=curve_fit_path)
+    sweep = weight_sweep(sweep_path=sweep_path)
+    fig_headline = plot_registry_figure(headline, title="Strategy comparison")
+    fig_sweep = plot_registry_figure(
+        sweep,
+        title="The momentum effect holds for any weighting",
+        gradient=True,
+        formula="score = (a·r(12-1) + (1−a)·r(6-1)) / σ(12),  a = 1.0 … 0.0",
+    )
+    return {
+        "title": "Experiments",
+        "chart_headline": _chart_embed(fig_headline, div_id="chart-compare-headline"),
+        "chart_sweep": _chart_embed(fig_sweep, div_id="chart-compare-sweep"),
+        "chart_topn_concentration": _fan_embed(fan_concentration_path),
+    }
+
+
 def build_site(
     *,
     q_values_path: Path,
@@ -339,8 +422,12 @@ def build_site(
     q_values = load_q_values(q_values_path)
     holdings = _load_holdings(holdings_dir)
     tickers = load_tickers(tickers_path)
+    scores = _load_scores(scores_path)
+    top15_label = f"Q1 top{TOP_K_CONCENTRATION}"
+    top15, embed_t15_alpha = _top15_assets(scores, monthly_dir, q_values, top15_label)
 
-    fig_dyn = plot_q1_q4_dynamics(q_values)
+    dyn_extra = [(top15_label, top15, Q1_TOP15_COLOR)] if top15 is not None else None
+    fig_dyn = plot_q1_q4_dynamics(q_values, extra_series=dyn_extra)
     fig_alpha = plot_q1_minus_mcftrr(q_values)
     fig_transitions = plot_quartile_transitions(holdings)
 
@@ -386,10 +473,16 @@ def build_site(
         "chart.html",
         {"title": "Q1–Q4 dynamics", "chart_html": embed_dyn_solo},
     )
+    # Q1 top15 alpha (task 026) sits below the Q1 alpha chart on this page, not as
+    # its own page — both share the "strategy vs MCFTRR alpha" framing.
     render(
         "q1_minus_mcftrr.html",
         "chart.html",
-        {"title": "Q1 vs MCFTRR alpha", "chart_html": embed_alpha_solo},
+        {
+            "title": "Q1 vs MCFTRR alpha",
+            "chart_html": embed_alpha_solo,
+            "chart_html_2": embed_t15_alpha,
+        },
     )
     render(
         "transitions.html",
@@ -425,31 +518,23 @@ def build_site(
         render("mages_index.html", "mages_index.html", mages_ctx)
 
     if compare_simple_path and compare_curve_fit_path and compare_sweep_path:
-        headline = q1_signals(
-            simple_path=compare_simple_path, curve_fit_path=compare_curve_fit_path
+        render(
+            "compare.html",
+            "compare.html",
+            _compare_page_context(
+                compare_simple_path,
+                compare_curve_fit_path,
+                compare_sweep_path,
+                fan_concentration_path,
+            ),
         )
-        sweep = weight_sweep(sweep_path=compare_sweep_path)
-        fig_headline = plot_registry_figure(headline, title="Strategy comparison")
-        fig_sweep = plot_registry_figure(
-            sweep,
-            title="The momentum effect holds for any weighting",
-            gradient=True,
-            formula="score = (a·r(12-1) + (1−a)·r(6-1)) / σ(12),  a = 1.0 … 0.0",
-        )
-        ctx: dict[str, Any] = {
-            "title": "Experiments",
-            "chart_headline": _chart_embed(fig_headline, div_id="chart-compare-headline"),
-            "chart_sweep": _chart_embed(fig_sweep, div_id="chart-compare-sweep"),
-            "chart_topn_concentration": _fan_embed(fan_concentration_path),
-        }
-        render("compare.html", "compare.html", ctx)
 
     data_json = _build_data_json(
         holdings,
         tickers,
         _load_pending(pending_path),
         _load_universe_meta(universe_meta_path),
-        _load_scores(scores_path),
+        scores,
     )
     data_path = out_dir / "data.json"
     _atomic_write(

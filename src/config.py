@@ -31,6 +31,11 @@ STDEV_DDOF: int = 1
 # 13 closes → 12 returns: 11 for r(12-1) skip-month + 1 current for σ(12).
 UNIVERSE_MIN_MONTHLY_CLOSES: int = 13
 
+# Concentration strategy on the home page (task 026): hold the top-K names by
+# score from the top-100 universe, equal-weight. A product choice, not the
+# in-sample optimum (task 024 found a higher K) — presented as an observation.
+TOP_K_CONCENTRATION: int = 15
+
 # Universe liquidity selection: keep the N most liquid names by median monthly
 # trading value over the 12-month window. A *relative* cut — stable name count
 # across years, immune to ruble/market-scale drift (the implied ₽ threshold of

@@ -3,4 +3,9 @@
 <main class="full">
 {{ chart_html|safe }}
 </main>
+{% if chart_html_2 %}
+<main class="full">
+{{ chart_html_2|safe }}
+</main>
+{% endif %}
 {% endblock %}

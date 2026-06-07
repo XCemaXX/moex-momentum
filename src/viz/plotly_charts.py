@@ -37,6 +37,10 @@ _COLORS = {
     "MCFTRR": "#d62728",
 }
 
+# Q1 top15 concentration line (task 026): cyan — distinct from Q1 blue and the
+# red MCFTRR benchmark on the dynamics chart.
+Q1_TOP15_COLOR = "#17becf"
+
 # The alpha line is neither a Q-series nor the benchmark — give it a neutral
 # colour so the monthly return bars read clearly underneath.
 _ALPHA_LINE_COLOR = "#333333"
@@ -256,19 +260,30 @@ def _add_unit_baseline(fig: go.Figure) -> None:
     fig.add_hline(y=1.0, line_dash="dot", line_color="#999", line_width=1)
 
 
-def plot_q1_q4_dynamics(q_values: pd.DataFrame) -> go.Figure:
-    """5 NAV lines (Q1..Q4 + MCFTRR), log y.
+def plot_q1_q4_dynamics(
+    q_values: pd.DataFrame,
+    *,
+    extra_series: list[tuple[str, pd.Series, str]] | None = None,
+) -> go.Figure:
+    """5 NAV lines (Q1..Q4 + MCFTRR), log y, plus any `extra_series`.
     MCFTRR is drawn dashed to mark it as the benchmark, not a strategy line.
+    `extra_series` is (label, NAV series, colour) overlaid as extra solid
+    strategy lines (task 026: Q1 top15). Each must be indexed like q_values.
     Buttons 1y/3y/5y/10y/all rebase the start of the window to NAV=1.0."""
-    cols = ["Q1", "Q2", "Q3", "Q4", "MCFTRR"]
-    x = _x_dates(q_values.index)
+    extra_series = extra_series or []
+    frame = q_values.copy()
+    for label, series, _ in extra_series:
+        frame[label] = series
+    cols = ["Q1", "Q2", "Q3", "Q4", "MCFTRR", *(label for label, _, _ in extra_series)]
+    colors = {**_COLORS, **{label: color for label, _, color in extra_series}}
+    x = _x_dates(frame.index)
     fig = go.Figure()
     for col in cols:
         dash = "dash" if col == "MCFTRR" else "solid"
-        fig.add_trace(_trace(col, x, q_values[col].tolist(), color=_COLORS[col], dash=dash))
+        fig.add_trace(_trace(col, x, frame[col].tolist(), color=colors[col], dash=dash))
     title = "Momentum Q1–Q4 dynamics vs MCFTRR"
-    buttons = _rebase_buttons(q_values, cols, title=title)
-    fig.update_layout(**_base_layout(title, _subtitle_for(q_values), rebase_buttons=buttons))
+    buttons = _rebase_buttons(frame, cols, title=title)
+    fig.update_layout(**_base_layout(title, _subtitle_for(frame), rebase_buttons=buttons))
     _add_unit_baseline(fig)
     _apply_default_view(fig, buttons)
     return fig
@@ -288,14 +303,28 @@ def plot_q1_minus_mcftrr(q_values: pd.DataFrame) -> go.Figure:
     that month, red when it lagged.
 
     Window buttons rebase only the line; the monthly bars are window-invariant."""
-    name = "Q1/MCFTRR cumulative"
-    title = "Q1 vs MCFTRR alpha"
-    spread = _spread_frame(q_values, "Q1", "MCFTRR", name)
-    x = _x_dates(q_values.index)
+    return _plot_strategy_vs_mcftrr(q_values, "Q1", strat_name="Q1", title="Q1 vs MCFTRR alpha")
 
-    q1_ret = q_values["Q1"].pct_change()
-    mcftrr_ret = q_values["MCFTRR"].pct_change()
-    gap = q1_ret - mcftrr_ret
+
+def _plot_strategy_vs_mcftrr(
+    frame: pd.DataFrame,
+    strat_col: str,
+    *,
+    strat_name: str,
+    title: str,
+    strat_color: str = _COLORS["Q1"],
+) -> go.Figure:
+    """Cumulative strategy/MCFTRR ratio + monthly return bars. `frame` carries
+    the strategy NAV in `strat_col` and a MCFTRR column; `strat_name` labels the
+    traces and `strat_color` paints the return column. Q1 is one caller (task 026
+    adds Q1 top15, coloured to match its line on the dynamics chart)."""
+    name = f"{strat_name}/MCFTRR cumulative"
+    spread = _spread_frame(frame, strat_col, "MCFTRR", name)
+    x = _x_dates(frame.index)
+
+    strat_ret = frame[strat_col].pct_change()
+    mcftrr_ret = frame["MCFTRR"].pct_change()
+    gap = strat_ret - mcftrr_ret
     # Split the gap into two single-colour traces (win / loss) so the legend
     # shows a green square and a red square, not one ambiguous swatch. Each month
     # populates only one; NaN (incl. the first month) renders nothing.
@@ -307,31 +336,31 @@ def plot_q1_minus_mcftrr(q_values: pd.DataFrame) -> go.Figure:
     cd_loss = [[g] for g in gap_loss]
 
     fig = go.Figure()
-    # Q1 column (anchored at zero) first; the signed gap band overlays its top.
+    # Strategy column (anchored at zero) first; the signed gap band overlays its top.
     fig.add_trace(
         go.Bar(
             x=x,
-            y=q1_ret.tolist(),
-            name="Q1 return",
-            marker_color=_COLORS["Q1"],
+            y=strat_ret.tolist(),
+            name=f"{strat_name} return",
+            marker_color=strat_color,
             opacity=0.5,
             yaxis="y2",
-            hovertemplate="Q1: %{y:+.1%}<extra></extra>",
+            hovertemplate=f"{strat_name}: %{{y:+.1%}}<extra></extra>",
         )
     )
-    # With `base` set, %{y} resolves to the bar's top (base+height = Q1 return),
-    # so carry the gap itself in customdata to hover the difference, not Q1.
+    # With `base` set, %{y} resolves to the bar's top (base+height = strat return),
+    # so carry the gap itself in customdata to hover the difference, not the strat.
     fig.add_trace(
         go.Bar(
             x=x,
             y=gap_win,
             base=base,
-            name="Q1 > MCFTRR",
+            name=f"{strat_name} > MCFTRR",
             marker_color=_GAP_WIN,
             opacity=0.85,
             yaxis="y2",
             customdata=cd_win,
-            hovertemplate="Q1−MCFTRR: %{customdata[0]:+.1%}<extra></extra>",
+            hovertemplate=f"{strat_name}−MCFTRR: %{{customdata[0]:+.1%}}<extra></extra>",
         )
     )
     fig.add_trace(
@@ -339,12 +368,12 @@ def plot_q1_minus_mcftrr(q_values: pd.DataFrame) -> go.Figure:
             x=x,
             y=gap_loss,
             base=base,
-            name="Q1 < MCFTRR",
+            name=f"{strat_name} < MCFTRR",
             marker_color=_GAP_LOSS,
             opacity=0.85,
             yaxis="y2",
             customdata=cd_loss,
-            hovertemplate="Q1−MCFTRR: %{customdata[0]:+.1%}<extra></extra>",
+            hovertemplate=f"{strat_name}−MCFTRR: %{{customdata[0]:+.1%}}<extra></extra>",
         )
     )
     # MCFTRR as a level tick across each bar, not a second column.
