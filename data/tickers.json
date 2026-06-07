@@ -187,7 +187,8 @@
   "AFKS": {
     "aliases": [
       "АФК \"Система\" ПАО ао",
-      "AFK Sistema"
+      "AFK Sistema",
+      "АФК Система"
     ],
     "boards": [
       {
@@ -1102,7 +1103,8 @@
   "ASTR": {
     "aliases": [
       "Группа Астра ао",
-      "Astra Group"
+      "Astra Group",
+      "Астра"
     ],
     "boards": [
       {
@@ -1675,7 +1677,8 @@
       "НоваБев Групп ПАО ао",
       "NovaBev Group ao",
       "НоваБев",
-      "НоваБев Групп"
+      "НоваБев Групп",
+      "Белуга"
     ],
     "boards": [
       {
@@ -2249,7 +2252,8 @@
   "BSPB": {
     "aliases": [
       "ПАО \"Банк \"Санкт-Петербург\" ао",
-      "BSP"
+      "BSP",
+      "БСП"
     ],
     "boards": [
       {
@@ -2385,7 +2389,8 @@
   "CARM": {
     "aliases": [
       "СТГ ао",
-      "STG"
+      "STG",
+      "Кармани"
     ],
     "boards": [
       {
@@ -2544,7 +2549,8 @@
   "CHMF": {
     "aliases": [
       "Северсталь (ПАО)ао",
-      "Severstal - ao"
+      "Severstal - ao",
+      "Северсталь"
     ],
     "boards": [
       {
@@ -2928,7 +2934,8 @@
   "CNRU": {
     "aliases": [
       "МКПАО \"Циан\"",
-      "IPJSC Cian"
+      "IPJSC Cian",
+      "CIAN"
     ],
     "boards": [
       {
@@ -3545,7 +3552,8 @@
   "DATA": {
     "aliases": [
       "Группа Аренадата",
-      "Arenadata Group"
+      "Arenadata Group",
+      "Аренадата"
     ],
     "boards": [
       {
@@ -3670,7 +3678,7 @@
     "aliases": [
       "Диасофт ао",
       "Diasoft",
-      "Аренадата"
+      "Диасофт"
     ],
     "boards": [
       {
@@ -4192,7 +4200,8 @@
   "ELFV": {
     "aliases": [
       "\"ЭЛ5-Энерго\" ПАО",
-      "El5-Ener"
+      "El5-Ener",
+      "ЭЛ5-Энерго"
     ],
     "boards": [
       {
@@ -4692,7 +4701,8 @@
   "FEES": {
     "aliases": [
       "\"ФСК - Россети\" ПАО",
-      "FGC ROSSETI"
+      "FGC ROSSETI",
+      "Россети-ФСК"
     ],
     "boards": [
       {
@@ -5352,7 +5362,8 @@
   "GEMC": {
     "aliases": [
       "Юнайтед Медикал Груп ПАО",
-      "IPJSC UMG"
+      "IPJSC UMG",
+      "GEMC"
     ],
     "boards": [
       {
@@ -5382,6 +5393,9 @@
     "type": "share"
   },
   "GLTR": {
+    "aliases": [
+      "Глобалтранс"
+    ],
     "canonical": "Globaltrans",
     "delisted_after": "2024-09-30",
     "history": [
@@ -7462,7 +7476,8 @@
   "KAZT": {
     "aliases": [
       "Куйбышевазот ПАО ао",
-      "Kuib.Azot ao"
+      "Kuib.Azot ao",
+      "Куйбышев Азот ао"
     ],
     "boards": [
       {
@@ -13018,7 +13033,8 @@
     "aliases": [
       "Россети Урал (ПАО) ао",
       "Rosseti Ural ao",
-      "Россети Урал"
+      "Россети Урал",
+      "МРСК Урала"
     ],
     "boards": [
       {
@@ -13875,7 +13891,8 @@
   "MSRS": {
     "aliases": [
       "ПАО Россети Моск.рег. ао",
-      "Rosseti Moscow Region"
+      "Rosseti Moscow Region",
+      "Россети МР"
     ],
     "boards": [
       {
@@ -14934,7 +14951,8 @@
   "NMTP": {
     "aliases": [
       "НМТП (ПАО) ао",
-      "NMTP"
+      "NMTP",
+      "НМТП"
     ],
     "boards": [
       {
@@ -17161,7 +17179,8 @@
   "PHOR": {
     "aliases": [
       "ФосАгро ПАО ао",
-      "PhosAgro ao"
+      "PhosAgro ao",
+      "Фосагро"
     ],
     "boards": [
       {
@@ -17523,7 +17542,8 @@
   "PMSB": {
     "aliases": [
       "\"Пермэнергосбыт\" ПАО ао",
-      "Perm' EnergoSbyt"
+      "Perm' EnergoSbyt",
+      "ПермЭнСб ао"
     ],
     "boards": [
       {
@@ -17740,7 +17760,8 @@
   "POSI": {
     "aliases": [
       "Группа Позитив ао",
-      "PJSC Positive Group"
+      "PJSC Positive Group",
+      "Позитив"
     ],
     "boards": [
       {
@@ -18775,7 +18796,8 @@
   "RNFT": {
     "aliases": [
       "РуссНефть НК ПАО ао",
-      "RussNeft NK"
+      "RussNeft NK",
+      "Русснефть"
     ],
     "boards": [
       {
@@ -19382,7 +19404,8 @@
   "RTKM": {
     "aliases": [
       "Ростелеком (ПАО) ао.",
-      "Rostelecom"
+      "Rostelecom",
+      "Ростелеком ао"
     ],
     "boards": [
       {
@@ -19876,7 +19899,8 @@
   "RTKMP": {
     "aliases": [
       "Ростелеком (ПАО) ап.",
-      "Rostelecom- (pref)"
+      "Rostelecom- (pref)",
+      "Ростелеком ап"
     ],
     "boards": [
       {
@@ -20628,7 +20652,8 @@
   "SBERP": {
     "aliases": [
       "Сбербанк России ПАО ап",
-      "Sberbank (pref)"
+      "Sberbank (pref)",
+      "Сбербанк ап"
     ],
     "boards": [
       {
@@ -21041,7 +21066,8 @@
   "SFIN": {
     "aliases": [
       "ЭсЭфАй ПАО ао",
-      "SFI ao"
+      "SFI ao",
+      "SFI"
     ],
     "boards": [
       {
@@ -21469,7 +21495,8 @@
   "SMLT": {
     "aliases": [
       "ГК Самолет ао",
-      "Samolet"
+      "Samolet",
+      "Самолёт"
     ],
     "boards": [
       {
@@ -21762,7 +21789,8 @@
   "SOFL": {
     "aliases": [
       "Софтлайн ао",
-      "Softline"
+      "Softline",
+      "Софтлайн"
     ],
     "boards": [
       {
@@ -22699,7 +22727,8 @@
       "IPJSC TCS Holding",
       "Т-Технологии",
       "Тинькофф",
-      "ТКС"
+      "ТКС",
+      "Т-Банк"
     ],
     "boards": [
       {
@@ -26446,7 +26475,8 @@
   "TRMK": {
     "aliases": [
       "ПАО ТМК",
-      "TMK ao"
+      "TMK ao",
+      "ТМК"
     ],
     "boards": [
       {
@@ -26752,7 +26782,8 @@
   "TUZA": {
     "aliases": [
       "Туймаз. завод автобетоновозов",
-      "Tuimaz. Zavod Avtobetonovozov"
+      "Tuimaz. Zavod Avtobetonovozov",
+      "ТЗА"
     ],
     "boards": [
       {
@@ -28170,7 +28201,8 @@
   "UWGN": {
     "aliases": [
       "ПАО НПК ОВК ао",
-      "OVK ao"
+      "OVK ao",
+      "ОВК"
     ],
     "boards": [
       {
@@ -28534,7 +28566,8 @@
   "VKCO": {
     "aliases": [
       "Международная компания ПАО ВК",
-      "VK International Public JS Com"
+      "VK International Public JS Com",
+      "ВК"
     ],
     "boards": [
       {
@@ -30319,7 +30352,8 @@
   "WUSH": {
     "aliases": [
       "ВУШ Холдинг ао",
-      "WHOOSH Holding"
+      "WHOOSH Holding",
+      "WHOOSH"
     ],
     "boards": [
       {
@@ -30343,7 +30377,8 @@
       "Корпоративный центр ИКС 5",
       "X5 Corporate Center",
       "ИКС 5",
-      "X5 Retail"
+      "X5 Retail",
+      "X5 Group"
     ],
     "boards": [
       {
@@ -30382,7 +30417,8 @@
   "YAKG": {
     "aliases": [
       "Якутская топл.-энерг. комп. ао",
-      "YaTEK ao"
+      "YaTEK ao",
+      "ЯТЭК"
     ],
     "boards": [
       {
@@ -30858,7 +30894,8 @@
   },
   "ZAYM": {
     "aliases": [
-      "Zaymer"
+      "Zaymer",
+      "Займер"
     ],
     "boards": [
       {

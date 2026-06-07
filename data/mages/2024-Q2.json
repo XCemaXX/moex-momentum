@@ -1,0 +1,280 @@
+{
+  "quarter": "2024-Q2",
+  "period": "2024-04",
+  "source": "https://vk.com/@shadrininvest-indeks-magov-aprel-2024-uskorenie-sfi-afk-sistema-zapis-3",
+  "shares": [
+    {
+      "ticker": "AFKS",
+      "canonical": "Система ао",
+      "raw_name": "АФК Система",
+      "pct": 9.67,
+      "pct_shares_only": 10.18
+    },
+    {
+      "ticker": "BSPB",
+      "canonical": "БСП ао",
+      "raw_name": "БСП",
+      "pct": 8.42,
+      "pct_shares_only": 8.86
+    },
+    {
+      "ticker": "SNGS",
+      "canonical": "Сургнфгз",
+      "raw_name": "Сургутнефтегаз ао",
+      "pct": 7.42,
+      "pct_shares_only": 7.81
+    },
+    {
+      "ticker": "AFLT",
+      "canonical": "Аэрофлот",
+      "raw_name": "Аэрофлот",
+      "pct": 5.5,
+      "pct_shares_only": 5.79
+    },
+    {
+      "ticker": "SMLT",
+      "canonical": "Самолет ао",
+      "raw_name": "Самолёт",
+      "pct": 5.0,
+      "pct_shares_only": 5.26
+    },
+    {
+      "ticker": "SNGSP",
+      "canonical": "Сургнфгз-п",
+      "raw_name": "Сургутнефтегаз ап",
+      "pct": 4.92,
+      "pct_shares_only": 5.18
+    },
+    {
+      "ticker": "PLZL",
+      "canonical": "Полюс",
+      "raw_name": "Полюс",
+      "pct": 4.25,
+      "pct_shares_only": 4.47
+    },
+    {
+      "ticker": "SBER",
+      "canonical": "Сбербанк",
+      "raw_name": "Сбербанк ао",
+      "pct": 3.75,
+      "pct_shares_only": 3.95
+    },
+    {
+      "ticker": "SBERP",
+      "canonical": "Сбербанк-п",
+      "raw_name": "Сбербанк ап",
+      "pct": 0.5,
+      "pct_shares_only": 0.53
+    },
+    {
+      "ticker": "OZON",
+      "canonical": "Озон",
+      "raw_name": "OZON",
+      "pct": 3.67,
+      "pct_shares_only": 3.86
+    },
+    {
+      "ticker": "ROSN",
+      "canonical": "Роснефть",
+      "raw_name": "Роснефть",
+      "pct": 3.5,
+      "pct_shares_only": 3.68
+    },
+    {
+      "ticker": "FLOT",
+      "canonical": "Совкомфлот",
+      "raw_name": "Совкомфлот",
+      "pct": 3.25,
+      "pct_shares_only": 3.42
+    },
+    {
+      "ticker": "SVCB",
+      "canonical": "Совкомбанк",
+      "raw_name": "Совкомбанк",
+      "pct": 2.67,
+      "pct_shares_only": 2.81
+    },
+    {
+      "ticker": "LKOH",
+      "canonical": "ЛУКОЙЛ",
+      "raw_name": "ЛУКойл",
+      "pct": 2.25,
+      "pct_shares_only": 2.37
+    },
+    {
+      "ticker": "LENT",
+      "canonical": "Лента ао",
+      "raw_name": "Лента",
+      "pct": 2.25,
+      "pct_shares_only": 2.37
+    },
+    {
+      "ticker": "TRNFP",
+      "canonical": "Транснф ап",
+      "raw_name": "Транснефть ап",
+      "pct": 2.25,
+      "pct_shares_only": 2.37
+    },
+    {
+      "ticker": "YDEX",
+      "canonical": "ЯНДЕКС",
+      "raw_name": "Яндекс",
+      "pct": 2.0,
+      "pct_shares_only": 2.1
+    },
+    {
+      "ticker": "GLTR",
+      "canonical": "Globaltrans",
+      "raw_name": "Глобалтранс",
+      "pct": 1.67,
+      "pct_shares_only": 1.76
+    },
+    {
+      "ticker": "MGNT",
+      "canonical": "Магнит ао",
+      "raw_name": "Магнит",
+      "pct": 1.67,
+      "pct_shares_only": 1.76
+    },
+    {
+      "ticker": "WUSH",
+      "canonical": "iВУШХолднг",
+      "raw_name": "WHOOSH",
+      "pct": 1.67,
+      "pct_shares_only": 1.76
+    },
+    {
+      "ticker": "TRMK",
+      "canonical": "ТМК ао",
+      "raw_name": "ТМК",
+      "pct": 1.5,
+      "pct_shares_only": 1.58
+    },
+    {
+      "ticker": "MRKP",
+      "canonical": "РСетиЦП ао",
+      "raw_name": "Россети ЦП",
+      "pct": 1.25,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "BANEP",
+      "canonical": "Башнефт ап",
+      "raw_name": "Башнефть ап",
+      "pct": 1.25,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "BELU",
+      "canonical": "НоваБев ао",
+      "raw_name": "НоваБев",
+      "pct": 1.25,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "RTKM",
+      "canonical": "Ростел -ао",
+      "raw_name": "Ростелеком ао",
+      "pct": 1.25,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "FEES",
+      "canonical": "Россети",
+      "raw_name": "Россети-ФСК",
+      "pct": 1.25,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "CNRU",
+      "canonical": "iЦиан",
+      "raw_name": "CIAN",
+      "pct": 1.25,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "SOFL",
+      "canonical": "iСофтлайн",
+      "raw_name": "Софтлайн",
+      "pct": 1.0,
+      "pct_shares_only": 1.05
+    },
+    {
+      "ticker": "YAKG",
+      "canonical": "ЯТЭК ао",
+      "raw_name": "ЯТЭК",
+      "pct": 1.0,
+      "pct_shares_only": 1.05
+    },
+    {
+      "ticker": "TUZA",
+      "canonical": "ТЗА ао",
+      "raw_name": "ТЗА",
+      "pct": 1.0,
+      "pct_shares_only": 1.05
+    },
+    {
+      "ticker": "POSI",
+      "canonical": "iПозитив",
+      "raw_name": "Позитив",
+      "pct": 1.0,
+      "pct_shares_only": 1.05
+    },
+    {
+      "ticker": "RTKMP",
+      "canonical": "Ростел -ап",
+      "raw_name": "Ростелеком ап",
+      "pct": 1.0,
+      "pct_shares_only": 1.05
+    },
+    {
+      "ticker": "RNFT",
+      "canonical": "РуссНфт ао",
+      "raw_name": "Русснефть",
+      "pct": 1.0,
+      "pct_shares_only": 1.05
+    },
+    {
+      "ticker": "ALRS",
+      "canonical": "АЛРОСА ао",
+      "raw_name": "Алроса",
+      "pct": 1.0,
+      "pct_shares_only": 1.05
+    },
+    {
+      "ticker": "MTSS",
+      "canonical": "МТС-ао",
+      "raw_name": "МТС",
+      "pct": 1.0,
+      "pct_shares_only": 1.05
+    },
+    {
+      "ticker": "X5",
+      "canonical": "КЦ ИКС 5",
+      "raw_name": "X5 Group",
+      "pct": 0.75,
+      "pct_shares_only": 0.79
+    },
+    {
+      "ticker": "NLMK",
+      "canonical": "НЛМК ао",
+      "raw_name": "НЛМК",
+      "pct": 0.5,
+      "pct_shares_only": 0.53
+    },
+    {
+      "ticker": "RENI",
+      "canonical": "Ренессанс",
+      "raw_name": "Ренессанс Страхование",
+      "pct": 0.5,
+      "pct_shares_only": 0.53
+    }
+  ],
+  "other": [
+    {
+      "raw_name": "ОФЗ 26238",
+      "pct": 5.0,
+      "type": "bond"
+    }
+  ]
+}

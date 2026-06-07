@@ -23,16 +23,16 @@ import logging
 import math
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import cast
 
 import pandas as pd
 
 from config import COMMISSION_PER_SIDE, UNIVERSE_TOP_N_LIQUID
+from momentum.benchmark import mcftrr_monthly_returns
 from momentum.pending import PendingEntry, compute_month_pending
 from momentum.signals import Signal
 from momentum.universe import liquidity_cut, load_panel, universe_at
-from storage.records import read_records, write_records_atomic
-from storage.schemas import INDEX_CASTS, Q_VALUES_FIELDS
+from storage.records import write_records_atomic
+from storage.schemas import Q_VALUES_FIELDS
 from tickers import TickersDict
 
 LOG = logging.getLogger(__name__)
@@ -112,25 +112,6 @@ def gross_return(
     return total
 
 
-def _mcftrr_monthly(indices_dir: Path) -> pd.Series:
-    """Last close of each month → monthly pct_change for MCFTRR benchmark."""
-    rows = read_records(indices_dir / "MCFTRR.csv", casts=INDEX_CASTS)
-    if not rows:
-        return pd.Series(dtype=float)
-    df = pd.DataFrame(rows)
-    df["date"] = pd.to_datetime(df["date"])
-    df = df.set_index("date").sort_index()
-    period_idx = cast(pd.DatetimeIndex, df.index).to_period("M")
-    last_per_month = df["close"].astype(float).groupby(period_idx).tail(1)
-    s = pd.Series(
-        last_per_month.values,
-        index=cast(pd.DatetimeIndex, last_per_month.index).to_period("M"),
-        dtype=float,
-    )
-    s.index.name = "month"
-    return s.pct_change()
-
-
 def backtest(
     signal: Signal,
     *,
@@ -165,7 +146,7 @@ def backtest(
     if len(months) == 0:
         return BacktestResult(q_values=pd.DataFrame())
 
-    mcftrr_ret = _mcftrr_monthly(indices_dir)
+    mcftrr_ret = mcftrr_monthly_returns(indices_dir)
 
     nav: dict[str, float] = {q: 1.0 for q in Q_LABELS}
     prev_w: dict[str, dict[str, float]] = {q: {} for q in Q_LABELS}

@@ -76,6 +76,14 @@ def site_build(
     # Per-month momentum scores (task 025): data.json orders Q1-Q4 by them.
     scores_path = computed_dir / signal / "scores.csv"
 
+    # Mages index page (task 002): built only when data/mages exists. Needs the
+    # shared monthly price panel and the MCFTRR benchmark.
+    mages_dir = Path("data/mages")
+    monthly_dir = computed_dir / "monthly"
+    indices_dir = Path("data/indices")
+    mages_intro = md.parent / "mages_intro.md"
+    mages_methodology = md.parent / "mages_methodology.md"
+
     pages = build_site(
         q_values_path=q_path,
         holdings_dir=holdings_dir,
@@ -91,5 +99,10 @@ def site_build(
         pending_path=pending_path if pending_path.exists() else None,
         universe_meta_path=universe_meta_path if universe_meta_path.exists() else None,
         scores_path=scores_path if scores_path.exists() else None,
+        mages_dir=mages_dir if mages_dir.exists() else None,
+        monthly_dir=monthly_dir if monthly_dir.exists() else None,
+        indices_dir=indices_dir if indices_dir.exists() else None,
+        mages_intro_md=mages_intro if mages_intro.exists() else None,
+        mages_methodology_md=mages_methodology if mages_methodology.exists() else None,
     )
     typer.echo(f"site {signal}: {len(pages)} artefacts → {out_dir}")

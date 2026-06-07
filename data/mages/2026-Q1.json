@@ -1,0 +1,317 @@
+{
+  "quarter": "2026-Q1",
+  "period": "2026-01",
+  "source": "https://teletype.in/@shadrininvest/pvWQTPUJAc1",
+  "shares": [
+    {
+      "ticker": "T",
+      "canonical": "Т-Техно ао",
+      "raw_name": "Т-Технологии",
+      "pct": 9.24,
+      "pct_shares_only": 10.25
+    },
+    {
+      "ticker": "SVCB",
+      "canonical": "Совкомбанк",
+      "raw_name": "Совкомбанк",
+      "pct": 8.13,
+      "pct_shares_only": 9.02
+    },
+    {
+      "ticker": "VTBR",
+      "canonical": "ВТБ ао",
+      "raw_name": "ВТБ",
+      "pct": 7.57,
+      "pct_shares_only": 8.4
+    },
+    {
+      "ticker": "LSNGP",
+      "canonical": "РСетиЛЭ-п",
+      "raw_name": "Ленэнерго ап",
+      "pct": 4.79,
+      "pct_shares_only": 5.32
+    },
+    {
+      "ticker": "YDEX",
+      "canonical": "ЯНДЕКС",
+      "raw_name": "Яндекс",
+      "pct": 4.72,
+      "pct_shares_only": 5.24
+    },
+    {
+      "ticker": "OZON",
+      "canonical": "Озон",
+      "raw_name": "OZON",
+      "pct": 4.31,
+      "pct_shares_only": 4.78
+    },
+    {
+      "ticker": "TRNFP",
+      "canonical": "Транснф ап",
+      "raw_name": "Транснефть ап",
+      "pct": 4.17,
+      "pct_shares_only": 4.63
+    },
+    {
+      "ticker": "DOMRF",
+      "canonical": "ДОМ.РФ",
+      "raw_name": "ДОМ.РФ",
+      "pct": 3.54,
+      "pct_shares_only": 3.93
+    },
+    {
+      "ticker": "SBER",
+      "canonical": "Сбербанк",
+      "raw_name": "Сбербанк ао",
+      "pct": 3.26,
+      "pct_shares_only": 3.62
+    },
+    {
+      "ticker": "ROSN",
+      "canonical": "Роснефть",
+      "raw_name": "Роснефть",
+      "pct": 2.64,
+      "pct_shares_only": 2.93
+    },
+    {
+      "ticker": "RUAL",
+      "canonical": "РУСАЛ ао",
+      "raw_name": "Русал",
+      "pct": 2.43,
+      "pct_shares_only": 2.7
+    },
+    {
+      "ticker": "MGNT",
+      "canonical": "Магнит ао",
+      "raw_name": "Магнит",
+      "pct": 2.29,
+      "pct_shares_only": 2.54
+    },
+    {
+      "ticker": "GMKN",
+      "canonical": "ГМКНорНик",
+      "raw_name": "ГМК НорНикель",
+      "pct": 2.22,
+      "pct_shares_only": 2.46
+    },
+    {
+      "ticker": "SNGS",
+      "canonical": "Сургнфгз",
+      "raw_name": "Сургутнефтегаз ао",
+      "pct": 2.22,
+      "pct_shares_only": 2.46
+    },
+    {
+      "ticker": "MRKC",
+      "canonical": "РоссЦентр",
+      "raw_name": "Россети Центр",
+      "pct": 2.22,
+      "pct_shares_only": 2.46
+    },
+    {
+      "ticker": "ALRS",
+      "canonical": "АЛРОСА ао",
+      "raw_name": "АЛРОСА",
+      "pct": 2.08,
+      "pct_shares_only": 2.31
+    },
+    {
+      "ticker": "BELU",
+      "canonical": "НоваБев ао",
+      "raw_name": "НоваБев",
+      "pct": 2.01,
+      "pct_shares_only": 2.23
+    },
+    {
+      "ticker": "GAZP",
+      "canonical": "ГАЗПРОМ ао",
+      "raw_name": "Газпром",
+      "pct": 1.88,
+      "pct_shares_only": 2.09
+    },
+    {
+      "ticker": "SNGSP",
+      "canonical": "Сургнфгз-п",
+      "raw_name": "Сургутнефтегаз ап",
+      "pct": 1.39,
+      "pct_shares_only": 1.54
+    },
+    {
+      "ticker": "HEAD",
+      "canonical": "Хэдхантер",
+      "raw_name": "Хедхантер",
+      "pct": 1.39,
+      "pct_shares_only": 1.54
+    },
+    {
+      "ticker": "MTSS",
+      "canonical": "МТС-ао",
+      "raw_name": "МТС",
+      "pct": 1.39,
+      "pct_shares_only": 1.54
+    },
+    {
+      "ticker": "LENT",
+      "canonical": "Лента ао",
+      "raw_name": "Лента",
+      "pct": 1.39,
+      "pct_shares_only": 1.54
+    },
+    {
+      "ticker": "IRAO",
+      "canonical": "ИнтерРАОао",
+      "raw_name": "ИнтерРАО",
+      "pct": 1.39,
+      "pct_shares_only": 1.54
+    },
+    {
+      "ticker": "DATA",
+      "canonical": "iАренадата",
+      "raw_name": "Аренадата",
+      "pct": 1.39,
+      "pct_shares_only": 1.54
+    },
+    {
+      "ticker": "MRKV",
+      "canonical": "РсетВол ао",
+      "raw_name": "Россети Волга",
+      "pct": 1.04,
+      "pct_shares_only": 1.15
+    },
+    {
+      "ticker": "ENPG",
+      "canonical": "ЭН+ГРУП ао",
+      "raw_name": "ЭН плюс",
+      "pct": 1.04,
+      "pct_shares_only": 1.15
+    },
+    {
+      "ticker": "UPRO",
+      "canonical": "Юнипро ао",
+      "raw_name": "Юнипро",
+      "pct": 1.04,
+      "pct_shares_only": 1.15
+    },
+    {
+      "ticker": "RAGR",
+      "canonical": "Русагро",
+      "raw_name": "Русагро",
+      "pct": 1.04,
+      "pct_shares_only": 1.15
+    },
+    {
+      "ticker": "MRKP",
+      "canonical": "РСетиЦП ао",
+      "raw_name": "Россети ЦП",
+      "pct": 0.83,
+      "pct_shares_only": 0.92
+    },
+    {
+      "ticker": "BANEP",
+      "canonical": "Башнефт ап",
+      "raw_name": "Башнефть ап",
+      "pct": 0.83,
+      "pct_shares_only": 0.92
+    },
+    {
+      "ticker": "UGLD",
+      "canonical": "ЮГК",
+      "raw_name": "ЮГК",
+      "pct": 0.83,
+      "pct_shares_only": 0.92
+    },
+    {
+      "ticker": "TGKJ",
+      "canonical": "Форвард Эн",
+      "raw_name": "Форвард Энерго",
+      "pct": 0.83,
+      "pct_shares_only": 0.92
+    },
+    {
+      "ticker": "RENI",
+      "canonical": "Ренессанс",
+      "raw_name": "Ренессанс Страхование",
+      "pct": 0.83,
+      "pct_shares_only": 0.92
+    },
+    {
+      "ticker": "NVTK",
+      "canonical": "Новатэк ао",
+      "raw_name": "Новатэк",
+      "pct": 0.83,
+      "pct_shares_only": 0.92
+    },
+    {
+      "ticker": "NLMK",
+      "canonical": "НЛМК ао",
+      "raw_name": "НЛМК",
+      "pct": 0.83,
+      "pct_shares_only": 0.92
+    },
+    {
+      "ticker": "AFLT",
+      "canonical": "Аэрофлот",
+      "raw_name": "Аэрофлот",
+      "pct": 0.83,
+      "pct_shares_only": 0.92
+    },
+    {
+      "ticker": "X5",
+      "canonical": "КЦ ИКС 5",
+      "raw_name": "КЦ ИКС 5",
+      "pct": 0.63,
+      "pct_shares_only": 0.7
+    },
+    {
+      "ticker": "VSMO",
+      "canonical": "ВСМПО-АВСМ",
+      "raw_name": "ВСМПО-Ависма",
+      "pct": 0.42,
+      "pct_shares_only": 0.47
+    },
+    {
+      "ticker": "PRMD",
+      "canonical": "iПРОМОМЕД",
+      "raw_name": "Промомед",
+      "pct": 0.21,
+      "pct_shares_only": 0.23
+    }
+  ],
+  "other": [
+    {
+      "raw_name": "ОФЗ 26238",
+      "pct": 4.17,
+      "type": "bond"
+    },
+    {
+      "raw_name": "Айдеко БО-01",
+      "pct": 1.39,
+      "type": "bond"
+    },
+    {
+      "raw_name": "Газпром Капитал БО-003р-14",
+      "pct": 1.39,
+      "type": "bond"
+    },
+    {
+      "raw_name": "ОФЗ 26248",
+      "pct": 0.83,
+      "type": "bond"
+    },
+    {
+      "raw_name": "Сегежа3Р7R",
+      "pct": 0.83,
+      "type": "bond"
+    },
+    {
+      "raw_name": "Полипласт П2Б5",
+      "pct": 0.83,
+      "type": "bond"
+    },
+    {
+      "raw_name": "МКБ ЗО-2027",
+      "pct": 0.42,
+      "type": "bond"
+    }
+  ]
+}

@@ -20,8 +20,12 @@ from typing import Any
 from jinja2 import Environment, PackageLoader, select_autoescape
 from markdown_it import MarkdownIt
 
+from mages.curve import build_mages_frame
+from mages.loader import load_quarters
+from mages.weighted_q1 import build_mages_table, build_weighted_frame
 from momentum.transitions import Q_LABELS, sticky_tickers, transition_windows
 from tickers import load as load_tickers
+from viz.mages_charts import plot_mages_vs_mcftrr, plot_weighted_q1
 from viz.plotly_charts import (
     _COLORS,
     _transition_subtitle,
@@ -49,6 +53,7 @@ NAV_LINKS: list[tuple[str, str]] = [
     ("Q1 vs MCFTRR alpha", "q1_minus_mcftrr.html"),
     ("Quartile composition", "q_history.html"),
     ("Quartile flows", "transitions.html"),
+    ("Mages index", "mages_index.html"),
     ("Methodology", "methodology.html"),
     ("Experiments", "compare.html"),
 ]
@@ -257,6 +262,51 @@ def _fan_embed(concentration_path: Path | None) -> str:
     return _chart_embed(fig, div_id="chart-topn-concentration")
 
 
+def _mages_page_context(
+    holdings: dict[str, dict[str, list[str]]],
+    tickers: dict[str, Any],
+    *,
+    mages_dir: Path | None,
+    monthly_dir: Path | None,
+    indices_dir: Path | None,
+    mages_intro_md: Path | None,
+    mages_methodology_md: Path | None,
+) -> dict[str, Any] | None:
+    """Context for mages_index.html (task 002), or None when its inputs (data +
+    price panel + benchmark) are absent — a repo without data/mages just omits it."""
+    if not (mages_dir and monthly_dir and indices_dir and any(mages_dir.glob("*.json"))):
+        return None
+    quarters = load_quarters(mages_dir)
+    frame = build_mages_frame(quarters, monthly_dir=monthly_dir, indices_dir=indices_dir)
+    if frame.empty:
+        return None
+    wframe = build_weighted_frame(
+        holdings, quarters, monthly_dir=monthly_dir, indices_dir=indices_dir
+    )
+    wframe["Mages"] = frame["Mages"]  # overlay the pure mages curve on chart 2
+    table = build_mages_table(holdings, quarters, lambda t: _canonical(tickers, t))
+    intro = (
+        _render_methodology_md(mages_intro_md) if mages_intro_md and mages_intro_md.exists() else ""
+    )
+    methodology = (
+        _render_methodology_md(mages_methodology_md)
+        if mages_methodology_md and mages_methodology_md.exists()
+        else ""
+    )
+    # Escape < so a name containing "</script>" can't break out of the inline JSON.
+    table_json = json.dumps(table, ensure_ascii=False, separators=(",", ":"))
+    table_json = table_json.replace("<", "\\u003c")
+    return {
+        "title": "Mages index",
+        "intro_html": intro,
+        "chart_mages": _chart_embed(plot_mages_vs_mcftrr(frame), div_id="chart-mages"),
+        "chart_weighted": _chart_embed(plot_weighted_q1(wframe), div_id="chart-weighted"),
+        "table_json": table_json,
+        "table_lam": f"{table['lam']:g}",
+        "methodology_html": methodology,
+    }
+
+
 def build_site(
     *,
     q_values_path: Path,
@@ -273,6 +323,11 @@ def build_site(
     pending_path: Path | None = None,
     universe_meta_path: Path | None = None,
     scores_path: Path | None = None,
+    mages_dir: Path | None = None,
+    monthly_dir: Path | None = None,
+    indices_dir: Path | None = None,
+    mages_intro_md: Path | None = None,
+    mages_methodology_md: Path | None = None,
 ) -> dict[str, Path]:
     """Render the full site to `out_dir`. Returns map of logical name → path.
 
@@ -356,6 +411,18 @@ def build_site(
         "methodology.html",
         {"title": "Methodology", "markdown_html": _render_methodology_md(methodology_md)},
     )
+
+    mages_ctx = _mages_page_context(
+        holdings,
+        tickers,
+        mages_dir=mages_dir,
+        monthly_dir=monthly_dir,
+        indices_dir=indices_dir,
+        mages_intro_md=mages_intro_md,
+        mages_methodology_md=mages_methodology_md,
+    )
+    if mages_ctx is not None:
+        render("mages_index.html", "mages_index.html", mages_ctx)
 
     if compare_simple_path and compare_curve_fit_path and compare_sweep_path:
         headline = q1_signals(

@@ -1,0 +1,190 @@
+{
+  "quarter": "2023-Q4",
+  "period": "2023-10",
+  "source": "https://smart-lab.ru/blog/946841.php",
+  "shares": [
+    {
+      "ticker": "TRNFP",
+      "canonical": "Транснф ап",
+      "raw_name": "Транснефть ап",
+      "pct": 14.9,
+      "pct_shares_only": 15.11
+    },
+    {
+      "ticker": "LKOH",
+      "canonical": "ЛУКОЙЛ",
+      "raw_name": "ЛУКойл",
+      "pct": 12.4,
+      "pct_shares_only": 12.58
+    },
+    {
+      "ticker": "RTKM",
+      "canonical": "Ростел -ао",
+      "raw_name": "Ростелеком ао",
+      "pct": 9.6,
+      "pct_shares_only": 9.74
+    },
+    {
+      "ticker": "BANEP",
+      "canonical": "Башнефт ап",
+      "raw_name": "Башнефть ап",
+      "pct": 7.5,
+      "pct_shares_only": 7.61
+    },
+    {
+      "ticker": "SNGSP",
+      "canonical": "Сургнфгз-п",
+      "raw_name": "Сургутнефтегаз ап",
+      "pct": 7.4,
+      "pct_shares_only": 7.51
+    },
+    {
+      "ticker": "SNGS",
+      "canonical": "Сургнфгз",
+      "raw_name": "Сургутнефтегаз ао",
+      "pct": 5.4,
+      "pct_shares_only": 5.48
+    },
+    {
+      "ticker": "FLOT",
+      "canonical": "Совкомфлот",
+      "raw_name": "Совкомфлот",
+      "pct": 6.6,
+      "pct_shares_only": 6.69
+    },
+    {
+      "ticker": "SBER",
+      "canonical": "Сбербанк",
+      "raw_name": "Сбербанк ао",
+      "pct": 5.0,
+      "pct_shares_only": 5.07
+    },
+    {
+      "ticker": "SBERP",
+      "canonical": "Сбербанк-п",
+      "raw_name": "Сбербанк ап",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "ROSN",
+      "canonical": "Роснефть",
+      "raw_name": "Роснефть",
+      "pct": 4.6,
+      "pct_shares_only": 4.67
+    },
+    {
+      "ticker": "BELU",
+      "canonical": "НоваБев ао",
+      "raw_name": "Белуга",
+      "pct": 2.5,
+      "pct_shares_only": 2.54
+    },
+    {
+      "ticker": "TRMK",
+      "canonical": "ТМК ао",
+      "raw_name": "ТМК",
+      "pct": 2.1,
+      "pct_shares_only": 2.13
+    },
+    {
+      "ticker": "MGNT",
+      "canonical": "Магнит ао",
+      "raw_name": "Магнит",
+      "pct": 2.1,
+      "pct_shares_only": 2.13
+    },
+    {
+      "ticker": "OZON",
+      "canonical": "Озон",
+      "raw_name": "OZON",
+      "pct": 2.1,
+      "pct_shares_only": 2.13
+    },
+    {
+      "ticker": "WUSH",
+      "canonical": "iВУШХолднг",
+      "raw_name": "WHOOSH",
+      "pct": 2.1,
+      "pct_shares_only": 2.13
+    },
+    {
+      "ticker": "GAZP",
+      "canonical": "ГАЗПРОМ ао",
+      "raw_name": "Газпром",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "NVTK",
+      "canonical": "Новатэк ао",
+      "raw_name": "НОВАТЭК",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "KAZT",
+      "canonical": "Куйбазот",
+      "raw_name": "Куйбышев Азот ао",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "RAGR",
+      "canonical": "Русагро",
+      "raw_name": "Русагро",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "GCHE",
+      "canonical": "ЧеркизГ-ао",
+      "raw_name": "Черкизово",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "YDEX",
+      "canonical": "ЯНДЕКС",
+      "raw_name": "Яндекс",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "CARM",
+      "canonical": "СТГ",
+      "raw_name": "Кармани",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "RASP",
+      "canonical": "Распадская",
+      "raw_name": "Распадская",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "SGZH",
+      "canonical": "Сегежа",
+      "raw_name": "Сегежа",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    },
+    {
+      "ticker": "AFKS",
+      "canonical": "Система ао",
+      "raw_name": "АФК Система",
+      "pct": 1.3,
+      "pct_shares_only": 1.32
+    }
+  ],
+  "other": [
+    {
+      "ticker": "NOMPP",
+      "raw_name": "Новошип ап",
+      "pct": 2.1,
+      "type": "otc"
+    }
+  ]
+}

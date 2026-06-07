@@ -433,6 +433,9 @@ def _registry_rebase_buttons(
                     {"x": [dates] * len(columns), "y": [rebased[c].tolist() for c in columns]},
                     {
                         "xaxis.range": [dates[0], dates[-1]],
+                        # Pin the slider to the window too, else it keeps the full
+                        # range and leaves a grey unselected band under shorter views.
+                        "xaxis.rangeslider.range": [dates[0], dates[-1]],
                         "title.text": _registry_title_text(
                             title, _subtitle_for(window), formula=formula
                         ),

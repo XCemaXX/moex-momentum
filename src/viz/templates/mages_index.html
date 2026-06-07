@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block head_extra %}
+<style>
+  .mages-tables { padding: 0 1.2em 2em; max-width: 1100px; margin: 0 auto; }
+  .month-picker { margin: 0.6em 0 1.2em; display: flex; align-items: center; gap: 0.4em; }
+  .month-picker select { font-size: 14px; padding: 0.3em 0.5em; }
+  .month-picker button {
+    font-size: 14px; padding: 0.3em 0.7em; cursor: pointer;
+    background: #fff; border: 1px solid #ccc; border-radius: 4px;
+    color: #1f77b4; min-width: 2.2em;
+  }
+  .month-picker button:hover:not(:disabled) { background: #f0f0f0; }
+  .month-picker button:disabled { color: #ccc; cursor: not-allowed; }
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1em; }
+  .cols section {
+    border: 1px solid #e0e0e0; border-radius: 6px; border-top: 4px solid var(--c);
+    background: #fff; padding: 0.7em 0.9em 0.9em;
+  }
+  .cols section.weighted { --c: #1f77b4; }
+  .cols section.mages { --c: #ff7f0e; }
+  .cols section h3 { margin: 0 0 0.6em; font-size: 15px; color: var(--c); }
+  .cols section h3 .count { color: #888; font-weight: 400; font-size: 13px; margin-left: 0.4em; }
+  .cols td.ticker { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .cols td.rownum { color: #aaa; text-align: right; padding-right: 0.5em; width: 1.6em; font-variant-numeric: tabular-nums; }
+  .cols td.pct { text-align: right; font-variant-numeric: tabular-nums; }
+  /* Mages list is long → split into two sub-columns. */
+  .split { display: flex; gap: 1em; align-items: flex-start; }
+  .split table { flex: 1; }
+  /* Rule off Q1 names also held by the mages index from those that are not. */
+  .cols tr.divider td { border-top: 2px solid var(--c); padding: 0; height: 0.4em; }
+</style>
+{% endblock %}
+{% block body %}
+{% if intro_html %}
+<main>
+{{ intro_html|safe }}
+</main>
+{% endif %}
+<main>
+{{ chart_mages|safe }}
+{{ chart_weighted|safe }}
+</main>
+<div class="mages-tables">
+  <h2>Составы портфеля: взвешенный Q1 (λ={{ table_lam }}) vs индекс магов</h2>
+  <div class="month-picker">
+    <label for="month-select">Месяц: </label>
+    <button type="button" id="month-prev" title="Предыдущий месяц">‹</button>
+    <select id="month-select"></select>
+    <button type="button" id="month-next" title="Следующий месяц">›</button>
+  </div>
+  <div class="cols">
+    <section class="weighted"><h3>Взвешенный Q1 <span class="count" id="cnt-w"></span></h3><table><tbody id="tb-w"></tbody></table></section>
+    <section class="mages"><h3>Индекс магов <span class="count" id="cnt-m"></span></h3><div class="split" id="sp-m"></div></section>
+  </div>
+</div>
+{% if methodology_html %}
+<main>
+{{ methodology_html|safe }}
+</main>
+{% endif %}
+<script id="mages-table-data" type="application/json">{{ table_json|safe }}</script>
+<script>
+(function () {
+  const payload = JSON.parse(document.getElementById("mages-table-data").textContent);
+  const months = payload.months;
+  const sel = document.getElementById("month-select");
+  const btnPrev = document.getElementById("month-prev");
+  const btnNext = document.getElementById("month-next");
+  if (!months.length) return;
+  for (const m of months) {
+    const opt = document.createElement("option");
+    opt.value = m; opt.textContent = m;
+    sel.appendChild(opt);
+  }
+  sel.value = months[months.length - 1];
+
+  const esc = (s) =>
+    String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+  function rowsHtml(rows, offset) {
+    return rows.map(([ticker, name, pct], i) =>
+      `<tr><td class="rownum">${offset + i + 1}</td><td class="ticker">${esc(ticker)}</td>` +
+      `<td>${esc(name || "")}</td><td class="pct">${pct.toFixed(2)}%</td></tr>`
+    ).join("");
+  }
+
+  function fill(tbodyId, countId, rows) {
+    const tb = document.getElementById(tbodyId);
+    document.getElementById(countId).textContent = rows.length ? rows.length + " имён" : "";
+    tb.innerHTML = rows.length ? rowsHtml(rows, 0) : '<tr><td class="empty">нет данных</td></tr>';
+  }
+
+  // Weighted Q1, ruled off where names stop being in the mages index (4th cell).
+  function fillWeighted(tbodyId, countId, rows) {
+    const tb = document.getElementById(tbodyId);
+    document.getElementById(countId).textContent = rows.length ? rows.length + " имён" : "";
+    if (!rows.length) { tb.innerHTML = '<tr><td class="empty">нет данных</td></tr>'; return; }
+    const cut = rows.findIndex((r) => r[3] === false);
+    if (cut <= 0) { tb.innerHTML = rowsHtml(rows, 0); return; }
+    tb.innerHTML =
+      rowsHtml(rows.slice(0, cut), 0) +
+      '<tr class="divider"><td colspan="4"></td></tr>' +
+      rowsHtml(rows.slice(cut), cut);
+  }
+
+  // Two sub-columns for long lists; ranks stay continuous across them.
+  function fillSplit(containerId, countId, rows) {
+    const c = document.getElementById(containerId);
+    document.getElementById(countId).textContent = rows.length ? rows.length + " имён" : "";
+    if (!rows.length) { c.innerHTML = '<p class="empty">нет данных</p>'; return; }
+    const half = Math.ceil(rows.length / 2);
+    const table = (slice, off) => `<table><tbody>${rowsHtml(slice, off)}</tbody></table>`;
+    c.innerHTML = table(rows.slice(0, half), 0) + table(rows.slice(half), half);
+  }
+
+  function render(month) {
+    const d = payload.data[month] || { weighted: [], mages: [] };
+    fillWeighted("tb-w", "cnt-w", d.weighted);
+    fillSplit("sp-m", "cnt-m", d.mages);
+    const i = months.indexOf(month);
+    btnPrev.disabled = i <= 0;
+    btnNext.disabled = i >= months.length - 1;
+  }
+
+  function step(delta) {
+    const i = months.indexOf(sel.value) + delta;
+    if (i < 0 || i >= months.length) return;
+    sel.value = months[i];
+    render(sel.value);
+  }
+  btnPrev.addEventListener("click", () => step(-1));
+  btnNext.addEventListener("click", () => step(1));
+  sel.addEventListener("change", () => render(sel.value));
+  // Mouse wheel over the dropdown steps months; preventDefault stops page scroll.
+  sel.addEventListener(
+    "wheel",
+    (e) => { e.preventDefault(); step(e.deltaY > 0 ? 1 : -1); },
+    { passive: false }
+  );
+  render(sel.value);
+})();
+</script>
+{% endblock %}
