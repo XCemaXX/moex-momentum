@@ -27,6 +27,7 @@ import argparse
 import json
 import sys
 from collections import Counter, defaultdict
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -72,7 +73,34 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
     p.add_argument(
         "--ticker", action="append", default=[], help="limit to specific tickers (repeatable)"
     )
+    p.add_argument(
+        "--sources",
+        default="yahoo,tbank",
+        help="comma-separated subset of {yahoo,tbank} in cascade order",
+    )
+    p.add_argument(
+        "--months",
+        type=int,
+        default=0,
+        help="only reconcile candidates with registry_close in the last N months "
+        "(0 = full history). Monthly runs scope this so settled history is not re-opened.",
+    )
     args = p.parse_args()
+
+    # Never book a declared-but-unpaid dividend: brokers list future record
+    # dates, but total-return may only include a payout once its date has passed.
+    today_iso = date.today().isoformat()
+
+    # Recent-window cutoff (YYYY-MM). The yahoo/tbank caches are static snapshots,
+    # so a full-history re-derive keeps re-surfacing already-curated old records.
+    since_ym: str | None = None
+    if args.months > 0:
+        today = date.today()
+        y, m = today.year, today.month - args.months
+        while m <= 0:
+            m += 12
+            y -= 1
+        since_ym = f"{y:04d}-{m:02d}"
 
     tickers_dict = t_mod.load(TICKERS_FILE)
     manual = t_mod.load_manual(MANUAL_FILE)
@@ -152,6 +180,13 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
     yf: Any = _Filtered(yf_real, yahoo_blacklist)
     tb: Any = _Filtered(tb_real, tbank_blacklist)
 
+    fetcher_map = {"yahoo": yf, "tbank": tb}
+    source_order = [s.strip() for s in args.sources.split(",") if s.strip()]
+    unknown = [s for s in source_order if s not in fetcher_map]
+    if unknown:
+        raise SystemExit(f"unknown --sources {unknown}; valid: {sorted(fetcher_map)}")
+    fetchers = [fetcher_map[s] for s in source_order]
+
     totals: Counter[str] = Counter()
     per_source_added: Counter[str] = Counter()
     ymconflict_candidates: list[dict[str, Any]] = []
@@ -161,13 +196,16 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
         existing = read_records(DIV_DIR / f"{tk}.csv", casts=DIV_CASTS)
         result = fill_dividends(
             tk,
-            fetchers=[yf, tb],  # type: ignore[list-item]
+            fetchers=fetchers,  # type: ignore[arg-type]
             tickers_dict=tickers_dict,
             tickers_manual=manual,
             prices_dir=PRICES_DIR,
             dividends_dir=DIV_DIR,
         )
-        if not result.records:
+        candidates = [r for r in result.records if r["registry_close"] <= today_iso]
+        if since_ym:
+            candidates = [r for r in candidates if r["registry_close"][:7] >= since_ym]
+        if not candidates:
             continue
 
         # Bucket existing by (ym, currency). May have multiple records per bucket
@@ -176,7 +214,7 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
         for r in existing:
             existing_buckets[_bucket_key(r)].append(r)
         proposed_buckets: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
-        for cand in result.records:
+        for cand in candidates:
             proposed_buckets[_bucket_key(cand)].append(cand)
 
         clean_new: list[dict[str, Any]] = []
@@ -254,7 +292,9 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
     mode = "APPLIED" if args.apply else "DRY RUN"
     lines.append(f"# Cascade merge — {mode} (task 012 phase 3)")
     lines.append("")
-    lines.append("Cascade order: ISS (in JSONL) → dohod (in JSONL) → Yahoo → Tbank.")
+    lines.append(f"Cascade order: ISS (in JSONL) → dohod (in JSONL) → {' → '.join(source_order)}.")
+    window = f"since {since_ym}" if since_ym else "full history"
+    lines.append(f"Window: {window}, through {today_iso}.")
     lines.append("Same-(year-month, currency) collisions: amount within 1% → near-dup")
     lines.append("(skip), else → ymconflict (NOT added in either mode, listed below).")
     lines.append("")

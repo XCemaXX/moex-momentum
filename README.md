@@ -94,6 +94,41 @@ Notes:
 - Editing `src/config.py` or `src/tickers.py` takes effect immediately (editable
   install); no reinstall needed.
 
+### Dividend reconciliation (recurring)
+
+ISS lags real payouts by months, so every cycle a few recent dividends are
+missing. Resolving them has sharp edges — this is the settled procedure.
+
+**A recent payout ISS has not posted yet** (e.g. a spring blue-chip dividend):
+
+1. Verify it against disclosure / smart-lab / dohod (record date + amount).
+2. Add one `augment` entry to `data/dividends/_conflicts_resolved.json`, then
+   `momentum corporate apply-conflicts`. `augment` has a 7-day / 1% near-dup
+   guard, so it will not double-count a payout already present under another
+   source.
+
+Do **not** reach for a bulk `momentum ingest fill-dividends --sources dohod`
+to grab one payout: with no date scope it drags in dohod's *entire* history
+(dozens of records per name), and its cross-source dedup is leaky (it
+re-proposes payouts already stored from yahoo/tbank under a slightly different
+amount). Use it only per-ticker with `--dry-run` to inspect a specific name.
+
+**Folding in the yahoo / tbank catalogs** (`scripts/backfill/cascade_merge_dividends.py`):
+
+- The fetchers are cache-only — `.fill_cache/{yahoo,tbank}/`. Yahoo is a frozen
+  snapshot (no new data). Refresh tbank before a run:
+  `python scripts/backfill/fetch_tbank_dividends.py --refresh` (overwrites a
+  snapshot only on a successful fetch; a network miss keeps the old one).
+- The cascade is **stateless**: each run re-derives the full diff between the
+  caches and the CSVs. So changing the `--sources` set or omitting the window
+  reshuffles the whole candidate/collision graph and re-surfaces history that
+  was already settled in `_conflicts_resolved.json`. Always scope a monthly run
+  with `--months N` so only recent records are reconciled, e.g.
+  `python scripts/backfill/cascade_merge_dividends.py --sources tbank --months 6`.
+- Same-(year-month) collisions above 1% are **not** auto-merged — they go to
+  `validate_with_raw/reports/cascade_conflicts.json` for manual resolution into
+  `_conflicts_resolved.json`. Re-run with `--apply` once resolved.
+
 ## CLI reference
 
 The entry point is `momentum` (`cli:app`). Every command is idempotent.

@@ -1,5 +1,29 @@
 # Claude skills для интерактивного заполнения пропусков
 
+## РЕЗОЛЮЦИЯ (DONE, 2026-07-01) — superseded
+
+Исходный план (два интерактивных per-gap скилла `/fill-dividends` и `/fill-splits`,
+оборачивающих `dividends_fill.py`, append в JSONL) **устарел и вытеснен другим
+дизайном**:
+
+- **Формат/пути изменились** (task 014, storage-рефактор): JSONL → CSV,
+  `src/momentum/ingest/dividends_fill.py` → `src/ingest/dividends/fill.py` (flat).
+  Оригинальная спецификация ниже опирается на снятые допущения.
+- **Дивидендный gap-filling закрыт другим путём**, отработанным на практике:
+  batch-CLI `momentum ingest fill-dividends` (dohod) + `cascade_merge_dividends.py`
+  (yahoo/tbank, windowed, future-guarded) + ручной `augment` в
+  `_conflicts_resolved.json` → `apply-conflicts`. Аппрув-на-запись сохранён (dry-run
+  + чекпоинты), но через CLI, не через отдельный интерактивный скилл.
+- **`/fill-splits` не понадобился** — сплиты покрыты ISS (`ingest splits`) +
+  `tickers_manual.json`; детектор (`corporate detect`) остаётся WARN-only сигналом.
+- Операционная обвязка теперь живёт в скилле **`update_monthly_data`**
+  (`.claude/skills/update_monthly_data/`, scope prices/dividends/all) и в
+  `README.md §Dividend reconciliation`.
+
+Дальнейших действий не требует. История ниже — как есть, для контекста.
+
+---
+
 Бывший Phase 13 из `task 000` — два skill'а для interactive-режима. Делается **после task 005**, потому что 005 строит batch-ядро (`src/momentum/ingest/dividends_fill.py`), которое skill `/fill-dividends` тонко оборачивает в UX-обвязку.
 
 ## Цель

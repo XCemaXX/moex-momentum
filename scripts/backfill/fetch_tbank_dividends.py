@@ -1,16 +1,18 @@
 """Bulk-fetch Tinkoff (tbank.ru) SPA-bootstrap dividend pages for the full
 MOEX universe.
 
-One-shot historical pull (task 012 phase 2). Idempotent: ticker is skipped
-if `.fill_cache/tbank/{T}.html` already exists. Failures are NOT cached, so
-re-running this script automatically retries them. Failure summary is
-written to `.fill_cache/tbank/_failures.json` after every run.
+Historical pull (task 012 phase 2) and monthly cache refresh. Default: skip
+tickers already cached, fetch only the missing. `--refresh`: re-fetch every
+ticker, overwriting a snapshot only on a successful fetch that carries a
+dividends payload — a network error, 404, or empty page leaves the existing
+snapshot intact. Failures summarised in `.fill_cache/tbank/_failures.json`.
 
 Rate limit: 2 req/s. Single attempt per ticker.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 import time
@@ -35,6 +37,14 @@ PROGRESS_EVERY = 50
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument(
+        "--refresh",
+        action="store_true",
+        help="re-fetch even if cached; overwrite a snapshot only on success",
+    )
+    args = ap.parse_args()
+
     tickers = sorted(t_mod.load(TICKERS_FILE).keys())
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -48,56 +58,44 @@ def main() -> int:
     n_skip = n_ok = n_404 = n_net = n_no_payload = 0
     started = time.monotonic()
 
-    def http_get(url: str) -> str | None:
-        nonlocal n_404, n_net
-        try:
-            r = client.get(url)
-        except httpx.HTTPError as exc:
-            n_net += 1
-            raise RuntimeError(f"network: {exc}") from exc
-        if r.status_code == 404:
-            n_404 += 1
-            return None
-        if r.status_code != 200:
-            raise RuntimeError(f"http {r.status_code}")
-        return r.text
-
-    f = TbankFetcher(http_get, cache_dir=CACHE_ROOT)
+    def _fail(tk: str, status: str, reason: str) -> None:
+        failures[tk] = {
+            "status": status,
+            "reason": reason[:200],
+            "ts": datetime.now(UTC).isoformat(),
+        }
 
     try:
         for i, tk in enumerate(tickers, 1):
             cache_file = CACHE_DIR / f"{tk}.html"
-            if cache_file.exists():
+            if cache_file.exists() and not args.refresh:
                 n_skip += 1
                 continue
+            url = TbankFetcher.URL_TEMPLATE.format(ticker=tk)
             try:
-                html = f._fetch_html(tk)
-            except Exception as exc:
-                failures[tk] = {
-                    "status": "error",
-                    "reason": str(exc)[:200],
-                    "ts": datetime.now(UTC).isoformat(),
-                }
+                r = client.get(url)
+            except httpx.HTTPError as exc:
+                n_net += 1
+                _fail(tk, "error", f"network: {exc}")
+                time.sleep(SLEEP_BETWEEN)
+                continue
+            if r.status_code == 404:
+                n_404 += 1
+                _fail(tk, "not_found", "tbank 404")
+                time.sleep(SLEEP_BETWEEN)
+                continue
+            if r.status_code != 200:
+                _fail(tk, "error", f"http {r.status_code}")
+                time.sleep(SLEEP_BETWEEN)
+                continue
+            # Payload sanity: else broker redirected to a generic stock page.
+            # On a miss, keep any prior snapshot — don't overwrite good with bad.
+            if _extract_dividends_payload(r.text, tk) is None:
+                n_no_payload += 1
+                _fail(tk, "no_payload", "investDividends block missing")
             else:
-                if html is None:
-                    failures[tk] = {
-                        "status": "not_found",
-                        "reason": "tbank 404",
-                        "ts": datetime.now(UTC).isoformat(),
-                    }
-                else:
-                    # Sanity: page must contain a dividends payload, else broker
-                    # redirected to a generic stock page (no dividend listing).
-                    divs = _extract_dividends_payload(html, tk)
-                    if divs is None:
-                        n_no_payload += 1
-                        failures[tk] = {
-                            "status": "no_payload",
-                            "reason": "investDividends block missing",
-                            "ts": datetime.now(UTC).isoformat(),
-                        }
-                    else:
-                        n_ok += 1
+                cache_file.write_text(r.text, encoding="utf-8")
+                n_ok += 1
             time.sleep(SLEEP_BETWEEN)
             if i % PROGRESS_EVERY == 0:
                 elapsed = time.monotonic() - started
