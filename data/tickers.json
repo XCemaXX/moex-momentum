@@ -31,19 +31,19 @@
       {
         "board": "TQBR",
         "history_from": "2023-08-18",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2023-09-06",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-25",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -66,7 +66,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -194,7 +194,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -218,7 +218,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-11-22",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -230,7 +230,7 @@
       {
         "board": "SPEQ",
         "history_from": "2020-05-27",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -270,7 +270,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-10-31",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -294,7 +294,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -312,7 +312,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -394,7 +394,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -505,7 +505,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -529,7 +529,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-12-02",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -541,7 +541,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -557,7 +557,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -630,7 +630,7 @@
       {
         "board": "TQBR",
         "history_from": "2024-07-30",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -652,7 +652,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -670,7 +670,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-11-21",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -693,7 +693,7 @@
       {
         "board": "TQBR",
         "history_from": "2015-06-10",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -919,7 +919,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -937,7 +937,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-04-11",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -1075,7 +1075,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -1110,13 +1110,13 @@
       {
         "board": "TQBR",
         "history_from": "2023-10-13",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2024-03-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -1132,7 +1132,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -1336,7 +1336,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -1354,7 +1354,7 @@
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -1461,7 +1461,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -1584,7 +1584,7 @@
       {
         "board": "TQBR",
         "history_from": "2025-12-10",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -1684,13 +1684,13 @@
       {
         "board": "TQBR",
         "history_from": "2017-08-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -1857,7 +1857,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -1875,7 +1875,7 @@
       {
         "board": "SMAL",
         "history_from": "2010-04-26",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-08",
         "is_primary": false
       }
     ],
@@ -1954,7 +1954,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2224,7 +2224,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2259,7 +2259,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2283,13 +2283,13 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -2329,7 +2329,7 @@
       {
         "board": "TQBR",
         "history_from": "2021-01-26",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2341,7 +2341,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -2356,7 +2356,7 @@
       {
         "board": "TQBR",
         "history_from": "2026-04-17",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -2396,7 +2396,7 @@
       {
         "board": "TQBR",
         "history_from": "2023-07-03",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2418,13 +2418,13 @@
       {
         "board": "TQBR",
         "history_from": "2015-06-22",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2015-10-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       },
       {
@@ -2436,7 +2436,7 @@
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -2493,7 +2493,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2511,7 +2511,7 @@
       {
         "board": "SMAL",
         "history_from": "2012-03-14",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-04",
         "is_primary": false
       }
     ],
@@ -2527,7 +2527,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2556,7 +2556,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2598,7 +2598,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -2614,7 +2614,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2941,7 +2941,7 @@
       {
         "board": "TQBR",
         "history_from": "2025-02-07",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -2957,7 +2957,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -2991,7 +2991,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -3559,7 +3559,7 @@
       {
         "board": "TQBR",
         "history_from": "2024-10-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -3575,7 +3575,7 @@
       {
         "board": "TQBR",
         "history_from": "2024-02-06",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -3684,7 +3684,7 @@
       {
         "board": "TQBR",
         "history_from": "2024-02-13",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -3717,7 +3717,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -3955,8 +3955,14 @@
       {
         "board": "TQBR",
         "history_from": "2025-11-20",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
+      },
+      {
+        "board": "SPEQ",
+        "history_from": "2026-06-19",
+        "history_till": "2026-06-19",
+        "is_primary": false
       }
     ],
     "canonical": "ДОМ.РФ",
@@ -4006,7 +4012,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -4030,7 +4036,7 @@
       {
         "board": "SMAL",
         "history_from": "2007-12-17",
-        "history_till": "2026-05-28",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -4046,7 +4052,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -4074,7 +4080,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -4102,7 +4108,7 @@
       {
         "board": "TQBR",
         "history_from": "2017-09-07",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -4207,13 +4213,13 @@
       {
         "board": "TQBR",
         "history_from": "2023-03-29",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2023-03-30",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -4236,13 +4242,13 @@
       {
         "board": "TQBR",
         "history_from": "2024-06-06",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2024-06-18",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-15",
         "is_primary": false
       }
     ],
@@ -4296,13 +4302,13 @@
       {
         "board": "TQBR",
         "history_from": "2020-02-18",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2026-03-20",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -4606,7 +4612,7 @@
       {
         "board": "TQBR",
         "history_from": "2020-02-03",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -4629,7 +4635,7 @@
       {
         "board": "TQBR",
         "history_from": "2023-11-21",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -4668,13 +4674,13 @@
       {
         "board": "TQBR",
         "history_from": "2026-05-19",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2026-05-19",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -4708,7 +4714,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -4738,7 +4744,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-07-16",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -4762,7 +4768,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -4779,7 +4785,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -4803,13 +4809,13 @@
       {
         "board": "SMAL",
         "history_from": "2009-06-04",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-26",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2024-06-24",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -4842,13 +4848,13 @@
       {
         "board": "TQBR",
         "history_from": "2025-07-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2025-08-20",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -4899,19 +4905,19 @@
       {
         "board": "TQBR",
         "history_from": "2020-10-07",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2020-10-07",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -4973,7 +4979,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -4997,7 +5003,7 @@
       {
         "board": "SMAL",
         "history_from": "2012-01-10",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -5013,7 +5019,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5053,7 +5059,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5118,7 +5124,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5142,7 +5148,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -5160,7 +5166,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -5176,7 +5182,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5234,7 +5240,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5277,7 +5283,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-09-02",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5324,13 +5330,13 @@
       {
         "board": "TQBR",
         "history_from": "2023-04-25",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2023-05-04",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-25",
         "is_primary": false
       }
     ],
@@ -5346,7 +5352,7 @@
       {
         "board": "TQBR",
         "history_from": "2019-07-25",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5369,7 +5375,7 @@
       {
         "board": "TQBR",
         "history_from": "2021-07-15",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -5385,7 +5391,7 @@
       {
         "board": "TQBR",
         "history_from": "2025-10-31",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -5419,7 +5425,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5449,7 +5455,7 @@
       {
         "board": "SMAL",
         "history_from": "2024-04-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -5467,7 +5473,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -5671,7 +5677,7 @@
       {
         "board": "TQBR",
         "history_from": "2017-10-23",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5830,13 +5836,13 @@
       {
         "board": "TQBR",
         "history_from": "2024-08-16",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2025-12-19",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -5887,7 +5893,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5944,7 +5950,7 @@
       {
         "board": "TQBR",
         "history_from": "2023-11-02",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -5960,7 +5966,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-03-25",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -5984,7 +5990,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-05-22",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -6002,7 +6008,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -6641,7 +6647,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -6676,7 +6682,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -6716,6 +6722,22 @@
     ],
     "canonical": "Икар ао",
     "delisted_after": "2012-08-13",
+    "type": "share"
+  },
+  "INCB": {
+    "aliases": [
+      "Инкаб Холдинг",
+      "Incab Holding"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2026-06-24",
+        "history_till": "2026-06-30",
+        "is_primary": true
+      }
+    ],
+    "canonical": "Инкаб",
     "type": "share"
   },
   "INGR": {
@@ -6770,7 +6792,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -6782,7 +6804,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-11-21",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -6800,7 +6822,7 @@
       {
         "board": "SPEQ",
         "history_from": "2020-12-18",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -7049,7 +7071,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -7073,7 +7095,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-05-29",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -7217,13 +7239,13 @@
       {
         "board": "TQBR",
         "history_from": "2024-06-04",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2026-03-20",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -7377,7 +7399,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -7395,7 +7417,7 @@
       {
         "board": "SMAL",
         "history_from": "2010-12-20",
-        "history_till": "2026-05-14",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -7418,7 +7440,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -7436,7 +7458,7 @@
       {
         "board": "SMAL",
         "history_from": "2010-08-02",
-        "history_till": "2026-05-29",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -7483,7 +7505,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -7517,7 +7539,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -7551,7 +7573,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -7650,7 +7672,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -7668,7 +7690,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-04-09",
-        "history_till": "2026-04-22",
+        "history_till": "2026-06-25",
         "is_primary": false
       }
     ],
@@ -7684,7 +7706,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -7741,7 +7763,7 @@
       {
         "board": "TQBR",
         "history_from": "2025-06-19",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -7764,7 +7786,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -7798,7 +7820,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8052,7 +8074,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8110,13 +8132,13 @@
       {
         "board": "TQBR",
         "history_from": "2024-02-22",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2024-02-28",
-        "history_till": "2026-03-16",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -8132,7 +8154,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8156,13 +8178,13 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-25",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -8190,7 +8212,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8289,7 +8311,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8606,7 +8628,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8634,7 +8656,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8697,7 +8719,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8791,7 +8813,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8809,7 +8831,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-04-10",
+        "history_till": "2026-06-08",
         "is_primary": false
       }
     ],
@@ -8832,7 +8854,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8873,7 +8895,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -8907,7 +8929,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9350,7 +9372,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9368,7 +9390,7 @@
       {
         "board": "SMAL",
         "history_from": "2012-11-14",
-        "history_till": "2026-04-24",
+        "history_till": "2026-06-23",
         "is_primary": false
       }
     ],
@@ -9517,7 +9539,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9535,7 +9557,7 @@
       {
         "board": "SMAL",
         "history_from": "2012-01-25",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-24",
         "is_primary": false
       }
     ],
@@ -9551,7 +9573,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9569,7 +9591,7 @@
       {
         "board": "SMAL",
         "history_from": "2012-03-14",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-24",
         "is_primary": false
       }
     ],
@@ -9614,13 +9636,13 @@
       {
         "board": "TQBR",
         "history_from": "2024-03-29",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2024-06-21",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -9637,7 +9659,7 @@
       {
         "board": "TQBR",
         "history_from": "2021-12-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -9676,7 +9698,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9700,7 +9722,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-18",
         "is_primary": false
       }
     ],
@@ -9716,7 +9738,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-03-25",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9740,7 +9762,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -9782,7 +9804,7 @@
       {
         "board": "TQBR",
         "history_from": "2024-10-30",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -9798,7 +9820,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9826,7 +9848,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9917,7 +9939,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9941,7 +9963,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-10-31",
-        "history_till": "2026-05-11",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -9957,7 +9979,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -9981,7 +10003,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -10006,7 +10028,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10030,7 +10052,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-05-20",
+        "history_till": "2026-06-24",
         "is_primary": false
       }
     ],
@@ -10053,7 +10075,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10099,7 +10121,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10133,7 +10155,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10151,7 +10173,7 @@
       {
         "board": "SMAL",
         "history_from": "2010-11-26",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -10167,7 +10189,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10201,7 +10223,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10225,7 +10247,7 @@
       {
         "board": "SMAL",
         "history_from": "2007-06-13",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -10243,7 +10265,7 @@
       {
         "board": "SPEQ",
         "history_from": "2019-03-07",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -10312,7 +10334,7 @@
       {
         "board": "TQBR",
         "history_from": "2024-04-26",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -10358,7 +10380,7 @@
       {
         "board": "TQBR",
         "history_from": "2020-11-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10370,7 +10392,7 @@
       {
         "board": "SPEQ",
         "history_from": "2025-12-19",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -10450,7 +10472,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10491,7 +10513,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10509,7 +10531,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-11-23",
-        "history_till": "2026-05-04",
+        "history_till": "2026-06-18",
         "is_primary": false
       }
     ],
@@ -10585,7 +10607,7 @@
       {
         "board": "TQBR",
         "history_from": "2023-12-28",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10608,7 +10630,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10644,7 +10666,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -10694,7 +10716,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10780,7 +10802,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10821,7 +10843,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10914,7 +10936,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -10948,7 +10970,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -11075,7 +11097,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-04-04",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -11099,7 +11121,7 @@
       {
         "board": "SMAL",
         "history_from": "2013-06-14",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -11111,7 +11133,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -11443,7 +11465,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-09-02",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -11473,7 +11495,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-08-20",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -12161,7 +12183,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -12281,7 +12303,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-09-02",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -12317,7 +12339,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-08-06",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -12709,7 +12731,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -12733,7 +12755,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-08-29",
-        "history_till": "2026-05-28",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -13040,7 +13062,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -13070,7 +13092,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-09-12",
-        "history_till": "2026-05-29",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -13257,7 +13279,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -13287,7 +13309,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-09-10",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -13449,7 +13471,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -13467,7 +13489,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-11-22",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -13490,7 +13512,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -13520,7 +13542,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-09-10",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -13817,7 +13839,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -13851,7 +13873,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -13863,7 +13885,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -13898,7 +13920,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -13928,7 +13950,7 @@
       {
         "board": "SMAL",
         "history_from": "2006-03-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -14085,7 +14107,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14138,7 +14160,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14162,7 +14184,7 @@
       {
         "board": "SPEQ",
         "history_from": "2022-03-30",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -14178,7 +14200,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14196,7 +14218,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-06-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -14288,7 +14310,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14300,7 +14322,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-11-21",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -14312,7 +14334,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -14405,7 +14427,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14447,7 +14469,7 @@
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -14463,7 +14485,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14538,7 +14560,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14698,7 +14720,7 @@
       {
         "board": "TQBR",
         "history_from": "2015-11-17",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14720,7 +14742,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14744,7 +14766,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-06-20",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -14760,7 +14782,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14790,7 +14812,7 @@
       {
         "board": "SMAL",
         "history_from": "2009-05-18",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-25",
         "is_primary": false
       }
     ],
@@ -14806,7 +14828,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14841,7 +14863,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14865,7 +14887,7 @@
       {
         "board": "SMAL",
         "history_from": "2007-03-19",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -14883,7 +14905,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -14958,7 +14980,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -14988,7 +15010,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -15120,7 +15142,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -15154,7 +15176,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -15304,7 +15326,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -15432,7 +15454,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-03-25",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -15456,7 +15478,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -15996,7 +16018,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -16020,7 +16042,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-11-21",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -16707,7 +16729,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -17008,13 +17030,13 @@
       {
         "board": "TQBR",
         "history_from": "2020-11-24",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2021-06-18",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -17030,13 +17052,13 @@
       {
         "board": "TQBR",
         "history_from": "2024-10-17",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2024-10-17",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -17052,7 +17074,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -17186,7 +17208,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -17210,7 +17232,7 @@
       {
         "board": "SPEQ",
         "history_from": "2022-03-30",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -17267,7 +17289,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -17303,7 +17325,7 @@
       {
         "board": "SPEQ",
         "history_from": "2021-09-17",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -17419,7 +17441,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -17455,7 +17477,7 @@
       {
         "board": "SPEQ",
         "history_from": "2019-03-07",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -17549,7 +17571,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -17583,7 +17605,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -17601,7 +17623,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-04-08",
-        "history_till": "2026-04-29",
+        "history_till": "2026-06-24",
         "is_primary": false
       }
     ],
@@ -17767,13 +17789,13 @@
       {
         "board": "TQBR",
         "history_from": "2021-12-17",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2022-12-16",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -17789,7 +17811,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -17904,7 +17926,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -17964,7 +17986,7 @@
       {
         "board": "TQBR",
         "history_from": "2024-07-12",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -18228,7 +18250,7 @@
       {
         "board": "TQBR",
         "history_from": "2025-02-17",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -18267,7 +18289,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -18291,7 +18313,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-05-16",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       },
       {
@@ -18303,7 +18325,7 @@
       {
         "board": "SPEQ",
         "history_from": "2024-12-20",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -18433,7 +18455,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -18463,7 +18485,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -18486,7 +18508,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -18550,19 +18572,19 @@
       {
         "board": "TQBR",
         "history_from": "2021-10-20",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2021-10-21",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-25",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2025-12-19",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -18578,7 +18600,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-12-26",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -18657,7 +18679,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -18803,7 +18825,7 @@
       {
         "board": "TQBR",
         "history_from": "2016-11-18",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -18815,7 +18837,7 @@
       {
         "board": "SPEQ",
         "history_from": "2024-06-24",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -18956,7 +18978,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -18974,7 +18996,7 @@
       {
         "board": "SMAL",
         "history_from": "2014-07-16",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -19078,7 +19100,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -19126,7 +19148,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -19142,7 +19164,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -19382,7 +19404,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -19411,7 +19433,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -19423,7 +19445,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -19441,7 +19463,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -19906,7 +19928,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -19918,7 +19940,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-26",
         "is_primary": false
       },
       {
@@ -19930,7 +19952,7 @@
       {
         "board": "SPEQ",
         "history_from": "2026-03-20",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -19987,7 +20009,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20021,7 +20043,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20116,19 +20138,19 @@
       {
         "board": "TQBR",
         "history_from": "2015-03-30",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2015-07-17",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2022-03-30",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -20185,7 +20207,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20203,7 +20225,7 @@
       {
         "board": "SMAL",
         "history_from": "2013-11-27",
-        "history_till": "2026-04-06",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -20294,7 +20316,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20312,7 +20334,7 @@
       {
         "board": "SMAL",
         "history_from": "2007-07-12",
-        "history_till": "2026-05-11",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -20328,7 +20350,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20358,7 +20380,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-05-25",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -20391,7 +20413,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20421,7 +20443,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-05-25",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -20454,7 +20476,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20472,7 +20494,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-05-14",
+        "history_till": "2026-06-25",
         "is_primary": false
       }
     ],
@@ -20495,7 +20517,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20513,7 +20535,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-05-18",
+        "history_till": "2026-06-24",
         "is_primary": false
       }
     ],
@@ -20538,7 +20560,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-03-25",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20562,7 +20584,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -20659,7 +20681,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-03-25",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20683,7 +20705,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -20869,7 +20891,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -20899,7 +20921,7 @@
       {
         "board": "SMAL",
         "history_from": "2012-03-21",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-25",
         "is_primary": false
       }
     ],
@@ -21073,7 +21095,7 @@
       {
         "board": "TQBR",
         "history_from": "2018-01-03",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -21085,7 +21107,7 @@
       {
         "board": "SPEQ",
         "history_from": "2024-12-20",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -21138,19 +21160,19 @@
       {
         "board": "TQBR",
         "history_from": "2021-04-28",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2021-04-28",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-26",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -21202,7 +21224,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -21250,7 +21272,7 @@
       {
         "board": "SPEQ",
         "history_from": "2022-03-30",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -21411,7 +21433,7 @@
       {
         "board": "TQBR",
         "history_from": "2017-02-06",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -21502,13 +21524,13 @@
       {
         "board": "TQBR",
         "history_from": "2020-10-29",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2022-03-30",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -21618,7 +21640,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -21642,7 +21664,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -21660,7 +21682,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -21684,7 +21706,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -21708,7 +21730,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
@@ -21726,7 +21748,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -21796,19 +21818,19 @@
       {
         "board": "TQBR",
         "history_from": "2023-09-25",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2023-09-26",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2024-03-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -21875,13 +21897,13 @@
       {
         "board": "TQBR",
         "history_from": "2021-11-19",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2022-03-30",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -22234,7 +22256,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -22252,7 +22274,7 @@
       {
         "board": "SMAL",
         "history_from": "2009-05-14",
-        "history_till": "2026-04-22",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -22268,7 +22290,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -22286,7 +22308,7 @@
       {
         "board": "SMAL",
         "history_from": "2009-05-14",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -22324,7 +22346,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -22364,19 +22386,19 @@
       {
         "board": "TQBR",
         "history_from": "2023-12-15",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2023-12-18",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2024-03-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -22451,7 +22473,7 @@
       {
         "board": "TQBR",
         "history_from": "2021-01-15",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -22479,7 +22501,7 @@
       {
         "board": "TQBR",
         "history_from": "2024-05-27",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -22734,13 +22756,13 @@
       {
         "board": "TQBR",
         "history_from": "2024-11-28",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2024-12-20",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -22966,7 +22988,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -23000,7 +23022,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -23057,7 +23079,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -23081,7 +23103,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -23104,7 +23126,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -23128,7 +23150,7 @@
       {
         "board": "SPEQ",
         "history_from": "2024-06-24",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -23267,7 +23289,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-09-02",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -23297,7 +23319,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-08-06",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -23501,7 +23523,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -23525,7 +23547,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-08-06",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -23839,7 +23861,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -23857,7 +23879,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-08-07",
-        "history_till": "2026-05-20",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -25957,7 +25979,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -25981,7 +26003,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-08-06",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -26227,7 +26249,7 @@
       {
         "board": "TQBR",
         "history_from": "2015-06-17",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -26273,7 +26295,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -26307,7 +26329,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -26325,7 +26347,7 @@
       {
         "board": "SMAL",
         "history_from": "2006-08-15",
-        "history_till": "2026-04-23",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -26482,7 +26504,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-07-26",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -26512,7 +26534,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-03-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       }
     ],
@@ -26537,7 +26559,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-12-16",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -26567,7 +26589,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -26619,7 +26641,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -26643,7 +26665,7 @@
       {
         "board": "SMAL",
         "history_from": "2009-06-11",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -26789,7 +26811,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -27426,13 +27448,13 @@
       {
         "board": "TQBR",
         "history_from": "2023-11-22",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2023-11-22",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -27448,7 +27470,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -27476,7 +27498,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -27506,7 +27528,7 @@
       {
         "board": "SMAL",
         "history_from": "2010-02-19",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -27552,7 +27574,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -27581,19 +27603,19 @@
       {
         "board": "TQBR",
         "history_from": "2016-07-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2016-07-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": false
       },
       {
         "board": "SPEQ",
         "history_from": "2025-12-19",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -27768,7 +27790,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -27920,7 +27942,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -27938,7 +27960,7 @@
       {
         "board": "SMAL",
         "history_from": "2011-12-15",
-        "history_till": "2026-05-28",
+        "history_till": "2026-06-10",
         "is_primary": false
       }
     ],
@@ -27971,7 +27993,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-09-02",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -27995,7 +28017,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-05-29",
+        "history_till": "2026-06-25",
         "is_primary": false
       }
     ],
@@ -28208,7 +28230,7 @@
       {
         "board": "TQBR",
         "history_from": "2015-04-29",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -28317,7 +28339,7 @@
       {
         "board": "TQBR",
         "history_from": "2021-11-26",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -28436,7 +28458,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -28454,7 +28476,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-05-07",
-        "history_till": "2026-05-11",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -28470,7 +28492,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -28488,7 +28510,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-04-09",
-        "history_till": "2026-05-11",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -28504,7 +28526,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -28538,7 +28560,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -28573,13 +28595,13 @@
       {
         "board": "TQBR",
         "history_from": "2021-12-14",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2021-12-17",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -28625,7 +28647,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -28643,7 +28665,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-10-31",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],
@@ -29259,7 +29281,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -29293,7 +29315,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -29311,7 +29333,7 @@
       {
         "board": "SMAL",
         "history_from": "2008-10-01",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-16",
         "is_primary": false
       }
     ],
@@ -29326,7 +29348,7 @@
       {
         "board": "TQBR",
         "history_from": "2024-07-05",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       }
     ],
@@ -29343,7 +29365,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -29388,7 +29410,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -29416,7 +29438,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -29445,7 +29467,7 @@
       {
         "board": "TQBR",
         "history_from": "2013-03-25",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -29487,7 +29509,7 @@
       {
         "board": "SPEQ",
         "history_from": "2018-06-29",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -30272,7 +30294,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -30318,7 +30340,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -30359,13 +30381,13 @@
       {
         "board": "TQBR",
         "history_from": "2022-12-14",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2023-09-22",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -30384,13 +30406,13 @@
       {
         "board": "TQBR",
         "history_from": "2025-01-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2025-03-21",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -30424,7 +30446,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -30442,7 +30464,7 @@
       {
         "board": "SMAL",
         "history_from": "2012-03-19",
-        "history_till": "2026-05-22",
+        "history_till": "2026-06-25",
         "is_primary": false
       }
     ],
@@ -30539,13 +30561,13 @@
       {
         "board": "TQBR",
         "history_from": "2024-07-08",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SPEQ",
         "history_from": "2024-09-20",
-        "history_till": "2026-03-20",
+        "history_till": "2026-06-19",
         "is_primary": false
       }
     ],
@@ -30561,7 +30583,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -30603,7 +30625,7 @@
       {
         "board": "SMAL",
         "history_from": "2005-06-16",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-29",
         "is_primary": false
       }
     ],
@@ -30626,7 +30648,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -30644,7 +30666,7 @@
       {
         "board": "SMAL",
         "history_from": "2009-03-02",
-        "history_till": "2026-05-27",
+        "history_till": "2026-06-04",
         "is_primary": false
       }
     ],
@@ -30740,7 +30762,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -30774,7 +30796,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -30901,13 +30923,13 @@
       {
         "board": "TQBR",
         "history_from": "2024-04-12",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
         "board": "SMAL",
         "history_from": "2024-04-12",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-08",
         "is_primary": false
       }
     ],
@@ -30982,7 +31004,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -31129,7 +31151,7 @@
       {
         "board": "TQBR",
         "history_from": "2014-06-09",
-        "history_till": "2026-06-01",
+        "history_till": "2026-06-30",
         "is_primary": true
       },
       {
@@ -31147,7 +31169,7 @@
       {
         "board": "SMAL",
         "history_from": "2012-10-18",
-        "history_till": "2026-04-09",
+        "history_till": "2026-06-26",
         "is_primary": false
       }
     ],

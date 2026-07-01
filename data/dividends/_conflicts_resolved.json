@@ -3908,5 +3908,17 @@
     },
     "reason": "FY2022 Q4 dividend 27.71 RUB (TATNP mirrors TATN per Tatneft policy).",
     "resolved_at": "2026-05-17"
+  },
+  {
+    "ticker": "PLZL",
+    "registry_close": "2026-05-18",
+    "action": "augment",
+    "add": {
+      "amount": 56.8,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "FY2025 dividend 56.8 RUB; AGM 2026-05-06, record 2026-05-18, pay 2026-06-23 (interfax/smart-lab/dohod agree). ISS lag.",
+    "resolved_at": "2026-07-01"
   }
 ]
