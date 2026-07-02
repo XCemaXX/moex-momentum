@@ -2935,7 +2935,8 @@
     "aliases": [
       "МКПАО \"Циан\"",
       "IPJSC Cian",
-      "CIAN"
+      "CIAN",
+      "ЦИАН"
     ],
     "boards": [
       {
@@ -13506,7 +13507,8 @@
   "MRKZ": {
     "aliases": [
       "ПАО Россети Северо-Запад ао",
-      "Rosseti Severo-Zapad"
+      "Rosseti Severo-Zapad",
+      "Россети СЗ"
     ],
     "boards": [
       {
@@ -21518,7 +21520,8 @@
     "aliases": [
       "ГК Самолет ао",
       "Samolet",
-      "Самолёт"
+      "Самолёт",
+      "Самолет"
     ],
     "boards": [
       {
