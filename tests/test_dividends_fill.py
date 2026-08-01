@@ -15,6 +15,7 @@ from ingest.dividends.conflicts import (
     apply_conflicts_to_universe,
 )
 from ingest.dividends.dohod import DohodFetcher
+from ingest.dividends.fetchers import CachedHttpFetcher
 from ingest.dividends.fill import fill_dividends, predecessor_cutoff
 from ingest.dividends.merge import cleanup_jsonl_near_duplicates, dedup_near_duplicates
 from storage.records import read_records, write_records_atomic
@@ -666,3 +667,39 @@ def test_fill_dividends_collapses_near_dup_against_iss(tmp_path: Path) -> None:
     )
     assert result.n_new == 0
     assert result.n_near_dup_dropped == 1
+
+
+# ---------- cache refresh ----------
+
+
+class _Probe(CachedHttpFetcher):
+    source_tag = "probe"
+
+    def get(self) -> str | None:
+        return self._cached_text(cache_key="probe/x.html", url="https://example.test/x")
+
+
+def test_cached_text_reuses_cache_by_default(tmp_path: Path) -> None:
+    calls: list[str] = []
+    (tmp_path / "probe").mkdir()
+    (tmp_path / "probe" / "x.html").write_text("old", encoding="utf-8")
+    f = _Probe(lambda u: calls.append(u) or "new", cache_dir=tmp_path)
+    assert f.get() == "old"
+    assert calls == []
+
+
+def test_force_refresh_refetches_and_overwrites(tmp_path: Path) -> None:
+    """A no-TTL cache would otherwise serve last month's snapshot forever."""
+    (tmp_path / "probe").mkdir()
+    (tmp_path / "probe" / "x.html").write_text("old", encoding="utf-8")
+    f = _Probe(lambda u: "new", cache_dir=tmp_path, force_refresh=True)
+    assert f.get() == "new"
+    assert (tmp_path / "probe" / "x.html").read_text(encoding="utf-8") == "new"
+
+
+def test_force_refresh_keeps_cache_when_fetch_fails(tmp_path: Path) -> None:
+    (tmp_path / "probe").mkdir()
+    (tmp_path / "probe" / "x.html").write_text("old", encoding="utf-8")
+    f = _Probe(lambda u: None, cache_dir=tmp_path, force_refresh=True)
+    assert f.get() == "old"
+    assert (tmp_path / "probe" / "x.html").read_text(encoding="utf-8") == "old"

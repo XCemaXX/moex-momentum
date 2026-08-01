@@ -238,6 +238,12 @@ def ingest_fill_dividends(
         "yahoo/tbank land in task 012 phase 2.",
     ),
     dry_run: bool = typer.Option(False, "--dry-run"),
+    force_refresh: bool = typer.Option(
+        False,
+        "--force-refresh",
+        help="Re-fetch source pages instead of reusing the no-TTL cache. "
+        "Required on a monthly run — a stale snapshot hides newly declared payouts.",
+    ),
 ) -> None:
     """Augment `data/dividends/{T}.csv` from dohod.
 
@@ -282,7 +288,7 @@ def ingest_fill_dividends(
     source_set = {s.strip() for s in sources.split(",") if s.strip()}
     fetchers: list[object] = []
     if "dohod" in source_set:
-        fetchers.append(DohodFetcher(http_get, cache_dir=cache_dir))
+        fetchers.append(DohodFetcher(http_get, cache_dir=cache_dir, force_refresh=force_refresh))
 
     try:
         for tk in ticker:

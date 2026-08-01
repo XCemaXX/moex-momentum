@@ -12,6 +12,7 @@ import pytest
 
 from ingest.prices import (
     Segment,
+    _pivot_history,
     ingest,
     ingest_one,
     merge_segments,
@@ -538,3 +539,28 @@ def test_ingest_dispatches_concurrently(tmp_path: Path, monkeypatch: pytest.Monk
     assert "A" in result and "B" not in result
     assert (tmp_path / "prices" / "A.csv").exists()
     assert not (tmp_path / "prices" / "B.csv").exists()
+
+
+# ---------- _pivot_history casts ----------
+
+
+def test_pivot_history_casts_match_price_casts() -> None:
+    """ISS whole numbers arrive as JSON int; uncast they would flip to float on
+    read-back and rewrite settled history on every ingest."""
+    row = ["TQBR", "2026-07-07", "A", "A", 1, 23421021, 46, 43, 46, 45.7, 45.7, 45.7, 522120]
+    rec = _pivot_history(HISTORY_COLS, [row])[0]
+    for field, expected in (
+        ("open", float),
+        ("high", float),
+        ("low", float),
+        ("close", float),
+        ("value", float),
+        ("volume", int),
+    ):
+        assert type(rec[field]) is expected, f"{field}: {type(rec[field])}"
+
+
+def test_pivot_history_keeps_missing_numeric_none() -> None:
+    row = ["TQBR", "2026-07-07", "A", "A", 1, None, None, None, None, 45.7, 45.7, 45.7, None]
+    rec = _pivot_history(HISTORY_COLS, [row])[0]
+    assert rec["open"] is None and rec["value"] is None and rec["volume"] is None

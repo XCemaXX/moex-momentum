@@ -22,6 +22,16 @@ incremental path guards against. Without it, drifted months trip the baseline ga
 ## Checks
 
 - `compute monthly` last line: ticker count and a sample ticker `last=<new-month>`.
+- **Triage the new detector flags** — WARN-only does not mean skip-it. The file is
+  append-only, so `git diff data/splits/_suspicious.json` is exactly this month's
+  additions. For each, read the price window around the date: `open` equal to the
+  previous `close` plus a wide intraday range plus a volume spike = a genuine move,
+  leave it. A gap at the open with no intraday path = an unadjusted split — add it to
+  `data/splits/<T>.csv` and redo the recompute. Check `data/indices/MCFTRR.csv`
+  first: a market-wide V-shape explains a whole cluster of high-beta names at once
+  (2026-07: a −9.5% three-day slide then a +4.8% rebound flagged four names, all
+  real). `data/splits/_acked.json` can silence a reviewed flag, but it is empty by
+  convention — do not start acking selectively.
 - `compute backtest` last rebalance: `month=<new-month>`.
 - `site build`: `N artefacts → docs/pages`. The `missing total_return … treated
   as 0` lines and any `mages: no price panel for … dropped` warning are

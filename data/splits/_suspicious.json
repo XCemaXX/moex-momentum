@@ -3997,6 +3997,13 @@
     "reason": "abs_return_above_threshold"
   },
   {
+    "ticker": "EUTR",
+    "date": "2026-07-20",
+    "raw_return": 1.0177865612648218,
+    "daily_value_rub": 1209239334.7,
+    "reason": "abs_return_above_threshold"
+  },
+  {
     "ticker": "FCIN",
     "date": "2009-12-07",
     "raw_return": 0.40384615384615374,
@@ -18739,6 +18746,13 @@
     "reason": "abs_return_above_threshold"
   },
   {
+    "ticker": "RAGR",
+    "date": "2026-07-24",
+    "raw_return": 0.4064809550881181,
+    "daily_value_rub": 6349456461.88,
+    "reason": "abs_return_above_threshold"
+  },
+  {
     "ticker": "RASP",
     "date": "2022-02-24",
     "raw_return": -0.4467068356534386,
@@ -20979,6 +20993,13 @@
     "reason": "abs_return_above_threshold"
   },
   {
+    "ticker": "SFIN",
+    "date": "2026-07-20",
+    "raw_return": 0.4076246334310849,
+    "daily_value_rub": 2311974625.6,
+    "reason": "abs_return_above_threshold"
+  },
+  {
     "ticker": "SGZH",
     "date": "2025-02-17",
     "raw_return": 0.30909090909090886,
@@ -21473,6 +21494,13 @@
     "date": "2023-05-15",
     "raw_return": 0.4006462035541196,
     "daily_value_rub": 6418992200.0,
+    "reason": "abs_return_above_threshold"
+  },
+  {
+    "ticker": "SVAV",
+    "date": "2026-07-21",
+    "raw_return": 0.5082266910420474,
+    "daily_value_rub": 3563780704.0,
     "reason": "abs_return_above_threshold"
   },
   {

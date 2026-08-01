@@ -3920,5 +3920,29 @@
     },
     "reason": "FY2025 dividend 56.8 RUB; AGM 2026-05-06, record 2026-05-18, pay 2026-06-23 (interfax/smart-lab/dohod agree). ISS lag.",
     "resolved_at": "2026-07-01"
+  },
+  {
+    "ticker": "NKHP",
+    "registry_close": "2026-07-06",
+    "action": "augment",
+    "add": {
+      "amount": 10.08,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "FY2025 dividend 10.08 RUB; AGM approved, record 2026-07-06 (vedomosti/dohod agree). ISS lag; tbank does not cover NKHP.",
+    "resolved_at": "2026-08-01"
+  },
+  {
+    "ticker": "VTBR",
+    "registry_close": "2026-07-20",
+    "action": "augment",
+    "add": {
+      "amount": 9.71,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "FY2025 dividend 9.71 RUB (25% of net profit); AGM 2026-06-30, record 2026-07-20 (vedomosti/interfax/dohod agree). ISS lag; tbank does not cover VTBR.",
+    "resolved_at": "2026-08-01"
   }
 ]

@@ -27,3 +27,4 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2023-07-04,0.18652,RUB,moex_iss,,
 2024-07-09,0.16038,RUB,moex_iss,,
 2025-07-08,0.22606373615,RUB,moex_iss,,
+2026-07-14,0.27170279181,RUB,skill_fill_tbank,tbank_reestr,

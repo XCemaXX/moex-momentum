@@ -19,6 +19,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import date, timedelta
 from pathlib import Path
@@ -103,8 +104,18 @@ async def _cached_aget(
     return cast(dict[str, Any], data)
 
 
+def _num(value: Any, to: Callable[[Any], Any]) -> Any:
+    """None-preserving cast — an absent ISS field must stay empty in the CSV."""
+    return None if value is None else to(value)
+
+
 def _pivot_history(cols: list[str], data: list[list[Any]]) -> list[dict[str, Any]]:
-    """Pivot ISS response into our JSONL format. Rows without CLOSE are dropped."""
+    """Pivot ISS response into our JSONL format. Rows without CLOSE are dropped.
+
+    Numeric fields are cast to match `PRICE_CASTS`: ISS returns a whole number as
+    JSON int, so an uncast row would serialize as `60` and flip to `60.0` on the
+    next read-back — rewriting settled history on every ingest.
+    """
     out: list[dict[str, Any]] = []
     for row in data:
         rec = dict(zip(cols, row, strict=True))
@@ -114,12 +125,12 @@ def _pivot_history(cols: list[str], data: list[list[Any]]) -> list[dict[str, Any
         out.append(
             {
                 "date": str(rec["TRADEDATE"]),
-                "open": rec.get("OPEN"),
-                "high": rec.get("HIGH"),
-                "low": rec.get("LOW"),
+                "open": _num(rec.get("OPEN"), float),
+                "high": _num(rec.get("HIGH"), float),
+                "low": _num(rec.get("LOW"), float),
                 "close": float(close),
-                "volume": rec.get("VOLUME"),
-                "value": rec.get("VALUE"),
+                "volume": _num(rec.get("VOLUME"), int),
+                "value": _num(rec.get("VALUE"), float),
                 "board": str(rec["BOARDID"]),
             }
         )

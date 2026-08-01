@@ -18,3 +18,4 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2024-11-29,20.0,RUB,moex_iss,,
 2025-05-19,22.0,RUB,moex_iss,,
 2025-10-20,42.0,RUB,skill_fill_disclosure,,
+2026-07-14,47.0,RUB,skill_fill_tbank,tbank_reestr,

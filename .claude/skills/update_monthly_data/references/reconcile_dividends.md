@@ -24,9 +24,27 @@ only dohod/disclosure tells you what is actually missing.
 
 1. Cross the 2025–2026 gaps with the liquid universe (proxy: the latest month of
    `data/momentum/curve_fit/scores.csv`, 100 names) to get candidate tickers.
-2. `momentum ingest fill-dividends -t A -t B ... --dry-run` on those names. Read the
-   **actual record dates**, not the `new=` counts.
-3. **Footgun — never bulk-apply dohod.** With no date scope it drags in dohod's
+2. `momentum ingest fill-dividends -t A -t B ... --dry-run --force-refresh` on those
+   names. **`--force-refresh` is mandatory on a monthly run** — the dohod cache has no
+   TTL, so without it you read last month's snapshot and every payout declared since
+   is invisible. Real run (2026-08): the stale cache surfaced 2 candidates, the
+   refreshed one surfaced 24 — the whole July wave.
+3. The CLI prints only counts. To judge the **actual record dates** (which is what
+   matters, not `new=`), call the driver directly:
+   ```bash
+   PYTHONPATH=src .venv/bin/python -c "
+   import pathlib; import tickers as t
+   from ingest.dividends.dohod import DohodFetcher
+   from ingest.dividends.fill import fill_dividends
+   f = DohodFetcher(lambda u: None, cache_dir=pathlib.Path('.fill_cache'))
+   r = fill_dividends('VTBR', fetchers=[f],
+       tickers_dict=t.load(pathlib.Path('data/tickers.json')),
+       tickers_manual=t.load_manual(pathlib.Path('data/tickers_manual.json')),
+       prices_dir=pathlib.Path('data/prices_iss'),
+       dividends_dir=pathlib.Path('data/dividends'))
+   print([(x['registry_close'], x['amount']) for x in r.records])"
+   ```
+4. **Footgun — never bulk-apply dohod.** With no date scope it drags in dohod's
    *entire* history (dozens of records per name), and its cross-source dedup is
    leaky — it re-proposes a payout already stored from another source when the two
    differ only in trailing precision or by a day, so it *looks* new but is a
@@ -35,10 +53,14 @@ only dohod/disclosure tells you what is actually missing.
    - **Verify online** — disclosure / smart-lab / dohod must agree on record date
      and amount.
    - Check the ticker's CSV: if the payout is already there under another
-     source/date, **skip it** (duplicate).
+     source/date, **skip it** (duplicate). Mind `registry_close_source`: a
+     `yahoo_ex_div` row holds an **ex-dividend** date, a `tbank_reestr` row a
+     **registry close** date — the same payout sits 1–2 days apart across the two,
+     so equal amounts a couple of days apart are one payout, not two (POSI 28.08 at
+     05-15 vs 05-17).
    - **Exclude future record dates** (> today): declared-but-unpaid dividends must
      not enter total-return until the date passes.
-4. Add each verified, past-dated, genuinely-missing payout as one `augment` to
+5. Add each verified, past-dated, genuinely-missing payout as one `augment` to
    `data/dividends/_conflicts_resolved.json`:
    ```json
    {"ticker":"<TICKER>","registry_close":"<YYYY-MM-DD>","action":"augment",
@@ -48,7 +70,7 @@ only dohod/disclosure tells you what is actually missing.
    ```
    Append surgically (edit the file's tail); don't rewrite the whole array. `augment`
    has a 7-day / 1% near-dup guard, so it will not double-count.
-5. `momentum corporate apply-conflicts`; confirm each new row landed in its CSV.
+6. `momentum corporate apply-conflicts`; confirm each new row landed in its CSV.
 
 ⏸ **Checkpoint:** present verified adds, skipped duplicates, and excluded
 future-dated records; get the user's nod before the cascade.
@@ -82,6 +104,11 @@ dividends.
    `cascade_conflicts.json` for manual resolution into `_conflicts_resolved.json`.
    Genuinely-clean past-dated records → re-run with `--apply`. If nothing survives
    scrutiny, apply nothing — a no-op is a valid, common outcome.
+5. **The cascade covers only names tbank serves** (~30% — the rest 404). After
+   `--apply`, diff the Step 2 dohod candidates against the cascade's ticker table:
+   whatever dohod found and tbank lacks still needs a manual `augment`, or it is
+   silently dropped. Real run (2026-08): VTBR 9.71 and NKHP 10.08 fell through
+   exactly this gap, and VTBR was caught only by re-checking the CSVs after apply.
 
 ⏸ **Checkpoint:** present the cascade findings and the apply decision before
 recomputing.
