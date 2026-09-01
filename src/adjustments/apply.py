@@ -87,13 +87,22 @@ def adjust_dividend_amounts(
     """Returns RUB-only dividends with an extra `amount_adj` field.
 
     Non-RUB records are dropped with a WARN — FX conversion is out of scope
-    for the momentum pipeline (affects 9 records: RUAL 2022, POLY 2015-2018).
+    for the momentum pipeline.
     """
     if not dividends:
         return []
     rub: list[dict[str, Any]] = []
     for d in dividends:
-        cur = d.get("currency", "RUB")
+        cur = d.get("currency")
+        if cur == "":
+            # Every source here quotes MOEX listings, so an unset field is RUB.
+            # Warn anyway: silence is what hid a backfill writing it empty.
+            LOG.warning(
+                "dividend with empty currency, assumed RUB ticker=%s ex=%s",
+                ticker,
+                d.get("registry_close"),
+            )
+        cur = cur or "RUB"
         if cur != "RUB":
             LOG.warning(
                 "dividend skipped (non-RUB) ticker=%s ex=%s currency=%s amount=%s",
