@@ -15,6 +15,7 @@ from pathlib import Path
 import pandas as pd
 
 import tickers as t_mod
+from cli.logging_setup import setup_logging
 from config import ANALYSIS_START_DATE, COMMISSION_PER_SIDE
 from momentum.backtest import backtest
 from momentum.signals import CurveFitSignal
@@ -44,6 +45,7 @@ def _write_fan_csv(path: Path, navs: dict[int, pd.Series], mcftrr: pd.Series, pr
 
 
 def main() -> None:
+    setup_logging()
     tickers_dict = t_mod.load(TICKERS_FILE)
     if not tickers_dict:
         raise SystemExit(f"{TICKERS_FILE} is empty — run `momentum tickers refresh` first")

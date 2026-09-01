@@ -151,7 +151,7 @@ def compute_one(
     elif baseline != new_hash:
         if from_scratch:
             baseline_hashes[ticker] = new_hash
-            LOG.info("baseline updated for %s (from-scratch)", ticker)
+            LOG.debug("baseline updated for %s (from-scratch)", ticker)
         else:
             raise IncrementalDriftError(
                 f"drift detected for {ticker}: pre-tail rows differ from committed "
@@ -220,7 +220,7 @@ def compute_all(
                 mass_warned = True
             continue
         result[t] = meta
-        LOG.info(
+        LOG.debug(
             "monthly ticker=%s rows=%d first=%s last=%s",
             t,
             meta.rows,

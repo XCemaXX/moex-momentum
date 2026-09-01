@@ -21,7 +21,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from momentum.backtest import gross_return, turnover
+from momentum.backtest import gross_return, turnover, warn_missing_returns
 from momentum.signals import Signal
 from momentum.universe import universe_at
 from tickers import TickersDict
@@ -97,9 +97,12 @@ def nav_from_selections(
     idx: list[pd.Period] = [months[0] - 1]
     vals: list[float] = [1.0]
     rebalances: list[Rebalance] = []
+    misses: list[tuple[str, str, str]] = []
     for t in months:
         if prev_w:
-            nav *= 1.0 + gross_return(prev_w, returns_panel.loc[t], period=t, quartile=label)
+            nav *= 1.0 + gross_return(
+                prev_w, returns_panel.loc[t], period=t, quartile=label, misses=misses
+            )
         sel = selections.get(t)
         if sel:
             w = 1.0 / len(sel)
@@ -111,6 +114,7 @@ def nav_from_selections(
             prev_w = new_w
         idx.append(t)
         vals.append(nav)
+    warn_missing_returns(misses, label=label)
     nav_series = pd.Series(vals, index=pd.PeriodIndex(idx, freq="M"), name=label)
     return FanCurve(nav=nav_series, rebalances=rebalances)
 

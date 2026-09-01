@@ -18,6 +18,8 @@ from typing import Any, cast
 
 import pandas as pd
 
+from config import LOG_SAMPLE
+
 LOG = logging.getLogger(__name__)
 
 
@@ -107,29 +109,37 @@ def monthly_total_returns(
 
     div_slag_by_month: dict[pd.Period, float] = {}
     idx = cast(pd.DatetimeIndex, prices_adj_df.index)
+    before_first_price: list[str] = []
+    non_positive_close: list[str] = []
     for d in dividends_adj:
         ex = pd.Timestamp(d["registry_close"])
         pos = int(idx.searchsorted(ex, side="left"))
         if pos == 0:
-            LOG.warning(
-                "dividend before first price ticker=%s ex=%s amount=%s — skipped",
-                ticker,
-                d["registry_close"],
-                d.get("amount"),
-            )
+            before_first_price.append(str(d["registry_close"]))
             continue
         close_pre_ex_adj = float(prices_adj_df.iloc[pos - 1]["close_adj"])
         if close_pre_ex_adj <= 0:
-            LOG.warning(
-                "dividend pre-ex close non-positive ticker=%s ex=%s — skipped",
-                ticker,
-                d["registry_close"],
-            )
+            non_positive_close.append(str(d["registry_close"]))
             continue
         amt = float(d["amount_adj"])
         slag = (1.0 - tax) * amt / close_pre_ex_adj
         m = ex.to_period("M")
         div_slag_by_month[m] = div_slag_by_month.get(m, 0.0) + slag
+
+    if before_first_price:
+        LOG.warning(
+            "dividend before first price, skipped ticker=%s n=%d sample_ex=%s",
+            ticker,
+            len(before_first_price),
+            ",".join(before_first_price[:LOG_SAMPLE]),
+        )
+    if non_positive_close:
+        LOG.warning(
+            "dividend pre-ex close non-positive, skipped ticker=%s n=%d sample_ex=%s",
+            ticker,
+            len(non_positive_close),
+            ",".join(non_positive_close[:LOG_SAMPLE]),
+        )
 
     monthly["div_return"] = [div_slag_by_month.get(p, 0.0) for p in monthly.index]
     monthly["total_return"] = monthly["price_return"].fillna(0.0) + monthly["div_return"]

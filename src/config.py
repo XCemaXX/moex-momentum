@@ -78,6 +78,10 @@ INCREMENTAL_RECOMPUTE_MONTHS: int = 12
 # split or dividend backfill — and worth manual inspection.
 MASS_DRIFT_THRESHOLD: int = 10
 
+# Aggregated warnings list this many examples; the count carries the signal and
+# the full set lives in the data, not the log.
+LOG_SAMPLE: int = 5
+
 # External dividend fill HTTP settings.
 FILL_HTTP_TIMEOUT_SECONDS: float = 20.0
 FILL_USER_AGENT: str = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"

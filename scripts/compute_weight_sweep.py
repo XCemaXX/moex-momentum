@@ -18,6 +18,7 @@ from pathlib import Path
 import pandas as pd
 
 import tickers as t_mod
+from cli.logging_setup import setup_logging
 from config import ANALYSIS_START_DATE
 from momentum.backtest import backtest
 from momentum.signals import CurveFitSignal
@@ -39,6 +40,7 @@ def _col(a: float) -> str:
 
 
 def main() -> None:
+    setup_logging()
     tickers_dict = t_mod.load(TICKERS_FILE)
     if not tickers_dict:
         raise SystemExit(f"{TICKERS_FILE} is empty — run `momentum tickers refresh` first")

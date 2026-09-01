@@ -14,6 +14,7 @@ from typing import Any, cast
 
 import pandas as pd
 
+from config import LOG_SAMPLE
 from ingest.dividends.merge import dedup_near_duplicates
 
 LOG = logging.getLogger(__name__)
@@ -92,27 +93,33 @@ def adjust_dividend_amounts(
     if not dividends:
         return []
     rub: list[dict[str, Any]] = []
+    empty_currency: list[str] = []
+    skipped: list[str] = []
     for d in dividends:
         cur = d.get("currency")
         if cur == "":
-            # Every source here quotes MOEX listings, so an unset field is RUB.
-            # Warn anyway: silence is what hid a backfill writing it empty.
-            LOG.warning(
-                "dividend with empty currency, assumed RUB ticker=%s ex=%s",
-                ticker,
-                d.get("registry_close"),
-            )
+            empty_currency.append(str(d.get("registry_close")))
+        # Every source here quotes MOEX listings, so an unset field is RUB.
         cur = cur or "RUB"
         if cur != "RUB":
-            LOG.warning(
-                "dividend skipped (non-RUB) ticker=%s ex=%s currency=%s amount=%s",
-                ticker,
-                d.get("registry_close"),
-                cur,
-                d.get("amount"),
-            )
+            skipped.append(f"{d.get('registry_close')}/{cur}")
             continue
         rub.append(d)
+    if empty_currency:
+        # Warn even though we recover: silence is what hid a backfill writing it empty.
+        LOG.warning(
+            "dividend empty currency assumed RUB ticker=%s n=%d sample_ex=%s",
+            ticker,
+            len(empty_currency),
+            ",".join(empty_currency[:LOG_SAMPLE]),
+        )
+    if skipped:
+        LOG.warning(
+            "dividend skipped (non-RUB) ticker=%s n=%d sample_ex/cur=%s",
+            ticker,
+            len(skipped),
+            ", ".join(skipped[:LOG_SAMPLE]),
+        )
     if not rub:
         return []
     # Collapse cross-source near-duplicates so monthly_total_returns never

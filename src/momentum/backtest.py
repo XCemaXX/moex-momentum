@@ -11,7 +11,7 @@ Mechanics (plan §9, locked decision #10 — signal-and-execute on one close):
 NAV[t] = NAV[t-1] × (1 + gross_return_t) × (1 - cost_at_t).
 
 If a held ticker has no total_return for the following month (delisting, gap),
-its position contributes 0% — WARN-logged once per occurrence.
+its position contributes 0% — WARN-logged as one aggregate per run.
 
 Output: q_values.csv (one row per month) + holdings/{YYYY-MM}.json.
 """
@@ -21,6 +21,7 @@ from __future__ import annotations
 import json
 import logging
 import math
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -93,23 +94,49 @@ def gross_return(
     *,
     period: pd.Period,
     quartile: str,
+    misses: list[tuple[str, str, str]] | None = None,
 ) -> float:
-    """Equal-weight portfolio gross return. Missing per-ticker return → 0% with WARN."""
+    """Equal-weight portfolio gross return. Missing per-ticker return → 0%.
+
+    Pass `misses` to collect them for one aggregated WARN per run; without it
+    each miss is warned on the spot.
+    """
     if not weights:
         return 0.0
     total = 0.0
     for tk, w in weights.items():
         r = monthly_returns.get(tk)
         if r is None or (isinstance(r, float) and math.isnan(r)):
-            LOG.warning(
-                "missing total_return month=%s ticker=%s quartile=%s — treated as 0",
-                period,
-                tk,
-                quartile,
-            )
+            if misses is None:
+                LOG.warning(
+                    "missing total_return month=%s ticker=%s quartile=%s — treated as 0",
+                    period,
+                    tk,
+                    quartile,
+                )
+            else:
+                misses.append((str(period), str(tk), quartile))
             continue
         total += w * float(r)
     return total
+
+
+def warn_missing_returns(misses: list[tuple[str, str, str]], *, label: str) -> None:
+    """One line per run instead of one per (month, ticker, quartile)."""
+    if not misses:
+        return
+    by_quartile = Counter(q for _, _, q in misses)
+    # topn_fan passes its curve label as the quartile, so the split is redundant there.
+    split = (
+        "" if set(by_quartile) == {label} else f", by quartile {dict(sorted(by_quartile.items()))}"
+    )
+    LOG.warning(
+        "missing total_return treated as 0 [%s]: %d event(s), %d ticker(s)%s",
+        label,
+        len(misses),
+        len({tk for _, tk, _ in misses}),
+        split,
+    )
 
 
 def backtest(
@@ -138,6 +165,7 @@ def backtest(
     if returns_panel.empty:
         return BacktestResult(q_values=pd.DataFrame())
 
+    misses: list[tuple[str, str, str]] = []
     months = returns_panel.index
     if start is not None:
         months = months[months >= start]
@@ -166,7 +194,7 @@ def backtest(
         if any(prev_w[q] for q in Q_LABELS):
             month_returns = returns_panel.loc[t]
             for q in Q_LABELS:
-                gr = gross_return(prev_w[q], month_returns, period=t, quartile=q)
+                gr = gross_return(prev_w[q], month_returns, period=t, quartile=q, misses=misses)
                 nav[q] *= 1.0 + gr
         # MCFTRR benchmark mirrors the same timing.
         if t in mcftrr_ret.index:
@@ -208,7 +236,7 @@ def backtest(
             )
             if month_pending:
                 pending[t] = month_pending
-            LOG.info(
+            LOG.debug(
                 "rebalance month=%s universe=%d Q1=%d Q4=%d",
                 t,
                 len(universe),
@@ -223,6 +251,7 @@ def backtest(
 
         rows.append({"month": str(t), **{q: nav[q] for q in Q_LABELS}, "MCFTRR": mcftrr_nav})
 
+    warn_missing_returns(misses, label=type(signal).__name__)
     df = pd.DataFrame(rows).drop_duplicates(subset=["month"], keep="last")
     df = df.set_index("month").sort_index()
     return BacktestResult(
