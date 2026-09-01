@@ -3944,5 +3944,17 @@
     },
     "reason": "FY2025 dividend 9.71 RUB (25% of net profit); AGM 2026-06-30, record 2026-07-20 (vedomosti/interfax/dohod agree). ISS lag; tbank does not cover VTBR.",
     "resolved_at": "2026-08-01"
+  },
+  {
+    "ticker": "RAGR",
+    "registry_close": "2026-08-06",
+    "action": "augment",
+    "add": {
+      "amount": 16.48,
+      "currency": "RUB",
+      "source": "skill_fill_disclosure"
+    },
+    "reason": "First payout after redomicile; 16.48 RUB, ex-date 2026-08-05, record 2026-08-06 (smart-lab/dohod agree). Price gap 106.18 -> 89.68 = 16.50 confirms. ISS lag.",
+    "resolved_at": "2026-09-01"
   }
 ]

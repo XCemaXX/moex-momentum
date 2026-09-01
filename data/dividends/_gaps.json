@@ -70,11 +70,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "ABRD",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "ACKO",
     "year": 2017,
     "reason": "no_record_for_year"
@@ -187,11 +182,6 @@
   {
     "ticker": "AFLT",
     "year": 2024,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "AFLT",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -602,11 +592,6 @@
   {
     "ticker": "AQUA",
     "year": 2019,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "AQUA",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -1057,21 +1042,6 @@
   {
     "ticker": "BANE",
     "year": 2021,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "BANE",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "BANEP",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "BAZA",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -3350,11 +3320,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "FLOT",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "FTRE",
     "year": 2017,
     "reason": "no_record_for_year"
@@ -5560,11 +5525,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "KRKNP",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "KRKO",
     "year": 2012,
     "reason": "no_record_for_year"
@@ -6725,11 +6685,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "LSRG",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "LVHK",
     "year": 2013,
     "reason": "no_record_for_year"
@@ -6937,11 +6892,6 @@
   {
     "ticker": "MBNK",
     "year": 2024,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MBNK",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -6967,11 +6917,6 @@
   {
     "ticker": "MDMG",
     "year": 2023,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MDMG",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -7790,11 +7735,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MRKC",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "MRKH",
     "year": 2011,
     "reason": "no_record_for_year"
@@ -8195,18 +8135,8 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "MSNG",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "MSRS",
     "year": 2009,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MSRS",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -8452,11 +8382,6 @@
   {
     "ticker": "MTSI",
     "year": 2011,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "MTSS",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -8780,11 +8705,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "NKHP",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "NKNC",
     "year": 2008,
     "reason": "no_record_for_year"
@@ -8927,11 +8847,6 @@
   {
     "ticker": "NMOS",
     "year": 2014,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "NMTP",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -11835,16 +11750,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "RTKM",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "RTKMP",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "RTMC",
     "year": 2008,
     "reason": "no_record_for_year"
@@ -12990,11 +12895,6 @@
     "reason": "no_record_for_year"
   },
   {
-    "ticker": "SIBN",
-    "year": 2026,
-    "reason": "no_record_for_year"
-  },
-  {
     "ticker": "SILM",
     "year": 2009,
     "reason": "no_record_for_year"
@@ -13307,11 +13207,6 @@
   {
     "ticker": "SOFL",
     "year": 2024,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SOFL",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -13652,11 +13547,6 @@
   {
     "ticker": "SVAV",
     "year": 2022,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "SVCB",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -15312,11 +15202,6 @@
   {
     "ticker": "TRNFP",
     "year": 2009,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "TRNFP",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
@@ -17567,11 +17452,6 @@
   {
     "ticker": "VTBR",
     "year": 2024,
-    "reason": "no_record_for_year"
-  },
-  {
-    "ticker": "VTBR",
-    "year": 2026,
     "reason": "no_record_for_year"
   },
   {
