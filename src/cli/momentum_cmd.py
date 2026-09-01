@@ -91,6 +91,7 @@ def compute_backtest(
         start=start_p,
         end=end_p,
         universe_top_n=top_n if top_n > 0 else None,
+        with_pending=(signal == "curve_fit"),
     )
     out = output_dir / signal
     # pending.json (task 008) only for curve_fit: the block compares against

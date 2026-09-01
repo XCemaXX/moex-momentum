@@ -33,9 +33,11 @@ incremental path guards against. Without it, drifted months trip the baseline ga
   real). `data/splits/_acked.json` can silence a reviewed flag, but it is empty by
   convention — do not start acking selectively.
 - `compute backtest` last rebalance: `month=<new-month>`.
-- `site build`: `N artefacts → docs/pages`. The `missing total_return … treated
-  as 0` lines and any `mages: no price panel for … dropped` warning are
-  pre-existing and harmless — do not chase them.
+- `site build`: `N artefacts → docs/pages`. One aggregated `missing total_return
+  treated as 0` line per run is expected: a held ticker whose data ends contributes
+  0% and drops out — the author's anti-survivorship convention, not a defect. It is
+  not free (per-quartile cost measured in `task 027`), but nothing about it is
+  actionable during a monthly run. Same for `mages: no price panel for … dropped`.
 - New month present in the site: `rg -o '"20[0-9]{2}-[0-9]{2}"' docs/pages/data.json
   | tail -2` shows the new month-end.
 

@@ -66,6 +66,7 @@ def main() -> None:
         start=start,
         universe_top_n=BASELINE_TOPN,
         panels=panels,
+        with_pending=False,
     )
     mcftrr = res.q_values["MCFTRR"].copy()
     mcftrr.index = pd.PeriodIndex(mcftrr.index, freq="M")

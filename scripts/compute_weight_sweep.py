@@ -59,6 +59,7 @@ def main() -> None:
             tickers_dict=tickers_dict,
             start=start,
             panels=panels,
+            with_pending=False,
         )
         q1[_col(a)] = result.q_values["Q1"]
         if mcftrr is None:

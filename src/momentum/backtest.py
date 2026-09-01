@@ -150,6 +150,7 @@ def backtest(
     commission_per_side: float = COMMISSION_PER_SIDE,
     universe_top_n: int | None = UNIVERSE_TOP_N_LIQUID,
     panels: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame] | None = None,
+    with_pending: bool = True,
 ) -> BacktestResult:
     """Run the quartile backtest. `start`/`end` are inclusive Period[M] bounds.
 
@@ -158,6 +159,9 @@ def backtest(
 
     `panels` injects a pre-loaded (returns, close, value) tuple from `load_panel`
     so callers sweeping many signals over one panel pay the load once.
+
+    `with_pending=False` skips the display-only pending block — it is ~60% of the
+    run and only the curve_fit result is ever written.
     """
     returns_panel, close_panel, value_panel = (
         panels if panels is not None else load_panel(monthly_dir)
@@ -223,16 +227,20 @@ def backtest(
             }
             # compute_month_pending returns [] when there is no liquidity floor
             # (incl. empty value_panel), so no extra guard is needed here.
-            month_pending = compute_month_pending(
-                t,
-                returns_panel=returns_panel,
-                close_panel=close_panel,
-                value_panel=value_panel,
-                tickers_dict=tickers_dict,
-                universe=universe,
-                scores=scores,
-                quartiles=quartiles,
-                liquidity_floor=cut[1] if cut else None,
+            month_pending = (
+                compute_month_pending(
+                    t,
+                    returns_panel=returns_panel,
+                    close_panel=close_panel,
+                    value_panel=value_panel,
+                    tickers_dict=tickers_dict,
+                    universe=universe,
+                    scores=scores,
+                    quartiles=quartiles,
+                    liquidity_floor=cut[1] if cut else None,
+                )
+                if with_pending
+                else []
             )
             if month_pending:
                 pending[t] = month_pending
