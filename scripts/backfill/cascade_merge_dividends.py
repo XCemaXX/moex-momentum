@@ -4,13 +4,10 @@ tbank (from .fill_cache/). Default mode: DRY RUN — no CSV writes.
 Per-ticker logic:
   1. Load existing CSV (ISS+dohod+manual entries from prior fills).
   2. Run `fill_dividends` with [YahooFetcher, TbankFetcher] fetchers
-     (read-only from .fill_cache/).
-  3. For each candidate record fill_dividends proposes:
-     - Bucket existing records by (year-month, currency).
-     - If candidate's (year-month, currency) already has a record there:
-        - amount within 1% → drop (near-dup, fill_dividends already handles).
-        - amount >1% different → ymconflict (do not add, surface to report).
-     - Otherwise: clean_new (add).
+     (read-only from .fill_cache/). It reconciles against the stored rows and
+     returns what is safe to add plus what disagrees.
+  3. Add `records`; surface `conflicts` to the report unless an `ignore` verdict
+     in `_conflicts_resolved.json` silences them.
   4. Counts and conflict candidates go to two reports.
 
 Dry-run outputs:
@@ -26,7 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from collections import Counter, defaultdict
+from collections import Counter
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -35,13 +32,12 @@ ROOT = Path(__file__).resolve().parents[2]  # scripts/backfill/ → repo root
 sys.path.insert(0, str(ROOT / "src"))
 
 import tickers as t_mod  # noqa: E402
-from ingest.dividends.conflicts import should_ignore_conflict  # noqa: E402
 from ingest.dividends.fill import fill_dividends  # noqa: E402
-from ingest.dividends.merge import classify_bucket  # noqa: E402
+from ingest.dividends.merge import DATE_TOL_DAYS  # noqa: E402
 from ingest.dividends.tbank import TbankFetcher  # noqa: E402
 from ingest.dividends.yahoo import YahooFetcher  # noqa: E402
 from storage.records import read_records, write_records_atomic  # noqa: E402
-from storage.schemas import DIV_CASTS, DIV_FIELDS, SPLIT_CASTS  # noqa: E402
+from storage.schemas import DIV_CASTS, DIV_FIELDS  # noqa: E402
 
 TICKERS_FILE = ROOT / "data" / "tickers.json"
 MANUAL_FILE = ROOT / "data" / "tickers_manual.json"
@@ -55,16 +51,28 @@ CONFLICTS_RESOLVED_FILE = DIV_DIR / "_conflicts_resolved.json"
 REPORT_MD = ROOT / "validate_with_raw" / "reports" / "cascade_dryrun.md"
 CONFLICTS_JSON = ROOT / "validate_with_raw" / "reports" / "cascade_conflicts.json"
 
-AMOUNT_TOL = 0.01  # 1%
-
 
 def _no_fetch(url: str) -> str | None:
     # cache-only mode
     return None
 
 
-def _bucket_key(rec: dict[str, Any]) -> tuple[str, str]:
-    return (rec["registry_close"][:7], rec["currency"])
+def _in_window(rows: list[dict[str, Any]], since_ym: str | None) -> list[dict[str, Any]]:
+    if not since_ym:
+        return list(rows)
+    return [r for r in rows if r["registry_close"][:7] >= since_ym]
+
+
+def _neighbours(existing: list[dict[str, Any]], cand: dict[str, Any]) -> list[dict[str, Any]]:
+    """Stored rows the candidate collides with, for the report."""
+    cur = cand.get("currency") or "RUB"
+    ref = date.fromisoformat(cand["registry_close"])
+    return [
+        e
+        for e in existing
+        if (e.get("currency") or "RUB") == cur
+        and abs((date.fromisoformat(e["registry_close"]) - ref).days) <= DATE_TOL_DAYS
+    ]
 
 
 def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchestration
@@ -87,8 +95,6 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
     )
     args = p.parse_args()
 
-    # Never book a declared-but-unpaid dividend: brokers list future record
-    # dates, but total-return may only include a payout once its date has passed.
     today_iso = date.today().isoformat()
 
     # Recent-window cutoff (YYYY-MM). The yahoo/tbank caches are static snapshots,
@@ -123,45 +129,6 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
         ignore_entries = [c for c in all_conflicts if c.get("action") == "ignore"]
     ignored_count = 0
 
-    # Splits per ticker → ISS records amounts at nominal-at-time; Yahoo/tbank
-    # back-apply splits. For each pre-split external record, divide by the
-    # cumulative split factor of all splits that came AFTER the record date,
-    # bringing the amount into ISS-compatible nominal-at-time convention.
-    splits_by_ticker: dict[str, list[dict[str, Any]]] = {}
-    for p in SPLITS_DIR.glob("*.csv"):
-        rows = read_records(p, casts=SPLIT_CASTS)
-        if rows:
-            splits_by_ticker[p.stem.upper()] = sorted(rows, key=lambda r: r["date"])
-
-    def _ratio_for_split(s: dict[str, Any]) -> float:
-        # ratio that Yahoo/tbank applied: new_amount = old_amount / ratio.
-        # For forward split before:1 after:N: shares ×N, per-share amount /N → ratio = N
-        # For reverse split before:N after:1: shares /N, per-share amount ×N → ratio = 1/N
-        # For bonus_issue before:1 after:N: same as forward.
-        return float(s["after"]) / float(s["before"])
-
-    def _adjust_external(rows: list[dict[str, Any]], ticker: str) -> list[dict[str, Any]]:
-        splits = splits_by_ticker.get(ticker.upper())
-        if not splits:
-            return rows
-        # bonus_issue treated differently by Yahoo (par value unchanged), skip.
-        applicable = [s for s in splits if s.get("type") != "bonus_issue"]
-        if not applicable:
-            return rows
-        out: list[dict[str, Any]] = []
-        for r in rows:
-            factor = 1.0
-            for s in applicable:
-                if r["registry_close"] < s["date"]:
-                    factor *= _ratio_for_split(s)
-            rec = r
-            if factor != 1.0:
-                rec = dict(r)
-                rec["amount"] = float(r["amount"]) * factor
-                rec["split_adjusted_back_by"] = factor
-            out.append(rec)
-        return out
-
     yf_real = YahooFetcher(_no_fetch, cache_dir=CACHE_ROOT)
     tb_real = TbankFetcher(_no_fetch, cache_dir=CACHE_ROOT)
 
@@ -175,7 +142,7 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
             tk = ticker.upper()
             if tk in self._blacklist:
                 return []
-            return _adjust_external(self._inner.fetch(ticker), tk)
+            return list(self._inner.fetch(ticker))
 
     yf: Any = _Filtered(yf_real, yahoo_blacklist)
     tb: Any = _Filtered(tb_real, tbank_blacklist)
@@ -201,70 +168,48 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
             tickers_manual=manual,
             prices_dir=PRICES_DIR,
             dividends_dir=DIV_DIR,
+            splits_dir=SPLITS_DIR,
+            ignore_entries=ignore_entries,
         )
-        candidates = [r for r in result.records if r["registry_close"] <= today_iso]
-        if since_ym:
-            candidates = [r for r in candidates if r["registry_close"][:7] >= since_ym]
-        if not candidates:
-            continue
+        clean_new = _in_window(result.records, since_ym)
 
-        # Bucket existing by (ym, currency). May have multiple records per bucket
-        # (real two-tranche payouts).
-        existing_buckets: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
-        for r in existing:
-            existing_buckets[_bucket_key(r)].append(r)
-        proposed_buckets: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
-        for cand in candidates:
-            proposed_buckets[_bucket_key(cand)].append(cand)
-
-        clean_new: list[dict[str, Any]] = []
-        for key, cands in proposed_buckets.items():
-            collisions = existing_buckets.get(key, [])
-            if not collisions:
-                clean_new.extend(cands)
-                continue
-            _drops, conflicts = classify_bucket(
-                cands,
-                collisions,
-                amount_rel_tol=AMOUNT_TOL,
-            )
-            for cand in conflicts:
-                if should_ignore_conflict(
-                    ignore_entries,
-                    ticker=tk,
-                    ym=key[0],
-                    registry_close=cand["registry_close"],
-                    source=cand.get("source"),
-                ):
-                    ignored_count += 1
-                    continue
-                ymconflict_candidates.append(
-                    {
-                        "ticker": tk,
-                        "ym": key[0],
-                        "currency": key[1],
-                        "existing": [
-                            {
-                                "registry_close": e["registry_close"],
-                                "amount": float(e["amount"]),
-                                "source": e.get("source"),
-                            }
-                            for e in collisions
-                        ],
-                        "proposed": {
-                            "registry_close": cand["registry_close"],
-                            "amount": float(cand["amount"]),
-                            "source": cand.get("source"),
-                            "registry_close_source": cand.get("registry_close_source"),
-                        },
-                        "ratio_max": max(
+        # `fill_dividends` reconciled against stored rows already: `records`
+        # collide with nothing, `conflicts` need a verdict. Collisions are
+        # recomputed here for the report only.
+        ignored_count += result.n_conflicts_ignored
+        for cand in _in_window(result.conflicts, since_ym):
+            ym = cand["registry_close"][:7]
+            collisions = _neighbours(existing, cand)
+            ymconflict_candidates.append(
+                {
+                    "ticker": tk,
+                    "ym": ym,
+                    "currency": cand.get("currency") or "RUB",
+                    "existing": [
+                        {
+                            "registry_close": e["registry_close"],
+                            "amount": float(e["amount"]),
+                            "source": e.get("source"),
+                        }
+                        for e in collisions
+                    ],
+                    "proposed": {
+                        "registry_close": cand["registry_close"],
+                        "amount": float(cand["amount"]),
+                        "source": cand.get("source"),
+                        "registry_close_source": cand.get("registry_close_source"),
+                    },
+                    "ratio_max": max(
+                        (
                             float(cand["amount"]) / float(e["amount"])
                             if float(e["amount"]) > 0
                             else float("inf")
                             for e in collisions
                         ),
-                    }
-                )
+                        default=float("inf"),
+                    ),
+                }
+            )
 
         if not clean_new:
             continue

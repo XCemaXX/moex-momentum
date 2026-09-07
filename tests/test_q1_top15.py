@@ -7,8 +7,6 @@ must equal the `k15` column the task-024 fan would produce.
 
 from __future__ import annotations
 
-from pathlib import Path
-
 import pandas as pd
 import pytest
 
@@ -21,7 +19,7 @@ from config import (
 )
 from momentum.signals import CurveFitSignal
 from momentum.topn_fan import topk_fan
-from momentum.universe import load_panel
+from tests.conftest import DATA_DIR, Computed
 from viz.plotly_charts import (
     Q1_TOP15_COLOR,
     _plot_strategy_vs_mcftrr,
@@ -83,20 +81,18 @@ def test_chart_template_second_main_guard() -> None:
     assert two.count('<main class="full">') == 2
 
 
-def test_inline_top15_matches_topn_fan() -> None:
+def test_inline_top15_matches_topn_fan(computed: Computed) -> None:
     """Inline top15 (from scores.csv) == the task-024 fan's k15 (recomputed from
     panels + signal) on the shared window — proves no research CSV is needed."""
-    monthly_dir = Path("data/momentum/monthly")
-    scores_path = Path("data/momentum/curve_fit/scores.csv")
-    tickers_file = Path("data/tickers.json")
-    if not (monthly_dir.exists() and scores_path.exists() and tickers_file.exists()):
-        pytest.skip("backtest output not present")
+    monthly_dir = computed.monthly_dir
+    scores_path = computed.signal_dir("curve_fit") / "scores.csv"
+    tickers_file = DATA_DIR / "tickers.json"
 
     k = TOP_K_CONCENTRATION
     inline = _q1top15_nav(_load_scores(scores_path), monthly_dir, k=k)
     assert inline is not None
 
-    panels = load_panel(monthly_dir)
+    panels = computed.panels
     fan = topk_fan(
         panels,
         CurveFitSignal(),

@@ -1,9 +1,8 @@
 """Fill dividend gaps from external sources, predecessor-aware.
 
-For each ticker: drop pre-predecessor-cutoff records (manual redomicile bound),
-then pull from `fetchers` in tier order, applying `dedup_near_duplicates` after
-each tier so same-payout-different-source noise collapses against higher-tier
-records.
+For each ticker: drop pre-predecessor-cutoff and not-yet-paid records, then pull
+from every fetcher and hand the whole batch to `reconcile`, which decides what
+joins the stored rows. This module does not judge payout identity itself.
 """
 
 from __future__ import annotations
@@ -11,14 +10,17 @@ from __future__ import annotations
 import logging
 from collections import defaultdict
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from typing import Any
 
+from config import FOREIGN_CURRENCY_TICKERS
+from ingest.dividends.conflicts import should_ignore_conflict
 from ingest.dividends.fetchers import DividendFetcher
-from ingest.dividends.merge import dedup_near_duplicates
-from ingest.dividends.types import DedupKey, dedup_key
+from ingest.dividends.merge import reconcile
+from ingest.dividends.scale import to_stored_scale
 from storage.records import read_records
-from storage.schemas import DIV_CASTS
+from storage.schemas import DIV_CASTS, SPLIT_CASTS
 from tickers import ManualEntry, TickersDict
 
 LOG = logging.getLogger(__name__)
@@ -65,9 +67,13 @@ class FillResult:
     cutoff: str | None
     n_new: int
     n_pre_cutoff_dropped: int
-    n_near_dup_dropped: int
+    n_duplicates_dropped: int
+    n_future_dropped: int
+    n_foreign_dropped: int
+    n_conflicts_ignored: int
     by_source: dict[str, int]
     records: list[dict[str, Any]]
+    conflicts: list[dict[str, Any]]
 
 
 def _filter_by_cutoff(
@@ -92,11 +98,20 @@ def fill_dividends(
     tickers_manual: list[ManualEntry],
     prices_dir: Path,
     dividends_dir: Path,
+    splits_dir: Path | None = None,
+    ignore_entries: list[dict[str, Any]] | None = None,
+    today: date | None = None,
 ) -> FillResult:
-    """Pull from `fetchers` (in tier order), filter, return new records to merge.
+    """Fetch, filter, and reconcile against stored rows.
 
-    Each tier sees only keys not already present from higher tiers. Pre-cutoff
-    records dropped.
+    `records` are the rows safe to append. `conflicts` are rows that collide
+    with stored data and need a verdict in `_conflicts_resolved.json` — they are
+    reported, never written.
+
+    `splits_dir` only matters for fetchers that declare `restates_splits`.
+    `ignore_entries` are the `ignore` verdicts already recorded in
+    `_conflicts_resolved.json`; without them a settled disagreement is
+    re-reported every run and the report stops being read.
     """
     cutoff = predecessor_cutoff(
         ticker,
@@ -106,49 +121,68 @@ def fill_dividends(
         dividends_dir=dividends_dir,
     )
     existing = read_records(dividends_dir / f"{ticker}.csv", casts=DIV_CASTS)
-    seen_keys: set[DedupKey] = {dedup_key(r) for r in existing}
+    today_iso = (today or date.today()).isoformat()
+    splits: list[dict[str, Any]] = []
+    if splits_dir is not None:
+        splits = read_records(splits_dir / f"{ticker}.csv", casts=SPLIT_CASTS)
 
-    high_tier_running = list(existing)
-    new_records: list[dict[str, Any]] = []
-    by_source: dict[str, int] = defaultdict(int)
+    proposed: list[dict[str, Any]] = []
     n_pre_cutoff = 0
-
+    n_future = 0
+    n_foreign = 0
     for f in fetchers:
         try:
             fetched = f.fetch(ticker)
         except Exception as exc:
             LOG.warning("fetcher %s failed for %s: %s", f.source_tag, ticker, exc)
             continue
+        if splits and f.restates_splits:
+            fetched = to_stored_scale(fetched, splits)
         filtered, dropped = _filter_by_cutoff(fetched, cutoff)
         n_pre_cutoff += dropped
-        tier_new = []
         for r in filtered:
-            k = dedup_key(r)
-            if k in seen_keys:
+            # A board recommendation is not a payout. dohod lists them with a
+            # plain future date, indistinguishable from a settled record.
+            if r["registry_close"] > today_iso:
+                n_future += 1
                 continue
-            seen_keys.add(k)
-            tier_new.append(r)
-        # Fuzzy near-dup pass: same-payout-different-source (e.g. ISS 2023-06-05
-        # 563.77 vs dohod 2023-06-05 563.80) must collapse, otherwise sources
-        # reporting the same payout inflate the total.
-        candidate_union = high_tier_running + tier_new
-        _, near_dropped = dedup_near_duplicates(candidate_union)
-        near_dup_keys = {dedup_key(r) for r in near_dropped}
-        tier_new = [r for r in tier_new if dedup_key(r) not in near_dup_keys]
-        new_records.extend(tier_new)
-        high_tier_running.extend(tier_new)
-        by_source[f.source_tag] += len(tier_new)
-        if near_dropped:
-            by_source["__near_dup_dropped"] = by_source.get("__near_dup_dropped", 0) + len(
-                near_dropped
-            )
+            # A non-RUB payout on a ticker that never declares one means the feed
+            # matched a foreign company on the ticker letters.
+            if (r.get("currency") or "RUB") != "RUB" and ticker not in FOREIGN_CURRENCY_TICKERS:
+                n_foreign += 1
+                continue
+            proposed.append(r)
+
+    accepted, duplicates, conflicts = reconcile(existing, proposed)
+    n_ignored = 0
+    if ignore_entries:
+        unresolved: list[dict[str, Any]] = []
+        for c in conflicts:
+            if should_ignore_conflict(
+                ignore_entries,
+                ticker=ticker,
+                ym=c["registry_close"][:7],
+                registry_close=c["registry_close"],
+                source=c.get("source"),
+            ):
+                n_ignored += 1
+            else:
+                unresolved.append(c)
+        conflicts = unresolved
+    by_source: dict[str, int] = defaultdict(int)
+    for r in accepted:
+        by_source[str(r.get("source", ""))] += 1
 
     return FillResult(
         ticker=ticker,
         cutoff=cutoff,
-        n_new=len(new_records),
+        n_new=len(accepted),
         n_pre_cutoff_dropped=n_pre_cutoff,
-        n_near_dup_dropped=by_source.pop("__near_dup_dropped", 0),
+        n_duplicates_dropped=len(duplicates),
+        n_future_dropped=n_future,
+        n_foreign_dropped=n_foreign,
+        n_conflicts_ignored=n_ignored,
         by_source=dict(by_source),
-        records=new_records,
+        records=accepted,
+        conflicts=conflicts,
     )

@@ -16,7 +16,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from storage.records import read_records
+from storage.records import read_records, write_json_atomic
 from storage.schemas import DIV_CASTS, PRICE_CASTS
 
 
@@ -81,9 +81,4 @@ def compute_gaps(
 
 
 def save_gaps(path: Path, gaps: list[dict[str, Any]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    with tmp.open("w", encoding="utf-8") as f:
-        json.dump(gaps, f, ensure_ascii=False, indent=2)
-        f.write("\n")
-    tmp.replace(path)
+    write_json_atomic(path, gaps, sort_keys=False)

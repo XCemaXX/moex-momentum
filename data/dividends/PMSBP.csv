@@ -15,7 +15,6 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2015-07-06,6.854557,RUB,skill_fill_yahoo,yahoo_ex_div,
 2016-06-28,6.877463,RUB,skill_fill_yahoo,yahoo_ex_div,
 2017-06-07,6.975408,RUB,skill_fill_yahoo,yahoo_ex_div,
-2018-05-29,16.735186,RUB,skill_fill_yahoo,yahoo_ex_div,
 2018-05-30,8.367593,RUB,skill_fill_tbank,tbank_reestr,
 2019-06-03,10.9,RUB,moex_iss,,
 2020-06-17,11.710424,RUB,moex_iss,,

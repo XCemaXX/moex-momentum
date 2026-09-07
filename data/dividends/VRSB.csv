@@ -3,7 +3,6 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2012-04-16,0.061655,RUB,skill_fill_tbank,tbank_reestr,
 2013-04-12,0.51825,RUB,skill_fill_tbank,tbank_reestr,
 2013-04-12,0.6545,RUB,skill_fill_tbank,tbank_reestr,
-2013-04-15,1.17273,RUB,skill_fill_yahoo,yahoo_ex_div,
 2014-05-23,0.28974,RUB,skill_fill_yahoo,yahoo_ex_div,
 2016-06-30,2.67137,RUB,skill_fill_yahoo,yahoo_ex_div,
 2017-11-13,1.28677,RUB,skill_fill_yahoo,yahoo_ex_div,

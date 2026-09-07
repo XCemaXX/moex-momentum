@@ -12,6 +12,7 @@ import pytest
 
 from ingest.prices import (
     Segment,
+    _boards_in_priority_order,
     _pivot_history,
     ingest,
     ingest_one,
@@ -564,3 +565,386 @@ def test_pivot_history_keeps_missing_numeric_none() -> None:
     row = ["TQBR", "2026-07-07", "A", "A", 1, None, None, None, None, 45.7, 45.7, 45.7, None]
     rec = _pivot_history(HISTORY_COLS, [row])[0]
     assert rec["open"] is None and rec["value"] is None and rec["volume"] is None
+
+
+def test_force_refresh_bypasses_the_cache(tmp_path: Path) -> None:
+    """A force flag that silently does nothing cost four months once — see task 029."""
+    cache = tmp_path / "cache"
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(
+            200, json=_history_payload([_row("TQBR", "SBER", "2024-03-13", 298.85)])
+        )
+
+    entry: Any = {
+        "boards": [{"board": "TQBR", "is_primary": 1, "history_from": "2024-03-01"}],
+        "history_from": "2024-03-01",
+    }
+
+    async def run(out: Path, *, force: bool) -> None:
+        async with _make_async_client(handler) as client:
+            await ingest_one(
+                client,
+                "SBER",
+                entry,
+                output_dir=out,
+                cache_dir=cache,
+                today=date(2024, 3, 13),
+                force=force,
+            )
+
+    asyncio.run(run(tmp_path / "a", force=False))
+    first = len(calls)
+    assert first >= 1
+    asyncio.run(run(tmp_path / "b", force=False))
+    assert len(calls) == first, "a plain re-run must read the cache"
+    asyncio.run(run(tmp_path / "c", force=True))
+    assert len(calls) == 2 * first, "--force-refresh must re-fetch"
+
+
+def _seed_prices(path: Path, rows: list[tuple[str, float, str]]) -> None:
+    write_records_atomic(
+        path,
+        [
+            {
+                "date": d,
+                "open": c,
+                "high": c,
+                "low": c,
+                "close": c,
+                "volume": 100,
+                "value": 1000.0,
+                "board": b,
+            }
+            for d, c, b in rows
+        ],
+        fieldnames=PRICE_FIELDS,
+    )
+
+
+def _refetch_entry() -> Any:
+    return {
+        "boards": [{"board": "TQBR", "is_primary": 1, "history_from": "2024-01-01"}],
+        "history_from": "2024-01-01",
+    }
+
+
+async def _run_refetch(out: Path, handler: Any, **kw: Any) -> Any:
+    async with _make_async_client(handler) as client:
+        return await ingest_one(
+            client,
+            "SBER",
+            _refetch_entry(),
+            output_dir=out,
+            cache_dir=None,
+            today=date(2024, 3, 5),
+            **kw,
+        )
+
+
+def test_refetch_of_an_unchanged_window_keeps_the_file(tmp_path: Path) -> None:
+    out = tmp_path / "d"
+    _seed_prices(out / "SBER.csv", [("2024-03-01", 100.0, "TQBR"), ("2024-03-04", 101.0, "TQBR")])
+    before = (out / "SBER.csv").read_bytes()
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200,
+            json=_history_payload(
+                [
+                    _row("TQBR", "SBER", "2024-03-01", 100.0),
+                    _row("TQBR", "SBER", "2024-03-04", 101.0),
+                ]
+            ),
+        )
+
+    m = asyncio.run(_run_refetch(out, handler, refetch_from=date(2024, 3, 1)))
+    assert (out / "SBER.csv").read_bytes() == before
+    assert m.refetch is not None and m.refetch.changed == 0 and m.refetch.added == 0
+
+
+def test_refetch_applies_a_changed_close(tmp_path: Path) -> None:
+    out = tmp_path / "d"
+    _seed_prices(out / "SBER.csv", [("2024-03-01", 100.0, "TQBR"), ("2024-03-04", 101.0, "TQBR")])
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200,
+            json=_history_payload(
+                [
+                    _row("TQBR", "SBER", "2024-03-01", 100.0),
+                    _row("TQBR", "SBER", "2024-03-04", 999.0),
+                ]
+            ),
+        )
+
+    m = asyncio.run(_run_refetch(out, handler, refetch_from=date(2024, 3, 1)))
+    rows = read_records(out / "SBER.csv", casts=PRICE_CASTS)
+    assert [r["close"] for r in rows] == [100.0, 999.0]
+    assert m.refetch is not None and m.refetch.changed == 1
+
+
+def test_refetch_refuses_when_a_day_vanished(tmp_path: Path) -> None:
+    out = tmp_path / "d"
+    _seed_prices(out / "SBER.csv", [("2024-03-01", 100.0, "TQBR"), ("2024-03-04", 101.0, "TQBR")])
+    before = (out / "SBER.csv").read_bytes()
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200, json=_history_payload([_row("TQBR", "SBER", "2024-03-01", 100.0)])
+        )
+
+    m = asyncio.run(_run_refetch(out, handler, refetch_from=date(2024, 3, 1)))
+    assert (out / "SBER.csv").read_bytes() == before, "a refused refetch must not write"
+    assert m.refetch is not None and m.refetch.missing == ["2024-03-04"] and m.refetch.refused
+
+    m2 = asyncio.run(_run_refetch(out, handler, refetch_from=date(2024, 3, 1), allow_missing=True))
+    assert m2.rows == 1
+
+
+def test_refetch_refuses_when_the_board_changed(tmp_path: Path) -> None:
+    """Board priority means the same day can carry a different close per board."""
+    out = tmp_path / "d"
+    _seed_prices(out / "SBER.csv", [("2024-03-01", 100.0, "SMAL")])
+    before = (out / "SBER.csv").read_bytes()
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200, json=_history_payload([_row("TQBR", "SBER", "2024-03-01", 100.0)])
+        )
+
+    m = asyncio.run(_run_refetch(out, handler, refetch_from=date(2024, 3, 1)))
+    assert (out / "SBER.csv").read_bytes() == before
+    assert m.refetch is not None and m.refetch.board_changed == ["2024-03-01"]
+    assert m.refetch.refused
+
+    m2 = asyncio.run(
+        _run_refetch(out, handler, refetch_from=date(2024, 3, 1), allow_board_change=True)
+    )
+    assert m2.refetch is not None and not m2.refetch.refused, (
+        "an accepted board change must not report as refused"
+    )
+    assert read_records(out / "SBER.csv", casts=PRICE_CASTS)[0]["board"] == "TQBR"
+
+
+def test_refetch_till_keeps_the_tail(tmp_path: Path) -> None:
+    out = tmp_path / "d"
+    _seed_prices(
+        out / "SBER.csv",
+        [
+            ("2024-03-01", 100.0, "TQBR"),
+            ("2024-03-04", 101.0, "TQBR"),
+            ("2024-03-05", 102.0, "TQBR"),
+        ],
+    )
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200, json=_history_payload([_row("TQBR", "SBER", "2024-03-01", 555.0)])
+        )
+
+    asyncio.run(
+        _run_refetch(out, handler, refetch_from=date(2024, 3, 1), refetch_till=date(2024, 3, 1))
+    )
+    rows = read_records(out / "SBER.csv", casts=PRICE_CASTS)
+    assert [r["close"] for r in rows] == [555.0, 101.0, 102.0]
+
+
+def test_refetch_writes_nothing_when_the_fetch_is_empty(tmp_path: Path) -> None:
+    out = tmp_path / "d"
+    _seed_prices(out / "SBER.csv", [("2024-03-01", 100.0, "TQBR")])
+    before = (out / "SBER.csv").read_bytes()
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=_history_payload([]))
+
+    asyncio.run(_run_refetch(out, handler, refetch_from=date(2024, 3, 1), allow_missing=True))
+    assert (out / "SBER.csv").read_bytes() == before
+
+
+def test_since_past_the_stored_tail_is_refused(tmp_path: Path) -> None:
+    """It used to write a hole between the stored tail and the requested start."""
+    out = tmp_path / "d"
+    _seed_prices(out / "SBER.csv", [("2024-01-05", 100.0, "TQBR")])
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=_history_payload([]))
+
+    with pytest.raises(ValueError, match="would leave a gap"):
+        asyncio.run(_run_refetch(out, handler, since=date(2024, 3, 1)))
+
+
+def test_odd_lot_board_ranks_below_a_later_starting_real_board() -> None:
+    """Before TQBR existed, SMAL's earlier history_from used to win the date."""
+    entry: Any = {
+        "boards": [
+            {"board": "SMAL", "is_primary": 0, "history_from": "2011-03-01"},
+            {"board": "TQNE", "is_primary": 0, "history_from": "2013-03-25"},
+            {"board": "TQBR", "is_primary": 1, "history_from": "2014-06-01"},
+        ]
+    }
+    assert [b["board"] for b in _boards_in_priority_order(entry)] == ["TQBR", "TQNE", "SMAL"]
+
+
+def test_odd_lot_board_still_supplies_days_nothing_else_traded(tmp_path: Path) -> None:
+    """1324 ticker-months have no other board; dropping them would void eligibility."""
+    entry: Any = {
+        "boards": [
+            {"board": "SMAL", "is_primary": 0, "history_from": "2013-01-01"},
+            {"board": "TQNE", "is_primary": 0, "history_from": "2013-01-01"},
+        ],
+        "history_from": "2013-01-01",
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        board = str(request.url).split("/boards/")[1].split("/")[0]
+        rows = [_row("SMAL", "SBER", "2013-01-09", 50.0)] if board == "SMAL" else []
+        return httpx.Response(200, json=_history_payload(rows))
+
+    async def run() -> None:
+        async with _make_async_client(handler) as client:
+            await ingest_one(
+                client,
+                "SBER",
+                entry,
+                output_dir=tmp_path,
+                cache_dir=None,
+                today=date(2013, 1, 10),
+            )
+
+    asyncio.run(run())
+    rows = read_records(tmp_path / "SBER.csv", casts=PRICE_CASTS)
+    assert [(r["date"], r["board"]) for r in rows] == [("2013-01-09", "SMAL")]
+
+
+def test_predecessor_boards_come_from_its_own_entry(tmp_path: Path) -> None:
+    """EONR traded EQNL, which its successor UPRO no longer lists."""
+    asked: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        url = str(request.url)
+        asked.append(url.split("/boards/")[1].split(".json", maxsplit=1)[0])
+        return httpx.Response(200, json=_history_payload([]))
+
+    entry: Any = {
+        "boards": [{"board": "TQBR", "is_primary": 1, "history_from": "2016-07-01"}],
+        "history": [{"renamed": "2016-07-01", "prev_ticker": "EONR"}],
+        "history_from": "2016-07-01",
+    }
+    dictionary: Any = {
+        "UPRO": entry,
+        "EONR": {"boards": [{"board": "EQNL", "is_primary": 0, "history_from": "2008-01-01"}]},
+    }
+
+    async def run() -> None:
+        async with _make_async_client(handler) as client:
+            await ingest_one(
+                client,
+                "UPRO",
+                entry,
+                output_dir=tmp_path,
+                cache_dir=None,
+                today=date(2016, 8, 1),
+                tickers_dict=dictionary,
+            )
+
+    asyncio.run(run())
+    assert any("EQNL/securities/EONR" in a for a in asked), (
+        "the predecessor's own board must be queried"
+    )
+
+
+def _epoch_row(secid: str, d: str) -> list[Any]:
+    return _row("TQBR", secid, d, 100.0)
+
+
+def test_thin_additional_issue_loses_to_the_main_line(tmp_path: Path) -> None:
+    """`changeover.json` retires a SECID for a rename and for a consolidated issue alike."""
+    entry: Any = {
+        "boards": [{"board": "TQBR", "is_primary": 1, "history_from": "2013-01-01"}],
+        "history": [{"renamed": "2014-07-14", "prev_ticker": "HYDR-041D"}],
+        "history_from": "2013-01-01",
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        secid = str(request.url).split("/securities/")[1].split(".json")[0]
+        days = ["2014-03-03", "2014-03-04", "2014-03-05"] if secid == "HYDR" else ["2014-03-03"]
+        return httpx.Response(200, json=_history_payload([_epoch_row(secid, d) for d in days]))
+
+    async def run() -> None:
+        async with _make_async_client(handler) as client:
+            await ingest_one(
+                client,
+                "HYDR",
+                entry,
+                output_dir=tmp_path,
+                cache_dir=None,
+                today=date(2014, 3, 5),
+                tickers_dict={"HYDR": entry},
+            )
+
+    asyncio.run(run())
+    assert len(read_records(tmp_path / "HYDR.csv", casts=PRICE_CASTS)) == 3
+
+
+def test_retired_secid_wins_when_it_is_the_market(tmp_path: Path) -> None:
+    """ZHIV: the retired line traded 88 days, the main line 2 — no regex would know."""
+    entry: Any = {
+        "boards": [{"board": "TQBR", "is_primary": 1, "history_from": "2013-01-01"}],
+        "history": [{"renamed": "2013-11-25", "prev_ticker": "ZHIV-001D"}],
+        "history_from": "2013-01-01",
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        secid = str(request.url).split("/securities/")[1].split(".json")[0]
+        days = (
+            ["2013-06-03", "2013-06-04", "2013-06-05"] if secid == "ZHIV-001D" else ["2013-06-03"]
+        )
+        return httpx.Response(200, json=_history_payload([_epoch_row(secid, d) for d in days]))
+
+    async def run() -> None:
+        async with _make_async_client(handler) as client:
+            await ingest_one(
+                client,
+                "ZHIV",
+                entry,
+                output_dir=tmp_path,
+                cache_dir=None,
+                today=date(2013, 6, 5),
+                tickers_dict={"ZHIV": entry},
+            )
+
+    asyncio.run(run())
+    assert len(read_records(tmp_path / "ZHIV.csv", casts=PRICE_CASTS)) == 3
+
+
+def test_disjoint_epochs_are_unioned(tmp_path: Path) -> None:
+    """A rename whose old line went quiet before the new code started loses nothing."""
+    entry: Any = {
+        "boards": [{"board": "TQBR", "is_primary": 1, "history_from": "2013-01-01"}],
+        "history": [{"renamed": "2013-06-10", "prev_ticker": "OLD"}],
+        "history_from": "2013-01-01",
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        secid = str(request.url).split("/securities/")[1].split(".json")[0]
+        days = ["2013-06-03"] if secid == "OLD" else ["2013-06-05"]
+        return httpx.Response(200, json=_history_payload([_epoch_row(secid, d) for d in days]))
+
+    async def run() -> None:
+        async with _make_async_client(handler) as client:
+            await ingest_one(
+                client,
+                "NEW",
+                entry,
+                output_dir=tmp_path,
+                cache_dir=None,
+                today=date(2013, 6, 9),
+                tickers_dict={"NEW": entry},
+            )
+
+    asyncio.run(run())
+    dates = [r["date"] for r in read_records(tmp_path / "NEW.csv", casts=PRICE_CASTS)]
+    assert dates == ["2013-06-03", "2013-06-05"]

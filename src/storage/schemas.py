@@ -25,8 +25,10 @@ PRICE_CASTS: Mapping[str, Callable[[str], object]] = {
 }
 
 # data/dividends/{TICKER}.csv
-# `split_adjusted_back_by`: legacy field from earlier split-adjust pass.
-# No source writes it today, but a few records still carry it — preserve on round-trip.
+# `split_adjusted_back_by`: provenance, not a split lookup. Marks rows whose amount
+# THIS pipeline lifted onto the stored share scale (`ingest.dividends.scale`), because
+# the feed quoted it at today's count. `data/splits/` cannot answer that: an ISS row
+# and a rescaled yahoo row before the same split are indistinguishable without it.
 DIV_FIELDS: tuple[str, ...] = (
     "registry_close",
     "amount",
@@ -67,6 +69,12 @@ MONTHLY_CASTS: Mapping[str, Callable[[str], object]] = {
 }
 
 # data/momentum/{signal}/q_values.csv
+SCORES_FIELDS: tuple[str, ...] = ("month", "ticker", "score")
+SCORES_CASTS: Mapping[str, Callable[[str], object]] = {"score": float}
+
+# `cut_rub` is empty in months where the universe did not reach the liquidity cap.
+UNIVERSE_META_FIELDS: tuple[str, ...] = ("month", "n", "cut_rub", "marginal")
+
 Q_VALUES_FIELDS: tuple[str, ...] = ("month", "Q1", "Q2", "Q3", "Q4", "MCFTRR")
 Q_VALUES_CASTS: Mapping[str, Callable[[str], object]] = {
     "Q1": float,

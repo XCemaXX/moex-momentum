@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-
 import pandas as pd
 import pytest
 
@@ -14,7 +12,7 @@ from mages.weighted_q1 import (
     convictions,
     weighted_q1_nav,
 )
-from momentum.universe import load_panel
+from tests.conftest import DATA_DIR, Computed
 from viz.plotly_charts import load_q_values
 from viz.site_builder import _load_holdings
 
@@ -96,21 +94,20 @@ def test_build_mages_table_two_columns() -> None:
     assert d["mages"] == [["A", "AA", 60.0], ["B", "b", 40.0]]
 
 
-def test_cold_lambda_zero_reproduces_base_q1() -> None:
+def test_cold_lambda_zero_reproduces_base_q1(computed: Computed) -> None:
     """λ=0 cold-start over full history must equal the published Q1 NAV exactly —
     the proof the tilt sits on top of the real backtest mechanics."""
-    qv_path = Path("data/momentum/curve_fit/q_values.csv")
-    holdings_dir = Path("data/momentum/curve_fit/holdings")
-    monthly_dir = Path("data/momentum/monthly")
-    if not (qv_path.exists() and holdings_dir.exists() and monthly_dir.exists()):
-        pytest.skip("backtest output not present")
+    signal_dir = computed.signal_dir("curve_fit")
 
-    holdings = _load_holdings(holdings_dir)
-    panel = load_panel(monthly_dir)[0]
-    qv = load_q_values(qv_path)
+    holdings = _load_holdings(signal_dir / "holdings")
+    panel = computed.panels[0]
+    qv = load_q_values(signal_dir / "q_values.csv")
     nav0 = weighted_q1_nav(
-        holdings, panel, load_quarters(Path("data/mages")), 0.0, warm_start=False
+        holdings, panel, load_quarters(DATA_DIR / "mages"), 0.0, warm_start=False
     )
-    common = nav0.index.intersection(qv.index)
+    # Drop the anchor: `backtest` books the entry cost into the row after the
+    # seeding close, this builder books it into the seeding row itself. Same
+    # economics, different placement of one display row.
+    common = nav0.index.intersection(qv.index)[1:]
     assert len(common) > 100
     assert (nav0.loc[common] - qv["Q1"].loc[common]).abs().max() == pytest.approx(0.0, abs=1e-12)

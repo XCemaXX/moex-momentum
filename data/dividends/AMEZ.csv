@@ -1,2 +1,2 @@
-registry_close,amount,currency,source,registry_close_source
-2024-09-28,77.0,RUB,moex_iss,
+registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2024-09-28,77.0,RUB,moex_iss,,

@@ -61,12 +61,14 @@ momentum tickers refresh --force-refresh
 
 # 2. Prices / splits / indices — delta pulls from the last stored date.
 momentum ingest prices
-momentum ingest splits
+momentum ingest splits --force-refresh
 momentum ingest indices
 
-# 3. Dividends from ISS — scoped to the last 3 months so a rerun never
-#    re-introduces old ISS near-duplicates into the curated files.
-momentum ingest dividends --force-refresh --months 3
+# 3. Dividends. MOEX withdrew the ISS handle in 2025-10, so this step now
+#    exits non-zero and only the external fill brings anything new.
+momentum ingest dividends --force-refresh --months 3   # expected to fail; see task 054
+momentum corporate check-registers --since <last month>  # which payouts are missing
+momentum ingest fill-dividends --force-refresh -t <each ticker it named>
 
 # 4. Apply curated fixes (_conflicts_resolved.json): drops known ISS dups,
 #    applies disclosure corrections. Required after step 3.
@@ -80,14 +82,23 @@ momentum compute backtest --signal simple
 python scripts/compute_weight_sweep.py
 python scripts/compute_topn_fan.py
 momentum site build
+
+# 6. Re-bless the regression reference: the new month makes `pytest` red on
+#    purpose, and the one-row diff is the record of what it contributed.
+cp data/momentum/curve_fit/q_values.csv tests/reference/q_values_curve_fit.csv
+cp data/momentum/simple/q_values.csv    tests/reference/q_values_simple.csv
 ```
 
 Notes:
 
-- **ISS lags on dividends by months.** The major names get their spring dividends
-  from external feeds (`skill_fill_*`), not ISS. Recent payouts arrive via
-  `momentum ingest fill-dividends --ticker T …` (dohod) and manual `augment`
-  entries in `_conflicts_resolved.json` — `ingest dividends` alone will not show them.
+- **The reference diff should be exactly one new row per signal.** More than that
+  means the recompute moved history — a dividend backfill or a split fix — and the
+  commit should say why.
+
+- **ISS no longer serves dividends at all.** Every payout now arrives through
+  `momentum ingest fill-dividends` (dohod, smart-lab) or a manual `augment` in
+  `_conflicts_resolved.json`. `check-registers` is the only thing that tells a
+  missing payout apart from a share that stopped paying — run it every month.
 - `--since` on prices/indices is a **forward floor only**: it can skip ahead but
   never backfills a range already stored. To re-pull a suspect older range, delete
   those rows from the CSV first, then ingest.
@@ -109,9 +120,11 @@ missing. Resolving them has sharp edges — this is the settled procedure.
 
 Do **not** reach for a bulk `momentum ingest fill-dividends --sources dohod`
 to grab one payout: with no date scope it drags in dohod's *entire* history
-(dozens of records per name), and its cross-source dedup is leaky (it
-re-proposes payouts already stored from yahoo/tbank under a slightly different
-amount). Use it only per-ticker with `--dry-run` to inspect a specific name.
+(dozens of records per name). A fetched row that disagrees with a stored one is
+reported as a conflict rather than appended, so nothing is silently corrupted —
+but on a name with a split you get one conflict per pre-split payout, because
+dohod restates some tickers to today's share count and not others. Use it
+per-ticker with `--dry-run`.
 
 **Folding in the yahoo / tbank catalogs** (`scripts/backfill/cascade_merge_dividends.py`):
 
@@ -119,6 +132,11 @@ amount). Use it only per-ticker with `--dry-run` to inspect a specific name.
   snapshot (no new data). Refresh tbank before a run:
   `python scripts/backfill/fetch_tbank_dividends.py --refresh` (overwrites a
   snapshot only on a successful fetch; a network miss keeps the old one).
+- **Do not delete those two directories.** `.fill_cache/iss`, `dohod` and `smartlab`
+  are disposable and re-fetch on demand, but `yahoo/` and `tbank/` are the only
+  surviving copy of their source — Yahoo stopped serving Russian prices in 2022, and
+  the cascade script is wired to read the cache and never fetch. An age-based cleanup
+  would take exactly these first.
 - The cascade is **stateless**: each run re-derives the full diff between the
   caches and the CSVs. So changing the `--sources` set or omitting the window
   reshuffles the whole candidate/collision graph and re-surfaces history that
@@ -138,12 +156,13 @@ The entry point is `momentum` (`cli:app`). Every command is idempotent.
 | `momentum tickers refresh` | Bootstrap the ticker dictionary from ISS (`--force-refresh` to bypass the no-TTL cache) |
 | `momentum tickers mark-unavailable` | Move empty-history tickers to the unavailable log |
 | `momentum ingest prices` | Async fetch daily OHLCV from ISS (union of boards) |
-| `momentum ingest splits` | Splits + bonus issues (ISS + manual override) |
+| `momentum ingest splits` | Splits + bonus issues (ISS + manual override). `--force-refresh` is required monthly — the ISS cache key carries no date |
 | `momentum ingest dividends` | Dividend payouts from ISS (`--months N` scopes the merge window); regenerate gap report |
 | `momentum ingest fill-dividends` | Fill gaps from external sources (dohod.ru, …) |
 | `momentum ingest indices` | Benchmark index series (default MCFTRR) |
 | `momentum corporate detect` | Split/dividend anomaly detector (fail-loud) |
 | `momentum corporate apply-conflicts` | Apply `_conflicts_resolved.json` (drop/replace/augment) to dividend files |
+| `momentum corporate check-registers` | MOEX register closings with no stored payout (`--strict` exits non-zero) |
 | `momentum compute monthly` | Prices + adjustments → monthly total-return series |
 | `momentum compute backtest` | Q1–Q4 quartile backtest (`--signal curve_fit\|simple`) |
 | `momentum site build` | Render the GitHub Pages site to `docs/pages/` |

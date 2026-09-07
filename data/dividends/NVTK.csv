@@ -21,7 +21,6 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2013-09-16,3.4,RUB,skill_fill_dohod,,
 2014-04-29,4.49,RUB,skill_fill_dohod,,
 2014-10-27,5.1,RUB,skill_fill_dohod,,
-2015-04-30,52.0,RUB,skill_fill_yahoo,yahoo_ex_div,
 2015-05-05,5.2,RUB,skill_fill_dohod,,
 2015-10-06,6.6,RUB,skill_fill_dohod,,
 2016-05-04,6.9,RUB,skill_fill_dohod,,

@@ -13,7 +13,10 @@ momentum tickers refresh --force-refresh   # bypass the no-TTL cache. Without it
 momentum ingest prices                     # delta from each ticker's last stored
                                            # date (forward floor). Does NOT re-pull
                                            # history — reassure the user if asked.
-momentum ingest splits                     # ISS splits + bonus issues (+ manual)
+momentum ingest splits --force-refresh     # ISS splits + bonus issues (+ manual).
+                                           # The flag is required: the ISS cache key
+                                           # carries no date, so a plain run replays
+                                           # the first snapshot ever taken.
 momentum ingest indices                    # MCFTRR by default
 ```
 

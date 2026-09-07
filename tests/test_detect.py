@@ -6,9 +6,14 @@ import json
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
 import pytest
 
-from adjustments.detect import detect_suspicious, load_acked
+from adjustments.detect import _is_sustained_rebase, _prices_to_df, detect_suspicious, load_acked
+from config import SPLIT_MATCH_DAYS
+from storage.records import read_records
+from storage.schemas import PRICE_CASTS, SPLIT_CASTS
+from tests.conftest import DATA_DIR
 
 
 def _price_series(rows: list[tuple[str, float, float]]) -> list[dict[str, Any]]:
@@ -28,7 +33,9 @@ def test_detect_flags_obvious_split() -> None:
     assert len(out) == 1
     assert out[0].date == "2024-07-15"
     assert out[0].raw_return < -0.9
-    assert out[0].reason == "abs_return_above_threshold"
+    # Three rows are too short to judge a plateau, so it lands in the catch-all
+    # rather than the split queue — the flag itself is what this test pins.
+    assert out[0].reason == "limit_move"
 
 
 def test_detect_suppresses_known_split() -> None:
@@ -180,3 +187,38 @@ def test_load_acked_rejects_object(tmp_path: Path) -> None:
     p.write_text("{}", encoding="utf-8")
     with pytest.raises(ValueError, match="JSON array"):
         load_acked(p)
+
+
+def test_known_splits_are_classified_as_rebase() -> None:
+    """Recall pin on the confirmed corporate actions in `data/splits/`.
+
+    Calibration is worth only what it catches: a threshold tightened for a
+    shorter triage queue must fail here rather than silently drop an event.
+    A recorded date is not always a trading day, hence the window.
+    """
+    missed: list[str] = []
+    for splits_path in sorted((DATA_DIR / "splits").glob("*.csv")):
+        ticker = splits_path.stem
+        prices = read_records(DATA_DIR / "prices_iss" / f"{ticker}.csv", casts=PRICE_CASTS)
+        df = _prices_to_df(prices)
+        for rec in read_records(splits_path, casts=SPLIT_CASTS):
+            target = pd.Timestamp(str(rec["date"]))
+            near = [
+                i for i, ts in enumerate(df.index) if abs((ts - target).days) <= SPLIT_MATCH_DAYS
+            ]
+            if not any(_is_sustained_rebase(df, i) for i in near):
+                missed.append(f"{ticker} {rec['date']}")
+    assert not missed, f"confirmed splits the classifier no longer detects: {missed}"
+
+
+def test_board_change_is_not_a_split_candidate() -> None:
+    """A price step that comes with a board switch is a source artefact."""
+    prices = [
+        {"date": f"2024-01-{d:02d}", "close": 100.0, "value": 1e9, "board": "TQBR"}
+        for d in range(1, 11)
+    ] + [
+        {"date": f"2024-02-{d:02d}", "close": 40.0, "value": 1e9, "board": "SMAL"}
+        for d in range(1, 11)
+    ]
+    flags = detect_suspicious("X", prices, [], [], [])
+    assert [f.reason for f in flags] == ["board_change"]

@@ -16,7 +16,6 @@ def compute_monthly(
     dividends_dir: Path = typer.Option(Path("data/dividends"), "--dividends-dir"),
     splits_dir: Path = typer.Option(Path("data/splits"), "--splits-dir"),
     output_dir: Path = typer.Option(Path("data/momentum/monthly"), "--output-dir"),
-    manifest_path: Path = typer.Option(Path("data/manifest.json"), "--manifest"),
     ticker: list[str] = typer.Option([], "--ticker", "-t"),
     from_scratch: bool = typer.Option(
         False,
@@ -25,7 +24,7 @@ def compute_monthly(
     ),
 ) -> None:
     """Build per-ticker monthly total-return JSONL. Pre-tail safety gate active by default."""
-    from momentum.pipeline import IncrementalDriftError, compute_all, write_manifest_section
+    from momentum.pipeline import IncrementalDriftError, compute_all
 
     selected = list(ticker) if ticker else None
     try:
@@ -40,7 +39,6 @@ def compute_monthly(
     except IncrementalDriftError as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(2) from exc
-    write_manifest_section(manifest_path, result)
     written = sum(1 for m in result.values() if m.rows > 0)
     typer.echo(f"monthly computed: {written} tickers → {output_dir}")
 

@@ -105,6 +105,52 @@ def _trailing_value_medians(
     return {str(tk): float(m) for tk, m in medians.items() if pd.notna(m)}
 
 
+def rename_edges(tickers_dict: TickersDict) -> list[tuple[str, str, pd.Period]]:
+    """(predecessor, successor, month of the rename) for ISS changeovers.
+
+    Redomiciliations are absent by construction: they live in
+    `tickers_manual.json` and are a different security, so both legs stay
+    eligible — same split as in `ingest.dividends.fill`.
+    """
+    edges: list[tuple[str, str, pd.Period]] = []
+    for succ, entry in tickers_dict.items():
+        for h in cast(list[dict[str, str]], entry.get("history") or ()):
+            if h.get("source") != "iss_changeover":
+                continue
+            pred, renamed = h.get("prev_ticker"), h.get("renamed")
+            # Some entries name the SECID as its own predecessor (a re-registration
+            # that kept the ticker). Treating that as a rename would delist the
+            # name outright — SBER, VTBS and six others.
+            if pred and renamed and pred != succ:
+                edges.append((pred, str(succ), pd.Period(renamed, freq="M")))
+    return edges
+
+
+def _drop_renamed_duplicates(
+    candidates: list[str], tickers_dict: TickersDict, t: pd.Period
+) -> list[str]:
+    """One issuer, one slot.
+
+    `ingest.prices` stitches the predecessor's history into the successor's file
+    but leaves the predecessor's own file in place, so both SECIDs stay eligible
+    and the issuer takes two slots with double weight in its quartile.
+
+    Keeps the name that actually traded that month. The predecessor is preferred
+    before the rename: its series comes from the primary board, while the
+    successor's stitched copy can fall back to a secondary one.
+    """
+    keep = set(candidates)
+    for pred, succ, renamed in rename_edges(tickers_dict):
+        if t >= renamed:
+            keep.discard(pred)
+        elif pred in keep:
+            # Only when the predecessor is actually available: its `delisted_after`
+            # can precede `renamed` by a day or two, and dropping both would leave
+            # the issuer unrepresented for that month.
+            keep.discard(succ)
+    return sorted(keep)
+
+
 def universe_at(
     t: pd.Period,
     returns_panel: pd.DataFrame,
@@ -133,6 +179,9 @@ def universe_at(
     candidates = [
         str(tk) for tk, ok in eligible.items() if ok and _share_active(tickers_dict, str(tk), t)
     ]
+    # Before the liquidity cut, so a freed slot is refilled by the next name and
+    # the universe keeps its declared size.
+    candidates = _drop_renamed_duplicates(candidates, tickers_dict, t)
 
     if top_n is not None and value_panel is not None and not value_panel.empty:
         medians = _trailing_value_medians(value_panel, window_start, window_end, candidates)

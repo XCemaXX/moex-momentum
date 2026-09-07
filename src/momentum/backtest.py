@@ -18,7 +18,6 @@ Output: q_values.csv (one row per month) + holdings/{YYYY-MM}.json.
 
 from __future__ import annotations
 
-import json
 import logging
 import math
 from collections import Counter
@@ -32,8 +31,8 @@ from momentum.benchmark import mcftrr_monthly_returns
 from momentum.pending import PendingEntry, compute_month_pending
 from momentum.signals import Signal
 from momentum.universe import liquidity_cut, load_panel, universe_at
-from storage.records import write_records_atomic
-from storage.schemas import Q_VALUES_FIELDS
+from storage.records import write_json_atomic, write_records_atomic
+from storage.schemas import Q_VALUES_FIELDS, SCORES_FIELDS, UNIVERSE_META_FIELDS
 from tickers import TickersDict
 
 LOG = logging.getLogger(__name__)
@@ -139,6 +138,64 @@ def warn_missing_returns(misses: list[tuple[str, str, str]], *, label: str) -> N
     )
 
 
+@dataclass(frozen=True)
+class _Formation:
+    """What forming the portfolio at one close produces, before any NAV update."""
+
+    quartiles: dict[str, list[str]]
+    scores: dict[str, float]
+    meta: dict[str, object]
+    pending: list[PendingEntry]
+
+
+def _form_portfolio(
+    t: pd.Period,
+    *,
+    signal: Signal,
+    panels: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame],
+    tickers_dict: TickersDict,
+    universe_top_n: int | None,
+    with_pending: bool,
+) -> _Formation | None:
+    """Rank the month's universe and cut it into quartiles. None if nothing is eligible."""
+    returns_panel, close_panel, value_panel = panels
+    universe = universe_at(
+        t, returns_panel, tickers_dict, value_panel=value_panel, top_n=universe_top_n
+    )
+    if not universe:
+        return None
+    scores = signal.compute(returns_panel.loc[:, universe], t)
+    quartiles = quartile_split(scores)
+    cut = liquidity_cut(value_panel, t, universe) if not value_panel.empty else None
+    # compute_month_pending returns [] when there is no liquidity floor
+    # (incl. empty value_panel), so no extra guard is needed here.
+    pending = (
+        compute_month_pending(
+            t,
+            returns_panel=returns_panel,
+            close_panel=close_panel,
+            value_panel=value_panel,
+            tickers_dict=tickers_dict,
+            universe=universe,
+            scores=scores,
+            quartiles=quartiles,
+            liquidity_floor=cut[1] if cut else None,
+        )
+        if with_pending
+        else []
+    )
+    return _Formation(
+        quartiles=quartiles,
+        scores={str(tk): float(v) for tk, v in scores.dropna().items()},
+        meta={
+            "n": len(universe),
+            "cut_rub": round(cut[1]) if cut else "",
+            "marginal": cut[0] if cut else "",
+        },
+        pending=pending,
+    )
+
+
 def backtest(
     signal: Signal,
     *,
@@ -189,74 +246,56 @@ def backtest(
     rows: list[dict[str, object]] = []
     mcftrr_nav = 1.0
 
-    # Initial row: one month before the first month in range, NAV=1.0.
+    def rebalance_at(t: pd.Period) -> None:
+        """Form the portfolio at close of t; it earns month t+1. No-op on an
+        empty universe, which is what makes the cold start below degrade safely."""
+        nonlocal prev_w
+        formed = _form_portfolio(
+            t,
+            signal=signal,
+            panels=(returns_panel, close_panel, value_panel),
+            tickers_dict=tickers_dict,
+            universe_top_n=universe_top_n,
+            with_pending=with_pending,
+        )
+        if formed is None:
+            return
+        holdings[t] = formed.quartiles
+        scores_by_month[t] = formed.scores
+        universe_meta[t] = formed.meta
+        if formed.pending:
+            pending[t] = formed.pending
+        LOG.debug("rebalance month=%s universe=%s", t, formed.meta["n"])
+        new_w = {q: _weights(formed.quartiles[q]) for q in Q_LABELS}
+        for q in Q_LABELS:
+            nav[q] *= 1.0 - commission_per_side * turnover(prev_w[q], new_w[q])
+        prev_w = new_w
+
+    # Capital = 1.0 at the close before the first month in range.
     init_month = months[0] - 1
     rows.append({"month": str(init_month), **{q: 1.0 for q in Q_LABELS}, "MCFTRR": 1.0})
 
+    # Form the portfolio at that close, so months[0] is earned by every series.
+    # The benchmark earns it either way; a one-month offset between the two is
+    # not a comparison. An empty universe here falls back to a cold start.
+    rebalance_at(init_month)
+
     for t in months:
-        # 1. Apply previously-set holdings' return over month t.
-        if any(prev_w[q] for q in Q_LABELS):
+        # A month counts for both series or for neither: the benchmark stands in
+        # for capital the strategy could have deployed, and it could not deploy
+        # any before its first holdings exist.
+        positioned = any(prev_w[q] for q in Q_LABELS)
+        if positioned:
             month_returns = returns_panel.loc[t]
             for q in Q_LABELS:
                 gr = gross_return(prev_w[q], month_returns, period=t, quartile=q, misses=misses)
                 nav[q] *= 1.0 + gr
-        # MCFTRR benchmark mirrors the same timing.
-        if t in mcftrr_ret.index:
-            r = mcftrr_ret.loc[t]
-            if not math.isnan(r):
-                mcftrr_nav *= 1.0 + float(r)
+            if t in mcftrr_ret.index:
+                r = mcftrr_ret.loc[t]
+                if not math.isnan(r):
+                    mcftrr_nav *= 1.0 + float(r)
 
-        # 2. Rebalance at close of t (if universe non-empty).
-        universe = universe_at(
-            t,
-            returns_panel,
-            tickers_dict,
-            value_panel=value_panel,
-            top_n=universe_top_n,
-        )
-        if universe:
-            scores = signal.compute(returns_panel.loc[:, universe], t)
-            quartiles = quartile_split(scores)
-            holdings[t] = quartiles
-            scores_by_month[t] = {str(tk): float(v) for tk, v in scores.dropna().items()}
-            cut = liquidity_cut(value_panel, t, universe) if not value_panel.empty else None
-            universe_meta[t] = {
-                "n": len(universe),
-                "cut_rub": round(cut[1]) if cut else "",
-                "marginal": cut[0] if cut else "",
-            }
-            # compute_month_pending returns [] when there is no liquidity floor
-            # (incl. empty value_panel), so no extra guard is needed here.
-            month_pending = (
-                compute_month_pending(
-                    t,
-                    returns_panel=returns_panel,
-                    close_panel=close_panel,
-                    value_panel=value_panel,
-                    tickers_dict=tickers_dict,
-                    universe=universe,
-                    scores=scores,
-                    quartiles=quartiles,
-                    liquidity_floor=cut[1] if cut else None,
-                )
-                if with_pending
-                else []
-            )
-            if month_pending:
-                pending[t] = month_pending
-            LOG.debug(
-                "rebalance month=%s universe=%d Q1=%d Q4=%d",
-                t,
-                len(universe),
-                len(quartiles["Q1"]),
-                len(quartiles["Q4"]),
-            )
-            new_w = {q: _weights(quartiles[q]) for q in Q_LABELS}
-            for q in Q_LABELS:
-                cost = commission_per_side * turnover(prev_w[q], new_w[q])
-                nav[q] *= 1.0 - cost
-            prev_w = new_w
-
+        rebalance_at(t)
         rows.append({"month": str(t), **{q: nav[q] for q in Q_LABELS}, "MCFTRR": mcftrr_nav})
 
     warn_missing_returns(misses, label=type(signal).__name__)
@@ -292,7 +331,7 @@ def write_backtest(
         write_records_atomic(
             output_dir / "universe_meta.csv",
             meta_rows,
-            fieldnames=("month", "n", "cut_rub", "marginal"),
+            fieldnames=UNIVERSE_META_FIELDS,
         )
 
     if result.scores:
@@ -303,27 +342,13 @@ def write_backtest(
             for p, per_month in sorted(result.scores.items())
             for tk, s in per_month.items()
         ]
-        write_records_atomic(
-            output_dir / "scores.csv", score_rows, fieldnames=("month", "ticker", "score")
-        )
+        write_records_atomic(output_dir / "scores.csv", score_rows, fieldnames=SCORES_FIELDS)
 
     if write_pending:
         pending_obj = {
             str(p): [e.to_dict() for e in entries] for p, entries in sorted(result.pending.items())
         }
-        path = output_dir / "pending.json"
-        tmp = path.with_suffix(path.suffix + ".tmp")
-        tmp.write_text(
-            json.dumps(pending_obj, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        tmp.replace(path)
+        write_json_atomic(output_dir / "pending.json", pending_obj)
 
     for period, quartiles in result.holdings.items():
-        path = holdings_dir / f"{period}.json"
-        tmp = path.with_suffix(path.suffix + ".tmp")
-        tmp.write_text(
-            json.dumps(quartiles, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        tmp.replace(path)
+        write_json_atomic(holdings_dir / f"{period}.json", quartiles)

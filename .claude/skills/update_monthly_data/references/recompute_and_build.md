@@ -14,6 +14,10 @@ momentum compute backtest --signal simple
 python scripts/compute_weight_sweep.py
 python scripts/compute_topn_fan.py
 momentum site build
+
+# Re-bless the regression reference — the new month makes pytest red on purpose.
+cp data/momentum/curve_fit/q_values.csv tests/reference/q_values_curve_fit.csv
+cp data/momentum/simple/q_values.csv    tests/reference/q_values_simple.csv
 ```
 
 `--from-scratch` is required after an ingest — it re-blesses the baseline hashes the
@@ -22,16 +26,21 @@ incremental path guards against. Without it, drifted months trip the baseline ga
 ## Checks
 
 - `compute monthly` last line: ticker count and a sample ticker `last=<new-month>`.
-- **Triage the new detector flags** — WARN-only does not mean skip-it. The file is
-  append-only, so `git diff data/splits/_suspicious.json` is exactly this month's
-  additions. For each, read the price window around the date: `open` equal to the
-  previous `close` plus a wide intraday range plus a volume spike = a genuine move,
-  leave it. A gap at the open with no intraday path = an unadjusted split — add it to
-  `data/splits/<T>.csv` and redo the recompute. Check `data/indices/MCFTRR.csv`
+- **Triage the split candidates.** `momentum corporate detect` labels every flag with a
+  `reason`; only **`sustained_rebase`** is a split candidate, and that queue is normally
+  empty. The other classes are diagnostics, not a to-do list — `board_change` points at
+  the price source (`task 037`), `near_dividend` at the dividend anchor (`task 036`),
+  `limit_move` is an illiquid name on its daily limit. The report itself is gitignored:
+  it regenerates byte-identical from the committed data, so there is no diff to read and
+  never was — the old "append-only" note here was wrong.
+  For each `sustained_rebase`, read the price window around the date. A gap at the open
+  with no intraday path, holding at the new level afterwards, is an unadjusted split —
+  add it to `data/splits/<T>.csv` (`before,after` = `1,N` for a 1:N split, dated the
+  first day at the new price) and rerun with `--from-scratch`. A wide intraday range with
+  a volume spike is a genuine move — write it to `data/splits/_acked.json` with the
+  reason, which also clears it from the queue next run. Check `data/indices/MCFTRR.csv`
   first: a market-wide V-shape explains a whole cluster of high-beta names at once
-  (2026-07: a −9.5% three-day slide then a +4.8% rebound flagged four names, all
-  real). `data/splits/_acked.json` can silence a reviewed flag, but it is empty by
-  convention — do not start acking selectively.
+  (2026-07: a −9.5% three-day slide then a +4.8% rebound flagged four names, all real).
 - `compute backtest` last rebalance: `month=<new-month>`.
 - `site build`: `N artefacts → docs/pages`. One aggregated `missing total_return
   treated as 0` line per run is expected: a held ticker whose data ends contributes
@@ -40,6 +49,10 @@ incremental path guards against. Without it, drifted months trip the baseline ga
   actionable during a monthly run. Same for `mages: no price panel for … dropped`.
 - New month present in the site: `rg -o '"20[0-9]{2}-[0-9]{2}"' docs/pages/data.json
   | tail -2` shows the new month-end.
+- **`git diff tests/reference/` must be exactly one added row per signal.** More than
+  that means the recompute moved history — a dividend backfill or a split fix reaching
+  back — and the commit message has to say which. Fewer means the re-bless was skipped
+  and `pytest` is still red.
 
 ## Review + hand off
 
@@ -53,6 +66,8 @@ incremental path guards against. Without it, drifted months trip the baseline ga
    - `chore: monthly data update through <YYYY-MM-DD>`
    - a separate `feat:`/`fix:` if any script/README/skill was touched this run.
 
-`data/momentum/**` is gitignored, so it will not appear in `git status`; the visible
-data changes are the ingest deltas (prices/dividends/indices/manifest) plus
-`docs/pages/`.
+Gitignored, so absent from `git status`: `data/momentum/**`, the built site under
+`docs/pages/`, and the generated detector reports (`data/splits/_suspicious.json`,
+`data/dividends/_gaps.json`). The visible data changes are the ingest deltas — prices,
+dividends, indices, manifest — plus any decision overlay you touched (`_acked.json`,
+`_conflicts_resolved.json`) and the re-blessed `tests/reference/q_values_*.csv`.

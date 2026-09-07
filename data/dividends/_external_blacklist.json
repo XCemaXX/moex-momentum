@@ -65,6 +65,16 @@
       "yahoo_amount": 22.735226,
       "added_at": "2026-05-16"
     },
+    "INGR": {
+      "exclude": ["tbank", "yahoo"],
+      "reason": "Different issuer: the feed returns Ingredion Inc. (NYSE: INGR) quarterly USD dividends from 1998. Our INGR is INGRAD (ex-OPIN), traded 2014-06-09..2025-06-18 in RUB at 151-1984. Matched on ticker letters alone; all 111 stored rows were foreign and have been removed.",
+      "added_at": "2026-09-05"
+    },
+    "VTRS": {
+      "exclude": ["tbank", "yahoo"],
+      "reason": "Different issuer: the feed returns Viatris Inc. (NASDAQ: VTRS) USD dividends for 2021-2026. Our VTRS is PAO Vtorresursy, traded 2012-07-19..2018-08-23 — every stored row postdates its delisting. All 20 rows removed.",
+      "added_at": "2026-09-05"
+    },
     "UNAC": {
       "exclude": ["tbank"],
       "reason": "Tbank truncates sub-millikopeck amounts (2014-07: yahoo=0.000779 matches legacy CSV exactly; tbank=0.0008 is rounded to 4 decimals). For kopeck-precision tickers yahoo is authoritative. ISS has no records for UNAC.",

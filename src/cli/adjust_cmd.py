@@ -55,3 +55,71 @@ def corporate_apply_conflicts(
     applied = sum(r.applied for r in results.values())
     touched = sum(1 for r in results.values() if r.applied)
     typer.echo(f"conflicts: {applied} change(s) across {touched} ticker(s)")
+
+    # The journal is a sequence of mutations, so two verdicts touching one row can
+    # depend on their order — an augment re-adding what a later replace rewrote,
+    # for one. A settled journal changes nothing on a second pass; anything else
+    # is a contradiction that would corrupt the data a row at a time.
+    recheck = apply_conflicts_to_universe(dividends_dir, conflicts_file)
+    unsettled = sorted(t for t, r in recheck.items() if r.applied)
+    if unsettled:
+        typer.echo(
+            f"conflicting verdicts for {', '.join(unsettled)} — the second pass still "
+            f"changes the data, so the journal contradicts itself",
+            err=True,
+        )
+        raise typer.Exit(1)
+
+
+@corporate_app.command("check-registers")
+def corporate_check_registers(
+    dividends_dir: Path = typer.Option(Path("data/dividends"), "--dividends-dir"),
+    prices_dir: Path = typer.Option(Path("data/prices_iss"), "--prices-dir"),
+    acked_file: Path = typer.Option(Path("data/dividends/_acked_no_div.json"), "--acked-no-div"),
+    since: str = typer.Option("2013-01-01", "--since"),
+    until: str | None = typer.Option(None, "--until", help="Defaults to today."),
+    strict: bool = typer.Option(False, "--strict"),
+) -> None:
+    """Report dividend registers MOEX recorded that we have no payout for.
+
+    ISS no longer serves dividends, so a silent source failure now looks exactly
+    like a share that stopped paying. This is the check that tells them apart.
+    """
+    from datetime import date
+
+    import httpx
+
+    from adjustments.dividend_gaps import load_acked
+    from config import FILL_HTTP_TIMEOUT_SECONDS, FILL_USER_AGENT
+    from ingest.dividends.register import REGISTER_URL, missing_payouts, parse_register
+
+    try:
+        resp = httpx.get(
+            REGISTER_URL,
+            timeout=FILL_HTTP_TIMEOUT_SECONDS,
+            headers={"User-Agent": FILL_USER_AGENT},
+            follow_redirects=True,
+        )
+        resp.raise_for_status()
+    except httpx.HTTPError as exc:
+        typer.echo(f"register export unavailable: {exc}", err=True)
+        raise typer.Exit(1) from exc
+
+    register = parse_register(resp.content)
+    if not register:
+        typer.echo("register export parsed to zero rows — the format changed", err=True)
+        raise typer.Exit(1)
+
+    missing = missing_payouts(
+        register,
+        dividends_dir,
+        prices_dir,
+        acked=load_acked(acked_file),
+        since=since,
+        until=until or date.today().isoformat(),
+    )
+    for m in missing:
+        typer.echo(f"  {m['record_date']}  {m['ticker']}", err=True)
+    typer.echo(f"register closings without a stored payout: {len(missing)} of {len(register)}")
+    if strict and missing:
+        raise typer.Exit(1)

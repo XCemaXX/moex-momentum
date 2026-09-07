@@ -196,9 +196,10 @@ def test_backtest_zero_commission_quartile_sum_equals_universe(tmp_path: Path) -
     assert diffs.mean() > 0.005
 
 
-def test_backtest_initial_cost_drag(tmp_path: Path) -> None:
-    """With commission>0, the FIRST rebalance imposes a turnover-1 cost on entry,
-    so Q-NAVs after the first month are below 1 by ≈ commission."""
+def test_backtest_cold_start_cost_drag(tmp_path: Path) -> None:
+    """Cold start: the month before `start` has a NaN in its window, so no seed
+    portfolio forms and the first rebalance lands inside the window, charging a
+    turnover-1 entry cost. Covers the fallback, not the seeded path below."""
     monthly_dir = tmp_path / "monthly"
     indices_dir = tmp_path / "indices"
     _seed_synthetic_panel(monthly_dir, indices_dir, n_months=14)
@@ -215,6 +216,33 @@ def test_backtest_initial_cost_drag(tmp_path: Path) -> None:
     first_real = res.q_values.iloc[1]  # row 0 is initial-month (NAV=1)
     assert first_real["Q1"] < 1.0
     assert math.isclose(first_real["Q1"], 0.99, abs_tol=0.002)
+
+
+def test_seeded_entry_earns_the_first_window_month(tmp_path: Path) -> None:
+    """With a formable month before `start`, the portfolio is seeded there, so
+    `start` is earned by the quartiles and not only by the benchmark."""
+    monthly_dir = tmp_path / "monthly"
+    indices_dir = tmp_path / "indices"
+    _seed_synthetic_panel(monthly_dir, indices_dir, n_months=30)
+    tickers_dict = {tk: {"type": "share"} for tk in "ABCDEFGH"}
+    start = pd.Period("2022-06", "M")
+    res = backtest(
+        SimpleSignal(),
+        monthly_dir=monthly_dir,
+        indices_dir=indices_dir,
+        tickers_dict=tickers_dict,
+        start=start,
+        commission_per_side=0.0,
+    )
+    assert start - 1 in res.holdings, "no portfolio formed at the close before `start`"
+
+    anchor, first = res.q_values.iloc[0], res.q_values.iloc[1]
+    assert all(math.isclose(anchor[c], 1.0) for c in ("Q1", "Q2", "Q3", "Q4", "MCFTRR"))
+    # The whole point: quartiles move in the same row the benchmark does. With
+    # zero commission an unearned month would leave every quartile at exactly 1.0.
+    assert math.isclose(first["MCFTRR"], 1.01, abs_tol=1e-12)
+    assert first["Q1"] > 1.0
+    assert not any(math.isclose(first[q], 1.0) for q in ("Q1", "Q2", "Q3", "Q4"))
 
 
 def test_write_backtest_roundtrip(tmp_path: Path) -> None:

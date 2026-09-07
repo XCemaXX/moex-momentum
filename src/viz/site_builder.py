@@ -28,6 +28,8 @@ from mages.weighted_q1 import build_mages_table, build_weighted_frame
 from momentum.topn_fan import nav_from_selections, score_ranking
 from momentum.transitions import Q_LABELS, sticky_tickers, transition_windows
 from momentum.universe import load_panel
+from storage.records import write_text_atomic
+from storage.schemas import SCORES_FIELDS
 from tickers import load as load_tickers
 from viz.mages_charts import plot_mages_vs_mcftrr, plot_weighted_q1
 from viz.plotly_charts import (
@@ -72,13 +74,6 @@ def _env() -> Environment:
         trim_blocks=True,
         lstrip_blocks=True,
     )
-
-
-def _atomic_write(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(text, encoding="utf-8")
-    tmp.replace(path)
 
 
 def _chart_embed(fig: Any, *, div_id: str) -> str:
@@ -188,7 +183,8 @@ def _load_scores(path: Path | None) -> dict[str, dict[str, float]]:
     out: dict[str, dict[str, float]] = {}
     with path.open(encoding="utf-8", newline="") as fh:
         for row in csv.DictReader(fh):
-            out.setdefault(row["month"], {})[row["ticker"]] = float(row["score"])
+            month, ticker, score = (row[f] for f in SCORES_FIELDS)
+            out.setdefault(month, {})[ticker] = float(score)
     return out
 
 
@@ -218,7 +214,9 @@ def _q1top15_nav(
     if returns_panel.empty:
         return None
     selections = {pd.Period(m, "M"): score_ranking(pd.Series(per))[:k] for m, per in scores.items()}
-    start = min(selections)
+    # The earliest scored month forms the portfolio; earning starts the month
+    # after, so it becomes the seed rather than the first iterated month.
+    start = min(selections) + 1
     months = returns_panel.index[returns_panel.index >= start]
     if len(months) == 0:
         return None
@@ -453,7 +451,7 @@ def build_site(
         }
         html = env.get_template(template).render(**full_ctx)
         path = out_dir / name
-        _atomic_write(path, html)
+        write_text_atomic(path, html)
         pages[name] = path
 
     render(
@@ -537,7 +535,7 @@ def build_site(
         scores,
     )
     data_path = out_dir / "data.json"
-    _atomic_write(
+    write_text_atomic(
         data_path,
         json.dumps(data_json, ensure_ascii=False, separators=(",", ":")),
     )

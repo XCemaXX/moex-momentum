@@ -1,4 +1,7 @@
 registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2007-05-11,0.323,RUB,skill_fill_dohod,,
+2008-05-21,0.295,RUB,skill_fill_dohod,,
+2009-08-07,0.655,RUB,skill_fill_dohod,,
 2010-04-14,9.140740000000001,RUB,skill_fill_yahoo,yahoo_ex_div,10.0
 2010-07-20,8.39215,RUB,skill_fill_yahoo,yahoo_ex_div,10.0
 2011-04-13,11.08118,RUB,skill_fill_yahoo,yahoo_ex_div,10.0
@@ -20,3 +23,4 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2025-10-13,70.85,RUB,skill_fill_disclosure,,
 2025-12-22,36.0,RUB,skill_fill_disclosure,,
 2026-05-18,56.8,RUB,skill_fill_disclosure,,
+2026-07-13,29.05,RUB,skill_fill_dohod,,

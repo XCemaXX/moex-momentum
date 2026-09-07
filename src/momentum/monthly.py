@@ -5,10 +5,15 @@ Total-return formula (plan §8):
     total_return[m] = (close_adj[m] / close_adj[m-1]) - 1
                     + sum_{div in (m-1, m]} (1 - tax) * amount_adj / close_pre_ex_adj
 
-`close_pre_ex_adj` is the adjusted close on the last trading day STRICTLY
-BEFORE the dividend's ex-date (registry_close). Dividends preceding the
-first available price are dropped with a WARN — there is no pre-ex close
-to scale against.
+`close_pre_ex_adj` is the adjusted close on the trading day before the ex-date,
+and the payout is booked into the ex-date's month. Only `skill_fill_yahoo` stores
+the ex-date in `registry_close`; every other source stores the RECORD date, which
+falls `SETTLEMENT_LAG` trading days later. Dividing by a post-gap close would
+inflate the yield by ~1/(1-y) — see `task 036`.
+
+Dividends preceding the first available price are dropped with a WARN, as are
+those whose ex-date lands in a trading gap: there the anchor is not a price the
+payout was ever measured against.
 """
 
 from __future__ import annotations
@@ -18,9 +23,20 @@ from typing import Any, cast
 
 import pandas as pd
 
-from config import LOG_SAMPLE
+from config import EX_DATE_SOURCE, LOG_SAMPLE, SETTLEMENT_T1_FROM, SETTLEMENT_T2_FROM
 
 LOG = logging.getLogger(__name__)
+
+
+def _settlement_lag(source: str, registry_close: pd.Timestamp) -> int:
+    """Trading days from the ex-date to the stored `registry_close`."""
+    if source == EX_DATE_SOURCE:
+        return 1
+    if registry_close < pd.Timestamp(SETTLEMENT_T2_FROM):
+        return 0
+    if registry_close < pd.Timestamp(SETTLEMENT_T1_FROM):
+        return 2
+    return 1
 
 
 def to_monthly_close(
@@ -111,19 +127,32 @@ def monthly_total_returns(
     idx = cast(pd.DatetimeIndex, prices_adj_df.index)
     before_first_price: list[str] = []
     non_positive_close: list[str] = []
+    stale_anchor: list[str] = []
     for d in dividends_adj:
-        ex = pd.Timestamp(d["registry_close"])
-        pos = int(idx.searchsorted(ex, side="left"))
-        if pos == 0:
+        reg = pd.Timestamp(d["registry_close"])
+        last = int(idx.searchsorted(reg, side="right")) - 1
+        ex_pos = last - _settlement_lag(str(d.get("source", "")), reg) + 1
+        if ex_pos <= 0:
             before_first_price.append(str(d["registry_close"]))
             continue
-        close_pre_ex_adj = float(prices_adj_df.iloc[pos - 1]["close_adj"])
+        if ex_pos >= len(idx):
+            stale_anchor.append(str(d["registry_close"]))
+            continue
+        ex = idx[ex_pos]
+        # The lag is at most two trading days, so a legitimate ex-date shares the
+        # record date's month or an adjacent one. Anything further means we stepped
+        # into a trading gap: 190 such rows exist, and dividing a 2019 payout by a
+        # 2012 close implies yields up to 136%.
+        m = ex.to_period("M")
+        if not (reg.to_period("M") - 1 <= m <= reg.to_period("M") + 1):
+            stale_anchor.append(str(d["registry_close"]))
+            continue
+        close_pre_ex_adj = float(prices_adj_df.iloc[ex_pos - 1]["close_adj"])
         if close_pre_ex_adj <= 0:
             non_positive_close.append(str(d["registry_close"]))
             continue
         amt = float(d["amount_adj"])
         slag = (1.0 - tax) * amt / close_pre_ex_adj
-        m = ex.to_period("M")
         div_slag_by_month[m] = div_slag_by_month.get(m, 0.0) + slag
 
     if before_first_price:
@@ -132,6 +161,13 @@ def monthly_total_returns(
             ticker,
             len(before_first_price),
             ",".join(before_first_price[:LOG_SAMPLE]),
+        )
+    if stale_anchor:
+        LOG.warning(
+            "dividend ex-date lands in a trading gap, skipped ticker=%s n=%d sample_reg=%s",
+            ticker,
+            len(stale_anchor),
+            ",".join(stale_anchor[:LOG_SAMPLE]),
         )
     if non_positive_close:
         LOG.warning(

@@ -1,4 +1,4 @@
-"""Ingest of share splits + bonus issues into `data/splits/{TICKER}.jsonl`.
+"""Ingest of share splits + bonus issues into `data/splits/{TICKER}.csv`.
 
 Two sources:
 - MOEX ISS `/iss/statistics/engines/stock/splits.json` — bulk endpoint, ~55 rows
@@ -16,21 +16,23 @@ Filters on ISS rows: drop SECIDs ending in `-RM` (foreign DRs), starting with
 `FIX` (MOEX fixings, not equity), in ISIN form (`RU000A...`). Keep only entries
 present in `tickers.json` with `type == "share"`.
 
-Idempotency: dedup key is `(date, before, after)`; manual override wins on tie.
+Idempotency: one record per date — a share cannot split twice in a day. Manual
+entries override; a stored ISS ratio that ISS itself later contradicts is
+fail-loud, because `apply.cascade_for_dates` would multiply both coefficients.
 """
 
 from __future__ import annotations
 
-import json
 import logging
 import re
 from fractions import Fraction
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 import httpx
 
 from config import ISS_BASE_URL, ISS_HTTP_TIMEOUT_SECONDS
+from ingest.iss_client import cached_get
 from storage.records import read_records, write_records_atomic
 from storage.schemas import SPLIT_CASTS, SPLIT_FIELDS
 from tickers import ManualEntry, TickersDict
@@ -131,39 +133,60 @@ def _parse_manual(manual: list[ManualEntry]) -> dict[str, list[dict[str, Any]]]:
     return out
 
 
-def _dedup_key(rec: dict[str, Any]) -> tuple[str, int, int]:
-    return (rec["date"], int(rec["before"]), int(rec["after"]))
+def _ratio(rec: dict[str, Any]) -> tuple[int, int]:
+    return (int(rec["before"]), int(rec["after"]))
+
+
+def _is_manual(rec: dict[str, Any]) -> bool:
+    return str(rec.get("source", "")).startswith("manual_")
 
 
 def _merge_records(
+    ticker: str,
     existing: list[dict[str, Any]],
     iss_recs: list[dict[str, Any]],
     manual_recs: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """Manual override wins on equal (date, before, after); existing wins otherwise."""
-    by_key: dict[tuple[str, int, int], dict[str, Any]] = {_dedup_key(r): r for r in existing}
+    """Keyed on date alone; manual entries win, a revised ISS ratio raises."""
+    by_date: dict[str, dict[str, Any]] = {r["date"]: r for r in existing}
     for r in iss_recs:
-        by_key.setdefault(_dedup_key(r), r)
+        prev = by_date.get(r["date"])
+        if prev is None:
+            by_date[r["date"]] = r
+        elif _ratio(prev) != _ratio(r) and not _is_manual(prev):
+            pb, pa = _ratio(prev)
+            nb, na = _ratio(r)
+            raise ValueError(
+                f"{ticker} {r['date']}: stored split {pb}:{pa}, ISS now says {nb}:{na} "
+                f"— verify against the price series and fix data/splits/{ticker}.csv by hand"
+            )
     for r in manual_recs:
-        by_key[_dedup_key(r)] = r
-    return sorted(by_key.values(), key=lambda r: r["date"])
+        prev = by_date.get(r["date"])
+        if prev is not None and _ratio(prev) != _ratio(r):
+            LOG.warning(
+                "manual split overrides a different ratio "
+                "ticker=%s date=%s stored=%d:%d manual=%d:%d",
+                ticker,
+                r["date"],
+                *_ratio(prev),
+                *_ratio(r),
+            )
+        by_date[r["date"]] = r
+    return sorted(by_date.values(), key=lambda r: r["date"])
 
 
-def _read_iss_payload(client: httpx.Client, cache_dir: Path | None) -> dict[str, Any]:
-    cp = (cache_dir / "splits/all.json") if cache_dir else None
-    if cp is not None and cp.exists():
-        with cp.open(encoding="utf-8") as f:
-            return cast(dict[str, Any], json.load(f))
-    resp = client.get(SPLITS_PATH)
-    resp.raise_for_status()
-    data = resp.json()
-    if cp is not None:
-        cp.parent.mkdir(parents=True, exist_ok=True)
-        tmp = cp.with_suffix(cp.suffix + ".tmp")
-        with tmp.open("w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False)
-        tmp.replace(cp)
-    return cast(dict[str, Any], data)
+def _read_iss_payload(
+    client: httpx.Client, cache_dir: Path | None, *, force: bool = False
+) -> dict[str, Any]:
+    """GET the bulk splits endpoint, cached under a constant key.
+
+    The key carries no date, so without `force` the cache never expires and a
+    monthly re-run replays whatever snapshot was taken first.
+    """
+    payload = cached_get(
+        client, SPLITS_PATH, cache_dir=cache_dir, cache_key="splits/all", force=force
+    )
+    return payload or {}
 
 
 def ingest(
@@ -172,11 +195,12 @@ def ingest(
     *,
     output_dir: Path,
     cache_dir: Path | None,
+    force_refresh: bool = False,
 ) -> dict[str, int]:
-    """Write per-ticker JSONL, return {ticker: row_count} for tickers with rows."""
+    """Write per-ticker CSV, return {ticker: row_count} for tickers with rows."""
     output_dir.mkdir(parents=True, exist_ok=True)
     with make_client() as client:
-        payload = _read_iss_payload(client, cache_dir)
+        payload = _read_iss_payload(client, cache_dir, force=force_refresh)
     iss_per = _parse_iss(payload, tickers)
     manual_per = _parse_manual(manual)
     all_tickers = sorted(set(iss_per) | set(manual_per))
@@ -185,7 +209,9 @@ def ingest(
     for ticker in all_tickers:
         out_path = output_dir / f"{ticker}.csv"
         existing = read_records(out_path, casts=SPLIT_CASTS)
-        merged = _merge_records(existing, iss_per.get(ticker, []), manual_per.get(ticker, []))
+        merged = _merge_records(
+            ticker, existing, iss_per.get(ticker, []), manual_per.get(ticker, [])
+        )
         if merged != existing and merged:
             write_records_atomic(out_path, merged, fieldnames=SPLIT_FIELDS)
         if merged:

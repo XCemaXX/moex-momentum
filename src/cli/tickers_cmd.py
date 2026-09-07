@@ -14,25 +14,24 @@ from cli._app import tickers_app
 def tickers_mark_unavailable(
     tickers_file: Path = typer.Option(Path("data/tickers.json"), "--tickers"),
     unavailable_file: Path = typer.Option(Path("data/tickers_unavailable.jsonl"), "--unavailable"),
-    manifest_path: Path = typer.Option(Path("data/manifest.json"), "--manifest"),
+    prices_dir: Path = typer.Option(Path("data/prices_iss"), "--prices-dir"),
     dry_run: bool = typer.Option(False, "--dry-run"),
 ) -> None:
-    """Move tickers with rows=0 from tickers.json to tickers_unavailable.jsonl.
+    """Move tickers with no price history from tickers.json to tickers_unavailable.jsonl.
 
-    Source of truth is `data/manifest.json`. A ticker absent from `manifest.prices`
-    is treated as "ISS returns no history" — moved to the unavailable file and
-    removed from the main dictionary. Bootstrap then skips them at the listing stage.
+    Source of truth is `data/prices_iss/` itself: ingest writes a CSV only when ISS
+    returned rows, so a missing file means "ISS returns no history". Bootstrap then
+    skips them at the listing stage.
     """
     import tickers as t_mod
 
-    if not manifest_path.exists():
-        typer.echo(f"{manifest_path} does not exist — run `momentum ingest prices` first")
+    if not prices_dir.exists():
+        typer.echo(f"{prices_dir} does not exist — run `momentum ingest prices` first")
         raise typer.Exit(1)
 
     tickers_dict = t_mod.load(tickers_file)
     unavailable = t_mod.load_unavailable(unavailable_file)
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    have = set(manifest.get("prices", {}).keys())
+    have = set(t_mod.enumerate_tickers(prices_dir))
     to_move = [t for t in tickers_dict if t not in have]
 
     if not to_move:
@@ -73,15 +72,12 @@ def tickers_refresh(
     `--force-refresh` (or delete cache-dir) to refetch.
     """
     import tickers as t
-    from ingest.dictionary import (
-        bootstrap,
-        make_iss_client,
-        merge_external_aliases,
-    )
+    from ingest.dictionary import bootstrap, merge_external_aliases
+    from ingest.iss_client import make_client
 
     existing = t.load(output)
     skip = frozenset(t.load_unavailable(unavailable_file).keys())
-    with make_iss_client() as client:
+    with make_client() as client:
         updated = bootstrap(
             existing,
             client=client,

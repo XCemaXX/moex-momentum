@@ -216,7 +216,7 @@ def test_merge_records_dedups_and_overrides() -> None:
             "source": "manual_bonus_issue",
         }
     ]
-    merged = _merge_records(existing, iss, manual)
+    merged = _merge_records("VTBR", existing, iss, manual)
     assert [r["date"] for r in merged] == ["2024-02-21", "2024-07-15", "2024-08-20"]
 
 
@@ -239,7 +239,7 @@ def test_merge_manual_overrides_iss_on_equal_key() -> None:
             "source": "manual_bonus_issue",
         }
     ]
-    merged = _merge_records([], iss, manual)
+    merged = _merge_records("BELU", [], iss, manual)
     assert len(merged) == 1
     assert merged[0]["source"] == "manual_bonus_issue"
 
@@ -325,3 +325,52 @@ def test_ingest_caches_payload(
     ingest(tickers, [], output_dir=out, cache_dir=cache)
     ingest(tickers, [], output_dir=out, cache_dir=cache)
     assert len(calls) == 1  # second run hits cache
+    ingest(tickers, [], output_dir=out, cache_dir=cache, force_refresh=True)
+    assert len(calls) == 2  # the cache key has no date, so only the flag can bust it
+
+
+def test_merge_records_raises_on_revised_ratio() -> None:
+    existing = [
+        {
+            "date": "2024-07-15",
+            "before": 10,
+            "after": 1,
+            "type": "reverse",
+            "source": "moex_iss",
+        }
+    ]
+    iss = [
+        {
+            "date": "2024-07-15",
+            "before": 100,
+            "after": 1,
+            "type": "reverse",
+            "source": "moex_iss",
+        }
+    ]
+    with pytest.raises(ValueError, match="stored split 10:1, ISS now says 100:1"):
+        _merge_records("IRAO", existing, iss, [])
+
+
+def test_merge_records_keeps_manual_against_revised_iss() -> None:
+    existing = [
+        {
+            "date": "2024-08-20",
+            "before": 1,
+            "after": 8,
+            "type": "bonus_issue",
+            "source": "manual_bonus_issue",
+        }
+    ]
+    iss = [
+        {
+            "date": "2024-08-20",
+            "before": 1,
+            "after": 4,
+            "type": "forward",
+            "source": "moex_iss",
+        }
+    ]
+    merged = _merge_records("BELU", existing, iss, [])
+    assert len(merged) == 1
+    assert merged[0]["source"] == "manual_bonus_issue"

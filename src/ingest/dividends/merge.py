@@ -1,89 +1,54 @@
-"""Cross-source dividend dedup.
+"""Cross-source dividend reconciliation.
 
-Used both by `fill.py` during ingest (collapse the same payout reported by
-multiple sources with small date/amount drift) and by ad-hoc cleanup over
-existing JSONL files.
+`reconcile` is the single decision point for "is this the same payout". Ingest
+calls it; nothing else needs to.
+
+Stored rows are immovable. A fetched row that restates a stored payout is a
+duplicate; one that disagrees beyond tolerance is a conflict for
+`data/dividends/_conflicts_resolved.json`, never a silent append. Appending
+instead of asking is how one payout ended up recorded twice a day apart and
+counted twice in `monthly_total_returns`.
 """
 
 from __future__ import annotations
 
 from collections import defaultdict
 from datetime import date
-from pathlib import Path
 from typing import Any
 
 from ingest.dividends.types import SOURCE_PRIORITY
-from storage.records import read_records, write_records_atomic
-from storage.schemas import DIV_CASTS, DIV_FIELDS
+
+DATE_TOL_DAYS = 7
+AMOUNT_REL_TOL = 0.01
 
 
 def _date_diff_days(a: str, b: str) -> int:
-    da = date.fromisoformat(a)
-    db = date.fromisoformat(b)
-    return abs((da - db).days)
+    return abs((date.fromisoformat(a) - date.fromisoformat(b)).days)
 
 
-def dedup_near_duplicates(
-    records: list[dict[str, Any]],
-    *,
-    date_tol_days: int = 7,
-    amount_rel_tol: float = 0.01,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Drop near-duplicate records across sources reporting the same payout
-    with small date/amount differences. Returns (kept, dropped).
+def _amounts_match(a: float, b: float, tol: float) -> bool:
+    denom = max(abs(a), abs(b), 1e-12)
+    return abs(a - b) / denom <= tol
 
-    Rule: when two records have `|date diff| ≤ max(date_tol_a, date_tol_b)`
-    and `|amount_a - amount_b| / max(amounts) ≤ amount_rel_tol`, keep the
-    one with higher SOURCE_PRIORITY. Tie-break: keep the earlier-listed one.
 
-    Same currency only — RUB and USD never collapse.
-    """
-    by_currency: dict[str, list[tuple[int, dict[str, Any]]]] = defaultdict(list)
-    for i, r in enumerate(records):
-        by_currency[r["currency"]].append((i, r))
-    keep_idx: set[int] = set()
-    dropped: list[dict[str, Any]] = []
-    for _cur, group in by_currency.items():
-        group.sort(
-            key=lambda x: (
-                -SOURCE_PRIORITY.get(x[1].get("source", ""), 0),
-                x[0],
-            )
-        )
-        accepted: list[dict[str, Any]] = []
-        for _orig_i, r in group:
-            is_dup = False
-            for acc in accepted:
-                if _date_diff_days(r["registry_close"], acc["registry_close"]) > date_tol_days:
-                    continue
-                a, b = float(r["amount"]), float(acc["amount"])
-                denom = max(abs(a), abs(b), 1e-12)
-                if abs(a - b) / denom <= amount_rel_tol:
-                    is_dup = True
-                    break
-            if is_dup:
-                dropped.append(r)
-            else:
-                accepted.append(r)
-                keep_idx.add(_orig_i)
-    kept: list[dict[str, Any]] = [r for i, r in enumerate(records) if i in keep_idx]
-    kept.sort(key=lambda r: (r["registry_close"], float(r["amount"])))
-    return kept, dropped
+def _currency(rec: dict[str, Any]) -> str:
+    # Every source here quotes MOEX listings, so an unset field is RUB.
+    return str(rec.get("currency") or "RUB")
 
 
 def classify_bucket(
     proposed: list[dict[str, Any]],
     existing: list[dict[str, Any]],
     *,
-    amount_rel_tol: float = 0.01,
+    amount_rel_tol: float = AMOUNT_REL_TOL,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Classify proposed records against existing within a single
-    (year-month, currency) bucket. Returns (drops, conflicts).
+    """Classify proposed records against colliding existing ones. Returns
+    (drops, conflicts).
 
-    All `proposed` and `existing` must already share the same bucket key.
-    A "drop" = proposed is a duplicate of existing (incl. multi-tranche
+    A "drop" = proposed restates something already stored (incl. multi-tranche
     aggregation in either direction). A "conflict" = genuine disagreement
-    requiring user resolution.
+    requiring user resolution. Nothing is ever accepted here: a proposed row
+    that collides with stored data is the operator's call, not the code's.
 
     Phases:
       1. Greedy pairwise: each proposed matches first unmatched existing
@@ -104,9 +69,7 @@ def classify_bucket(
         for ei, e in enumerate(existing):
             if ei in used_existing:
                 continue
-            ea = float(e["amount"])
-            denom = max(abs(ca), abs(ea), 1e-12)
-            if abs(ca - ea) / denom <= amount_rel_tol:
+            if _amounts_match(ca, float(e["amount"]), amount_rel_tol):
                 matched_idx = ei
                 break
         if matched_idx is not None:
@@ -120,29 +83,105 @@ def classify_bucket(
     sum_e = sum(
         float(existing[i]["amount"]) for i in range(len(existing)) if i not in used_existing
     )
-    if sum_e > 0:
-        denom = max(abs(sum_p), abs(sum_e), 1e-12)
-        if abs(sum_p - sum_e) / denom <= amount_rel_tol:
-            drops.extend(unmatched)
-            return drops, []
+    if sum_e > 0 and _amounts_match(sum_p, sum_e, amount_rel_tol):
+        drops.extend(unmatched)
+        return drops, []
     return drops, unmatched
 
 
-def cleanup_jsonl_near_duplicates(
-    path: Path,
-    *,
-    date_tol_days: int = 7,
-    amount_rel_tol: float = 0.01,
-) -> tuple[int, int]:
-    """One-shot cleanup of an existing dividends JSONL. Returns (kept, dropped)."""
-    rows = read_records(path, casts=DIV_CASTS)
-    if not rows:
-        return 0, 0
-    kept, dropped = dedup_near_duplicates(
-        rows,
-        date_tol_days=date_tol_days,
-        amount_rel_tol=amount_rel_tol,
+def _keep_by_priority(
+    rows: list[dict[str, Any]],
+    date_tol_days: int,
+    amount_rel_tol: float,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Collapse rows describing one payout, keeping the highest-priority source.
+
+    Tie-break on the original order, so the result does not depend on fetcher
+    ordering beyond SOURCE_PRIORITY.
+    """
+    ordered = sorted(
+        enumerate(rows),
+        key=lambda x: (-SOURCE_PRIORITY.get(str(x[1].get("source", "")), 0), x[0]),
     )
-    if dropped:
-        write_records_atomic(path, kept, fieldnames=DIV_FIELDS)
-    return len(kept), len(dropped)
+    accepted: list[dict[str, Any]] = []
+    kept_idx: set[int] = set()
+    dropped: list[dict[str, Any]] = []
+    for i, r in ordered:
+        dup = any(
+            _date_diff_days(r["registry_close"], a["registry_close"]) <= date_tol_days
+            and _amounts_match(float(r["amount"]), float(a["amount"]), amount_rel_tol)
+            for a in accepted
+        )
+        if dup:
+            dropped.append(r)
+        else:
+            accepted.append(r)
+            kept_idx.add(i)
+    return [r for i, r in enumerate(rows) if i in kept_idx], dropped
+
+
+def _clusters(
+    proposed: list[dict[str, Any]],
+    existing: list[dict[str, Any]],
+    date_tol_days: int,
+) -> list[tuple[list[dict[str, Any]], list[dict[str, Any]]]]:
+    """Group rows into date-neighbourhoods, single-linkage on `date_tol_days`.
+
+    Judging a whole neighbourhood at once is what lets an aggregate reported by
+    one source collapse against the tranches stored from another.
+    """
+    marked = [(r["registry_close"], True, r) for r in proposed]
+    marked += [(r["registry_close"], False, r) for r in existing]
+    marked.sort(key=lambda x: (x[0], x[1]))
+    out: list[tuple[list[dict[str, Any]], list[dict[str, Any]]]] = []
+    cur_p: list[dict[str, Any]] = []
+    cur_e: list[dict[str, Any]] = []
+    last: str | None = None
+    for dt, is_proposed, r in marked:
+        if last is not None and _date_diff_days(dt, last) > date_tol_days:
+            if cur_p:
+                out.append((cur_p, cur_e))
+            cur_p, cur_e = [], []
+        (cur_p if is_proposed else cur_e).append(r)
+        last = dt
+    if cur_p:
+        out.append((cur_p, cur_e))
+    return out
+
+
+def reconcile(
+    existing: list[dict[str, Any]],
+    proposed: list[dict[str, Any]],
+    *,
+    date_tol_days: int = DATE_TOL_DAYS,
+    amount_rel_tol: float = AMOUNT_REL_TOL,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Split `proposed` against `existing` into (accepted, duplicates, conflicts).
+
+    Same currency only — RUB and USD never collapse.
+    """
+    by_cur_existing: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for r in existing:
+        by_cur_existing[_currency(r)].append(r)
+    by_cur_proposed: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for r in proposed:
+        by_cur_proposed[_currency(r)].append(r)
+
+    accepted: list[dict[str, Any]] = []
+    duplicates: list[dict[str, Any]] = []
+    conflicts: list[dict[str, Any]] = []
+    for cur, rows in by_cur_proposed.items():
+        for cl_prop, cl_exist in _clusters(rows, by_cur_existing.get(cur, []), date_tol_days):
+            # Collapse agreeing sources first. `classify_bucket` pairs proposed to
+            # existing one-to-one, so a second source restating the same payout
+            # would otherwise be reported as a disagreement.
+            keep, drop = _keep_by_priority(cl_prop, date_tol_days, amount_rel_tol)
+            duplicates.extend(drop)
+            if cl_exist:
+                drops, confl = classify_bucket(keep, cl_exist, amount_rel_tol=amount_rel_tol)
+                duplicates.extend(drops)
+                conflicts.extend(confl)
+            else:
+                accepted.extend(keep)
+    accepted.sort(key=lambda r: (r["registry_close"], float(r["amount"])))
+    return accepted, duplicates, conflicts

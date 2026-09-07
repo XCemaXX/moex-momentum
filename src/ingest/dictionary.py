@@ -19,7 +19,6 @@ Delisted/renamed SECIDs return HTTP 200 — liveness is read from `boards`.
 from __future__ import annotations
 
 import copy
-import json
 import logging
 import re
 import time
@@ -30,7 +29,8 @@ from typing import Any, cast
 
 import httpx
 
-from config import ISS_BASE_URL, ISS_HTTP_TIMEOUT_SECONDS
+from ingest.iss_client import cached_get as _cached_get
+from ingest.iss_client import is_cached
 from tickers import Board, Rebrand, TickerEntry, TickersDict
 
 LOG = logging.getLogger(__name__)
@@ -47,54 +47,6 @@ PROGRESS_LOG_EVERY = 200
 # Legacy listing rows where SECID = ISIN (CC + 9 alphanumerics + check digit) —
 # duplicates of real tickers, drop them.
 ISIN_SHAPED_SECID_RE = re.compile(r"^[A-Z]{2}[A-Z0-9]{9}\d$")
-
-
-def make_iss_client() -> httpx.Client:
-    return httpx.Client(
-        base_url=ISS_BASE_URL,
-        timeout=ISS_HTTP_TIMEOUT_SECONDS,
-        params={"iss.meta": "off"},
-        headers={"User-Agent": "moex-momentum/0.1"},
-    )
-
-
-def _cache_path(cache_dir: Path, key: str) -> Path:
-    return cache_dir / f"{key}.json"
-
-
-def _cached_get(
-    client: httpx.Client,
-    url_path: str,
-    *,
-    params: dict[str, str] | None = None,
-    cache_dir: Path | None,
-    cache_key: str,
-    force: bool = False,
-) -> dict[str, Any] | None:
-    """GET with on-disk cache. Returns `None` for 404 (not cached).
-
-    `force` re-fetches even on a cache hit (still rewrites the cache). The cache
-    has no TTL, so a monthly refresh over an old cache would otherwise replay a
-    stale ISS snapshot — wrong board windows, false delisted_after.
-    """
-    if cache_dir is not None and not force:
-        cp = _cache_path(cache_dir, cache_key)
-        if cp.exists():
-            with cp.open(encoding="utf-8") as f:
-                return cast(dict[str, Any], json.load(f))
-    resp = client.get(url_path, params=params or {})
-    if resp.status_code == 404:
-        return None
-    resp.raise_for_status()
-    data = resp.json()
-    if cache_dir is not None:
-        cp = _cache_path(cache_dir, cache_key)
-        cp.parent.mkdir(parents=True, exist_ok=True)
-        tmp = cp.with_suffix(cp.suffix + ".tmp")
-        with tmp.open("w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False)
-        tmp.replace(cp)
-    return cast(dict[str, Any], data)
 
 
 def _drain_listing(
@@ -178,7 +130,26 @@ def _parse_boards(block: Mapping[str, Any]) -> list[Board]:
         if rec.get("history_till"):
             b["history_till"] = str(rec["history_till"])
         out.append(b)
+    # ISS returns boards in no stable order, which churned the diff every refresh.
+    out.sort(key=lambda x: (not x.get("is_primary", False), x.get("history_from", "")))
     return out
+
+
+def _coarsen_history_till(boards: list[Board]) -> None:
+    """Round `history_till` up to month end before persisting.
+
+    The field only gates which boards a price query skips, so widening the window is
+    harmless — it can never skip a board that still traded. Storing the exact day made
+    ~800 lines of every monthly diff move for no reason. Call only AFTER
+    `_delisted_after`, which needs the exact date.
+    """
+    for b in boards:
+        ht = b.get("history_till")
+        if not ht:
+            continue
+        d = date.fromisoformat(ht)
+        nxt = date(d.year + d.month // 12, d.month % 12 + 1, 1)
+        b["history_till"] = (nxt - timedelta(days=1)).isoformat()
 
 
 def _delisted_after(boards: list[Board], today: date) -> str | None:
@@ -277,7 +248,7 @@ def bootstrap(
         cache_hit = (
             not force_refresh
             and cache_dir is not None
-            and _cache_path(cache_dir, f"securities/{secid}").exists()
+            and is_cached(cache_dir, f"securities/{secid}")
         )
         if i and not cache_hit:
             time.sleep(ISS_REQUEST_DELAY_S)
@@ -314,6 +285,7 @@ def bootstrap(
             entry["delisted_after"] = last
         elif "delisted_after" in entry:
             del entry["delisted_after"]
+        _coarsen_history_till(entry["boards"])
 
     LOG.info("dictionary: %d shares after TYPE filter", len(result))
 

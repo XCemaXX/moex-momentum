@@ -13,7 +13,6 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2010-05-05,0.012623,RUB,skill_fill_yahoo,yahoo_ex_div,
 2011-05-11,0.02,RUB,skill_fill_yahoo,yahoo_ex_div,
 2012-05-11,0.03,RUB,skill_fill_yahoo,yahoo_ex_div,
-2012-05-12,0.02,RUB,skill_fill_tbank,tbank_reestr,
 2013-04-24,0.03,RUB,skill_fill_yahoo,yahoo_ex_div,
 2014-06-16,0.04,RUB,moex_iss,,
 2015-06-24,0.01,RUB,moex_iss,,

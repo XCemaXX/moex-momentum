@@ -1020,30 +1020,6 @@
     "resolved_at": "2026-05-12"
   },
   {
-    "ticker": "MISB",
-    "registry_close": "2022-07-13",
-    "action": "augment",
-    "add": {
-      "amount": 1.92,
-      "currency": "RUB",
-      "source": "manual_disclosure"
-    },
-    "reason": "TNS Energo Mari El: Two separate AGM decisions both paid on 2022-07-13. Existing 0.566038 = 1Q2022 tranche. Missing record = 2021-FY-final tranche, 1.92 RUB EQ for both common and pref classes per RBC quote/ticker/59336 + smart-lab/q/MISB + TNS Energo Type-A pref charter (10% net profit clause with raise-to-common provision; FY2021 formula yielded equal payout for both classes). Bucket 2 multi-AGM same-day pattern.",
-    "resolved_at": "2026-05-16"
-  },
-  {
-    "ticker": "MISBP",
-    "registry_close": "2022-07-13",
-    "action": "augment",
-    "add": {
-      "amount": 1.92,
-      "currency": "RUB",
-      "source": "manual_disclosure"
-    },
-    "reason": "TNS Energo Mari El pref: same 2021-FY-final tranche as MISB on 2022-07-13. Charter Type-A pref clause yielded equal payout (1.92 EQ) for both classes in FY2021. Existing 0.566038 = 1Q2022 tranche, kept. See MISB 2022-07-13 entry for full context.",
-    "resolved_at": "2026-05-16"
-  },
-  {
     "ticker": "AKRN",
     "action": "ignore",
     "match": {
@@ -1243,26 +1219,6 @@
     },
     "reason": "NLMK AGM 2015-06-03 approved two simultaneous dividends on registry 2015-06-16: 1.64 RUB Q1-2015 interim (already in ISS) + 1.56 RUB FY2014 final (missing). Confirmed by ProFinance + metalinfo coverage of 2015-04-24 BoD recommendation, plus dohod per-tranche listing. Yahoo aggregate 3.20 = 1.56 + 1.64 corroborates. Bucket 2 multi-tranche.",
     "resolved_at": "2026-05-16"
-  },
-  {
-    "ticker": "MISB",
-    "action": "ignore",
-    "applies_to_ym_pattern": "2022-07",
-    "match": {
-      "source": "skill_fill_yahoo"
-    },
-    "reason": "Yahoo 2.528302 is unreconcilable with the verified two-AGM decomposition (1Q2022 0.566 + FY2021 1.92 = 2.486 RUB total). Per agent A initial research: Yahoo mixes pref+common amounts. ISS+augments canonical.",
-    "verified_at": "2026-05-16"
-  },
-  {
-    "ticker": "MISBP",
-    "action": "ignore",
-    "applies_to_ym_pattern": "2022-07",
-    "match": {
-      "source": "skill_fill_yahoo"
-    },
-    "reason": "Same as MISB — Yahoo 2.528302 unreconcilable; verified decomposition 1Q2022 (0.566) + FY2021 (1.92) = 2.486. ISS+augments canonical.",
-    "verified_at": "2026-05-16"
   },
   {
     "ticker": "RTSB",
@@ -2736,18 +2692,6 @@
   },
   {
     "ticker": "DGBZP",
-    "registry_close": "2013-04-24",
-    "action": "augment",
-    "add": {
-      "amount": 1.2,
-      "currency": "RUB",
-      "source": "manual_disclosure"
-    },
-    "reason": "Акционеры ОАО 'Дорогобуж'...приняли решение выплатить дивиденды по результатам 2012 года в размере 1,2 рубля на одну привилегированную ... PRIME News confirms the company's leadership proposed this same distribution amount to the shareholder assembly on April 24, 2013. [https://html.duckduckgo.com/html/?q=Дорогобуж+дивиденды+2012+привилегированные+итогам]",
-    "resolved_at": "2026-05-17"
-  },
-  {
-    "ticker": "DGBZP",
     "registry_close": "2014-06-15",
     "action": "augment",
     "add": {
@@ -3956,5 +3900,1033 @@
     },
     "reason": "First payout after redomicile; 16.48 RUB, ex-date 2026-08-05, record 2026-08-06 (smart-lab/dohod agree). Price gap 106.18 -> 89.68 = 16.50 confirms. ISS lag.",
     "resolved_at": "2026-09-01"
+  },
+  {
+    "ticker": "GMKN",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_dohod"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Scale, not disagreement: dohod restates history at the post-split share count (1:100 forward, 2024-04-08), reporting 1.2 where 120.0 was paid — 2.42% vs 0.024% yield on close 4960.0 (2007-05-15). Stored scale is nominal-at-time. Verified against data/prices_iss. Auto-rescaling of dohod stays off: it restates GMKN/PLZL/TRNFP/VTBR/BELU but not ABRD/IRAO/SBER/T/PHOR.",
+    "verified_at": "2026-09-05"
+  },
+  {
+    "ticker": "PLZL",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_dohod"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Scale, not disagreement: dohod restates history at the post-split share count (1:10 forward, 2025-03-27), reporting 2.62 against a stored 25.84 — 1.39% vs 0.14% yield on close 1861.9 (2011-10-06). Stored scale is nominal-at-time. Verified against data/prices_iss. Auto-rescaling of dohod stays off: it restates GMKN/PLZL/TRNFP/VTBR/BELU but not ABRD/IRAO/SBER/T/PHOR.",
+    "verified_at": "2026-09-05"
+  },
+  {
+    "ticker": "TRNFP",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_dohod"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Scale, not disagreement: dohod restates history at the post-split share count (1:100 forward, 2024-02-21), reporting 7.17 against a stored 716.58 — 1.60% vs 0.016% yield on close 44700.0 (2012-05-24). Stored scale is nominal-at-time. Verified against data/prices_iss. Auto-rescaling of dohod stays off: it restates GMKN/PLZL/TRNFP/VTBR/BELU but not ABRD/IRAO/SBER/T/PHOR.",
+    "verified_at": "2026-09-05"
+  },
+  {
+    "ticker": "VTBR",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_dohod"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Scale, not disagreement: dohod restates history at the post-split share count (5000:1 reverse, 2024-07-15), reporting 4.4 against a stored 0.00088 — 1.39% vs 6971% yield on close 0.06312 (2012-04-26). Stored scale is nominal-at-time. Verified against data/prices_iss. Auto-rescaling of dohod stays off: it restates GMKN/PLZL/TRNFP/VTBR/BELU but not ABRD/IRAO/SBER/T/PHOR.",
+    "verified_at": "2026-09-05"
+  },
+  {
+    "ticker": "BELU",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_dohod"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "Scale, not disagreement: dohod restates history at the post-bonus share count (1:8 bonus issue, 2024-08-20), reporting 11.25 against a stored 90.0 — 2.49% vs 0.31% yield on close 3620.0 (2021-05-06). Stored scale is nominal-at-time. Verified against data/prices_iss. Auto-rescaling of dohod stays off: it restates GMKN/PLZL/TRNFP/VTBR/BELU but not ABRD/IRAO/SBER/T/PHOR.",
+    "verified_at": "2026-09-05"
+  },
+  {
+    "ticker": "AFLT",
+    "registry_close": "2010-05-05",
+    "action": "drop",
+    "match": {
+      "amount": 0.285308,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates AFLT dividends at a constant factor 0.815866 against the stored series (4 records, stdev 9.7e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for AFLT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "AFLT",
+    "registry_close": "2011-05-10",
+    "action": "drop",
+    "match": {
+      "amount": 0.885297,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates AFLT dividends at a constant factor 0.815866 against the stored series (4 records, stdev 9.7e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for AFLT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "AFLT",
+    "registry_close": "2012-05-11",
+    "action": "drop",
+    "match": {
+      "amount": 1.475168,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates AFLT dividends at a constant factor 0.815866 against the stored series (4 records, stdev 9.7e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for AFLT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "AFLT",
+    "registry_close": "2013-05-07",
+    "action": "drop",
+    "match": {
+      "amount": 0.949342,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates AFLT dividends at a constant factor 0.815866 against the stored series (4 records, stdev 9.7e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for AFLT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "AKRN",
+    "registry_close": "2010-04-12",
+    "action": "drop",
+    "match": {
+      "amount": 27.56878,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates AKRN dividends at a constant factor 1.102751 against the stored series (4 records, stdev 3e-08) — one payout reported twice, not a second payout. See the standing `ignore` verdict for AKRN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "AKRN",
+    "registry_close": "2011-04-07",
+    "action": "drop",
+    "match": {
+      "amount": 44.11005,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates AKRN dividends at a constant factor 1.102751 against the stored series (4 records, stdev 3e-08) — one payout reported twice, not a second payout. See the standing `ignore` verdict for AKRN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "AKRN",
+    "registry_close": "2011-08-31",
+    "action": "drop",
+    "match": {
+      "amount": 142.25491,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates AKRN dividends at a constant factor 1.102751 against the stored series (4 records, stdev 3e-08) — one payout reported twice, not a second payout. See the standing `ignore` verdict for AKRN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "AKRN",
+    "registry_close": "2012-11-09",
+    "action": "drop",
+    "match": {
+      "amount": 50.72656,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates AKRN dividends at a constant factor 1.102751 against the stored series (4 records, stdev 3e-08) — one payout reported twice, not a second payout. See the standing `ignore` verdict for AKRN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "AKRN",
+    "registry_close": "2013-04-12",
+    "action": "drop",
+    "match": {
+      "amount": 71.67883,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Duplicate of the 2013-04-11 payout stored as 110.0 (tbank), which the AKRN `ignore` verdict names canonical. Two payouts one day apart are not plausible. Note the ratio here is 0.6516, off the 1.102751 family constant that explains AKRN's other yahoo rows — the row is a duplicate but its distortion is unexplained.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2011-05-23",
+    "action": "drop",
+    "match": {
+      "amount": 6.32,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Aggregate duplicate: the yahoo row equals the sum of the tranches stored from other sources on the same registry date (2.42 + 3.90 = 6.32), so it restates a payout already recorded in full. Tranches kept, aggregate dropped.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2012-05-15",
+    "action": "drop",
+    "match": {
+      "amount": 7.63,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Aggregate duplicate: the yahoo row equals the sum of the tranches stored from other sources on the same registry date (3.56 + 4.07 = 7.63), so it restates a payout already recorded in full. Tranches kept, aggregate dropped.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2013-04-29",
+    "action": "drop",
+    "match": {
+      "amount": 2.32,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Aggregate duplicate: the yahoo row equals the sum of the tranches stored from other sources on the same registry date (0.43 + 1.89 = 2.32), so it restates a payout already recorded in full. Tranches kept, aggregate dropped.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2021-05-31",
+    "action": "drop",
+    "match": {
+      "amount": 83.04,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Aggregate duplicate: the yahoo row equals the sum of the tranches stored from other sources on the same registry date (36.27 (ISS) + 46.77 (dohod) = 83.04), so it restates a payout already recorded in full. Tranches kept, aggregate dropped.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "FEES",
+    "registry_close": "2017-07-18",
+    "action": "drop",
+    "match": {
+      "amount": 0.015383,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Aggregate duplicate: the yahoo row equals the sum of the tranches stored from other sources on the same registry date (0.001116473 + 0.014266352 = 0.015382825), so it restates a payout already recorded in full. Tranches kept, aggregate dropped.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "GCHE",
+    "registry_close": "2014-11-20",
+    "action": "drop",
+    "match": {
+      "amount": 34.44,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Aggregate duplicate: the yahoo row equals the sum of the tranches stored from other sources on the same registry date (11.16 + 23.28 = 34.44), so it restates a payout already recorded in full. Tranches kept, aggregate dropped.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "GMKN",
+    "registry_close": "2010-05-24",
+    "action": "drop",
+    "match": {
+      "amount": 217.39380000000003,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates GMKN dividends at a constant factor 1.035208 against the stored series (6 records, stdev 3.6e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for GMKN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "GMKN",
+    "registry_close": "2011-05-17",
+    "action": "drop",
+    "match": {
+      "amount": 186.3375,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates GMKN dividends at a constant factor 1.035208 against the stored series (6 records, stdev 3.6e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for GMKN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "GMKN",
+    "registry_close": "2012-05-23",
+    "action": "drop",
+    "match": {
+      "amount": 202.90089999999998,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates GMKN dividends at a constant factor 1.035208 against the stored series (6 records, stdev 3.6e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for GMKN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "GMKN",
+    "registry_close": "2013-05-02",
+    "action": "drop",
+    "match": {
+      "amount": 414.9423,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates GMKN dividends at a constant factor 1.035208 against the stored series (6 records, stdev 3.6e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for GMKN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "GMKN",
+    "registry_close": "2018-09-28",
+    "action": "drop",
+    "match": {
+      "amount": 803.3425,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates GMKN dividends at a constant factor 1.035208 against the stored series (6 records, stdev 3.6e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for GMKN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "GMKN",
+    "registry_close": "2021-05-31",
+    "action": "drop",
+    "match": {
+      "amount": 1057.1755,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates GMKN dividends at a constant factor 1.035208 against the stored series (6 records, stdev 3.6e-07) — one payout reported twice, not a second payout. See the standing `ignore` verdict for GMKN.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "IRKT",
+    "registry_close": "2010-05-11",
+    "action": "drop",
+    "match": {
+      "amount": 0.29723,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates IRKT dividends at a constant factor 0.660510 against the stored series (7 records, stdev 1.3e-06) — one payout reported twice, not a second payout. See the standing `ignore` verdict for IRKT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "IRKT",
+    "registry_close": "2011-04-27",
+    "action": "drop",
+    "match": {
+      "amount": 0.250994,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates IRKT dividends at a constant factor 0.660510 against the stored series (7 records, stdev 1.3e-06) — one payout reported twice, not a second payout. See the standing `ignore` verdict for IRKT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "IRKT",
+    "registry_close": "2012-04-19",
+    "action": "drop",
+    "match": {
+      "amount": 0.290625,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates IRKT dividends at a constant factor 0.660510 against the stored series (7 records, stdev 1.3e-06) — one payout reported twice, not a second payout. See the standing `ignore` verdict for IRKT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "IRKT",
+    "registry_close": "2013-04-22",
+    "action": "drop",
+    "match": {
+      "amount": 0.29723,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates IRKT dividends at a constant factor 0.660510 against the stored series (7 records, stdev 1.3e-06) — one payout reported twice, not a second payout. See the standing `ignore` verdict for IRKT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "IRKT",
+    "registry_close": "2014-07-15",
+    "action": "drop",
+    "match": {
+      "amount": 0.330255,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates IRKT dividends at a constant factor 0.660510 against the stored series (7 records, stdev 1.3e-06) — one payout reported twice, not a second payout. See the standing `ignore` verdict for IRKT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "IRKT",
+    "registry_close": "2016-07-14",
+    "action": "drop",
+    "match": {
+      "amount": 0.396306,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates IRKT dividends at a constant factor 0.660510 against the stored series (7 records, stdev 1.3e-06) — one payout reported twice, not a second payout. See the standing `ignore` verdict for IRKT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "IRKT",
+    "registry_close": "2017-07-14",
+    "action": "drop",
+    "match": {
+      "amount": 0.594459,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo restates IRKT dividends at a constant factor 0.660510 against the stored series (7 records, stdev 1.3e-06) — one payout reported twice, not a second payout. See the standing `ignore` verdict for IRKT.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "RASP",
+    "registry_close": "2011-07-12",
+    "action": "drop",
+    "match": {
+      "amount": 5.128546,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo back-adjusts pre-2022 Raspadskaya dividends by 1/(1-0.025) after the treasury cancellation (5.128546 vs stored 5.0). One payout, not two. See the standing `ignore` verdict for RASP.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "SVAV",
+    "registry_close": "2013-04-05",
+    "action": "drop",
+    "match": {
+      "amount": 57.164112,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Rescaled copy: yahoo amount 57.164112 against the stored 52.52, which smart-lab and dohod confirm. Yahoo's factors for SVAV are inconsistent and unreproducible. See the standing `ignore` verdict for SVAV.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "VRSB",
+    "registry_close": "2013-04-15",
+    "action": "drop",
+    "match": {
+      "amount": 1.17273,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Aggregate duplicate: the yahoo row equals the sum of the tranches stored from other sources on the same registry date (0.51825 + 0.6545 = 1.17275), so it restates a payout already recorded in full. Tranches kept, aggregate dropped.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "CHMF",
+    "registry_close": "2010-11-11",
+    "action": "drop",
+    "match": {
+      "amount": 4.0326,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Duplicate: dohod lists a single 2010 payout of 4.29 (record 2010-11-12) and no 4.0326 anywhere; tbank's structured feed likewise holds one 2010 entry. Yahoo restates the same payout.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "CNTLP",
+    "registry_close": "2017-07-06",
+    "action": "drop",
+    "match": {
+      "amount": 0.008212,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Wrong share class: 0.008212 is CNTL's ORDINARY dividend for the same record date 2017-07-07, and it is stored as such in CNTL.csv. The charter pays the preferred twice the ordinary, which is the 2.0001 ratio observed. Only one CNTLP payout exists for this cycle: 0.0164246.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "DIOD",
+    "registry_close": "2020-08-31",
+    "action": "drop",
+    "match": {
+      "amount": 0.86,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Duplicate: ISS and smart-lab both give 0.43 (record 2020-09-01), and DIOD pays once a year across 2016-2025 with no interim/final pattern. Caveat: the ex-date drop was 13.5% where 0.43 implies 6.0% — the name is illiquid and fell on its own through that week, so the gap neither confirms nor refutes.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "KMAZ",
+    "registry_close": "2014-07-15",
+    "action": "drop",
+    "match": {
+      "amount": 0.2639,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Duplicate: dohod's yearly block holds a single 2014 figure of 0.29 (record 2014-07-17); 0.2639 appears nowhere on the page.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "LVHK",
+    "registry_close": "2022-05-31",
+    "action": "drop",
+    "match": {
+      "amount": 0.3,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Stale repeat: 0.3 is LVHK's FY2020 dividend, already stored from ISS at record 2021-06-01. The FY2021 payout is 0.24462 (record 2022-06-01), confirmed by smart-lab and investmint. Yahoo's ex-div feed carried the prior year's amount forward.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "MSNG",
+    "registry_close": "2012-05-12",
+    "action": "drop",
+    "match": {
+      "amount": 0.02,
+      "source": "skill_fill_tbank"
+    },
+    "reason": "Wrong year: 0.02 is Mosenergo's 2011 dividend stamped onto the 2012 record date. dohod gives 2012 = 0.03 and 2011 = 0.02; marketcap.ru matches. Keep 0.03.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "NLMK",
+    "registry_close": "2011-04-16",
+    "action": "drop",
+    "match": {
+      "amount": 1.82,
+      "source": "skill_fill_tbank"
+    },
+    "reason": "Duplicate: dohod gives 17.04.2011 = 1.2, and smart-lab's 2011 annual total 2.60 = 1.2 (April) + 1.4 (August), matching the two stored yahoo events. 1.82 appears in no source but tbank's pre-2013 calendar.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "NLMK",
+    "registry_close": "2012-04-10",
+    "action": "drop",
+    "match": {
+      "amount": 2.0,
+      "source": "skill_fill_tbank"
+    },
+    "reason": "Duplicate: dohod gives 10.04.2012 = 0.6 and smart-lab's 2012 annual total is 0.60 — a single payment. Same stale tbank pre-2013 calendar entry as the 2011 case.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "NMTP",
+    "registry_close": "2011-05-10",
+    "action": "drop",
+    "match": {
+      "amount": 0.023,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Duplicate of the 2011-05-11 payout, carrying the ex-dividend date rather than the record date. The surviving row's amount is corrected separately from 0.23 to 0.023.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "NSVZ",
+    "registry_close": "2014-10-01",
+    "action": "drop",
+    "match": {
+      "amount": 5.506845,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Duplicate: investfunds and tbank both show exactly one dividend in the company's entire history — 8.3 RUB, ex 2014-10-03, record 2014-10-06. 5.506845 corresponds to no documented payout.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "NVTK",
+    "registry_close": "2015-04-30",
+    "action": "drop",
+    "match": {
+      "amount": 52.0,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Order-of-magnitude error at the source: Novatek declared 5.2 RUB for FY2014 (record 2015-05-05), confirmed by dohod and contemporaneous finam coverage of the 12.03.2015 board recommendation. 52.0 would be a 10.5% one-off yield; the price series shows no gap at all that week.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "PMSBP",
+    "registry_close": "2018-05-29",
+    "action": "drop",
+    "match": {
+      "amount": 16.735186,
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Doubling: smart-lab's PMSB page carries 8,367593 twice and no 16,735 anywhere; tbank gives 8.367593 for PMSBP directly. Both share classes pay the same amount, so this is not a class mix. The ex-date drop of 11.8% matches 8.367593 (11.1%), not 33%.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "VSMO",
+    "registry_close": "2017-10-19",
+    "action": "drop",
+    "match": {
+      "amount": 410.18,
+      "source": "moex_iss"
+    },
+    "reason": "Duplicate, and the wrong row is the ISS one: smart-lab, tbank, dohod and investmint all show exactly one payout for this record date — 762.68 — and none contains 410.18 anywhere in VSMO's history. The ex-date drop of 4.0% matches 762.68 (4.43%); both rows together would imply 6.8%. 410.18 is not a tax-net variant either (762.68 x 0.87 = 663.5).",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "NMTP",
+    "registry_close": "2011-05-11",
+    "action": "replace",
+    "from": {
+      "amount": 0.23,
+      "source": "skill_fill_tbank"
+    },
+    "to": {
+      "amount": 0.023,
+      "currency": "RUB",
+      "source": "skill_fill_dohod",
+      "registry_close_source": "dohod"
+    },
+    "reason": "Decimal-point error in the tbank feed: dohod gives 0.023 for record date 11.05.2011, and the neighbouring years are 0.0235 (2012) and 0.02362 (2013), so 0.23 is a lone 10x outlier. tbank's own table implies 6.84% here against 0.68-2.23% in surrounding years.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "PHOR",
+    "registry_close": "2024-07-11",
+    "action": "augment",
+    "add": {
+      "amount": 15.0,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Genuine second tranche, not a duplicate: smart-lab shows 294 (4кв 2023) and 15 (1кв 2024) as separate rows on record date 11.07.2024, and TASS reports the combined 309 RUB decision. ISS captured only the 294 leg. Recorded so the pair reads as reviewed.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "PIKK",
+    "registry_close": "2021-05-17",
+    "action": "augment",
+    "add": {
+      "amount": 22.92,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Genuine second tranche: 22.51 is the FY2020 final and 22.92 the Q1-2021 interim, both on record date 17.05.2021. smart-lab and dohod split it the same way and RBC quotes both board recommendations. The 1.8% gap is not rounding noise.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "MRKU",
+    "registry_close": "2024-06-14",
+    "action": "augment",
+    "add": {
+      "amount": 0.0384,
+      "currency": "RUB",
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Genuine second tranche: 0.05441 is the FY2023 final and 0.0384 the Q1-2024 interim, both on record date 14.06.2024. smart-lab, dohod and investmint agree, each stating explicitly that two dividends share one record date.",
+    "resolved_at": "2026-09-05"
+  },
+  {
+    "ticker": "GAZC",
+    "registry_close": "2025-12-27",
+    "action": "augment",
+    "add": {
+      "amount": 12.5632,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Issuer disclosure gazcon.ru/rask/2025/18-12-25-1.pdf clause 2.8 gives 12,56320 RUB per ordinary share and clause 2.10 the record date 27.12.2025; the EGM resolution 18-12-25-3.pdf repeats both. ISS stopped serving dividends before this payout.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "GAZC",
+    "registry_close": "2026-07-08",
+    "action": "augment",
+    "add": {
+      "amount": 1.33009,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Issuer disclosure gazcon.ru/rask/2026/29-06-26-2.pdf: 1,33009 RUB per ordinary share for FY2025, record date 08.07.2026. Confirmed by the MOEX register-closing export.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "GAZS",
+    "registry_close": "2025-12-27",
+    "action": "augment",
+    "add": {
+      "amount": 12.41844,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Issuer disclosure gaz-services.ru/rask/2025/18-12-25-2.pdf: 12,41844 RUB per ordinary share for 9M 2025, record date 27.12.2025. ISS stopped serving dividends before this payout.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "GAZS",
+    "registry_close": "2026-07-08",
+    "action": "augment",
+    "add": {
+      "amount": 1.75867,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Issuer disclosure gaz-services.ru/rask/2026/29-06-26-2.pdf: 1,75867 RUB per ordinary share for FY2025, record date 08.07.2026. Confirmed by the MOEX register-closing export.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "GAZT",
+    "registry_close": "2026-07-08",
+    "action": "augment",
+    "add": {
+      "amount": 0.137,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Issuer disclosure gaz-tek.ru/rask/2026/29-06-26-2.pdf: 0,13700 RUB per ordinary share for FY2025, record date 08.07.2026. Confirmed by the MOEX register-closing export.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "GEMA",
+    "registry_close": "2026-06-15",
+    "action": "augment",
+    "add": {
+      "amount": 2.8,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "AGM approved 2,8 RUB per ordinary share for FY2025, record date 15.06.2026. investfunds and investmint agree; the MOEX register-closing export confirms the date.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "SVETP",
+    "registry_close": "2025-12-30",
+    "action": "augment",
+    "add": {
+      "amount": 4.22,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "4,22 RUB per preferred share, record date 30.12.2025. The ordinary SVET leg of the same closing is already stored at 0.10, and investfunds and investmint both give 4.22 for the preferred. smart-lab dates this payout 14.10.2025, which is the announcement, not the register.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "YRSBP",
+    "registry_close": "2026-06-25",
+    "action": "augment",
+    "add": {
+      "amount": 17.207374,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "17,20737388 RUB per preferred share for FY2025, record date 25.06.2026. investfunds and investmint agree; the MOEX register-closing export confirms the date. The ordinary YRSB paid nothing for FY2025.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "KBSB",
+    "registry_close": "2017-10-27",
+    "action": "replace",
+    "from": {
+      "amount": 4.33931,
+      "source": "skill_fill_yahoo"
+    },
+    "to": {
+      "amount": 4.2675,
+      "currency": "RUB",
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Yahoo alone gives 4.33931; smart-lab and investfunds both give 4.2675 for the register that closed 30.10.2017. The stored date stays the ex-date 27.10.2017, which investfunds confirms and which the yahoo source tag encodes.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "KBSB",
+    "registry_close": "2018-07-16",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_smartlab"
+    },
+    "reason": "smart-lab dates the 2019 payout to 2018: it gives 4.1432 here, which is the amount for the register of 17.06.2019. investfunds confirms 13.6627 for 16.07.2018, matching the stored ISS row.",
+    "verified_at": "2026-09-06"
+  },
+  {
+    "ticker": "MISB",
+    "registry_close": "2018-06-18",
+    "action": "replace",
+    "from": {
+      "amount": 1.821453,
+      "source": "skill_fill_yahoo"
+    },
+    "to": {
+      "amount": 0.909811,
+      "currency": "RUB",
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Issuer AGM protocol No.24 (meeting 08.06.2018), cdn.tns-e.ru/iblock/52b/: «в размере 0,909811 руб. на одну обыкновенную акцию … 0,909811 руб. на одну привилегированную», record date 19.06.2018; the Q2-2018 quarterly report repeats it per class. 0.909811 x 132.5M shares = 120,550,000 RUB, the protocol's «120 550 тыс. руб.». The stored 1.821453 is 0.909811 + 0.911642 — one payout ingested from two feeds and summed. Date left as the yahoo ex-date 18.06.2018.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "MISB",
+    "registry_close": "2022-07-13",
+    "action": "replace",
+    "from": {
+      "amount": 1.92,
+      "source": "manual_disclosure"
+    },
+    "to": {
+      "amount": 1.358491,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Record date 14.07.2022 carried three tranches, identical for both classes: 1.358491 (retained earnings), 0.566038 (FY2021), 0.603774 (Q1 2022). The stored 1.92 merged the first two while 0.566038 was already stored separately from ISS, so FY2021 was counted twice. Audited FY2022 accounts in ГИР БО (bo.nalog.gov.ru/nbo/bfo/18001018/details, form 0710004 line 3327) report 335,000 тыс. руб. of dividends = 2.528303 per share over 132.5M shares.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "MISB",
+    "registry_close": "2022-07-13",
+    "action": "augment",
+    "add": {
+      "amount": 0.603774,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Third tranche of the 14.07.2022 record date, for Q1 2022, missing from the stored pair. investfunds, investmint and smart-lab all list it; the sum of the three tranches matches the 335,000 тыс. руб. reported in the audited FY2022 accounts (ГИР БО, form 0710004 line 3327).",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "MISBP",
+    "registry_close": "2018-06-18",
+    "action": "replace",
+    "from": {
+      "amount": 1.821453,
+      "source": "skill_fill_yahoo"
+    },
+    "to": {
+      "amount": 0.909811,
+      "currency": "RUB",
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "Issuer AGM protocol No.24 (meeting 08.06.2018), cdn.tns-e.ru/iblock/52b/: «в размере 0,909811 руб. на одну обыкновенную акцию … 0,909811 руб. на одну привилегированную», record date 19.06.2018; the Q2-2018 quarterly report repeats it per class. 0.909811 x 132.5M shares = 120,550,000 RUB, the protocol's «120 550 тыс. руб.». The stored 1.821453 is 0.909811 + 0.911642 — one payout ingested from two feeds and summed. Date left as the yahoo ex-date 18.06.2018.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "MISBP",
+    "registry_close": "2022-07-13",
+    "action": "replace",
+    "from": {
+      "amount": 1.92,
+      "source": "manual_disclosure"
+    },
+    "to": {
+      "amount": 1.358491,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Record date 14.07.2022 carried three tranches, identical for both classes: 1.358491 (retained earnings), 0.566038 (FY2021), 0.603774 (Q1 2022). The stored 1.92 merged the first two while 0.566038 was already stored separately from ISS, so FY2021 was counted twice. Audited FY2022 accounts in ГИР БО (bo.nalog.gov.ru/nbo/bfo/18001018/details, form 0710004 line 3327) report 335,000 тыс. руб. of dividends = 2.528303 per share over 132.5M shares.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "MISBP",
+    "registry_close": "2022-07-13",
+    "action": "augment",
+    "add": {
+      "amount": 0.603774,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Third tranche of the 14.07.2022 record date, for Q1 2022, missing from the stored pair. investfunds, investmint and smart-lab all list it; the sum of the three tranches matches the 335,000 тыс. руб. reported in the audited FY2022 accounts (ГИР БО, form 0710004 line 3327).",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "RTSB",
+    "registry_close": "2016-06-24",
+    "action": "replace",
+    "from": {
+      "amount": 0.132474,
+      "source": "skill_fill_yahoo"
+    },
+    "to": {
+      "amount": 0.066237,
+      "currency": "RUB",
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "AGM of 07.06.2016 declared two dividends on one record date 27.06.2016, equal for both classes: 0,008837 for FY2015 and 0,0574 out of prior-year profit, total 0,066237 per share. Issuer quarterly report Q3 2016 §8.7 (cdn.tns-e.ru/iblock/6eb/ezho_za_3_kv._2016.pdf) and the 2016 annual report both state the figures per class; the charter forces the preferred up to the ordinary. Totals check against share counts: 8,128,764,676 x 0,008837 = 71,833,893 and 925,737,256 x 0,0574 = 53,137,318. The stored 0.132474 is exactly twice 0,066237 — yahoo summed the ordinary and preferred legs into each. The stored date stays the yahoo ex-date.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "RTSBP",
+    "registry_close": "2016-06-24",
+    "action": "replace",
+    "from": {
+      "amount": 0.132474,
+      "source": "skill_fill_yahoo"
+    },
+    "to": {
+      "amount": 0.066237,
+      "currency": "RUB",
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "AGM of 07.06.2016 declared two dividends on one record date 27.06.2016, equal for both classes: 0,008837 for FY2015 and 0,0574 out of prior-year profit, total 0,066237 per share. Issuer quarterly report Q3 2016 §8.7 (cdn.tns-e.ru/iblock/6eb/ezho_za_3_kv._2016.pdf) and the 2016 annual report both state the figures per class; the charter forces the preferred up to the ordinary. Totals check against share counts: 8,128,764,676 x 0,008837 = 71,833,893 and 925,737,256 x 0,0574 = 53,137,318. The stored 0.132474 is exactly twice 0,066237 — yahoo summed the ordinary and preferred legs into each. The stored date stays the yahoo ex-date.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "WTCM",
+    "registry_close": "2018-05-02",
+    "action": "replace",
+    "from": {
+      "amount": 0.481927,
+      "source": "skill_fill_yahoo"
+    },
+    "to": {
+      "amount": 0.481927710843373,
+      "currency": "RUB",
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "AGM of 20.04.2018 declared 0,481927710843373 per share on both classes, record date 03.05.2018. Issuer quarterly report Q2 2018 §8.7.1 (wtcmoscow.ru/upload/iblock/b8b/...Ezhekvartalnyy_otchet_za_2_kv._2018) gives 521,927,710.84 over 1,083,000,000 ordinary and 78,072,289.16 over 162,000,000 preferred; the IFRS note and the 2018 annual report repeat it. 600,000,000 / 1,245,000,000 = 0,481927710843373. The stored preferred 0.963855 is the two legs summed by yahoo; the ordinary was merely rounded. The stored date stays the yahoo ex-date.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "WTCMP",
+    "registry_close": "2018-05-02",
+    "action": "replace",
+    "from": {
+      "amount": 0.963855,
+      "source": "skill_fill_yahoo"
+    },
+    "to": {
+      "amount": 0.481927710843373,
+      "currency": "RUB",
+      "source": "skill_fill_yahoo"
+    },
+    "reason": "AGM of 20.04.2018 declared 0,481927710843373 per share on both classes, record date 03.05.2018. Issuer quarterly report Q2 2018 §8.7.1 (wtcmoscow.ru/upload/iblock/b8b/...Ezhekvartalnyy_otchet_za_2_kv._2018) gives 521,927,710.84 over 1,083,000,000 ordinary and 78,072,289.16 over 162,000,000 preferred; the IFRS note and the 2018 annual report repeat it. 600,000,000 / 1,245,000,000 = 0,481927710843373. The stored preferred 0.963855 is the two legs summed by yahoo; the ordinary was merely rounded. The stored date stays the yahoo ex-date.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "ALNU",
+    "registry_close": "2015-06-15",
+    "action": "augment",
+    "add": {
+      "amount": 4706.25,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "АЛРОСА-Нюрба payouts MOEX's register-closing export confirms and no automated feed carried; the ticker had no dividend file at all. smart-lab /q/ALNU/dividend/ and an archived investfunds.ru/stocks/ALROSA-Nurba (ISIN RU000A0JP468) agree on all three record dates and amounts. Single share class, so no ordinary/preferred ambiguity.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "ALNU",
+    "registry_close": "2015-12-21",
+    "action": "augment",
+    "add": {
+      "amount": 11075.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "АЛРОСА-Нюрба payouts MOEX's register-closing export confirms and no automated feed carried; the ticker had no dividend file at all. smart-lab /q/ALNU/dividend/ and an archived investfunds.ru/stocks/ALROSA-Nurba (ISIN RU000A0JP468) agree on all three record dates and amounts. Single share class, so no ordinary/preferred ambiguity.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "ALNU",
+    "registry_close": "2017-06-16",
+    "action": "augment",
+    "add": {
+      "amount": 5008.75,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "АЛРОСА-Нюрба payouts MOEX's register-closing export confirms and no automated feed carried; the ticker had no dividend file at all. smart-lab /q/ALNU/dividend/ and an archived investfunds.ru/stocks/ALROSA-Nurba (ISIN RU000A0JP468) agree on all three record dates and amounts. Single share class, so no ordinary/preferred ambiguity.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "CHEP",
+    "registry_close": "2017-05-10",
+    "action": "augment",
+    "add": {
+      "amount": 10.05,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "ЧТПЗ FY2016 dividend, record date 10.05.2017, confirmed by smart-lab /q/CHEP/dividend/ and an archived investfunds.ru/stocks/Chelpipe (ISIN RU0009066807). Ordinary shares only. The ticker had no dividend file.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "GTLC",
+    "registry_close": "2016-04-12",
+    "action": "augment",
+    "add": {
+      "amount": 0.042,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "ДжиТиЭл payout, record date 12.04.2016, from an archived investfunds.ru/stocks/GTL (ISIN RU000A0JTN19). Single source: the live page lost its dividend history after the 2022 delisting and smart-lab keeps only the 2019 payout. The ticker had no dividend file.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "DGBZP",
+    "registry_close": "2013-04-24",
+    "action": "drop",
+    "match": {
+      "amount": 1.2,
+      "source": "manual_disclosure"
+    },
+    "reason": "Same payout as the stored 2013-04-24 row, not a second one: 1.2 RUB per preferred share for FY2012. MOEX's register-closing export and investfunds.ru/stocks/Dorogobouzh-pref (ISIN RU0007661682) both put the register at 05.04.2013; the stored date was hand-entered 19 days late. Dropped and re-added on the register date so the completeness check stops reporting it as missing.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "DGBZP",
+    "registry_close": "2013-04-05",
+    "action": "augment",
+    "add": {
+      "amount": 1.2,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Same payout as the stored 2013-04-24 row, not a second one: 1.2 RUB per preferred share for FY2012. MOEX's register-closing export and investfunds.ru/stocks/Dorogobouzh-pref (ISIN RU0007661682) both put the register at 05.04.2013; the stored date was hand-entered 19 days late. Dropped and re-added on the register date so the completeness check stops reporting it as missing.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "RLMN",
+    "registry_close": "2013-05-24",
+    "action": "augment",
+    "add": {
+      "amount": 6.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "ГК Роллман FY2012, ordinary class. Archived investfunds.ru/stocks/Rollman-Group gives record date 24.05.2013 and 6 RUB; marketcap.ru/stocks/RLMN/dividends agrees and shows it as the only payout ever. The archived RLMNP page has no 2013 row, so the 6 RUB is unambiguously the ordinary class. The ticker had no dividend file.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "ROSB",
+    "registry_close": "2023-06-09",
+    "action": "augment",
+    "add": {
+      "amount": 2.9,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Росбанк FY2022, 2.9 RUB per ordinary share. Archived investfunds.ru/stocks/Rosbank and smart-lab both give record date 09.06.2023. Not a duplicate of the stored 2024-05-27 row: MOEX's register export and smart-lab each list both closings, and the bank paid 2.9 twice.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "RSTIP",
+    "registry_close": "2013-05-23",
+    "action": "augment",
+    "add": {
+      "amount": 0.08,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Российские сети, preferred class, out of retained earnings of prior years. AGM of 28.06.2013 (issuer site, archived): «Выплатить дивиденды по привилегированным акциям Общества из нераспределённой прибыли прошлых лет в размере 0,08 рубля на одну привилегированную акцию», with the list drawn up as of 23.05.2013 — under pre-2014 rules the AGM list date is the dividend record date. Ordinary shares got nothing for 2012. Total 166,012 тыс. руб / 0.08 = 2,075,150,000, matching the RSTIP issue size.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "VTRS",
+    "registry_close": "2017-06-17",
+    "action": "augment",
+    "add": {
+      "amount": 0.0017,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Вторресурсы FY2016, ordinary class — the Russian issuer, NOT Viatris Inc., whose data was removed from this ticker in task 035. AGM resolution carried in the NSD corporate-action message (ricom.ru/depo/corporate/1959): «Выплатить дивиденды по обыкновенным акциям в размере 0,0017 рублей на одну обыкновенную акцию… дату… – 17.06.2017». 132,600 RUB / 0.0017 = 78,000,000 = the exact ISS issue size for RU000A0JS9K8. Aggregators carry a stale record date because the AGM was called, cancelled and re-held.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "VZRZP",
+    "registry_close": "2019-06-11",
+    "action": "augment",
+    "add": {
+      "amount": 2.0,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Банк Возрождение FY2018, preferred class. Archived investfunds.ru/stocks/Bank-Vozrozhdenie-pref and smart-lab /q/VZRZ/dividend/ both give record date 11.06.2019 and 2 RUB on the preferred; the ordinary VZRZ paid nothing that year. The ticker had no dividend file.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "KUBE",
+    "registry_close": "2022-06-27",
+    "action": "augment",
+    "add": {
+      "amount": 2.71262,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Россети Кубань FY2021. Issuer's own material-fact filing (rosseti-kuban.ru, file_62cbd7ec9fab40): «2.6. Размер выплаченных доходов… в расчете на одну ценную бумагу эмитента: 2,71262 руб.… 2.9. Дата… 27.06.2022», repeated in the 2022 and 2023 annual reports. smart-lab and investfunds give 2.79 / 2.785582 because they divide the declared total by the registered share count while the company was mid-issue; the count at the record date was 343,661,365.",
+    "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "KUBE",
+    "registry_close": "2023-06-30",
+    "action": "augment",
+    "add": {
+      "amount": 2.0022935,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Россети Кубань FY2022. Issuer's own material-fact filing (rosseti-kuban.ru, file_64b0f5acc460a6): «2.5. Размер выплаченных доходов… в расчете на одну ценную бумагу эмитента: 2,0022935 руб.… 2.9. Дата… 30.06.2023». smart-lab and investfunds give 2.2904 from a stale share count; the count at the record date was 382,811,011.",
+    "resolved_at": "2026-09-06"
   }
 ]

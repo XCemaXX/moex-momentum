@@ -99,10 +99,12 @@ def test_vsmo_monthly_aggregation_picks_last_trading_day() -> None:
 # refactor moves any link in that chain. Both are blue chips with full history
 # and no splits; LKOH has buybacks, SBER does not — different code paths.
 # If a dividend backfill touches the 2023 window, recompute and update.
+# Tolerance is deliberately tight: at the original 5e-4 these anchors slept through
+# `task 036`, where the dividend contribution moved 6% and each drifted ~3.8e-4.
 _SNAPSHOT_PERIOD = "2023-12"
 _SNAPSHOT_R12: dict[str, float] = {
-    "LKOH": 0.060941,
-    "SBER": 0.072061,
+    "LKOH": 0.060572,
+    "SBER": 0.071668,
 }
 
 
@@ -122,7 +124,7 @@ def test_snapshot_r12_anchor(ticker: str) -> None:
     """r(12-1) for LKOH/SBER frozen against committed data — catches code drift."""
     got = _committed_r12(ticker, _SNAPSHOT_PERIOD)
     want = _SNAPSHOT_R12[ticker]
-    assert math.isclose(got, want, abs_tol=0.0005), (
+    assert math.isclose(got, want, abs_tol=1e-6), (
         f"{ticker} r(12-1) @ {_SNAPSHOT_PERIOD}: got {got:.6f}, snapshot {want:.6f}. "
         f"A refactor of the compute chain is a real regression; a change to "
         f"committed data in the 2023 window means recompute the snapshot."

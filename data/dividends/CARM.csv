@@ -1,2 +1,2 @@
-registry_close,amount,currency,source,registry_close_source
-2025-12-10,0.08,RUB,skill_fill_tbank,tbank_reestr
+registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2025-12-10,0.08,RUB,skill_fill_tbank,tbank_reestr,

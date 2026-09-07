@@ -42,10 +42,20 @@ BOARDID=`RTSI` (pseudo-board). Required field — `CLOSE`. Confirmed 2024-03-13 
 ## 3. Dividends
 
 ```
-GET /iss/securities/{TICKER}/dividends.json?iss.meta=off
+GET /iss/securities/{TICKER}/dividends.json?iss.meta=off    # WITHDRAWN
 ```
 
-Columns: `secid, isin, registryclosedate, value, currencyid`. The fields `declared_date` / `payment_date` are **absent**. Confirmed SBER 2024-07-11 = 33.3 RUB.
+**Dead since roughly 2025-10.** MOEX removed the handle. It answers 200 with the
+plain security card (`description` + `boards`) and no `dividends` block; an
+invented sub-resource such as `/securities/SBER/zzzznotreal.json` returns the
+same bytes, so ISS is discarding the unknown segment rather than erroring.
+`/iss/reference/` lists no per-security dividends path, and `/iss/securities/[security]`
+has only `aggregates` and `indices` as sub-resources — the handle was never
+documented. Re-checked 2026-09-06 against the live reference; prices, index and
+splits handles are unaffected. See task 054.
+
+Columns while it lived: `secid, isin, registryclosedate, value, currencyid`. The
+fields `declared_date` / `payment_date` were **absent**. Confirmed SBER 2024-07-11 = 33.3 RUB.
 
 SBER coverage over the entire history — 6 records. For long dividend history the coverage is incomplete; the legacy CSV cross-check (phase 12) catches the gaps.
 
@@ -54,12 +64,58 @@ SBER coverage over the entire history — 6 records. For long dividend history t
 {"registry_close": "2024-07-11", "amount": 33.3, "currency": "RUB", "source": "moex_iss"}
 ```
 
-The `source` field ∈ `moex_iss | skill_fill_dohod | skill_fill_smartlab | manual`.
+The `source` field ∈ `moex_iss | skill_fill_dohod | skill_fill_yahoo | skill_fill_tbank | skill_fill_smartlab | skill_fill_disclosure | manual_disclosure`.
 
-**Fallback (via skill `/fill-dividends`):**
-- `dohod.ru/ik/analytics/dividend/{ticker_lower}` — table "Announcement date / Record date / Year / Dividend". Without explicit CSS classes. Donor: `WLM1ke/poptimizer_old/src/web/dividends/dohod_ru.py` (archived 2018, needs a smoke test).
-- `smart-lab.ru/q/{TICKER}/dividend/` — for reference, for cross-check.
+### Which registers closed — the completeness spine
+
+```
+GET https://web.moex.com/moex-web-icdb-api/api/v1/export/register-closing-dates/csv?language=1&separator=1
+```
+
+First-party MOEX, no auth, cp1251 with no charset header, `MM/DD/YYYY` dates,
+whole history in one response. Columns `Эмитент,Дата события,Адрес сайта,Тип события`.
+Carries **no amount** — it answers "did this share pay?", not "how much?".
+
+Rows from roughly 2021 embed the SECID and share class in the issuer string
+(`… - 2-03-00161-A, TATNP [Акция привилегированная]`), so no name matching is
+needed; older rows name the issuer only and are unusable. `Тип события` is
+`закрытие реестра` or `закрытие реестра (рекомендуемая)` — the latter is a
+recommendation, not an event: SVET/SVETP carry a recommended 2026-07-08 whose
+actual closing was 2026-06-01.
+
+Measured against the period where our data was still complete (2024 to 2025-10):
+324 register closings on tickers we track, 322 matched a stored payout to the
+exact day. That is the check `momentum corporate check-registers` runs.
+
+**Amount sources (via `momentum ingest fill-dividends`):**
+- `dohod.ru/ik/analytics/dividend/{ticker_lower}` — deep history, but the index lists ~127 slugs: large caps only. Donor: `WLM1ke/poptimizer_old/src/web/dividends/dohod_ru.py` (archived 2018, needs a smoke test).
+- `smart-lab.ru/q/{TICKER}/dividend/` — the only free source reaching the small-cap tail. Both share classes sit in the ordinary share's table; prefs have no page. Amounts are rounded to a few significant digits. Cancelled recommendations stay in the table marked only by a CSS class.
 - `e-disclosure.ru` — authoritative, but curl 403, only via WebFetch in manual mode.
+
+**Manual lookup routes** — for one payout at a time, not wired into the pipeline:
+
+- `investfunds.ru/stocks/{slug}/` — server-rendered table with an explicit
+  `Закрытие реестра` column next to the ex-date, and **separate pages for preferred
+  shares** (`…-pref`). The best single source for settling a disputed figure: it
+  covered 8 of the 10 payouts no automated feed had. Deliberately **not** scripted —
+  slugs are transliterated company names, not tickers, and are inconsistent
+  (`TNS-Energo-Kuban` and `GAZ-service` resolve, `TNS-Energo-Mari-El` and `GAZ-servis`
+   404), so automating it would mean hand-maintaining a ticker→slug map.
+- `financemarker.ru` — **checked and rejected 2026-09-06, do not use.** Its
+  `/legal/terms.pdf` §6.3 forbids automated download and parsing of the service by
+  name, and §3.3.9 forbids redistributing the data «в коммерческих или некоммерческих
+  целях» and including it in any database. The open `/api/stocks/MOEX:{SECID}/dividends`
+  path is an undocumented front-end endpoint that returns more fields than their
+  metered paid API, so using it also routes around a paywall. Redistribution is sold
+  separately as a commercial tier. Absence of a rate limiter is not consent.
+- Issuer disclosure sites. The three gas distributors share a layout:
+  `gazcon.ru`, `gaz-services.ru`, `gaz-tek.ru`, PDFs at `rask/<year>/<DD-MM-YY>-<n>.pdf`,
+  windows-1251. In the «Начисленные доходы» filing clause 2.8 is the per-share amount
+  and clause 2.10 the record date.
+- `закрытияреестров.рф` — **dead**, 301 to a parking domain. Do not retry.
+
+Coverage measured 2026-09-06 on the payouts ISS used to carry alone: dohod 2 of
+16, tbank 0 of 14, smart-lab 14 of 14.
 
 Sanity check on SBER 2020-2025 (5 points) — MOEX / Smart-Lab / dohod all agree.
 
@@ -147,8 +203,8 @@ One file for all manual cases, unifying two types: bonus issues and redomiciliat
 | Daily quotes | MOEX ISS | `/iss/history/.../boards/{BOARD}/securities/{TICKER}.json` |
 | Ticker metadata | MOEX ISS | `/iss/securities/{TICKER}.json` |
 | MCFTRR | MOEX ISS | `/iss/history/.../index/securities/MCFTRR.json` |
-| Dividends (primary) | MOEX ISS | `/iss/securities/{TICKER}/dividends.json` |
-| Dividends (fallback) | dohod.ru, smart-lab.ru | via skill `/fill-dividends` |
+| Dividend record dates | MOEX web export | `/moex-web-icdb-api/.../register-closing-dates/csv` |
+| Dividend amounts | dohod.ru, smart-lab.ru | `momentum ingest fill-dividends` |
 | Splits (primary) | MOEX ISS | `/iss/statistics/engines/stock/splits.json` |
 | Rebrandings (technical) | MOEX ISS | `/iss/history/.../shares/securities/changeover.json` |
 | Bonus issues + redomiciliations | manual list | `data/tickers_manual.json` |
@@ -165,7 +221,7 @@ One file for all manual cases, unifying two types: bonus issues and redomiciliat
 - **`aiomoex` / `apimoex` / SilverFir donor** — wrappers over the same ISS, drag the extra `aiohttp` into our httpx stack. We will take the pagination pattern from `apimoex/client.py` as a model, but implement it ourselves.
 - **`poptimizer_old/src/momentum_tickers.py`** — a different strategy (`gradient/std × volume`), not Q1-Q4. Not an algorithm donor.
 - **MOEX `/iss/cci/corp-actions/dividends`** — returns an HTML stub, not public.
+- **longterminvestments.ru** — checked 2026-09-06: no per-ticker dividend data at all. Its sitemap is 926 article and portfolio URLs with no ticker route, no screener and no dividend table; guessed routes return an empty shell. Its agreement §3 also forbids automated collection without written permission and §4 forbids derivative databases. A subscription research blog, not a data source.
 - **MOEX `/securities/{TICKER}/corporates.json`** — this is just description, not corporate actions; do not confuse them.
-- **`web.moex.com/moex-web-icdb-api/api/v1/export/register-closing-dates/csv`** (CP1251) — forward-looking registries. Useful for displaying "a record date is coming up", but not needed for a historical backtest. Optional for the future.
 </content>
 </invoke>

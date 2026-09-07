@@ -14,16 +14,16 @@ backtest's `DIVIDEND_TAX`. Gross sibling MCFTR is intentionally out of scope.
 
 from __future__ import annotations
 
-import json
 import logging
 from dataclasses import dataclass
 from datetime import date, timedelta
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 import httpx
 
-from config import ISS_BASE_URL, ISS_HTTP_TIMEOUT_SECONDS
+from ingest.iss_client import cached_aget as _cached_aget
+from ingest.iss_client import make_async_client
 from storage.records import read_records, write_records_atomic
 from storage.schemas import INDEX_CASTS, INDEX_FIELDS
 
@@ -40,47 +40,6 @@ class IndexManifest:
     first: str | None
     last: str | None
     rows: int
-
-
-def make_async_client() -> httpx.AsyncClient:
-    return httpx.AsyncClient(
-        base_url=ISS_BASE_URL,
-        timeout=ISS_HTTP_TIMEOUT_SECONDS,
-        params={"iss.meta": "off"},
-        headers={"User-Agent": "moex-momentum/0.1"},
-    )
-
-
-def _cache_path(cache_dir: Path, key: str) -> Path:
-    return cache_dir / f"{key}.json"
-
-
-async def _cached_aget(
-    client: httpx.AsyncClient,
-    url_path: str,
-    *,
-    params: dict[str, str],
-    cache_dir: Path | None,
-    cache_key: str,
-) -> dict[str, Any] | None:
-    if cache_dir is not None:
-        cp = _cache_path(cache_dir, cache_key)
-        if cp.exists():
-            with cp.open(encoding="utf-8") as f:
-                return cast(dict[str, Any], json.load(f))
-    resp = await client.get(url_path, params=params)
-    if resp.status_code == 404:
-        return None
-    resp.raise_for_status()
-    data: Any = resp.json()
-    if cache_dir is not None:
-        cp = _cache_path(cache_dir, cache_key)
-        cp.parent.mkdir(parents=True, exist_ok=True)
-        tmp = cp.with_suffix(cp.suffix + ".tmp")
-        with tmp.open("w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False)
-        tmp.replace(cp)
-    return cast(dict[str, Any], data)
 
 
 def _pivot_history(cols: list[str], data: list[list[Any]]) -> list[dict[str, Any]]:
@@ -102,6 +61,7 @@ async def _drain_history(
     from_: date,
     till: date,
     cache_dir: Path | None,
+    force: bool = False,
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     start = 0
@@ -121,6 +81,7 @@ async def _drain_history(
             },
             cache_dir=cache_dir,
             cache_key=cache_key,
+            force=force,
         )
         if payload is None:
             break
@@ -145,6 +106,34 @@ def _max_existing_date(records: list[dict[str, Any]]) -> date | None:
     return date.fromisoformat(max(r["date"] for r in records))
 
 
+def _refetched_manifest(
+    out_path: Path,
+    secid: str,
+    existing: list[dict[str, Any]],
+    fetched: list[dict[str, Any]],
+    *,
+    window: tuple[date, date],
+    allow_missing: bool,
+) -> IndexManifest:
+    """Splice a refetched window over the stored rows unless a day vanished."""
+    lo, hi = window[0].isoformat(), window[1].isoformat()
+    in_window = [r for r in existing if lo <= r["date"] <= hi]
+    vanished = sorted({r["date"] for r in in_window} - {r["date"] for r in fetched})
+    if vanished and not allow_missing:
+        LOG.error("%s: refetch refused — %d date(s) vanished", secid, len(vanished))
+        rows = existing
+    else:
+        kept = [r for r in existing if r not in in_window]
+        rows = sorted(kept + fetched, key=lambda r: r["date"])
+        if fetched:
+            write_records_atomic(out_path, rows, fieldnames=INDEX_FIELDS)
+    return IndexManifest(
+        first=rows[0]["date"] if rows else None,
+        last=rows[-1]["date"] if rows else None,
+        rows=len(rows),
+    )
+
+
 async def ingest_one(
     client: httpx.AsyncClient,
     secid: str,
@@ -153,6 +142,10 @@ async def ingest_one(
     cache_dir: Path | None,
     today: date,
     since: date | None = None,
+    force: bool = False,
+    refetch_from: date | None = None,
+    refetch_till: date | None = None,
+    allow_missing: bool = False,
 ) -> IndexManifest:
     """Ingest one index series. Append-only, idempotent."""
     out_path = output_dir / f"{secid}.csv"
@@ -163,7 +156,14 @@ async def ingest_one(
         from_ = max_existing + timedelta(days=1)
     else:
         from_ = INDEX_FLOOR
-    if since is not None and since > from_:
+    if refetch_from is not None:
+        from_ = refetch_from
+    elif since is not None and since > from_:
+        if max_existing is not None:
+            raise ValueError(
+                f"{secid}: --since {since} starts after the stored history ends "
+                f"({max_existing}) and would leave a gap; use --refetch-from instead"
+            )
         from_ = since
     if from_ > today:
         return IndexManifest(
@@ -172,8 +172,15 @@ async def ingest_one(
             rows=len(existing),
         )
 
-    new_rows = await _drain_history(client, secid, from_=from_, till=today, cache_dir=cache_dir)
+    till = min(refetch_till, today) if refetch_till else today
+    new_rows = await _drain_history(
+        client, secid, from_=from_, till=till, cache_dir=cache_dir, force=force
+    )
 
+    if refetch_from is not None:
+        return _refetched_manifest(
+            out_path, secid, existing, new_rows, window=(from_, till), allow_missing=allow_missing
+        )
     if existing and new_rows:
         existing_dates = {r["date"] for r in existing}
         for r in new_rows:
@@ -200,6 +207,10 @@ async def ingest(
     cache_dir: Path | None,
     since: date | None = None,
     today: date | None = None,
+    force: bool = False,
+    refetch_from: date | None = None,
+    refetch_till: date | None = None,
+    allow_missing: bool = False,
 ) -> dict[str, IndexManifest]:
     today = today or date.today()
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -213,6 +224,10 @@ async def ingest(
                 cache_dir=cache_dir,
                 today=today,
                 since=since,
+                force=force,
+                refetch_from=refetch_from,
+                refetch_till=refetch_till,
+                allow_missing=allow_missing,
             )
             LOG.info("%s: %d rows (first=%s last=%s)", secid, m.rows, m.first, m.last)
             results[secid] = m

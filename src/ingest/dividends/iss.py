@@ -4,6 +4,10 @@ Endpoint: `/securities/{TICKER}/dividends.json?iss.meta=off`. Single-page payloa
 in practice (SBER full history = 6 records); we still drain `dividends.cursor` if
 ISS adds one later — same defensive pattern as prices.
 
+MOEX withdrew this endpoint: it now answers 200 with the plain security card and
+no `dividends` block, so the module reports `block_missing` and the CLI fails on
+it. Kept wired in case the handle comes back; see task 054.
+
 Record schema (only what ISS gives):
     {"registry_close": "YYYY-MM-DD", "amount": 33.30, "currency": "RUB",
      "source": "moex_iss"}
@@ -18,17 +22,18 @@ appends nothing if ISS hasn't changed.
 from __future__ import annotations
 
 import asyncio
-import json
 import logging
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 import httpx
 
-from config import ISS_BASE_URL, ISS_HTTP_TIMEOUT_SECONDS, ISS_MAX_CONCURRENCY
+from config import ISS_MAX_CONCURRENCY
 from ingest.dividends.types import DedupKey, dedup_key
+from ingest.iss_client import cached_aget as _cached_aget
+from ingest.iss_client import make_async_client
 from storage.records import read_records, write_records_atomic
 from storage.schemas import DIV_CASTS, DIV_FIELDS
 from tickers import TickersDict
@@ -43,48 +48,12 @@ class DividendsManifest:
     first: str | None
     last: str | None
     rows: int
-
-
-def make_async_client() -> httpx.AsyncClient:
-    return httpx.AsyncClient(
-        base_url=ISS_BASE_URL,
-        timeout=ISS_HTTP_TIMEOUT_SECONDS,
-        params={"iss.meta": "off"},
-        headers={"User-Agent": "moex-momentum/0.1"},
-    )
-
-
-def _cache_path(cache_dir: Path, key: str) -> Path:
-    return cache_dir / f"{key}.json"
-
-
-async def _cached_aget(
-    client: httpx.AsyncClient,
-    url_path: str,
-    *,
-    params: dict[str, str],
-    cache_dir: Path | None,
-    cache_key: str,
-    force: bool = False,
-) -> dict[str, Any] | None:
-    if cache_dir is not None and not force:
-        cp = _cache_path(cache_dir, cache_key)
-        if cp.exists():
-            with cp.open(encoding="utf-8") as f:
-                return cast(dict[str, Any], json.load(f))
-    resp = await client.get(url_path, params=params)
-    if resp.status_code == 404:
-        return None
-    resp.raise_for_status()
-    data: Any = resp.json()
-    if cache_dir is not None:
-        cp = _cache_path(cache_dir, cache_key)
-        cp.parent.mkdir(parents=True, exist_ok=True)
-        tmp = cp.with_suffix(cp.suffix + ".tmp")
-        with tmp.open("w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False)
-        tmp.replace(cp)
-    return cast(dict[str, Any], data)
+    # Rows the source actually returned. `rows` is the merged file on disk, so it
+    # stays positive even when the fetch brings back nothing.
+    fetched: int = 0
+    # Endpoint answered without a `dividends` block — source failure, not "this
+    # share pays nothing". Callers must not confuse the two.
+    block_missing: bool = False
 
 
 def _normalise_currency(code: str) -> str:
@@ -123,9 +92,11 @@ async def _fetch_dividends(
     *,
     cache_dir: Path | None,
     force: bool = False,
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], bool]:
+    """Fetched rows, plus whether the first page came back with no `dividends` block."""
     rows: list[dict[str, Any]] = []
     start = 0
+    block_missing = False
     url_path = DIVIDENDS_PATH_TEMPLATE.format(secid=secid)
     while True:
         cache_key = f"dividends/{secid}/start_{start:05d}"
@@ -141,6 +112,7 @@ async def _fetch_dividends(
             break
         block = payload.get("dividends")
         if not block:
+            block_missing = start == 0
             break
         page_rows = block["data"]
         if not page_rows:
@@ -153,7 +125,7 @@ async def _fetch_dividends(
         if idx + len(page_rows) >= total:
             break
         start += len(page_rows)
-    return rows
+    return rows, block_missing
 
 
 def _merge(existing: list[dict[str, Any]], new: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -181,7 +153,10 @@ async def ingest_one(
     """
     out_path = output_dir / f"{ticker}.csv"
     existing = read_records(out_path, casts=DIV_CASTS)
-    fetched = await _fetch_dividends(client, ticker, cache_dir=cache_dir, force=force)
+    fetched, block_missing = await _fetch_dividends(
+        client, ticker, cache_dir=cache_dir, force=force
+    )
+    n_fetched = len(fetched)
     if since is not None:
         cutoff = since.isoformat()
         fetched = [r for r in fetched if r["registry_close"] >= cutoff]
@@ -195,6 +170,8 @@ async def ingest_one(
         first=merged[0]["registry_close"] if merged else None,
         last=merged[-1]["registry_close"] if merged else None,
         rows=len(merged),
+        fetched=n_fetched,
+        block_missing=block_missing,
     )
 
 
@@ -225,7 +202,16 @@ async def ingest(
                     since=since,
                     force=force,
                 )
-            LOG.info("%s: %d div rows (first=%s last=%s)", t, m.rows, m.first, m.last)
+            if m.block_missing:
+                LOG.warning("%s: ISS answered without a dividends block", t)
+            LOG.info(
+                "%s: %d fetched, %d stored (first=%s last=%s)",
+                t,
+                m.fetched,
+                m.rows,
+                m.first,
+                m.last,
+            )
             return t, m
 
         for t, m in await asyncio.gather(*[_task(t) for t in selected]):

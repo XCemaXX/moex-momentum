@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -250,3 +251,86 @@ def test_ingest_dispatcher(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> N
         )
     )
     assert result["SBER"].rows == 1
+
+
+# ---------- source-failure detection ----------
+
+
+def test_ingest_one_flags_missing_dividends_block(tmp_path: Path) -> None:
+    """ISS withdrew the handle: 200 with the security card and no dividends block."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"description": {"columns": [], "data": []}})
+
+    async def run() -> None:
+        async with _make_client(handler) as client:
+            m = await ingest_one(client, "SBER", output_dir=tmp_path, cache_dir=None)
+            assert m.block_missing
+            assert m.fetched == 0
+
+    asyncio.run(run())
+
+
+def test_empty_dividends_block_is_not_a_failure(tmp_path: Path) -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=_payload([]))
+
+    async def run() -> None:
+        async with _make_client(handler) as client:
+            m = await ingest_one(client, "FOO", output_dir=tmp_path, cache_dir=None)
+            assert not m.block_missing
+            assert m.fetched == 0
+
+    asyncio.run(run())
+
+
+def test_fetched_counts_source_rows_not_stored_rows(tmp_path: Path) -> None:
+    """A dead source must not inherit the row count of the file already on disk."""
+    write_records_atomic(
+        tmp_path / "SBER.csv",
+        [
+            {
+                "registry_close": "2023-05-08",
+                "amount": 25.0,
+                "currency": "RUB",
+                "source": "moex_iss",
+            }
+        ],
+        fieldnames=DIV_FIELDS,
+    )
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"description": {"columns": [], "data": []}})
+
+    async def run() -> None:
+        async with _make_client(handler) as client:
+            m = await ingest_one(client, "SBER", output_dir=tmp_path, cache_dir=None)
+            assert m.rows == 1
+            assert m.fetched == 0
+
+    asyncio.run(run())
+
+
+def test_fetched_ignores_since_filter(tmp_path: Path) -> None:
+    """`fetched` measures the source, so the recency bound must not shrink it."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200,
+            json=_payload(
+                [
+                    ["SBER", "RU", "2024-07-11", 33.3, "RUB"],
+                    ["SBER", "RU", "2015-05-08", 25.0, "RUB"],
+                ]
+            ),
+        )
+
+    async def run() -> None:
+        async with _make_client(handler) as client:
+            m = await ingest_one(
+                client, "SBER", output_dir=tmp_path, cache_dir=None, since=date(2024, 1, 1)
+            )
+            assert m.fetched == 2
+            assert m.rows == 1
+
+    asyncio.run(run())

@@ -15,7 +15,6 @@ from typing import Any, cast
 import pandas as pd
 
 from config import LOG_SAMPLE
-from ingest.dividends.merge import dedup_near_duplicates
 
 LOG = logging.getLogger(__name__)
 
@@ -89,6 +88,10 @@ def adjust_dividend_amounts(
 
     Non-RUB records are dropped with a WARN — FX conversion is out of scope
     for the momentum pipeline.
+
+    Rows are used as stored. Collapsing the same payout reported by several
+    sources belongs to ingest; `tests/test_dividend_invariants.py` guards that
+    the stored tree holds no such pair.
     """
     if not dividends:
         return []
@@ -122,18 +125,6 @@ def adjust_dividend_amounts(
         )
     if not rub:
         return []
-    # Collapse cross-source near-duplicates so monthly_total_returns never
-    # double-counts (e.g. moex_iss + manual_disclosure for the same payout).
-    deduped, dropped = dedup_near_duplicates(rub)
-    for r in dropped:
-        LOG.warning(
-            "dividend dropped as near-dup ticker=%s ex=%s amount=%s source=%s",
-            ticker,
-            r.get("registry_close"),
-            r.get("amount"),
-            r.get("source"),
-        )
-    rub = deduped
     idx = pd.DatetimeIndex([pd.Timestamp(d["registry_close"]) for d in rub])
     coef = cascade_for_dates(idx, splits)
     out: list[dict[str, Any]] = []

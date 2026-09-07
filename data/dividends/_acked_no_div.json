@@ -1,1 +1,10 @@
-{}
+{
+  "CBOM": {
+    "2015": "MOEX's register-closing export shows 2015-07-31, but the bank paid no dividend that year: smart-lab, investfunds, dohod and banki.ru each list exactly one CBOM payout ever, 0.11 RUB on 2019-06-07. The 2015 register followed the June IPO and is a shareholder-meeting list, not a dividend one — the export mixes the two."
+  },
+  "POLY": {
+    "2013": "Polymetal declared in USD. The payouts are real and MOEX's register export lists them, but `currency != RUB` records are dropped by design — see docs/methodology.md and task 035, which decided not to restore them because no FX series exists. Acked so the completeness check stops reporting a settled case; this is not a claim that nothing was paid.",
+    "2014": "Polymetal declared in USD. The payouts are real and MOEX's register export lists them, but `currency != RUB` records are dropped by design — see docs/methodology.md and task 035, which decided not to restore them because no FX series exists. Acked so the completeness check stops reporting a settled case; this is not a claim that nothing was paid.",
+    "2015": "Polymetal declared in USD. The payouts are real and MOEX's register export lists them, but `currency != RUB` records are dropped by design — see docs/methodology.md and task 035, which decided not to restore them because no FX series exists. Acked so the completeness check stops reporting a settled case; this is not a claim that nothing was paid."
+  }
+}

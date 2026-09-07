@@ -1,4 +1,5 @@
 registry_close,amount,currency,source,registry_close_source,split_adjusted_back_by
+2009-05-13,0.6722,RUB,skill_fill_dohod,,
 2010-05-19,0.347123,RUB,skill_fill_yahoo,yahoo_ex_div,
 2011-05-03,0.511327,RUB,skill_fill_yahoo,yahoo_ex_div,
 2012-05-28,0.522853,RUB,skill_fill_yahoo,yahoo_ex_div,
@@ -14,3 +15,4 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2023-06-02,1.1335132838,RUB,moex_iss,,
 2024-06-10,1.3313884236,RUB,moex_iss,,
 2025-06-18,2.2545983445,RUB,moex_iss,,
+2026-06-22,2.07,RUB,skill_fill_dohod,,

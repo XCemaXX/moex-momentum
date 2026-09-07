@@ -52,12 +52,18 @@ def monthly_rankings(
     empty universe (too little history) are simply absent from the dict.
     """
     returns_panel, _close, value_panel = panels
-    months = returns_panel.index
-    months = months[months >= start]
+    panel_months = returns_panel.index
+    months = panel_months[panel_months >= start]
     if end is not None:
         months = months[months <= end]
     rankings: dict[pd.Period, list[str]] = {}
-    for t in months:
+    # Rank the close before the window too: the NAV builder forms the portfolio
+    # there so that months[0] is earned, matching `backtest`.
+    seed = months[0] - 1 if len(months) else None
+    ranked = list(months)
+    if seed is not None and seed in panel_months:
+        ranked = [seed, *ranked]
+    for t in ranked:
         universe = universe_at(t, returns_panel, tickers_dict, value_panel=value_panel, top_n=top_n)
         if not universe:
             continue
@@ -91,13 +97,23 @@ def nav_from_selections(
 ) -> FanCurve:
     """Equal-weight NAV from a timeline of held sets, mirroring `backtest`:
     holdings chosen at close of t earn month-(t+1) return; rebalance cost is
-    `commission · Σ|Δw|` charged at t."""
+    `commission · Σ|Δw|` charged at t. A selection for `months[0] - 1` seeds the
+    portfolio so the first in-window month is earned, not skipped."""
     nav = 1.0
     prev_w: dict[str, float] = {}
-    idx: list[pd.Period] = [months[0] - 1]
+    seed_month = months[0] - 1
+    idx: list[pd.Period] = [seed_month]
     vals: list[float] = [1.0]
     rebalances: list[Rebalance] = []
     misses: list[tuple[str, str, str]] = []
+
+    seed = selections.get(seed_month)
+    if seed:
+        prev_w = {tk: 1.0 / len(seed) for tk in seed}
+        to = turnover({}, prev_w)
+        nav *= 1.0 - commission * to
+        rebalances.append(Rebalance(seed_month, to, len(seed), len(seed), is_entry=True))
+
     for t in months:
         if prev_w:
             nav *= 1.0 + gross_return(

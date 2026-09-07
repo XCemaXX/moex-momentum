@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "ticker": "ORSBP",
+    "date": "2007-07-27",
+    "comment": "Not a split: 27.444 was a stale quote held on 100-share prints, then a 50-day halt and real trading resumed at 2.7-4.15. Factor 8.8 matches no nominal change. Never enters the universe (0 scored months).",
+    "reviewed_at": "2026-09-05"
+  },
+  {
+    "ticker": "NGSBP",
+    "date": "2008-06-07",
+    "comment": "Not a split: factor 1.5 matches no nominal change, intraday range 0.991-1.294 on 29.7k RUB turnover. Never enters the universe (0 scored months).",
+    "reviewed_at": "2026-09-05"
+  },
+  {
+    "ticker": "VTGK",
+    "date": "2008-10-13",
+    "comment": "340-day halt around it — the month has no traded row, so total_return is NaN and nothing downstream reads the step.",
+    "reviewed_at": "2026-09-05"
+  },
+  {
+    "ticker": "RBCI",
+    "date": "2007-12-12",
+    "comment": "1520-day halt; month resolves to NaN.",
+    "reviewed_at": "2026-09-05"
+  },
+  {
+    "ticker": "APTK",
+    "date": "2009-06-29",
+    "comment": "132-day halt; month resolves to NaN. First scored month is 2012-12, well after.",
+    "reviewed_at": "2026-09-05"
+  },
+  {
+    "ticker": "VTBR",
+    "date": "2009-12-31",
+    "comment": "839-day halt on a legacy SECID; month resolves to NaN. First scored month 2013-08.",
+    "reviewed_at": "2026-09-05"
+  },
+  {
+    "ticker": "RUGR",
+    "date": "2011-11-29",
+    "comment": "68-day halt; month resolves to NaN. First scored month 2018-11.",
+    "reviewed_at": "2026-09-05"
+  },
+  {
+    "ticker": "YRSBP",
+    "date": "2011-12-09",
+    "comment": "714-day halt; month resolves to NaN.",
+    "reviewed_at": "2026-09-05"
+  },
+  {
+    "ticker": "OGKB",
+    "date": "2013-08-20",
+    "comment": "484-day halt; month resolves to NaN. First scored month 2014-11.",
+    "reviewed_at": "2026-09-05"
+  }
+]

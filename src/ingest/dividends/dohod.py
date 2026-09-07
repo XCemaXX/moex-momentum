@@ -33,6 +33,9 @@ def _parse_dohod_date(s: str) -> str | None:
 
 class DohodFetcher(CachedHttpFetcher):
     source_tag = "skill_fill_dohod"
+    # Inconsistent: restates GMKN but not T, both checked against the price
+    # series. Scaling it blindly corrupts the names it leaves alone.
+    restates_splits = False
     URL_TEMPLATE = "https://www.dohod.ru/ik/analytics/dividend/{ticker}"
 
     def fetch(self, ticker: str) -> list[dict[str, Any]]:
@@ -47,7 +50,12 @@ class DohodFetcher(CachedHttpFetcher):
 
         import pandas as pd  # noqa: PLC0415
 
-        tables = pd.read_html(_io.StringIO(html))
+        # Pin the parser: the default flavour falls back to bs4, which pandas
+        # services with html5lib — not a dependency of this project.
+        try:
+            tables = pd.read_html(_io.StringIO(html), flavor="lxml")
+        except ValueError:
+            tables = []
         if len(tables) < 3:
             LOG.warning("dohod %s: expected >=3 tables, got %d", ticker, len(tables))
             return []

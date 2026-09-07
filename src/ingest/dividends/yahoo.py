@@ -35,6 +35,7 @@ LOG = logging.getLogger(__name__)
 
 class YahooFetcher(CachedHttpFetcher):
     source_tag = "skill_fill_yahoo"
+    restates_splits = True
     URL_TEMPLATE = (
         "https://query1.finance.yahoo.com/v8/finance/chart/{ticker}.ME"
         "?events=div&period1=0&period2={period2}&interval=1d"

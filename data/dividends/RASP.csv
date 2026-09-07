@@ -4,7 +4,6 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2008-04-24,3.75,RUB,skill_fill_tbank,tbank_reestr,
 2008-11-14,1.5,RUB,skill_fill_tbank,tbank_reestr,
 2010-04-22,5.0,RUB,manual_disclosure,,
-2011-07-12,5.128546,RUB,skill_fill_yahoo,yahoo_ex_div,
 2011-07-13,5.0,RUB,skill_fill_tbank,tbank_reestr,
 2019-10-20,2.5,RUB,moex_iss,,
 2020-06-08,2.83,RUB,moex_iss,,

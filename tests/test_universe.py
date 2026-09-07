@@ -129,3 +129,73 @@ def test_universe_top_n_keeps_most_liquid(tmp_path: Path) -> None:
     assert universe_at(t, panel, tickers_dict, value_panel=vpanel, top_n=2) == ["HIGH", "MID"]
     # top_n=1 — only the most liquid.
     assert universe_at(t, panel, tickers_dict, value_panel=vpanel, top_n=1) == ["HIGH"]
+
+
+def _rename_panel(tmp_path: Path) -> tuple[Path, list[str]]:
+    """OLD renamed into NEW; NEW carries the stitched history, so both files
+    exist and both are eligible in every month."""
+    months = [str(pd.Period("2020-01", "M") + i) for i in range(15)]
+    returns: list[float | None] = [None, *[0.01] * 14]
+    _write_monthly(tmp_path, "OLD", months, returns)
+    _write_monthly(tmp_path, "NEW", months, returns)
+    _write_monthly(tmp_path, "OTHER", months, returns, monthly_value=1e7)
+    return tmp_path, months
+
+
+def test_renamed_predecessor_hands_over_at_the_rename_month(tmp_path: Path) -> None:
+    monthly_dir, _ = _rename_panel(tmp_path)
+    returns_panel, _c, value_panel = load_panel(monthly_dir)
+    tickers = {
+        "OLD": {"type": "share"},
+        "NEW": {
+            "type": "share",
+            "history": [
+                {"prev_ticker": "OLD", "renamed": "2021-02-10", "source": "iss_changeover"}
+            ],
+        },
+        "OTHER": {"type": "share"},
+    }
+    for month, expected in (("2021-01", "OLD"), ("2021-02", "NEW")):
+        got = universe_at(
+            pd.Period(month, "M"), returns_panel, tickers, value_panel=value_panel, top_n=2
+        )
+        assert expected in got, f"{month}: {expected} missing"
+        assert len([tk for tk in got if tk in ("OLD", "NEW")]) == 1, f"{month}: both legs present"
+        # The freed slot is refilled, not lost.
+        assert len(got) == 2
+
+
+def test_redomicile_history_is_not_treated_as_a_rename(tmp_path: Path) -> None:
+    """Only `iss_changeover` bridges a ticker; a manual entry is another security."""
+    monthly_dir, _ = _rename_panel(tmp_path)
+    returns_panel, _c, value_panel = load_panel(monthly_dir)
+    tickers = {
+        "OLD": {"type": "share"},
+        "NEW": {
+            "type": "share",
+            "history": [{"prev_ticker": "OLD", "renamed": "2021-02-10", "source": "manual"}],
+        },
+    }
+    got = universe_at(
+        pd.Period("2021-02", "M"), returns_panel, tickers, value_panel=value_panel, top_n=5
+    )
+    assert {"OLD", "NEW"} <= set(got)
+
+
+def test_self_referencing_history_is_not_a_rename(tmp_path: Path) -> None:
+    """Some dictionary entries name the SECID as its own predecessor. Reading that
+    as a rename delists the name outright — it did exactly that to SBER."""
+    monthly_dir, _ = _rename_panel(tmp_path)
+    returns_panel, _c, value_panel = load_panel(monthly_dir)
+    tickers = {
+        "OLD": {
+            "type": "share",
+            "history": [
+                {"prev_ticker": "OLD", "renamed": "2020-06-01", "source": "iss_changeover"}
+            ],
+        },
+    }
+    got = universe_at(
+        pd.Period("2021-02", "M"), returns_panel, tickers, value_panel=value_panel, top_n=5
+    )
+    assert got == ["OLD"]

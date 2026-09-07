@@ -50,6 +50,13 @@ PENDING_MIN_AGE_FOR_ESTIMATE: int = 6
 # Default MOEX board for shares.
 DEFAULT_BOARD: str = "TQBR"
 
+# Odd-lot boards ("Неполные лоты"). Their prints are real trades but of a few
+# shares: median daily turnover 911 RUB against 1.9M on TQBR, and the close sits
+# ~7.6% below the main board on entry and ~12% above on exit — a sawtooth with the
+# opposite sign to momentum. Ranked last, never dropped: 1324 ticker-months have no
+# other board at all, and a gap month would silently void 13 months of eligibility.
+ODD_LOT_BOARDS: frozenset[str] = frozenset({"SMAL"})
+
 # Lower bound of analysis window. Ingest is survivorship-free down to the
 # ticker's listing date, but visualization and backtest start here.
 # Changing this = recompute without re-ingest.
@@ -84,4 +91,35 @@ LOG_SAMPLE: int = 5
 
 # External dividend fill HTTP settings.
 FILL_HTTP_TIMEOUT_SECONDS: float = 20.0
-FILL_USER_AGENT: str = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+# Identify ourselves rather than pose as a browser: none of these sites
+# publishes a scraping policy, so stay easy to recognise and to block.
+FILL_USER_AGENT: str = "moex-momentum/1.0 (+https://github.com/xcemaxx/moex-momentum)"
+# Pause between fill-source page fetches. None of these sites publishes a
+# crawl-delay, so we pace ourselves rather than find out where the limit is.
+FILL_REQUEST_DELAY_SECONDS: float = 1.0
+
+# Split-candidate classifier. Calibrated on the 14 confirmed corporate actions in
+# `data/splits/`, chosen for recall: a missed split silently corrupts a year of
+# returns, an extra line in the triage queue costs a minute.
+REBASE_WINDOW: int = 20
+REBASE_SHARE_RANGE: tuple[float, float] = (0.80, 1.35)
+REBASE_ROUNDNESS_MAX: float = 0.18
+REBASE_FLATNESS_MAX: float = 0.05
+REBASE_GAP_MIN_DAYS: int = 6
+# A recorded split date is not always a trading day, so matching is by window.
+SPLIT_MATCH_DAYS: int = 5
+
+# Issuers that genuinely declare dividends in a foreign currency. Anything else
+# arriving non-RUB from a fill fetcher is a different company matched on ticker
+# letters alone — that is how Ingredion Inc. landed under INGRAD and Viatris Inc.
+# under Vtorresursy.
+FOREIGN_CURRENCY_TICKERS: frozenset[str] = frozenset({"POLY", "RUAL", "T"})
+
+# Settlement regime on MOEX, as trading days between the ex-date and the record
+# date. A record-date source stores `registry_close`; the price gaps `SETTLEMENT_LAG`
+# trading days earlier. `skill_fill_yahoo` stores the ex-date itself, so it never
+# tracks the regime. Verified against the observed gap day: T+2 era 523 of 609
+# payouts, T+1 era 206 of 251.
+SETTLEMENT_T2_FROM = "2013-09-02"
+SETTLEMENT_T1_FROM = "2023-07-31"
+EX_DATE_SOURCE = "skill_fill_yahoo"

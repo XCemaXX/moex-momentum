@@ -11,6 +11,8 @@ from datetime import date
 from pathlib import Path
 from typing import Any, Literal, TypedDict
 
+from storage.records import write_json_atomic
+
 
 def enumerate_tickers(*dirs: Path) -> list[str]:
     """Sorted union of `.csv` stems across the given dirs."""
@@ -74,12 +76,7 @@ def load(path: Path) -> TickersDict:
 
 
 def save(path: Path, data: TickersDict) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    with tmp.open("w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2, sort_keys=True)
-        f.write("\n")
-    tmp.replace(path)
+    write_json_atomic(path, data)
 
 
 def load_unavailable(path: Path) -> dict[str, dict[str, str]]:

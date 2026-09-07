@@ -12,11 +12,17 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any, Protocol
 
+from storage.records import write_text_atomic
+
 HttpGet = Callable[[str], str | None]
 
 
 class DividendFetcher(Protocol):
     source_tag: str
+    # Feed restates history at today's share count, so pre-split amounts need
+    # scaling back to nominal-at-time. Varies per feed and even per ticker —
+    # never assume it.
+    restates_splits: bool
 
     def fetch(self, ticker: str) -> list[dict[str, Any]]: ...
 
@@ -59,6 +65,5 @@ class CachedHttpFetcher:
         if text is None:
             return cached
         if cache_path:
-            cache_path.parent.mkdir(parents=True, exist_ok=True)
-            cache_path.write_text(text, encoding="utf-8")
+            write_text_atomic(cache_path, text)
         return text

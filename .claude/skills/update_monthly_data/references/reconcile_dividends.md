@@ -45,10 +45,12 @@ only dohod/disclosure tells you what is actually missing.
    print([(x['registry_close'], x['amount']) for x in r.records])"
    ```
 4. **Footgun — never bulk-apply dohod.** With no date scope it drags in dohod's
-   *entire* history (dozens of records per name), and its cross-source dedup is
-   leaky — it re-proposes a payout already stored from another source when the two
-   differ only in trailing precision or by a day, so it *looks* new but is a
-   duplicate. So for each candidate the dry-run surfaces:
+   *entire* history (dozens of records per name). Rows that restate stored payouts
+   now collapse and rows that disagree are reported as conflicts, so nothing is
+   appended silently — but dohod restates some tickers to today's share count and
+   not others, so on a split name every pre-split payout shows up as a conflict
+   with a round ×10/×100 ratio. That ratio is the diagnosis, not a disagreement.
+   For each candidate the dry-run surfaces:
    - Keep only records dated in the current window (this year / last few months).
    - **Verify online** — disclosure / smart-lab / dohod must agree on record date
      and amount.

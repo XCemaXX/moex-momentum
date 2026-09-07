@@ -17,6 +17,7 @@ VALID_SOURCES: frozenset[str] = frozenset(
         "skill_fill_dohod",
         "skill_fill_yahoo",
         "skill_fill_tbank",
+        "skill_fill_smartlab",
         "skill_fill_disclosure",
         "manual_disclosure",
     }
@@ -30,6 +31,9 @@ SOURCE_PRIORITY: dict[str, int] = {
     "skill_fill_dohod": 70,
     "skill_fill_yahoo": 65,
     "skill_fill_tbank": 63,
+    # Amounts rounded to a few significant digits — last resort, but the only
+    # free source covering the small-cap tail since ISS dropped dividends.
+    "skill_fill_smartlab": 40,
 }
 
 # Conflict-resolution actions in `_conflicts_resolved.json`.

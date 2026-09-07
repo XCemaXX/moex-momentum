@@ -35,7 +35,7 @@ import pandas as pd
 from adjustments.apply import adjust_dividend_amounts, apply_splits_to_prices
 from config import DIVIDEND_TAX, INCREMENTAL_RECOMPUTE_MONTHS, MASS_DRIFT_THRESHOLD
 from momentum.monthly import monthly_total_returns
-from storage.records import read_records, write_records_atomic
+from storage.records import read_records, write_json_atomic, write_records_atomic
 from storage.schemas import DIV_CASTS, MONTHLY_FIELDS, PRICE_CASTS, SPLIT_CASTS
 from tickers import enumerate_tickers
 
@@ -80,13 +80,7 @@ def load_baseline_hashes(path: Path) -> dict[str, str]:
 
 
 def save_baseline_hashes(path: Path, hashes: dict[str, str]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(
-        json.dumps(hashes, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
-    tmp.replace(path)
+    write_json_atomic(path, hashes)
 
 
 @dataclass(frozen=True)
@@ -241,21 +235,3 @@ def compute_all(
             f"Inspect inputs and rerun with --from-scratch if expected."
         )
     return result
-
-
-def write_manifest_section(manifest_path: Path, result: dict[str, MonthlyMeta]) -> None:
-    manifest: dict[str, dict[str, dict[str, object]]] = (
-        json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
-    )
-    section = manifest.setdefault("monthly", {})
-    for tk, m in result.items():
-        if m.rows == 0:
-            continue
-        section[tk] = {"rows": m.rows, "first": m.first_month, "last": m.last_month}
-    manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = manifest_path.with_suffix(manifest_path.suffix + ".tmp")
-    tmp.write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
-    tmp.replace(manifest_path)

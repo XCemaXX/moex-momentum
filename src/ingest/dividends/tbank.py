@@ -75,6 +75,7 @@ def _parse_reestr_date(s: str) -> str | None:
 
 class TbankFetcher(CachedHttpFetcher):
     source_tag = "skill_fill_tbank"
+    restates_splits = True
     URL_TEMPLATE = "https://www.tbank.ru/invest/stocks/{ticker}/dividends/"
 
     def fetch(self, ticker: str) -> list[dict[str, Any]]:

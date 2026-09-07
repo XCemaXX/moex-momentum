@@ -66,4 +66,10 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra"
+addopts = "-ra --strict-markers --strict-config"
+# A parametrisation that globs the data tree must fail loudly when the tree
+# moves, not collapse into a single silent skip.
+empty_parameter_set_mark = "fail_at_collect"
+# The project sits on a pandas major that deprecates actively; a FutureWarning is
+# the only early signal that numbers will move in the next release.
+filterwarnings = ["error"]
