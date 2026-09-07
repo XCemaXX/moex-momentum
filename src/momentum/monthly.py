@@ -53,14 +53,16 @@ def to_monthly_close(
 
     The trailing period is dropped if `as_of <= period.end_time` — i.e. the
     month is still in progress (mid-month or last trading day's close not yet
-    settled). Default `as_of = today UTC normalized`; pass an explicit value
-    for deterministic tests. See methodology «Конвенция периода».
+    settled). `as_of=None` drops nothing: the caller decides the cutoff, so the
+    result is a function of the data and never of the clock. `compute_all`
+    derives it from the price tree. See methodology «Конвенция периода».
 
     Returns DataFrame indexed by Period[M] with columns:
         - month_end_date (Timestamp; NaT for missing months)
         - close_adj (float; NaN for missing months)
-        - monthly_value_rub (float; sum of daily `value` for the month,
-          0.0 for missing months — liquidity proxy used by the universe filter)
+        - monthly_value_rub (float; sum of daily `value` for the month, NaN for
+          months with no trades — liquidity proxy used by the universe filter.
+          A price file with no `value` column reads as 0.0, not NaN.)
     """
     if prices_adj_df.empty:
         return pd.DataFrame(
@@ -89,8 +91,7 @@ def to_monthly_close(
     full_idx = pd.period_range(start=traded.index[0], end=traded.index[-1], freq="M")
     out = traded.reindex(full_idx)
     out.index.name = "month"
-    cutoff = as_of if as_of is not None else pd.Timestamp("now").normalize()
-    if len(out) > 0 and cutoff <= out.index[-1].end_time:
+    if as_of is not None and len(out) > 0 and as_of <= out.index[-1].end_time:
         out = out.iloc[:-1]
     return out
 
@@ -180,8 +181,8 @@ def monthly_total_returns(
     monthly["div_return"] = [div_slag_by_month.get(p, 0.0) for p in monthly.index]
     monthly["total_return"] = monthly["price_return"].fillna(0.0) + monthly["div_return"]
     monthly.loc[monthly["price_return"].isna(), "total_return"] = float("nan")
-    # Drop reindexed gap rows (no trading that month) — they carry NaN close
-    # and would crash JSONL serialization.
+    # Drop reindexed gap rows (no trading that month) — they carry NaN close,
+    # which downstream readers cast to float and choke on.
     monthly = monthly[monthly["close_adj"].notna()]
     return monthly[
         [

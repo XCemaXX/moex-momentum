@@ -22,14 +22,10 @@ import pandas as pd
 from config import COMMISSION_PER_SIDE
 from mages.loader import MagesQuarter
 from momentum.benchmark import mcftrr_monthly_returns
+from momentum.nav import turnover
 from momentum.universe import load_panel
 
 LOG = logging.getLogger(__name__)
-
-
-def _turnover(old: dict[str, float], new: dict[str, float]) -> float:
-    keys = set(old) | set(new)
-    return sum(abs(new.get(k, 0.0) - old.get(k, 0.0)) for k in keys)
 
 
 def _panel_weights(weights: dict[str, float], columns: set[str]) -> dict[str, float]:
@@ -67,7 +63,7 @@ def mages_nav(
     for t in months:
         if t in targets:  # quarter start: rebalance at prior close, then earn month t
             tgt = targets[t]
-            nav *= 1.0 - commission_per_side * _turnover(held, tgt)
+            nav *= 1.0 - commission_per_side * turnover(held, tgt)
             held = dict(tgt)
         if held:
             r = returns_panel.loc[t]

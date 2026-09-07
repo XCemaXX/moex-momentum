@@ -9,8 +9,24 @@ Backtest momentum-стратегии на российских акциях по
 Подробности — на странице <a href="methodology.html">Методика</a>.
 </p>
 
+<p>
+За {{ headline.years }} лет ({{ first_month }} – {{ last_month }}) Q1 дал
+<strong>×{{ headline.q1_x }}</strong> ({{ headline.q1_cagr }} годовых) против
+<strong>×{{ headline.bench_x }}</strong> ({{ headline.bench_cagr }}) у MCFTRR — до налога
+на прирост капитала и без учёта спреда, см. <a href="methodology.html">Ограничения</a>.
+</p>
+
 <h2>Динамика Q1–Q4 vs MCFTRR</h2>
 {{ chart_dyn|safe }}
+{% if top15_label %}
+<p style="color: #666; font-size: 13px;">
+Линия «{{ top15_label }}» — концентрированный вариант: не весь верхний квартиль, а
+{{ top15_k }} сильнейших имён по скору. Это одна точка сетки{% if compare_available %}, которую
+целиком видно на странице <a href="compare.html">Experiments</a>{% endif %}, и выбрана она как
+продуктовое решение, а не как лучший вариант в выборке: превосходство ни одного варианта не
+пережило поправку на множественные сравнения (см. <a href="methodology.html#ограничения">Ограничения</a>).
+</p>
+{% endif %}
 
 <h2>Q1 vs MCFTRR alpha</h2>
 {{ chart_alpha|safe }}

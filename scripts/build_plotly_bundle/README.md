@@ -31,7 +31,7 @@ If you upgrade `plotly` past 6.7.0:
 2. Bump `plotly.js` in `package.json` to that exact version (no caret).
 3. Re-run `./build.sh`.
 4. Commit the regenerated `docs/pages/plotly.min.js` + updated SHA256
-   in `src/momentum/viz/render.py`.
+   in `src/viz/site_builder.py`.
 
 ## Prerequisites
 
@@ -56,8 +56,8 @@ This:
 2. Bundles `index.js` into `plotly.min.js` (minified, IIFE, with the
    `Plotly` global).
 3. Copies the result to `docs/pages/plotly.min.js`.
-4. Prints the new SHA256 — paste it into `src/momentum/viz/render.py`'s
-   `_BUNDLE_SHA256` constant.
+4. Prints the new SHA256 — paste it into `src/viz/site_builder.py`'s
+   `PLOTLY_BUNDLE_SHA256` constant.
 
 ## What's in the bundle
 

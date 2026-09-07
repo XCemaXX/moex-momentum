@@ -18,14 +18,14 @@ from config import (
     UNIVERSE_TOP_N_LIQUID,
 )
 from momentum.signals import CurveFitSignal
-from momentum.topn_fan import topk_fan
+from momentum.topn_fan import top_k_nav_from_scores, topk_fan
 from tests.conftest import DATA_DIR, Computed
 from viz.plotly_charts import (
     Q1_TOP15_COLOR,
     _plot_strategy_vs_mcftrr,
     plot_q1_q4_dynamics,
 )
-from viz.site_builder import _env, _load_scores, _q1top15_nav, _top15_assets
+from viz.site_builder import _env, _load_scores, _top15_assets
 
 
 def _sample_q_values() -> pd.DataFrame:
@@ -89,7 +89,7 @@ def test_inline_top15_matches_topn_fan(computed: Computed) -> None:
     tickers_file = DATA_DIR / "tickers.json"
 
     k = TOP_K_CONCENTRATION
-    inline = _q1top15_nav(_load_scores(scores_path), monthly_dir, k=k)
+    inline = top_k_nav_from_scores(_load_scores(scores_path), monthly_dir, k=k)
     assert inline is not None
 
     panels = computed.panels

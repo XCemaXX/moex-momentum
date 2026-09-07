@@ -104,10 +104,32 @@ def test_dividend_before_first_price_skipped() -> None:
     assert out.loc[feb, "div_return"] == 0.0
 
 
-def test_split_dividend_invariance_via_full_pipeline() -> None:
-    """Plan §8 verification: dividend before forward 1:2 split.
-    Raw close_pre_ex = 100, amount = 10. After apply_splits: close = 50, amount_adj = 5.
-    Tax-adjusted slag must equal (1 - 0.13) * 10 / 100 = 0.087 either way."""
+def test_split_dividend_invariance_when_paid_before_the_split() -> None:
+    """A payout strictly before the split: amount and close scale by the same
+    factor, so the tax-adjusted yield is unchanged by the split."""
+    raw_rows = [
+        {"date": "2024-04-24", "close": 100.0, "value": 1.0},
+        {"date": "2024-04-25", "close": 100.0, "value": 1.0},
+        {"date": "2024-04-30", "close": 100.0, "value": 1.0},
+        {"date": "2024-05-01", "close": 50.0, "value": 1.0},  # split D
+        {"date": "2024-05-31", "close": 55.0, "value": 1.0},
+    ]
+    splits = [{"date": "2024-05-01", "before": 1, "after": 2, "type": "f", "source": "t"}]
+    divs = [{"registry_close": "2024-04-26", "amount": 10.0, "currency": "RUB", "source": "t"}]
+    prices_adj_df = apply_splits_to_prices(raw_rows, splits)
+    divs_adj = adjust_dividend_amounts(divs, splits)
+    assert divs_adj[0]["amount_adj"] == 5.0  # paid before D → scaled with the prices
+    out = monthly_total_returns(prices_adj_df, divs_adj, tax=0.13)
+    # 0.87 * 5 / 50 == 0.87 * 10 / 100 — the split cancels.
+    assert math.isclose(out.loc[pd.Period("2024-04", "M"), "div_return"], 0.087)
+
+
+def test_dividend_on_the_split_date_uses_the_post_split_scale() -> None:
+    """The split date itself is already post-split (`apply.py`), so the amount is not
+    scaled while the pre-ex close is — the ratio is 0.174, not 0.087.
+
+    Boundary case; the invariance the pipeline actually promises is the test below.
+    """
     raw_rows = [
         {"date": "2024-04-29", "close": 100.0, "value": 1.0},
         {"date": "2024-04-30", "close": 100.0, "value": 1.0},  # close_pre_ex
@@ -173,3 +195,60 @@ def test_trading_gap_does_not_create_synthetic_return() -> None:
     # And the next month resumes normally — small return ≈ 0.13%.
     pr_dec = out.loc[pd.Period("2016-12", "M"), "price_return"]
     assert math.isclose(pr_dec, 412.97 / 412.41 - 1, abs_tol=1e-9)
+
+
+def _daily_with_value(start: str, n: int, closes: list[float], values: list[float]) -> pd.DataFrame:
+    d0 = date.fromisoformat(start)
+    idx = pd.DatetimeIndex([d0 + timedelta(days=i) for i in range(n)])
+    return pd.DataFrame({"close_adj": closes, "value": values}, index=idx)
+
+
+def test_monthly_value_sums_the_daily_turnover() -> None:
+    """The top-100 liquidity cut rides on this sum, so a wrong one reshapes every quartile."""
+    df = _daily_with_value("2024-01-30", 4, [100.0, 101.0, 102.0, 103.0], [1e6, 2e6, 4e6, 8e6])
+    out = to_monthly_close(df, as_of=pd.Timestamp("2024-03-01"))
+    assert out.loc[pd.Period("2024-01", "M"), "monthly_value_rub"] == 3e6
+    assert out.loc[pd.Period("2024-02", "M"), "monthly_value_rub"] == 12e6
+
+
+def test_monthly_value_is_zero_without_a_value_column() -> None:
+    """A price file with no `value` reads as zero turnover, not as missing — it
+    silently sinks to the bottom of the liquidity ranking."""
+    df = _daily("2024-01-30", 4, [100.0, 101.0, 102.0, 103.0])
+    out = to_monthly_close(df, as_of=pd.Timestamp("2024-03-01"))
+    assert list(out["monthly_value_rub"]) == [0.0, 0.0]
+
+
+def test_untraded_month_carries_no_turnover_figure() -> None:
+    """A gap month is NaN, not 0.0 — `monthly_total_returns` drops those rows, so a
+    real zero (a file without `value`) and a non-traded month stay distinguishable."""
+    df = _daily_with_value("2024-01-15", 1, [100.0], [5e6])
+    march = _daily_with_value("2024-03-15", 1, [110.0], [7e6])
+    out = to_monthly_close(pd.concat([df, march]), as_of=pd.Timestamp("2024-04-01"))
+    assert pd.isna(out.loc[pd.Period("2024-02", "M"), "monthly_value_rub"])
+    assert pd.isna(out.loc[pd.Period("2024-02", "M"), "close_adj"])
+
+
+def test_trailing_month_is_kept_without_an_explicit_cutoff() -> None:
+    """No `as_of` means no cutoff: the leaf never reads the clock, so the same
+    inputs give the same months whenever the build runs."""
+    today = pd.Timestamp.now().normalize()
+    start = today.replace(day=1)
+    df = _daily(str(start.date()), 3, [100.0, 101.0, 102.0])
+    assert to_monthly_close(df).index[-1] == start.to_period("M")
+
+
+def test_explicit_cutoff_drops_the_in_progress_month() -> None:
+    today = pd.Timestamp.now().normalize()
+    start = today.replace(day=1)
+    df = _daily(str(start.date()), 3, [100.0, 101.0, 102.0])
+    out = to_monthly_close(df, as_of=df.index.max() + pd.Timedelta(days=1))
+    assert start.to_period("M") not in out.index
+
+
+def test_delisted_ticker_keeps_its_partial_final_month() -> None:
+    """A delisting ends mid-month by definition. The run-wide cutoff sits far
+    later, so that month survives — a per-ticker cutoff would strip it."""
+    df = _daily("2018-06-11", 5, [100.0, 101.0, 102.0, 103.0, 104.0])
+    out = to_monthly_close(df, as_of=pd.Timestamp("2026-09-05"))
+    assert out.index[-1] == pd.Period("2018-06", "M")

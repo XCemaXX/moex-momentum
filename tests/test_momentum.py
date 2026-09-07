@@ -104,11 +104,23 @@ def test_asymmetry_r_unaffected_sigma_affected_by_t() -> None:
 
 
 def test_simple_signal_known_value() -> None:
-    returns = [0.05] * 12
+    """r(12-1) is the geometric-mean monthly return over 11 points, σ(12) the
+    sample stdev over 12 including t."""
+    returns = [0.01, 0.02, -0.01, 0.03, 0.02, 0.05, 0.04, 0.03, 0.02, 0.01, 0.0, 0.06]
     panel = _panel({"A": returns}, start="2021-03")
     t = pd.Period("2022-02", freq="M")
+    window = pd.Series(returns[:-1])
+    r = float((1.0 + window).prod() ** (1.0 / len(window)) - 1.0)
+    sigma = float(pd.Series(returns).std(ddof=1))
     score = SimpleSignal().compute(panel, t)["A"]
-    # All identical → σ ≈ 0 → score explodes (in floating point, not necessarily inf).
+    assert math.isclose(score, r / sigma, rel_tol=1e-12)
+
+
+def test_simple_signal_explodes_when_sigma_is_zero() -> None:
+    """A flat return series gives σ ≈ 0, so the score blows up rather than
+    returning NaN — such a ticker would top Q1 unopposed. Nothing guards it."""
+    panel = _panel({"A": [0.05] * 12}, start="2021-03")
+    score = SimpleSignal().compute(panel, pd.Period("2022-02", freq="M"))["A"]
     assert abs(score) > 1e10
 
 

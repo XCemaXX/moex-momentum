@@ -33,7 +33,7 @@ def load_panel(
     monthly_dir: Path,
     ticker_filter: list[str] | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """Load per-ticker monthly JSONL into wide panels.
+    """Load per-ticker monthly CSV into wide panels.
 
     Returns (total_returns, close_adj, monthly_value_rub), each indexed by
     Period[M] with columns = ticker. Missing months become NaN.

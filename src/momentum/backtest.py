@@ -20,7 +20,6 @@ from __future__ import annotations
 
 import logging
 import math
-from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -28,6 +27,7 @@ import pandas as pd
 
 from config import COMMISSION_PER_SIDE, UNIVERSE_TOP_N_LIQUID
 from momentum.benchmark import mcftrr_monthly_returns
+from momentum.nav import gross_return, turnover, warn_missing_returns
 from momentum.pending import PendingEntry, compute_month_pending
 from momentum.signals import Signal
 from momentum.universe import liquidity_cut, load_panel, universe_at
@@ -80,62 +80,6 @@ def _weights(tickers: list[str]) -> dict[str, float]:
         return {}
     w = 1.0 / len(tickers)
     return {tk: w for tk in tickers}
-
-
-def turnover(old_w: dict[str, float], new_w: dict[str, float]) -> float:
-    keys = set(old_w) | set(new_w)
-    return sum(abs(new_w.get(k, 0.0) - old_w.get(k, 0.0)) for k in keys)
-
-
-def gross_return(
-    weights: dict[str, float],
-    monthly_returns: pd.Series,
-    *,
-    period: pd.Period,
-    quartile: str,
-    misses: list[tuple[str, str, str]] | None = None,
-) -> float:
-    """Equal-weight portfolio gross return. Missing per-ticker return → 0%.
-
-    Pass `misses` to collect them for one aggregated WARN per run; without it
-    each miss is warned on the spot.
-    """
-    if not weights:
-        return 0.0
-    total = 0.0
-    for tk, w in weights.items():
-        r = monthly_returns.get(tk)
-        if r is None or (isinstance(r, float) and math.isnan(r)):
-            if misses is None:
-                LOG.warning(
-                    "missing total_return month=%s ticker=%s quartile=%s — treated as 0",
-                    period,
-                    tk,
-                    quartile,
-                )
-            else:
-                misses.append((str(period), str(tk), quartile))
-            continue
-        total += w * float(r)
-    return total
-
-
-def warn_missing_returns(misses: list[tuple[str, str, str]], *, label: str) -> None:
-    """One line per run instead of one per (month, ticker, quartile)."""
-    if not misses:
-        return
-    by_quartile = Counter(q for _, _, q in misses)
-    # topn_fan passes its curve label as the quartile, so the split is redundant there.
-    split = (
-        "" if set(by_quartile) == {label} else f", by quartile {dict(sorted(by_quartile.items()))}"
-    )
-    LOG.warning(
-        "missing total_return treated as 0 [%s]: %d event(s), %d ticker(s)%s",
-        label,
-        len(misses),
-        len({tk for _, tk, _ in misses}),
-        split,
-    )
 
 
 @dataclass(frozen=True)
@@ -288,7 +232,7 @@ def backtest(
         if positioned:
             month_returns = returns_panel.loc[t]
             for q in Q_LABELS:
-                gr = gross_return(prev_w[q], month_returns, period=t, quartile=q, misses=misses)
+                gr = gross_return(prev_w[q], month_returns, period=t, label=q, misses=misses)
                 nav[q] *= 1.0 + gr
             if t in mcftrr_ret.index:
                 r = mcftrr_ret.loc[t]

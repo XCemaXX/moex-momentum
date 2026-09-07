@@ -1,10 +1,10 @@
-"""Ingest MOEX index series (MCFTRR) into `data/indices/{INDEX}.jsonl`.
+"""Ingest MOEX index series (MCFTRR) into `data/indices/{INDEX}.csv`.
 
 Single SECID per index, no walk-history, no board fallback. Endpoint:
 `/history/engines/stock/markets/index/securities/{INDEX}.json` with `from`/`till`
 window and `history.cursor` pagination — same drain shape as prices.
 
-Idempotent: read existing JSONL, take `max(date)`, request `from = max + 1d`.
+Idempotent: read the existing file, take `max(date)`, request `from = max + 1d`.
 HTTP responses are cached to disk before parsing, so a re-run after a parse
 failure does not re-hit the network.
 

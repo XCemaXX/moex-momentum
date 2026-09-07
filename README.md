@@ -7,12 +7,18 @@ liquid universe into quartiles Q1–Q4, backtests them against the MCFTRR total-
 benchmark, and publishes interactive charts to GitHub Pages.
 
 **Live charts:** https://xcemaxx.github.io/moex-momentum/
-**Methodology (full):** [`docs/methodology.md`](docs/methodology.md)
+**Methodology (full, in Russian):** [`docs/methodology.md`](docs/methodology.md)
 
 > The momentum method follows the public approach of the
 > [kpd_investments](https://t.me/kpd_investments) blog, reproduced here on an
 > independent MOEX dataset. The data, code and universe rule (top-100 by
 > liquidity) are this project's own.
+
+The site also carries a side project — «Индекс магов», the equity sleeve of a
+publicly-published portfolio tracked quarter by quarter against the same benchmark.
+It is independent of the momentum backtest; its own write-ups are
+[`docs/mages_intro.md`](docs/mages_intro.md) and
+[`docs/mages_methodology.md`](docs/mages_methodology.md).
 
 ## The signal
 
@@ -20,14 +26,16 @@ benchmark, and publishes interactive charts to GitHub Pages.
 score = (0.9 · r(12-1) + 0.1 · r(6-1)) / σ(12)
 ```
 
-- `r(12-1)`, `r(6-1)` — total return over the 12- and 6-month windows, **excluding
-  the last month** (skip-month, to drop the short-term reversal).
-- `σ(12)` — sample standard deviation of monthly log-returns over the window.
+- `r(12-1)`, `r(6-1)` — geometric-mean monthly return over `[t-11 … t-1]` and
+  `[t-5 … t-1]`, **excluding the last month** (skip-month, to drop the short-term
+  reversal).
+- `σ(12)` — sample standard deviation of monthly returns (simple, not log) over
+  `[t-11 … t]`.
 
 Stocks are ranked by `score`, split into four equal quartiles, rebalanced monthly.
 Q1 is the high-momentum top, Q4 the bottom. The *why* (literature, skip-month,
 σ-normalization, the empirical 0.9/0.1 weights) is in
-[`docs/methodology.md`](docs/methodology.md).
+[`docs/methodology.md`](docs/methodology.md) (in Russian).
 
 ## Quickstart
 
@@ -44,9 +52,21 @@ The repository ships with the committed raw dataset, so the full strategy can be
 **recomputed offline** without re-ingesting from the network:
 
 ```bash
-momentum compute monthly       # raw prices/divs/splits → monthly total returns
-momentum compute backtest      # quartile sort + NAV (default signal: curve_fit)
-momentum site build            # render docs/pages/*.html
+momentum compute monthly                  # raw prices/divs/splits → monthly total returns
+momentum compute backtest --signal curve_fit   # quartile sort + NAV
+momentum compute backtest --signal simple      # the second signal, for compare.html
+momentum compute sweep                    # Q1 across the a/b weight grid
+momentum compute fan                      # top-K concentration fan
+momentum site build                       # render docs/pages/*.html
+```
+
+Run the same checks CI does:
+
+```bash
+uv run ruff format --check
+uv run ruff check
+uv run mypy src
+uv run pytest
 ```
 
 ### Monthly update
@@ -79,8 +99,8 @@ momentum corporate detect      # flags |daily return| > 30% with no split/divide
 momentum compute monthly --from-scratch   # rebless baselines after ingest
 momentum compute backtest --signal curve_fit
 momentum compute backtest --signal simple
-python scripts/compute_weight_sweep.py
-python scripts/compute_topn_fan.py
+momentum compute sweep
+momentum compute fan
 momentum site build
 
 # 6. Re-bless the regression reference: the new month makes `pytest` red on
@@ -107,45 +127,13 @@ Notes:
 
 ### Dividend reconciliation (recurring)
 
-ISS lags real payouts by months, so every cycle a few recent dividends are
-missing. Resolving them has sharp edges — this is the settled procedure.
-
-**A recent payout ISS has not posted yet** (e.g. a spring blue-chip dividend):
-
-1. Verify it against disclosure / smart-lab / dohod (record date + amount).
-2. Add one `augment` entry to `data/dividends/_conflicts_resolved.json`, then
-   `momentum corporate apply-conflicts`. `augment` has a 7-day / 1% near-dup
-   guard, so it will not double-count a payout already present under another
-   source.
-
-Do **not** reach for a bulk `momentum ingest fill-dividends --sources dohod`
-to grab one payout: with no date scope it drags in dohod's *entire* history
-(dozens of records per name). A fetched row that disagrees with a stored one is
-reported as a conflict rather than appended, so nothing is silently corrupted —
-but on a name with a split you get one conflict per pre-split payout, because
-dohod restates some tickers to today's share count and not others. Use it
-per-ticker with `--dry-run`.
-
-**Folding in the yahoo / tbank catalogs** (`scripts/backfill/cascade_merge_dividends.py`):
-
-- The fetchers are cache-only — `.fill_cache/{yahoo,tbank}/`. Yahoo is a frozen
-  snapshot (no new data). Refresh tbank before a run:
-  `python scripts/backfill/fetch_tbank_dividends.py --refresh` (overwrites a
-  snapshot only on a successful fetch; a network miss keeps the old one).
-- **Do not delete those two directories.** `.fill_cache/iss`, `dohod` and `smartlab`
-  are disposable and re-fetch on demand, but `yahoo/` and `tbank/` are the only
-  surviving copy of their source — Yahoo stopped serving Russian prices in 2022, and
-  the cascade script is wired to read the cache and never fetch. An age-based cleanup
-  would take exactly these first.
-- The cascade is **stateless**: each run re-derives the full diff between the
-  caches and the CSVs. So changing the `--sources` set or omitting the window
-  reshuffles the whole candidate/collision graph and re-surfaces history that
-  was already settled in `_conflicts_resolved.json`. Always scope a monthly run
-  with `--months N` so only recent records are reconciled, e.g.
-  `python scripts/backfill/cascade_merge_dividends.py --sources tbank --months 6`.
-- Same-(year-month) collisions above 1% are **not** auto-merged — they go to
-  `validate_with_raw/reports/cascade_conflicts.json` for manual resolution into
-  `_conflicts_resolved.json`. Re-run with `--apply` once resolved.
+ISS lags real payouts by months, so every cycle a few recent dividends are missing.
+Resolving them has sharp edges — which source may be trusted for which share class,
+when `augment` is safe, why a bulk fill drags in a name's entire history, and which
+caches must never be deleted. That procedure lives in
+`.claude/skills/update_monthly_data/references/reconcile_dividends.md`, together with
+the price-ingest and recompute references next to it. Those files are the canonical
+runbook; this README carries the command sequence only.
 
 ## CLI reference
 
@@ -160,11 +148,13 @@ The entry point is `momentum` (`cli:app`). Every command is idempotent.
 | `momentum ingest dividends` | Dividend payouts from ISS (`--months N` scopes the merge window); regenerate gap report |
 | `momentum ingest fill-dividends` | Fill gaps from external sources (dohod.ru, …) |
 | `momentum ingest indices` | Benchmark index series (default MCFTRR) |
-| `momentum corporate detect` | Split/dividend anomaly detector (fail-loud) |
+| `momentum corporate detect` | Split/dividend anomaly detector (WARN-only; `--strict` to exit non-zero) |
 | `momentum corporate apply-conflicts` | Apply `_conflicts_resolved.json` (drop/replace/augment) to dividend files |
 | `momentum corporate check-registers` | MOEX register closings with no stored payout (`--strict` exits non-zero) |
 | `momentum compute monthly` | Prices + adjustments → monthly total-return series |
 | `momentum compute backtest` | Q1–Q4 quartile backtest (`--signal curve_fit\|simple`) |
+| `momentum compute sweep` | Q1 NAV across the a/b weight grid (input for compare.html) |
+| `momentum compute fan` | Top-K concentration fan (input for compare.html) |
 | `momentum site build` | Render the GitHub Pages site to `docs/pages/` |
 
 ## Configuration
@@ -185,8 +175,7 @@ elsewhere.
 | `ANALYSIS_START_DATE` | `2013-01-01` | Start of the backtest/visualization window |
 | `INCREMENTAL_RECOMPUTE_MONTHS` | `12` | Trailing months recomputed by default |
 
-(There are additional constants for an experimental persistence strategy and for the
-ISS HTTP client — see `src/config.py`.)
+(Fetcher pacing, detector thresholds and the ISS HTTP client have their own constants — see `src/config.py`.)
 
 ## Repository layout
 
@@ -197,7 +186,7 @@ src/
 ├── ingest/            # data acquisition from MOEX ISS + external sources
 ├── adjustments/       # corporate-action processing (splits, dividends, detector)
 ├── momentum/          # signal computation + quartile backtest
-├── storage/           # atomic plain-text (JSONL/CSV) read/write
+├── storage/           # atomic CSV / JSON read/write
 ├── viz/               # Plotly charts + Jinja2 site builder
 └── cli/               # Typer CLI subcommands
 data/                  # committed raw dataset (prices, dividends, splits, indices)
@@ -215,9 +204,10 @@ and work offline. CI lints + tests on PRs and deploys Pages on push to `main`
 - **Survivorship-free.** The universe is recomputed each month; delisted tickers
   fall out naturally when their prices end. No retrospective "winners" list.
 - **Raw-first.** Prices are stored raw; splits/dividends are applied on the fly.
-  The detector fails loud on unexplained jumps rather than silently adjusting.
+  The detector WARNs on unexplained jumps rather than silently adjusting; pass
+  `--strict` to make it exit non-zero.
 - **Committed dataset.** `data/` holds the raw source-of-truth; computed outputs
-  (`data/computed/`) and HTTP caches are gitignored and regenerable.
+  (`data/momentum/`) and HTTP caches are gitignored and regenerable.
 - **Regression anchors.** Tests freeze externally-verified values (e.g. VSMO
   2022-03 simple-signal = 4.6458%) to catch code drift.
 
@@ -233,6 +223,13 @@ history is kept in the repository on purpose, as a worked example:
 
 These are working artifacts, not polished documentation — included for transparency
 into how the pipeline was designed and verified.
+
+## Disclaimer
+
+Research material, not investment advice. The quartile membership published by this
+project is the output of the documented methodology applied to historical data; past
+returns do not predict future ones, and the cost model is deliberately incomplete (see
+the limitations section of the methodology). MIT covers the code, not the content.
 
 ## License
 

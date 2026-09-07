@@ -1,10 +1,11 @@
-"""Async ingest of daily quotes from MOEX ISS into `data/prices_iss/{TICKER}.jsonl`.
+"""Async ingest of daily quotes from MOEX ISS into `data/prices_iss/{TICKER}.csv`.
 
 Contract:
 - `ingest(tickers, *, output_dir, cache_dir, ...)` — async, ~10 parallel GETs.
-- Per-ticker: walk history (multi-step changeover); for each segment try boards in
-  order `(is_primary desc, history_from asc)`. First non-empty = winner.
-- Append-only: on a repeat run we read the existing JSONL, take `max(date)`, and
+- Per-ticker: walk history (multi-step changeover); every board of a segment is
+  fetched and the rows are merged by date with priority dedup — primary boards win
+  over odd-lot ones (SMAL), which rank last.
+- Append-only: on a repeat run we read the existing file, take `max(date)`, and
   request `from = max_date + 1d`. Idempotent: a repeat run does not change a byte.
 - Cache HTTP pages to disk *before* parsing/merging (see lesson learned phase 3).
 - Price (CLOSE) conflict on a single date from different segments = `ValueError`.
@@ -83,7 +84,7 @@ def _num(value: Any, to: Callable[[Any], Any]) -> Any:
 
 
 def _pivot_history(cols: list[str], data: list[list[Any]]) -> list[dict[str, Any]]:
-    """Pivot ISS response into our JSONL format. Rows without CLOSE are dropped.
+    """Pivot ISS response into our record format. Rows without CLOSE are dropped.
 
     Numeric fields are cast to match `PRICE_CASTS`: ISS returns a whole number as
     JSON int, so an uncast row would serialize as `60` and flip to `60.0` on the

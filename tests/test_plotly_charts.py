@@ -9,11 +9,14 @@ from __future__ import annotations
 
 import datetime as dt
 import hashlib
+import json
 import math
+import re
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
+import plotly
 
 from storage.records import write_records_atomic
 from storage.schemas import Q_VALUES_FIELDS
@@ -318,6 +321,38 @@ def test_committed_bundle_matches_pinned_sha256() -> None:
     assert digest == PLOTLY_BUNDLE_SHA256, (
         f"bundle SHA256 mismatch — committed={digest!r}, "
         f"expected={PLOTLY_BUNDLE_SHA256!r}. Rebuild and update site_builder.py."
+    )
+
+
+def test_bundle_python_and_npm_pin_the_same_plotly_js() -> None:
+    """The SHA guard only proves the file was not swapped. This proves the three
+    copies of the version agree: the browser bundle, the npm pin it was built
+    from, and the plotly.js that the installed Python plotly emits figures for.
+    A `uv lock --upgrade` moves the Python side alone and would otherwise ship
+    a figure spec the browser bundle cannot read."""
+    root = Path(__file__).resolve().parent.parent
+    bundle = root / "docs" / "pages" / "plotly.min.js"
+    in_bundle = re.search(r'version="(\d+\.\d+\.\d+)"', bundle.read_text(encoding="utf-8"))
+    assert in_bundle, "no plotly.js version marker in the committed bundle"
+
+    pkg = json.loads(
+        (root / "scripts" / "build_plotly_bundle" / "package.json").read_text(encoding="utf-8")
+    )
+    npm_pin = pkg["dependencies"]["plotly.js"]
+
+    shipped = Path(plotly.__file__).parent / "package_data" / "plotly.min.js"
+    in_python = re.search(rb"plotly\.js v([0-9.]+)", shipped.read_bytes())
+    assert in_python, "no plotly.js version marker in the installed plotly"
+
+    versions = {
+        "committed bundle": in_bundle.group(1),
+        "npm pin": npm_pin,
+        "python plotly": in_python.group(1).decode(),
+    }
+    assert len(set(versions.values())) == 1, (
+        "plotly.js version drift: "
+        + ", ".join(f"{k}={v}" for k, v in versions.items())
+        + " — rebuild scripts/build_plotly_bundle and update PLOTLY_BUNDLE_SHA256."
     )
 
 

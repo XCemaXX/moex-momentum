@@ -65,7 +65,7 @@ def site_build(
         typer.echo(
             "note: compare.html skipped — needs data/momentum/{simple,curve_fit}/q_values.csv "
             "+ sweep/q1_nav.csv (run `momentum compute backtest` for both signals and "
-            "`python scripts/compute_weight_sweep.py`)"
+            "`momentum compute sweep`)"
         )
 
     # Pending-inclusion block + universe cutoff (task 008): pending.json is only

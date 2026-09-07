@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import date
 from pathlib import Path
 
 import typer
@@ -46,7 +47,6 @@ def ingest_prices(
 ) -> None:
     """Async ingest of daily quotes. Idempotent: a rerun pulls only the delta."""
     import asyncio
-    from datetime import date
 
     import tickers as t_mod
     from ingest.prices import ingest
@@ -164,6 +164,18 @@ def ingest_splits(
     typer.echo(f"splits ingested: {len(counts)} tickers")
 
 
+def since_from_months(months: int, today: date) -> date | None:
+    """First day of the month `months` back from `today`. 0 or less → no bound."""
+    if months <= 0:
+        return None
+    mo = today.month - months
+    yr = today.year
+    while mo <= 0:
+        mo += 12
+        yr -= 1
+    return date(yr, mo, 1)
+
+
 @ingest_app.command("dividends")
 def ingest_dividends(
     output_dir: Path = typer.Option(Path("data/dividends"), "--output-dir"),
@@ -192,7 +204,6 @@ def ingest_dividends(
     dividends; recent payouts come from `fill-dividends` + `corporate apply-conflicts`.
     """
     import asyncio
-    from datetime import date
 
     import tickers as t_mod
     from adjustments.dividend_gaps import compute_gaps, load_acked, save_gaps
@@ -203,15 +214,7 @@ def ingest_dividends(
         typer.echo(f"{tickers_file} is empty — run `momentum tickers refresh` first")
         raise typer.Exit(1)
 
-    since_d: date | None = None
-    if months > 0:
-        today = date.today()
-        mo = today.month - months
-        yr = today.year
-        while mo <= 0:
-            mo += 12
-            yr -= 1
-        since_d = date(yr, mo, 1)
+    since_d = since_from_months(months, date.today())
 
     selected = list(ticker) if ticker else None
     result = asyncio.run(
@@ -409,7 +412,6 @@ def ingest_indices(
 ) -> None:
     """Ingest MOEX index series (default: MCFTRR). Idempotent: rerun pulls only the delta."""
     import asyncio
-    from datetime import date
 
     from ingest.indices import ingest
 

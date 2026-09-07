@@ -21,13 +21,12 @@ import pandas as pd
 from jinja2 import Environment, PackageLoader, select_autoescape
 from markdown_it import MarkdownIt
 
-from config import COMMISSION_PER_SIDE, TOP_K_CONCENTRATION
+from config import TOP_K_CONCENTRATION
 from mages.curve import build_mages_frame
 from mages.loader import load_quarters
 from mages.weighted_q1 import build_mages_table, build_weighted_frame
-from momentum.topn_fan import nav_from_selections, score_ranking
+from momentum.topn_fan import top_k_nav_from_scores
 from momentum.transitions import Q_LABELS, sticky_tickers, transition_windows
-from momentum.universe import load_panel
 from storage.records import write_text_atomic
 from storage.schemas import SCORES_FIELDS
 from tickers import load as load_tickers
@@ -52,7 +51,7 @@ from viz.series_registry import (
 
 # Custom-bundled plotly.min.js (scatter+bar+sankey only). Pinned by SHA so a
 # silent swap to the 4.7 MB full bundle is caught in tests.
-PLOTLY_BUNDLE_SHA256 = "54db33f426b36f8ffa0193c423de08056c4a9702f70214d3fac392b320ce9c3d"
+PLOTLY_BUNDLE_SHA256 = "95aecfee38073f2dc471f65a839e826e464322e15cd3f1046b9de8b6b3308775"
 PLOTLY_BUNDLE_FILENAME = "plotly.min.js"
 
 NAV_LINKS: list[tuple[str, str]] = [
@@ -65,6 +64,18 @@ NAV_LINKS: list[tuple[str, str]] = [
     ("Experiments", "compare.html"),
     ("Mages index", "mages_index.html"),
 ]
+
+# Rendered only when their inputs are present, so their nav entries have to drop
+# out with them — a clone without the research CSVs must not get 404s in every header.
+OPTIONAL_PAGES = frozenset({"compare.html", "mages_index.html"})
+
+
+def _nav_links(rendered_optional: set[str]) -> list[tuple[str, str]]:
+    return [
+        (label, href)
+        for label, href in NAV_LINKS
+        if href not in OPTIONAL_PAGES or href in rendered_optional
+    ]
 
 
 def _env() -> Environment:
@@ -198,34 +209,6 @@ def _order_by_score(members: list[str], month_scores: dict[str, float]) -> list[
     return scored + [t for t in members if t not in month_scores]
 
 
-def _q1top15_nav(
-    scores: dict[str, dict[str, float]], monthly_dir: Path, *, k: int
-) -> pd.Series | None:
-    """NAV of the top-K-by-score concentration strategy (task 026).
-
-    Built at render time from scores.csv (full top-100 universe per month, task
-    025) + the monthly returns panel — same build-time-curve pattern the mages
-    page uses. Reproduces the `k{K}` column of the task-024 concentration fan
-    (same universe, signal, tie-break), so the home page needs no research CSV.
-    """
-    if not scores:
-        return None
-    returns_panel = load_panel(monthly_dir)[0]
-    if returns_panel.empty:
-        return None
-    selections = {pd.Period(m, "M"): score_ranking(pd.Series(per))[:k] for m, per in scores.items()}
-    # The earliest scored month forms the portfolio; earning starts the month
-    # after, so it becomes the seed rather than the first iterated month.
-    start = min(selections) + 1
-    months = returns_panel.index[returns_panel.index >= start]
-    if len(months) == 0:
-        return None
-    curve = nav_from_selections(
-        returns_panel, months, selections, commission=COMMISSION_PER_SIDE, label=f"top{k}"
-    )
-    return curve.nav
-
-
 def _top15_assets(
     scores: dict[str, dict[str, float]],
     monthly_dir: Path | None,
@@ -241,7 +224,7 @@ def _top15_assets(
     """
     if not scores or monthly_dir is None:
         return None, ""
-    nav = _q1top15_nav(scores, monthly_dir, k=TOP_K_CONCENTRATION)
+    nav = top_k_nav_from_scores(scores, monthly_dir, k=TOP_K_CONCENTRATION)
     if nav is None:
         return None, ""
     top15 = nav.reindex(q_values.index)
@@ -299,9 +282,23 @@ def _copy_bundle(bundle_src: Path, out_dir: Path) -> None:
     shutil.copy2(bundle_src, dest)
 
 
+def _heading_slug(text: str) -> str:
+    """`## Ограничения` → `ограничения`. Cyrillic is kept: browsers percent-encode
+    the fragment, and a transliteration table would be one more thing to maintain."""
+    out = "".join(c.lower() if c.isalnum() else "-" for c in text.strip())
+    while "--" in out:
+        out = out.replace("--", "-")
+    return out.strip("-")
+
+
 def _render_methodology_md(md_path: Path) -> str:
+    """Render, giving every heading an id so other pages can deep-link a section."""
     md = MarkdownIt("commonmark", {"html": False}).enable("table")
-    rendered: str = md.render(md_path.read_text(encoding="utf-8"))
+    tokens = md.parse(md_path.read_text(encoding="utf-8"))
+    for i, token in enumerate(tokens):
+        if token.type == "heading_open" and i + 1 < len(tokens):
+            token.attrSet("id", _heading_slug(tokens[i + 1].content))
+    rendered: str = md.renderer.render(tokens, md.options, {})
     return rendered
 
 
@@ -388,6 +385,21 @@ def _compare_page_context(
     }
 
 
+def _headline_numbers(q_values: pd.DataFrame) -> dict[str, str]:
+    """Terminal multiple and CAGR for Q1 and the benchmark.
+
+    Generated at build time rather than written into a doc: the values move with
+    every monthly refresh, and a hand-typed one goes stale within days.
+    """
+    years = (q_values.index.max() - q_values.index.min()).n / 12
+    out: dict[str, str] = {"years": f"{years:.1f}"}
+    for col, key in (("Q1", "q1"), ("MCFTRR", "bench")):
+        terminal = float(q_values[col].iloc[-1])
+        out[f"{key}_x"] = f"{terminal:.2f}"
+        out[f"{key}_cagr"] = f"{terminal ** (1 / years) - 1:.1%}" if years > 0 else "—"
+    return out
+
+
 def build_site(
     *,
     q_values_path: Path,
@@ -439,13 +451,30 @@ def build_site(
 
     first_month = str(q_values.index.min())
     last_month = str(q_values.index.max())
+    headline = _headline_numbers(q_values)
     build_iso = dt.datetime.now(dt.UTC).strftime("%Y-%m-%d %H:%M UTC")
 
     pages: dict[str, Path] = {}
 
+    # Decided before the first render: every page carries the same header.
+    mages_ctx = _mages_page_context(
+        holdings,
+        tickers,
+        mages_dir=mages_dir,
+        monthly_dir=monthly_dir,
+        indices_dir=indices_dir,
+        mages_intro_md=mages_intro_md,
+        mages_methodology_md=mages_methodology_md,
+    )
+    compare_ready = bool(compare_simple_path and compare_curve_fit_path and compare_sweep_path)
+    optional_rendered = {"mages_index.html"} if mages_ctx is not None else set()
+    if compare_ready:
+        optional_rendered.add("compare.html")
+    nav_links = _nav_links(optional_rendered)
+
     def render(name: str, template: str, ctx: dict[str, Any]) -> None:
         full_ctx = {
-            "nav_links": NAV_LINKS,
+            "nav_links": nav_links,
             "current_href": name,
             **ctx,
         }
@@ -460,8 +489,12 @@ def build_site(
         {
             "title": "Home",
             "chart_dyn": embed_dyn_idx,
+            "top15_label": top15_label if top15 is not None else None,
+            "top15_k": TOP_K_CONCENTRATION,
+            "compare_available": compare_ready,
             "chart_alpha": embed_alpha_idx,
             "build_iso": build_iso,
+            "headline": headline,
             "first_month": first_month,
             "last_month": last_month,
         },
@@ -503,15 +536,6 @@ def build_site(
         {"title": "Methodology", "markdown_html": _render_methodology_md(methodology_md)},
     )
 
-    mages_ctx = _mages_page_context(
-        holdings,
-        tickers,
-        mages_dir=mages_dir,
-        monthly_dir=monthly_dir,
-        indices_dir=indices_dir,
-        mages_intro_md=mages_intro_md,
-        mages_methodology_md=mages_methodology_md,
-    )
     if mages_ctx is not None:
         render("mages_index.html", "mages_index.html", mages_ctx)
 
@@ -559,6 +583,7 @@ def default_methodology_path() -> Path:
 
 __all__ = [
     "NAV_LINKS",
+    "OPTIONAL_PAGES",
     "PLOTLY_BUNDLE_FILENAME",
     "PLOTLY_BUNDLE_SHA256",
     "build_site",

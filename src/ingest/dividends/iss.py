@@ -1,4 +1,4 @@
-"""Async ingest of dividends from MOEX ISS into `data/dividends/{TICKER}.jsonl`.
+"""Async ingest of dividends from MOEX ISS into `data/dividends/{TICKER}.csv`.
 
 Endpoint: `/securities/{TICKER}/dividends.json?iss.meta=off`. Single-page payload
 in practice (SBER full history = 6 records); we still drain `dividends.cursor` if

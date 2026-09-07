@@ -1,4 +1,4 @@
-"""Apply manual conflict resolutions (`_conflicts_resolved.json`) to JSONL.
+"""Apply manual conflict resolutions (`_conflicts_resolved.json`) to dividend files.
 
 Used to surgically correct stale ISS records or augment with verified
 disclosure data. Actions: `replace` | `drop` | `augment`. Idempotent — a
@@ -72,7 +72,7 @@ def _load_conflicts(path: Path) -> list[dict[str, Any]]:
                 raise ValueError(f"{path}[{i}]: missing or empty field {fld!r}")
         if rec["action"] not in CONFLICT_ACTIONS:
             raise ValueError(f"{path}[{i}]: action={rec['action']!r} not in {CONFLICT_ACTIONS}")
-        # replace/drop/augment mutate JSONL → registry_close required.
+        # replace/drop/augment mutate the file → registry_close required.
         # ignore can be pattern-based → registry_close optional (use applies_to_ym_pattern).
         if rec["action"] != "ignore" and not rec.get("registry_close"):
             raise ValueError(
@@ -123,10 +123,10 @@ def should_ignore_conflict(
     return None
 
 
-def apply_conflicts_to_jsonl(  # noqa: PLR0912, PLR0915 — 3 action branches × idempotency checks
+def apply_conflicts_to_file(  # noqa: PLR0912, PLR0915 — 3 action branches × idempotency checks
     path: Path, conflicts: list[dict[str, Any]]
 ) -> ConflictApplyResult:
-    """Apply `replace`/`drop`/`augment` ops to one dividends JSONL atomically."""
+    """Apply `replace`/`drop`/`augment` ops to one dividends file atomically."""
     ticker = path.stem
     rows = read_records(path, casts=DIV_CASTS)
     applied = skipped = 0
@@ -134,7 +134,7 @@ def apply_conflicts_to_jsonl(  # noqa: PLR0912, PLR0915 — 3 action branches ×
         if c["ticker"] != ticker:
             continue
         if c["action"] == "ignore":
-            # ignore entries do not mutate JSONL — only filter cascade conflict-flagging
+            # ignore entries do not mutate the file — only filter cascade conflict-flagging
             continue
         reg = c["registry_close"]
         if c["action"] == "replace":
@@ -233,7 +233,7 @@ def apply_conflicts_to_universe(
         if not path.exists():
             LOG.warning("conflicts target missing: %s", path)
             continue
-        result = apply_conflicts_to_jsonl(path, ticker_conflicts)
+        result = apply_conflicts_to_file(path, ticker_conflicts)
         if result.applied or result.skipped_no_match:
             LOG.info(
                 "%s: applied=%d skipped_no_match=%d",

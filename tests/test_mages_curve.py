@@ -8,7 +8,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from mages.curve import _panel_weights, _turnover, mages_nav
+from mages.curve import _panel_weights, mages_nav
 from mages.loader import MagesQuarter, load_quarters
 
 
@@ -55,10 +55,6 @@ def test_panel_weights_drops_unpriced_and_renormalizes() -> None:
     w = _panel_weights({"A": 0.5, "B": 0.3, "C": 0.2}, {"A", "B"})
     assert w == pytest.approx({"A": 0.625, "B": 0.375})
     assert sum(w.values()) == pytest.approx(1.0)
-
-
-def test_turnover_counts_both_sides() -> None:
-    assert _turnover({"A": 0.6, "B": 0.4}, {"A": 0.5, "C": 0.5}) == pytest.approx(1.0)
 
 
 def test_load_quarters_weights_sum_to_one(tmp_path: Path) -> None:

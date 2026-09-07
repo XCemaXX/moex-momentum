@@ -14,8 +14,29 @@ if [[ -f /etc/ssl/certs/ca-certificates.crt && -z "${NODE_EXTRA_CA_CERTS:-}" ]];
     export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 fi
 
-echo "==> npm install"
-npm install --no-audit --no-fund --loglevel=error
+NODE_MAJOR=$(node -p "process.versions.node.split('.')[0]")
+if (( NODE_MAJOR < 22 )); then
+    echo "plotly.js 4 needs Node >= 22, found $(node --version)" >&2
+    exit 1
+fi
+
+# `ci` rather than `install`: it installs the committed lock exactly, so the
+# bundle stays reproducible. It refuses when the lock and package.json disagree
+# — that means a dependency was bumped, and regenerating the lock is a
+# deliberate act, not something a build script should do behind your back.
+if [[ -f package-lock.json ]]; then
+    echo "==> npm ci"
+    if ! npm ci --no-audit --no-fund --loglevel=error; then
+        echo "" >&2
+        echo "package-lock.json does not match package.json." >&2
+        echo "If you changed a dependency, refresh the lock and commit it:" >&2
+        echo "    npm install --no-audit --no-fund" >&2
+        exit 1
+    fi
+else
+    echo "==> npm install (no lock yet)"
+    npm install --no-audit --no-fund --loglevel=error
+fi
 
 echo "==> esbuild bundle"
 ./node_modules/.bin/esbuild index.js \
@@ -39,4 +60,4 @@ echo "  size:        $SIZE bytes ($(numfmt --to=iec "$SIZE"))"
 echo "  gzip size:   $GZIP_SIZE bytes ($(numfmt --to=iec "$GZIP_SIZE"))"
 echo "  sha256:      $HASH"
 echo ""
-echo "Paste this hash into src/momentum/viz/render.py:_BUNDLE_SHA256"
+echo "Paste this hash into src/viz/site_builder.py:PLOTLY_BUNDLE_SHA256"

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 import pandas as pd
@@ -132,6 +133,30 @@ def test_dividend_non_rub_dropped() -> None:
     out = adjust_dividend_amounts(divs, [], ticker="POLY")
     assert len(out) == 1
     assert out[0]["currency"] == "RUB"
+
+
+def test_dividend_empty_currency_is_kept_as_rub_and_warned(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """A backfill once wrote the field empty; the row is recovered, but silently
+    recovering it is what hid the bug, so the WARN is part of the contract."""
+    divs = [{"registry_close": "2018-05-11", "amount": 30.0, "currency": "", "source": "s"}]
+    with caplog.at_level(logging.WARNING, logger="adjustments.apply"):
+        out = adjust_dividend_amounts(divs, [], ticker="CHMF")
+    assert [r["amount_adj"] for r in out] == [30.0]
+    assert "empty currency assumed RUB" in caplog.text
+    assert "2018-05-11" in caplog.text
+
+
+def test_dividend_missing_currency_key_is_kept_without_a_warning(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """No key at all is the old schema, not a corrupted write — no alarm."""
+    divs = [{"registry_close": "2018-05-11", "amount": 30.0, "source": "s"}]
+    with caplog.at_level(logging.WARNING, logger="adjustments.apply"):
+        out = adjust_dividend_amounts(divs, [], ticker="CHMF")
+    assert len(out) == 1
+    assert "empty currency" not in caplog.text
 
 
 def test_dividend_adjust_empty() -> None:

@@ -8,14 +8,9 @@ from pathlib import Path
 
 import pandas as pd
 
-from momentum.backtest import (
-    backtest,
-    gross_return,
-    quartile_split,
-    turnover,
-    write_backtest,
-)
+from momentum.backtest import backtest, quartile_split, write_backtest
 from momentum.signals import SimpleSignal
+from momentum.universe import load_panel
 from storage.records import write_records_atomic
 from storage.schemas import INDEX_FIELDS, MONTHLY_FIELDS
 
@@ -59,39 +54,6 @@ def test_quartile_split_drops_nan_scores() -> None:
 def test_quartile_split_empty() -> None:
     q = quartile_split(pd.Series([], dtype=float))
     assert q == {"Q1": [], "Q2": [], "Q3": [], "Q4": []}
-
-
-def test_turnover_initial_buy_in_equals_one() -> None:
-    assert math.isclose(turnover({}, {"A": 0.5, "B": 0.5}), 1.0, abs_tol=1e-12)
-
-
-def test_turnover_full_swap_equals_two() -> None:
-    old = {"A": 0.5, "B": 0.5}
-    new = {"C": 0.5, "D": 0.5}
-    assert math.isclose(turnover(old, new), 2.0, abs_tol=1e-12)
-
-
-def test_turnover_no_change_zero() -> None:
-    w = {"A": 0.5, "B": 0.5}
-    assert math.isclose(turnover(w, w), 0.0, abs_tol=1e-12)
-
-
-def test_gross_return_equal_weight() -> None:
-    w = {"A": 0.5, "B": 0.5}
-    r = pd.Series({"A": 0.10, "B": -0.10})
-    assert math.isclose(
-        gross_return(w, r, period=pd.Period("2022-01", "M"), quartile="Q1"),
-        0.0,
-        abs_tol=1e-12,
-    )
-
-
-def test_gross_return_missing_ticker_treated_as_zero(caplog) -> None:
-    w = {"A": 0.5, "B": 0.5}
-    r = pd.Series({"A": 0.20})  # B missing
-    out = gross_return(w, r, period=pd.Period("2022-01", "M"), quartile="Q1")
-    # B contributes 0 → return = 0.5 × 0.20 + 0.5 × 0 = 0.10
-    assert math.isclose(out, 0.10, abs_tol=1e-12)
 
 
 def _seed_monthly_dir(
@@ -174,7 +136,7 @@ def test_backtest_smoke_quartile_ranking(tmp_path: Path) -> None:
 
 
 def test_backtest_zero_commission_quartile_sum_equals_universe(tmp_path: Path) -> None:
-    """With commission=0, average of Q1..Q4 (equal-weighted) ≈ universe return."""
+    """With commission=0 the four quartile returns average to the universe return."""
     monthly_dir = tmp_path / "monthly"
     indices_dir = tmp_path / "indices"
     _seed_synthetic_panel(monthly_dir, indices_dir, n_months=20)
@@ -187,13 +149,17 @@ def test_backtest_zero_commission_quartile_sum_equals_universe(tmp_path: Path) -
         start=pd.Period("2022-01", "M"),
         commission_per_side=0.0,
     )
-    # Equal-weight universe NAV (8 tickers): start at 1.0, grow by mean monthly return.
-    # Each quartile has 2 tickers; their averaged NAV per month equals the universe avg.
-    avg = res.q_values[["Q1", "Q2", "Q3", "Q4"]].mean(axis=1)
-    # Simple check: monotone non-decreasing (since all returns ≥ -0.005, average is positive).
-    diffs = avg.diff().dropna()
-    # Average growth should be roughly 0.01 per month (mean of A..H returns).
-    assert diffs.mean() > 0.005
+    # Four equal-sized quartiles partition the universe, so the average of their
+    # monthly returns is the equal-weight universe return exactly — but only on
+    # returns, not on NAVs: averaging products is not the product of averages.
+    returns_panel = load_panel(monthly_dir)[0]
+    # The cold entry month only forms the portfolio, so it earns nothing — skip it.
+    quartile_returns = (
+        res.q_values[["Q1", "Q2", "Q3", "Q4"]].pct_change().mean(axis=1).dropna().iloc[1:]
+    )
+    assert len(quartile_returns) > 5
+    for t, got in quartile_returns.items():
+        assert math.isclose(got, float(returns_panel.loc[t].mean()), abs_tol=1e-12), t
 
 
 def test_backtest_cold_start_cost_drag(tmp_path: Path) -> None:

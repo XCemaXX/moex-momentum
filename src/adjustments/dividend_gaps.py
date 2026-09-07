@@ -4,8 +4,8 @@ For each ticker with prices: years that have >= `min_active_months` of trading
 activity but zero dividend records. Acked years (no-div confirmed manually) are
 suppressed. Output feeds task-005 fill workflow.
 
-Lives in `corporate/` because the rule joins price activity with dividend
-absence — same pattern as `corporate/detect.py` (suspicious returns).
+Lives here because the rule joins price activity with dividend absence — same
+pattern as `detect.py` (suspicious returns) next door.
 """
 
 from __future__ import annotations

@@ -11,8 +11,8 @@ momentum corporate detect                       # WARN-only anomaly detector
 momentum compute monthly --from-scratch         # rebless baselines after ingest
 momentum compute backtest --signal curve_fit
 momentum compute backtest --signal simple
-python scripts/compute_weight_sweep.py
-python scripts/compute_topn_fan.py
+momentum compute sweep
+momentum compute fan
 momentum site build
 
 # Re-bless the regression reference — the new month makes pytest red on purpose.

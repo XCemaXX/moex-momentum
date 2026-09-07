@@ -13,6 +13,7 @@ from storage.schemas import Q_VALUES_FIELDS
 from viz.series_registry import topn_fan_concentration
 from viz.site_builder import (
     NAV_LINKS,
+    OPTIONAL_PAGES,
     PLOTLY_BUNDLE_FILENAME,
     _order_by_score,
     build_site,
@@ -130,14 +131,16 @@ def test_each_page_loads_bundle_once(fixture_dir: Path, tmp_path: Path) -> None:
         assert text.count('src="plotly.min.js"') == 1, f"{f.name}: bundle load count wrong"
 
 
-def test_nav_consistent_with_constant(fixture_dir: Path, tmp_path: Path) -> None:
+def test_nav_links_only_pages_that_were_written(fixture_dir: Path, tmp_path: Path) -> None:
+    """A build without the optional inputs must not advertise pages it never wrote."""
     out = tmp_path / "out"
-    _build(fixture_dir, out)
-    expected_hrefs = {href for _label, href in NAV_LINKS}
+    pages = _build(fixture_dir, out)
+    assert not OPTIONAL_PAGES & set(pages)  # the fixture supplies neither
     for f in out.glob("*.html"):
         text = f.read_text(encoding="utf-8")
-        for href in expected_hrefs:
-            assert f'href="{href}"' in text, f"{f.name} missing nav link {href}"
+        for _label, href in NAV_LINKS:
+            present = f'href="{href}"' in text
+            assert present is (href not in OPTIONAL_PAGES), f"{f.name}: nav link {href}"
 
 
 def test_current_page_highlighted(fixture_dir: Path, tmp_path: Path) -> None:
@@ -279,8 +282,10 @@ def test_methodology_renders_markdown(fixture_dir: Path, tmp_path: Path) -> None
     out = tmp_path / "out"
     _build(fixture_dir, out)
     text = (out / "methodology.html").read_text(encoding="utf-8")
-    # Headings + paragraph + table from the fixture markdown.
-    assert "<h1>Title</h1>" in text
+    # Headings + paragraph + table from the fixture markdown. Headings carry an
+    # id so other pages can deep-link a section.
+    assert '<h1 id="title">Title</h1>' in text
+    assert '<h2 id="section">Section</h2>' in text
     assert "<p>Body paragraph.</p>" in text
     assert "<table>" in text and "<th>A</th>" in text
     # No raw markdown leaked through.
@@ -314,7 +319,11 @@ def test_bundle_inplace_is_noop(fixture_dir: Path, tmp_path: Path) -> None:
 
 
 def test_chart_pages_full_size_each(fixture_dir: Path, tmp_path: Path) -> None:
-    """Each standalone chart page has its own embedded Plotly figure."""
+    """Each standalone chart page has its own embedded Plotly figure.
+
+    `q1_minus_mcftrr.html` carries a second one in production — the top-K alpha
+    chart, which needs scores this fixture does not supply (see test_q1_top15).
+    """
     out = tmp_path / "out"
     _build(fixture_dir, out)
     for name in ("q1_q4_dynamics.html", "q1_minus_mcftrr.html", "transitions.html"):
@@ -435,6 +444,27 @@ def test_compare_page_two_charts_and_series(fixture_dir: Path, tmp_path: Path) -
     assert "(= curve_fit)" in text
     # Both signal Q1 lines present in the headline figure.
     assert "Q1 simple" in text
+
+
+def test_nav_gains_the_link_once_the_page_is_rendered(fixture_dir: Path, tmp_path: Path) -> None:
+    out = tmp_path / "out"
+    simple, cf, sweep = _write_compare_sources(tmp_path)
+    build_site(
+        q_values_path=fixture_dir / "q_values.csv",
+        holdings_dir=fixture_dir / "holdings",
+        tickers_path=fixture_dir / "tickers.json",
+        methodology_md=fixture_dir / "methodology.md",
+        bundle_src=fixture_dir / "plotly.min.js",
+        out_dir=out,
+        signal="curve_fit",
+        compare_simple_path=simple,
+        compare_curve_fit_path=cf,
+        compare_sweep_path=sweep,
+    )
+    for f in out.glob("*.html"):
+        text = f.read_text(encoding="utf-8")
+        assert 'href="compare.html"' in text, f.name
+        assert 'href="mages_index.html"' not in text, f.name  # still not built
 
 
 def _write_fan_source(tmp_path: Path) -> Path:

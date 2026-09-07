@@ -75,6 +75,7 @@ gitignored and regenerated — never hand-edit it.
 - Skills in `.claude/skills/` are local-dev tooling, not part of the production
   runtime. This one orchestrates existing CLI commands and `scripts/`; it invents
   no new data path.
-- The canonical runbook is `README.md §Monthly update` and
-  `README.md §Dividend reconciliation`. If this skill and the README disagree, the
-  README wins — and fix the skill to match.
+- `references/` is the canonical runbook: it carries the triage and the judgement
+  calls, and it is the copy kept current. `README.md §Monthly update` holds the bare
+  command sequence for a human running it by hand. If the two disagree on procedure,
+  the references win; if they disagree on a command, fix whichever is stale.

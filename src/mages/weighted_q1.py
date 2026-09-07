@@ -26,8 +26,9 @@ from typing import Any
 import pandas as pd
 
 from config import COMMISSION_PER_SIDE
-from mages.curve import _mcftrr_nav, _turnover
+from mages.curve import _mcftrr_nav
 from mages.loader import MagesQuarter
+from momentum.nav import gross_return, turnover, warn_missing_returns
 from momentum.universe import load_panel
 
 _LAMBDAS: tuple[float, ...] = (0.0, 0.5, 1.0, 2.0)
@@ -66,15 +67,6 @@ def _conv_at(lookup: list[tuple[pd.Period, dict[str, float]]], t: pd.Period) -> 
         else:
             break
     return active
-
-
-def _gross(weights: dict[str, float], month_returns: pd.Series) -> float:
-    total = 0.0
-    for tk, w in weights.items():
-        ri = month_returns.get(tk)
-        rv = 0.0 if (ri is None or pd.isna(ri)) else float(ri)
-        total += w * rv
-    return total
 
 
 def weighted_q1_nav(
@@ -118,15 +110,23 @@ def weighted_q1_nav(
     nav = 1.0
     idx: list[pd.Period] = [m0 - 1]
     vals: list[float] = [1.0]
+    label = _lam_label(lam)
+    misses: list[tuple[str, str, str]] = []
     for t in months:
         if prev:  # weights set at close of t-1 earn month t
-            nav *= 1.0 + _gross(prev, returns_panel.loc[t])
+            nav *= 1.0 + gross_return(
+                prev, returns_panel.loc[t], period=t, label=label, misses=misses
+            )
         # rebalance at close of t: holdings[t] held over t+1, its conviction
         target = additive_tilt(holdings.get(str(t), {}).get("Q1", []), _conv_at(lookup, t + 1), lam)
-        nav *= 1.0 - commission_per_side * _turnover(prev, target)
-        prev = target
+        # A month without holdings is a hole in the data, not a decision to go to
+        # cash: hold the previous weights, like the backtest.
+        if target:
+            nav *= 1.0 - commission_per_side * turnover(prev, target)
+            prev = target
         idx.append(t)
         vals.append(nav)
+    warn_missing_returns(misses, label=label)
     return pd.Series(vals, index=pd.PeriodIndex(idx, freq="M"), dtype=float)
 
 

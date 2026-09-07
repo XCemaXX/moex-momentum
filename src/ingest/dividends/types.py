@@ -37,6 +37,6 @@ SOURCE_PRIORITY: dict[str, int] = {
 }
 
 # Conflict-resolution actions in `_conflicts_resolved.json`.
-# `ignore` does NOT modify JSONL — it silences ymconflict-flagging in cascade
+# `ignore` does NOT modify the file — it silences conflict-flagging in cascade
 # dry-run for verified forever-conflicts (Bucket 1 patterns).
 CONFLICT_ACTIONS = frozenset({"replace", "drop", "augment", "ignore"})

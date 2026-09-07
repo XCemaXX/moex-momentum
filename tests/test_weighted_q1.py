@@ -71,6 +71,20 @@ def test_weighted_nav_applies_conviction_tilt() -> None:
     assert nav.loc[pd.Period("2024-01", "M")] == pytest.approx(1.1375)
 
 
+def test_month_without_holdings_holds_instead_of_selling() -> None:
+    """A hole in `holdings/` is a data gap, not a move to cash — no exit cost."""
+    holdings = {"2023-12": {"Q1": ["A"]}, "2024-02": {"Q1": ["A"]}}  # 2024-01 missing
+    returns = pd.DataFrame(
+        {"A": [0.10, 0.20]}, index=pd.PeriodIndex(["2024-01", "2024-02"], freq="M")
+    ).astype(float)
+    nav = weighted_q1_nav(
+        holdings, returns, [], 0.0, commission_per_side=0.5, start=pd.Period("2024-01", "M")
+    )
+    # Held through the gap: 1.10 in Jan, 1.32 in Feb, and the Feb rebalance is
+    # target-to-target so it costs nothing.
+    assert nav.loc[pd.Period("2024-02", "M")] == pytest.approx(1.32)
+
+
 def test_build_mages_table_two_columns() -> None:
     holdings = {"2023-12": {"Q1": ["A", "B", "D"]}, "2024-01": {"Q1": ["A", "C"]}}
     shares = [

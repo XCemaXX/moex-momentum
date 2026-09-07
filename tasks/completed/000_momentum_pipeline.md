@@ -11,6 +11,11 @@
    - Корзина строится **на каждый месяц t** заново.
    - Условие включения: тикер имеет ≥ 13 месячных закрытий непрерывно, заканчивающихся в месяце t (включительно). Это даёт 12 месячных доходностей: 11 для r(12-1)/r(6-1) с skip-month + последняя для σ(12). Без 13 точек curve-fit формула не считается → тикер исключён из универса этого месяца.
    - **Никакого top-N по обороту, никакого порога ликвидности.**
+     > Отменено: `UNIVERSE_TOP_N_LIQUID = 100` — универс это 100 самых ликвидных
+     > имён месяца по медианному обороту (`src/momentum/universe.py`).
+   > Отменено (`task 037`, `task 052`): доски объединяются, а не выбирается первая
+   > непустая — union строк по дате с приоритетным дедупом, odd-lot доски (SMAL)
+   > ранжируются последними (`src/ingest/prices.py`).
    - Дефолт: только режим `TQBR` (главный стакан). Если для запрошенного диапазона TQBR-ответ пустой, допустим **fallback**: берём первый доступный board из `iss/securities/{TICKER}.json` `boards`-списка, **громко логируем** (`WARN: TICKER fell back to {BOARD} for {DATE_RANGE}`). На практике это в основном касается раннего периода (до миграции тикеров на TQBR в ~2013–2014), но без жёсткого date guard — fallback срабатывает в любом случае пустого TQBR.
    - Облигации, ОФЗ, ETF/БПИФ — НЕ участвуют в моментум-расчёте. Они нужны только будущей фиче «индекс магов» (см. `task 002`).
 3. **Данные.** Endpoints зафиксированы в `agent_context/data_sources.md` после фазы 2:
@@ -22,7 +27,8 @@
    - Ребрендинги (technical): `/iss/history/.../shares/securities/changeover.json` — 637 записей с 2003, auto-seed.
    - Manual override: `data/tickers_manual.json` для редомициляций (YNDX→YDEX и т.п., 5-10 кейсов) и bonus issues (BELU 2024-08-20). Обязательное поле `reason`.
    - **Текущий `raw_sources/Российские_акции_*.csv` НЕ используется в production-pipeline.** Только для regression-валидации, **лежит на месте без копирования**.
-4. **Формат хранения.** Plain-text JSONL per-ticker, одна запись = одно наблюдение (день для котировок, событие для corporate actions). Канонические имена тикеров и алиасы — в `data/tickers.json`. Markdown / HTML препревью — build-артефакты, генерируются и в gitignore.
+4. **Формат хранения.** _Отменено (`task 014`, `task 039`): хранилище CSV, не JSONL._
+   _JSONL остался только у `data/tickers_unavailable.jsonl`._ Plain-text JSONL per-ticker, одна запись = одно наблюдение (день для котировок, событие для corporate actions). Канонические имена тикеров и алиасы — в `data/tickers.json`. Markdown / HTML препревью — build-артефакты, генерируются и в gitignore.
 5. **Формула момента.** Реализованы обе:
    - Curve-fit (default): `(0.9·r(12-1) + 0.1·r(6-1)) / СКО(12)` с константами в `config.py`.
    - Simple: `r(12-1) / СКО(12)`.
@@ -67,6 +73,8 @@
 - `scripts/setup.sh`: проверяет, что uv установлен (если нет — инструкция, а не auto-install); `uv sync --frozen`; создаёт `data/`, `docs/pages/` если их нет. **Linux/WSL only** (документировать в README; macOS работает, Windows-native — нет).
 - **Логирование**: stdlib `logging`, конфиг в `src/momentum/cli.py`. Формат key=value на stderr, уровни INFO (default) / DEBUG (`--verbose`). Ingest-операции логируют `(ticker, rows_added, source, duration_ms)`. Detector подозрений → WARN. Fallback на не-TQBR board → WARN.
 - **Atomic-write для JSONL**: общий хелпер `src/momentum/io/atomic.py` — все ingest-фазы пишут через `<file>.jsonl.tmp` + `os.replace`. **Ни одного half-written файла после network-blip.** Concurrent CLI-инвокации на одном файле не поддерживаются (single-process); в README одна строка про это.
+- _Отменено (`task 014`): коммитится только сырьё; `data/momentum/` в `.gitignore`_
+  _и пересобирается из него. Эталон бэктеста живёт в `tests/reference/`._
 - `.gitignore`: `__pycache__`, `.venv`, `*.egg-info`, `docs/pages/_preview/`, `.coverage`, `htmlcov/`. **Всё под `data/` коммитится** (raw + computed) — full reproducibility, diff’ы между месяцами видны на review (locked decision: см. фазу 11).
 - `uv lock` → коммит `uv.lock`.
 - Структура `src/momentum/`, `tests/`, `data/`, `docs/`, `agent_context/` (этот PLAN), `.claude/skills/`.

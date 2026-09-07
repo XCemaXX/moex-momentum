@@ -171,7 +171,7 @@ def detect_suspicious(
     return_threshold: float = SUSPICIOUS_RETURN_THRESHOLD,
     min_daily_value: float = MIN_DAILY_VALUE_FOR_DETECT,
 ) -> list[Suspicion]:
-    """Run detector for one ticker. Inputs are JSONL records."""
+    """Run detector for one ticker. Inputs are stored price/dividend records."""
     df = _prices_to_df(prices)
     if len(df) < 2:
         return []

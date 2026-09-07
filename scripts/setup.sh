@@ -2,7 +2,7 @@
 # Bootstrap for a clean clone. Linux/WSL only.
 # 1. Creates .venv via stdlib python -m venv (no pre-installed uv required).
 # 2. Installs uv INSIDE .venv (isolation, see CLAUDE.md).
-# 3. Runs uv sync --frozen.
+# 3. Runs uv sync --locked.
 
 set -euo pipefail
 
@@ -28,7 +28,10 @@ if [ ! -x ".venv/bin/uv" ]; then
 fi
 
 echo "Syncing dependencies"
-.venv/bin/uv sync --frozen 2>/dev/null || .venv/bin/uv sync
+# `--locked` rather than `--frozen`: it verifies uv.lock still matches
+# pyproject.toml. The old fallback swallowed the error and re-resolved, which
+# rewrote uv.lock in a fresh clone — the opposite of what a setup script should do.
+.venv/bin/uv sync --locked
 
 mkdir -p data/{prices_iss,dividends,splits,indices,momentum} docs/pages
 

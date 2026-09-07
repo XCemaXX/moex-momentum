@@ -18,12 +18,14 @@ Equal-weight throughout. NAV/turnover mechanics mirror `backtest` exactly.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
 import pandas as pd
 
-from momentum.backtest import gross_return, turnover, warn_missing_returns
+from config import COMMISSION_PER_SIDE
+from momentum.nav import gross_return, turnover, warn_missing_returns
 from momentum.signals import Signal
-from momentum.universe import universe_at
+from momentum.universe import load_panel, universe_at
 from tickers import TickersDict
 
 Panels = tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]
@@ -117,7 +119,7 @@ def nav_from_selections(
     for t in months:
         if prev_w:
             nav *= 1.0 + gross_return(
-                prev_w, returns_panel.loc[t], period=t, quartile=label, misses=misses
+                prev_w, returns_panel.loc[t], period=t, label=label, misses=misses
             )
         sel = selections.get(t)
         if sel:
@@ -133,6 +135,38 @@ def nav_from_selections(
     warn_missing_returns(misses, label=label)
     nav_series = pd.Series(vals, index=pd.PeriodIndex(idx, freq="M"), name=label)
     return FanCurve(nav=nav_series, rebalances=rebalances)
+
+
+def top_k_nav_from_scores(
+    scores: dict[str, dict[str, float]],
+    monthly_dir: Path,
+    *,
+    k: int,
+    commission: float = COMMISSION_PER_SIDE,
+) -> pd.Series | None:
+    """NAV of the top-K-by-score concentration strategy (task 026).
+
+    Driven by `scores.csv`, which `compute backtest` always writes, so the site
+    can draw this curve without the research-only concentration CSV (task 026
+    decision). Reproduces the `k{K}` column of `topk_fan` — same universe,
+    signal and tie-break.
+    """
+    if not scores:
+        return None
+    returns_panel = load_panel(monthly_dir)[0]
+    if returns_panel.empty:
+        return None
+    selections = {pd.Period(m, "M"): score_ranking(pd.Series(per))[:k] for m, per in scores.items()}
+    # The earliest scored month forms the portfolio; earning starts the month
+    # after, so it becomes the seed rather than the first iterated month.
+    start = min(selections) + 1
+    months = returns_panel.index[returns_panel.index >= start]
+    if len(months) == 0:
+        return None
+    curve = nav_from_selections(
+        returns_panel, months, selections, commission=commission, label=f"top{k}"
+    )
+    return curve.nav
 
 
 def topk_fan(
@@ -192,6 +226,7 @@ __all__ = [
     "monthly_rankings",
     "nav_from_selections",
     "score_ranking",
+    "top_k_nav_from_scores",
     "topk_fan",
     "turnover_stats",
 ]

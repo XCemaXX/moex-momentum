@@ -13,10 +13,14 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - name: Install uv
-        run: pip install uv
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.9"
+          enable-cache: true
       - name: Sync deps
-        run: uv sync --frozen
+        # `--locked` fails when uv.lock does not match pyproject.toml. `--frozen`
+        # only installs the lock as-is, so a forgotten relock would pass silently.
+        run: uv sync --locked
       - name: ruff format check
         if: ${{ !cancelled() }}
         run: uv run ruff format --check

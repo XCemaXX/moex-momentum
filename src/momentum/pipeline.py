@@ -15,6 +15,14 @@ Two modes:
 - `--from-scratch`: same recompute, hash mismatch is silently accepted and the
   new hash overwrites the baseline. Used after backfill batches.
 
+Scope of that gate: it is a local convenience, not a safety net. The baseline
+lives inside gitignored `data/momentum/`, so a fresh clone and CI have no hashes
+and self-bless on the first run; the monthly runbook prescribes `--from-scratch`
+anyway; and the tail — the window that changes most — is outside it by
+construction. The real guard on published numbers is
+`tests/test_regression_reference.py`, which recomputes everything from committed
+raw and compares all months against `tests/reference/` at 1e-12.
+
 The hash compares records bytes (CSV-serialized via the same schema as the
 output file), so the hash is stable across runs as long as the rows match.
 """
@@ -63,9 +71,9 @@ def _pre_tail_hash(records: list[dict[str, object]], tail_months: int) -> str:
 
 
 class IncrementalDriftError(ValueError):
-    """Pre-tail hash diverged from the committed baseline. Operator should
-    inspect inputs (new split or pre-tail dividend?) and, if the drift is
-    expected, rerun the offending tickers with `--from-scratch` to update
+    """Pre-tail hash diverged from the local baseline. Operator should inspect
+    inputs (new split or pre-tail dividend?) and, if the drift is expected,
+    rerun the offending tickers with `--from-scratch` to update
     `_baseline_hashes.json`."""
 
 
@@ -113,6 +121,23 @@ def _maybe_nan(v: object) -> float | None:
     return f
 
 
+def derive_as_of(prices_iss_dir: Path) -> pd.Timestamp | None:
+    """Cutoff for the in-progress month, taken from the data instead of the clock.
+
+    One value for the whole run, never per ticker: a delisted ticker's final
+    month is partial by definition, so a per-ticker cutoff would strip the last
+    month off roughly 700 of them and silently reshape the universe.
+    """
+    last: pd.Timestamp | None = None
+    for f in sorted(prices_iss_dir.glob("*.csv")):
+        rows = read_records(f, casts=PRICE_CASTS)
+        if not rows:
+            continue
+        d = pd.Timestamp(str(rows[-1]["date"]))
+        last = d if last is None else max(last, d)
+    return None if last is None else last + pd.Timedelta(days=1)
+
+
 def compute_one(
     ticker: str,
     *,
@@ -124,6 +149,7 @@ def compute_one(
     from_scratch: bool,
     tax: float = DIVIDEND_TAX,
     tail_months: int = INCREMENTAL_RECOMPUTE_MONTHS,
+    as_of: pd.Timestamp | None = None,
 ) -> MonthlyMeta:
     prices = read_records(prices_iss_dir / f"{ticker}.csv", casts=PRICE_CASTS)
     if not prices:
@@ -135,7 +161,9 @@ def compute_one(
     if prices_adj_df.empty:
         return MonthlyMeta(rows=0, first_month=None, last_month=None)
     dividends_adj = adjust_dividend_amounts(dividends, splits, ticker=ticker)
-    monthly = monthly_total_returns(prices_adj_df, dividends_adj, tax=tax, ticker=ticker)
+    monthly = monthly_total_returns(
+        prices_adj_df, dividends_adj, tax=tax, ticker=ticker, as_of=as_of
+    )
     records = _df_to_records(monthly)
 
     new_hash = _pre_tail_hash(records, tail_months)
@@ -148,7 +176,7 @@ def compute_one(
             LOG.debug("baseline updated for %s (from-scratch)", ticker)
         else:
             raise IncrementalDriftError(
-                f"drift detected for {ticker}: pre-tail rows differ from committed "
+                f"drift detected for {ticker}: pre-tail rows differ from the local "
                 f"baseline. Likely a new split or pre-tail dividend lands in the "
                 f"older history. Inspect data/splits/{ticker}.csv and "
                 f"data/dividends/{ticker}.csv, then rerun with --from-scratch "
@@ -172,8 +200,17 @@ def compute_all(
     ticker_filter: list[str] | None = None,
     from_scratch: bool = False,
     tax: float = DIVIDEND_TAX,
+    as_of: pd.Timestamp | None = None,
 ) -> dict[str, MonthlyMeta]:
     output_dir.mkdir(parents=True, exist_ok=True)
+    source = "explicit"
+    if as_of is None:
+        as_of = derive_as_of(prices_iss_dir)
+        source = "from the price tree"
+    if as_of is not None:
+        LOG.info(
+            "as_of=%s (%s) — the month it falls inside stays unpublished", as_of.date(), source
+        )
     hashes_path = (
         baseline_hashes_path
         if baseline_hashes_path is not None
@@ -199,6 +236,7 @@ def compute_all(
                 baseline_hashes=baseline_hashes,
                 from_scratch=from_scratch,
                 tax=tax,
+                as_of=as_of,
             )
         except IncrementalDriftError as exc:
             LOG.error("%s", exc)

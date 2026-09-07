@@ -7,6 +7,7 @@ import logging
 from datetime import date, timedelta
 from pathlib import Path
 
+import pandas as pd
 import pytest
 
 from config import MASS_DRIFT_THRESHOLD
@@ -15,6 +16,7 @@ from momentum.pipeline import (
     _pre_tail_hash,
     _records_to_csv_bytes,
     compute_all,
+    derive_as_of,
     load_baseline_hashes,
     save_baseline_hashes,
 )
@@ -250,3 +252,18 @@ def test_records_to_csv_bytes_matches_disk_write(tmp_path: Path) -> None:
     p = tmp_path / "out.csv"
     write_records_atomic(p, recs, fieldnames=MONTHLY_FIELDS)
     assert p.read_bytes() == _records_to_csv_bytes(recs)
+
+
+def test_derive_as_of_is_the_day_after_the_last_bar_in_the_tree(tmp_path: Path) -> None:
+    """One value for the whole run, taken from the newest ticker — a per-ticker
+    cutoff would strip the final month off every delisted name."""
+    d = tmp_path / "p"
+    _write_prices(d / "OLD.csv", [{"date": "2018-06-14", "close": 1.0, "value": 1.0, "volume": 1}])
+    _write_prices(d / "NEW.csv", [{"date": "2026-09-04", "close": 1.0, "value": 1.0, "volume": 1}])
+    assert derive_as_of(d) == pd.Timestamp("2026-09-05")
+
+
+def test_derive_as_of_on_an_empty_tree_is_none(tmp_path: Path) -> None:
+    d = tmp_path / "p"
+    d.mkdir(parents=True)
+    assert derive_as_of(d) is None

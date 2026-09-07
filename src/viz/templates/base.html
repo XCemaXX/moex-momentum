@@ -18,6 +18,11 @@
   }
   nav.site-nav a:hover { background: #eaeaea; }
   nav.site-nav a.current { color: #333; font-weight: 600; background: #e8e8e8; }
+  footer.site-footer {
+    border-top: 1px solid #e0e0e0; background: #fafafa;
+    padding: 0.9em 1.2em; margin-top: 2em;
+    font-size: 13px; color: #666; line-height: 1.5;
+  }
   main { padding: 1em 1.2em; max-width: 1100px; margin: 0 auto; }
   main.full { max-width: none; padding: 0; }
   h1 { font-size: 22px; margin: 0.4em 0 0.6em; }
@@ -38,5 +43,10 @@
 {% endfor %}
 </nav>
 {% block body %}{% endblock %}
+<footer class="site-footer">
+  Исследовательский материал, не инвестиционная рекомендация. Составы квартилей — результат
+  расчёта по описанной <a href="methodology.html">методике</a> на исторических данных; прошлая
+  доходность не предсказывает будущую. Издержки учтены не полностью — см. <a href="methodology.html#ограничения">Ограничения</a>.
+</footer>
 </body>
 </html>

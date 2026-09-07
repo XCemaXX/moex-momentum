@@ -11,8 +11,9 @@ from typing import Any
 import pytest
 
 from ingest.dividends.conflicts import (
+    _has_near_duplicate,
     _load_conflicts,
-    apply_conflicts_to_jsonl,
+    apply_conflicts_to_file,
     apply_conflicts_to_universe,
 )
 from ingest.dividends.dohod import DohodFetcher
@@ -398,12 +399,12 @@ def test_apply_replace_idempotent(tmp_path: Path) -> None:
             "reason": "ISS stale half-figure",
         }
     ]
-    r1 = apply_conflicts_to_jsonl(path, conflicts)
+    r1 = apply_conflicts_to_file(path, conflicts)
     assert r1.applied == 1
     recs = read_records(path, casts=DIV_CASTS)
     assert any(r["amount"] == 10.28 and r["source"] == "skill_fill_dohod" for r in recs)
     assert not any(r["amount"] == 5.14 for r in recs)
-    r2 = apply_conflicts_to_jsonl(path, conflicts)
+    r2 = apply_conflicts_to_file(path, conflicts)
     assert r2.applied == 0
     assert r2.skipped_no_match == 1
 
@@ -442,7 +443,7 @@ def test_apply_drop(tmp_path: Path) -> None:
             "reason": "Stale pre-approval recommendation",
         }
     ]
-    r = apply_conflicts_to_jsonl(path, conflicts)
+    r = apply_conflicts_to_file(path, conflicts)
     assert r.applied == 1
     recs = read_records(path, casts=DIV_CASTS)
     assert len(recs) == 2
@@ -465,7 +466,7 @@ def test_apply_conflicts_skips_other_tickers(tmp_path: Path) -> None:
             "reason": "irrelevant",
         }
     ]
-    r = apply_conflicts_to_jsonl(path, conflicts)
+    r = apply_conflicts_to_file(path, conflicts)
     assert r.applied == 0
 
 
@@ -883,3 +884,33 @@ def test_fetcher_cache_leaves_no_partial_file(tmp_path: Path) -> None:
     f.fetch("SBER")
     assert not list(tmp_path.rglob("*.tmp"))
     assert (tmp_path / "smartlab" / "SBER.html").exists()
+
+
+def _row_for_dup(reg: str, amount: float, currency: str = "RUB") -> dict[str, Any]:
+    return {"registry_close": reg, "amount": amount, "currency": currency, "source": "s"}
+
+
+def test_near_duplicate_matches_within_both_tolerances() -> None:
+    rows = [_row_for_dup("2024-05-10", 10.0)]
+    assert _has_near_duplicate(rows, _row_for_dup("2024-05-15", 10.05))  # 5d, 0.5%
+
+
+def test_near_duplicate_rejects_a_distant_date() -> None:
+    rows = [_row_for_dup("2024-05-10", 10.0)]
+    assert not _has_near_duplicate(rows, _row_for_dup("2024-05-18", 10.0))  # 8d > 7d
+
+
+def test_near_duplicate_rejects_a_different_amount() -> None:
+    rows = [_row_for_dup("2024-05-10", 10.0)]
+    assert not _has_near_duplicate(rows, _row_for_dup("2024-05-11", 10.5))  # 5% > 1%
+
+
+def test_near_duplicate_ignores_another_currency() -> None:
+    """A USD and a RUB payout on one date are two different records, not a dup."""
+    rows = [_row_for_dup("2024-05-10", 10.0, "USD")]
+    assert not _has_near_duplicate(rows, _row_for_dup("2024-05-10", 10.0, "RUB"))
+
+
+def test_near_duplicate_treats_a_missing_currency_as_rub() -> None:
+    rows = [{"registry_close": "2024-05-10", "amount": 10.0, "source": "s"}]
+    assert _has_near_duplicate(rows, _row_for_dup("2024-05-10", 10.0, "RUB"))
