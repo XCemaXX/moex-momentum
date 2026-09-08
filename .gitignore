@@ -18,7 +18,7 @@ _site/
 #   .fill_cache/smartlab/ — smart-lab.ru HTML
 # NOT regenerable — the only surviving copy of a dead source:
 #   .fill_cache/yahoo/    — Yahoo dropped Russian prices in 2022
-#   .fill_cache/tbank/    — read back by scripts/backfill/cascade_merge_dividends.py,
-#                           which is wired to never re-fetch
+# Regenerable only by hand, outside the CLI:
+#   .fill_cache/tbank/    — scripts/backfill/fetch_tbank_dividends.py --refresh
 .fill_cache/
 *.tmp

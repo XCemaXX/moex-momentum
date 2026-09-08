@@ -7,6 +7,10 @@ ticker, overwriting a snapshot only on a successful fetch that carries a
 dividends payload — a network error, 404, or empty page leaves the existing
 snapshot intact. Failures summarised in `.fill_cache/tbank/_failures.json`.
 
+Delisted names are skipped: tbank serves listed instruments only, and a name
+without prices after delisting can no longer change a total return. `--full`
+queries them anyway — use it if tbank's catalogue is suspected to have grown.
+
 Rate limit: 2 req/s. Single attempt per ticker.
 """
 
@@ -34,6 +38,24 @@ FAILURES_PATH = CACHE_DIR / "_failures.json"
 
 SLEEP_BETWEEN = 0.5  # seconds → 2 req/s
 PROGRESS_EVERY = 50
+# A skip is indistinguishable from a cache hit in the summary line, so a
+# tickers.json that lost its boards would look like a fast clean run.
+MIN_LIVE_TICKERS = 100
+
+
+def _targets(*, full: bool) -> tuple[list[str], int]:
+    """Tickers to query, and how many delisted ones were dropped."""
+    universe = t_mod.load(TICKERS_FILE)
+    tickers = sorted(universe)
+    if full:
+        return tickers, 0
+    live = [tk for tk in tickers if not universe[tk].get("delisted_after")]
+    if len(live) < MIN_LIVE_TICKERS:
+        raise SystemExit(
+            f"only {len(live)} of {len(tickers)} tickers look listed — "
+            "refresh data/tickers.json, or pass --full"
+        )
+    return live, len(tickers) - len(live)
 
 
 def main() -> int:
@@ -43,9 +65,14 @@ def main() -> int:
         action="store_true",
         help="re-fetch even if cached; overwrite a snapshot only on success",
     )
+    ap.add_argument(
+        "--full",
+        action="store_true",
+        help="query delisted tickers too (tbank has no page for them)",
+    )
     args = ap.parse_args()
 
-    tickers = sorted(t_mod.load(TICKERS_FILE).keys())
+    tickers, n_delisted = _targets(full=args.full)
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
     client = httpx.Client(
@@ -113,7 +140,7 @@ def main() -> int:
         )
 
     print(
-        f"\nDONE: ok={n_ok} skip(cached)={n_skip} 404={n_404} "
+        f"\nDONE: ok={n_ok} skip(cached)={n_skip} skip(delisted)={n_delisted} 404={n_404} "
         f"no_payload={n_no_payload} net_err={n_net} total_failures={len(failures)}"
     )
     print(f"failures → {FAILURES_PATH}")

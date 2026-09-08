@@ -86,11 +86,12 @@ dividends.
 
 1. Refresh the tbank cache first (yahoo is a frozen snapshot — leave it):
    ```bash
-   python scripts/backfill/fetch_tbank_dividends.py --refresh   # ~10 min, 2 req/s
+   python scripts/backfill/fetch_tbank_dividends.py --refresh   # ~4 min, 2 req/s
    ```
    Run in the background and monitor. Overwrites a snapshot only on a successful
-   fetch; a network miss or 404 keeps the old one. Many 404s are normal (tbank
-   covers a subset of names). On mass `net_err`, stop and escalate.
+   fetch; a network miss or 404 keeps the old one. Delisted names are skipped —
+   tbank has no page for them; `--full` overrides. A handful of 404s among the
+   listed names is normal. On mass `net_err`, stop and escalate.
 2. Windowed dry-run:
    ```bash
    python scripts/backfill/cascade_merge_dividends.py --sources tbank --months 6

@@ -32,6 +32,7 @@ ROOT = Path(__file__).resolve().parents[2]  # scripts/backfill/ → repo root
 sys.path.insert(0, str(ROOT / "src"))
 
 import tickers as t_mod  # noqa: E402
+from ingest.dividends.fetchers import DividendFetcher  # noqa: E402
 from ingest.dividends.fill import fill_dividends  # noqa: E402
 from ingest.dividends.merge import DATE_TOL_DAYS  # noqa: E402
 from ingest.dividends.tbank import TbankFetcher  # noqa: E402
@@ -133,10 +134,13 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
     tb_real = TbankFetcher(_no_fetch, cache_dir=CACHE_ROOT)
 
     class _Filtered:
-        def __init__(self, inner: Any, blacklist: set[str]) -> None:
+        # Must mirror every DividendFetcher attribute: fill_dividends reads them
+        # off the object it is handed, not off the wrapped one.
+        def __init__(self, inner: DividendFetcher, blacklist: set[str]) -> None:
             self._inner = inner
             self._blacklist = blacklist
             self.source_tag = inner.source_tag
+            self.restates_splits = inner.restates_splits
 
         def fetch(self, ticker: str) -> list[dict[str, Any]]:
             tk = ticker.upper()
@@ -144,10 +148,10 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
                 return []
             return list(self._inner.fetch(ticker))
 
-    yf: Any = _Filtered(yf_real, yahoo_blacklist)
-    tb: Any = _Filtered(tb_real, tbank_blacklist)
-
-    fetcher_map = {"yahoo": yf, "tbank": tb}
+    fetcher_map: dict[str, DividendFetcher] = {
+        "yahoo": _Filtered(yf_real, yahoo_blacklist),
+        "tbank": _Filtered(tb_real, tbank_blacklist),
+    }
     source_order = [s.strip() for s in args.sources.split(",") if s.strip()]
     unknown = [s for s in source_order if s not in fetcher_map]
     if unknown:
@@ -163,7 +167,7 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
         existing = read_records(DIV_DIR / f"{tk}.csv", casts=DIV_CASTS)
         result = fill_dividends(
             tk,
-            fetchers=fetchers,  # type: ignore[arg-type]
+            fetchers=fetchers,
             tickers_dict=tickers_dict,
             tickers_manual=manual,
             prices_dir=PRICES_DIR,
