@@ -4928,5 +4928,71 @@
     },
     "reason": "Россети Кубань FY2022. Issuer's own material-fact filing (rosseti-kuban.ru, file_64b0f5acc460a6): «2.5. Размер выплаченных доходов… в расчете на одну ценную бумагу эмитента: 2,0022935 руб.… 2.9. Дата… 30.06.2023». smart-lab and investfunds give 2.2904 from a stale share count; the count at the record date was 382,811,011.",
     "resolved_at": "2026-09-06"
+  },
+  {
+    "ticker": "GEMA",
+    "registry_close": "2026-09-28",
+    "action": "augment",
+    "add": {
+      "amount": 2.74,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "ММЦБ H1 2026, 50.142 mln RUB total. smart-lab, investmint, akm.ru («начислено 2.74 руб.») and the MOEX register export agree on date and amount. dohod has no GEMA page; tbank does not serve GEMA.",
+    "resolved_at": "2026-10-01"
+  },
+  {
+    "ticker": "LVHK",
+    "registry_close": "2026-06-15",
+    "action": "augment",
+    "add": {
+      "amount": 0.16,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Левенгук FY2025. Issuer filing «Начисленные доходы» 05.06.2026 (disclosure.1prime.ru, guid 418671B9-F64E-4F1D-A9DD-F0FD32C0F473): AGM 04.06.2026, 8 470 400 RUB total, «0,16 рублей» per share, record date 15.06.2026. investfunds agrees. dohod and smart-lab carry the board recommendation 0.1889, which the AGM did not adopt.",
+    "resolved_at": "2026-10-01"
+  },
+  {
+    "ticker": "LVHK",
+    "registry_close": "2026-06-15",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_dohod"
+    },
+    "reason": "dohod lists the board recommendation 0.1889; the AGM approved 0.16 (issuer filing, see the LVHK augment).",
+    "verified_at": "2026-10-01"
+  },
+  {
+    "ticker": "LVHK",
+    "registry_close": "2026-06-15",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_smartlab"
+    },
+    "reason": "smart-lab lists the board recommendation 0.189; the AGM approved 0.16 (issuer filing, see the LVHK augment).",
+    "verified_at": "2026-10-01"
+  },
+  {
+    "ticker": "SVETP",
+    "registry_close": "2026-06-01",
+    "action": "drop",
+    "match": {
+      "amount": 0.1716,
+      "source": "skill_fill_smartlab"
+    },
+    "reason": "Phantom. FY2025 board recommendation (Vedomosti 26.05.2026, record date 08.07.2026) never declared: AGM 26.06.2026 was declared failed (несостоявшимся). investmint: «Дивидендов за 2025 год не будет», record date cancelled. smart-lab still lists it, unmarked, under a wrong date. Kept as drop, not ignore: ignore does not stop fill from re-adding it as new.",
+    "resolved_at": "2026-10-01"
+  },
+  {
+    "ticker": "SVET",
+    "registry_close": "2026-06-01",
+    "action": "drop",
+    "match": {
+      "amount": 0.0448,
+      "source": "skill_fill_smartlab"
+    },
+    "reason": "Same never-declared FY2025 dividend as SVETP 2026-06-01. Not stored now; this drop removes it if a fill run re-adds it from smart-lab.",
+    "resolved_at": "2026-10-01"
   }
 ]

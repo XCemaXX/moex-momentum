@@ -1,83 +1,122 @@
 # Reference: dividend reconciliation
 
-Runs for scope `dividends` and `all`. ISS lags real payouts by months, so each
-cycle a few recent dividends are missing and must be closed from other sources.
+Runs for scope `dividends` and `all`. MOEX withdrew the ISS dividends endpoint in
+2025-10 (`task 054`), so nothing arrives on its own: every payout is found via the
+MOEX register export and closed from dohod / smart-lab / tbank / issuer filings.
 This is the sharp-edged part of the update — go slow.
 
 Assumes `data/tickers.json` is current. If running `dividends`-only and names may
 have changed, run `momentum tickers refresh --force-refresh` first.
 
-## Step 1 — ISS dividends + curated fixes
+## Step 1 — ISS probe + curated fixes
 
 ```bash
-momentum ingest dividends --force-refresh --months 3   # trailing 3-month merge
-                                                        # window; wider re-introduces
-                                                        # ISS near-duplicates
+momentum ingest dividends --force-refresh --months 3   # EXPECTED to exit 1 (task 054)
 momentum corporate apply-conflicts                      # apply _conflicts_resolved.json
 ```
 
-`ingest dividends` regenerates `data/dividends/_gaps.json` (per-(ticker, year)).
-"no_record_for_year" ≠ "ISS is late" — many names simply do not pay that year;
-only dohod/disclosure tells you what is actually missing.
+`ingest dividends` must print `ISS returned no dividends block for any of N tickers`
+and exit 1. That is the designed loud failure, not a reason to stop the run — it is
+kept only to notice if the endpoint ever comes back. If it suddenly fetches rows,
+stop and tell the user.
 
-## Step 2 — Recent lagging payouts (dohod, live)
+`_gaps.json` is no longer a useful to-do list: with ISS gone it cannot tell a silent
+source from a share that stopped paying.
 
-1. Cross the 2025–2026 gaps with the liquid universe (proxy: the latest month of
-   `data/momentum/curve_fit/scores.csv`, 100 names) to get candidate tickers.
-2. `momentum ingest fill-dividends -t A -t B ... --dry-run --force-refresh` on those
-   names. **`--force-refresh` is mandatory on a monthly run** — the dohod cache has no
-   TTL, so without it you read last month's snapshot and every payout declared since
-   is invisible. Real run (2026-08): the stale cache surfaced 2 candidates, the
-   refreshed one surfaced 24 — the whole July wave.
-3. The CLI prints only counts. To judge the **actual record dates** (which is what
-   matters, not `new=`), call the driver directly:
+## Step 1b — Which registers closed (MOEX export)
+
+```bash
+momentum corporate check-registers --since <first day of last month>
+```
+
+Lists register closings MOEX recorded that we have no payout for.
+
+**Blind spot (`task 056`):** it keeps only `закрытие реестра` rows and drops
+`закрытие реестра (рекомендуемая)` even after the date has passed. MOEX confirms
+closings late — on 2026-10-01 all five September closings and LVHK 2026-06-15 were
+still "рекомендуемая", and the report said `0 of 1048`. Until the task is fixed,
+list the past-dated recommended rows by hand:
+
+```bash
+python -c "
+import httpx,csv,io,datetime
+t = httpx.get('https://web.moex.com/moex-web-icdb-api/api/v1/export/register-closing-dates/csv?language=1&separator=1', timeout=60).content.decode('cp1251')
+today = datetime.date.today().isoformat()
+for r in csv.DictReader(io.StringIO(t)):
+    m,d,y = r['Дата события'][:10].split('/'); iso=f'{y}-{m}-{d}'
+    if 'рекоменд' in r['Тип события'] and '2025-01-01' <= iso <= today: print(iso, r['Эмитент'][:90])" | sort
+```
+
+For each name, check its CSV: a row within a few days of the date means covered.
+
+## Step 2 — Fill recent payouts (dohod + smart-lab, live)
+
+1. Candidates = Step 1b output ∪ past-dated recommended rows ∪ the liquid universe
+   (latest month of `data/momentum/curve_fit/scores.csv`, 100 names). The register
+   export also misses whole payouts (`task 054` found 10), hence the universe sweep.
+2. `momentum ingest fill-dividends -t A -t B ... --dry-run --force-refresh`.
+   Default `--sources dohod,smartlab`. **`--force-refresh` is mandatory** — the
+   cache has no TTL, so without it every payout declared since last month is
+   invisible.
+3. The CLI prints only counts, and most `new=` are old history (see the footgun
+   below). To see the actual record dates, call the driver from the fresh cache:
    ```bash
    PYTHONPATH=src .venv/bin/python -c "
    import pathlib; import tickers as t
    from ingest.dividends.dohod import DohodFetcher
+   from ingest.dividends.smartlab import SmartLabFetcher
    from ingest.dividends.fill import fill_dividends
-   f = DohodFetcher(lambda u: None, cache_dir=pathlib.Path('.fill_cache'))
-   r = fill_dividends('VTBR', fetchers=[f],
-       tickers_dict=t.load(pathlib.Path('data/tickers.json')),
-       tickers_manual=t.load_manual(pathlib.Path('data/tickers_manual.json')),
-       prices_dir=pathlib.Path('data/prices_iss'),
-       dividends_dir=pathlib.Path('data/dividends'))
-   print([(x['registry_close'], x['amount']) for x in r.records])"
+   def nonet(u): raise RuntimeError(u)
+   C = pathlib.Path('.fill_cache')
+   fs = [DohodFetcher(nonet, cache_dir=C), SmartLabFetcher(nonet, cache_dir=C)]
+   td = t.load(pathlib.Path('data/tickers.json')); tm = t.load_manual(pathlib.Path('data/tickers_manual.json'))
+   for n in ['DIAS', 'HEAD']:
+       r = fill_dividends(n, fetchers=fs, tickers_dict=td, tickers_manual=tm,
+           prices_dir=pathlib.Path('data/prices_iss'), dividends_dir=pathlib.Path('data/dividends'),
+           splits_dir=pathlib.Path('data/splits'))
+       print(n, [(x['registry_close'], x['amount'], x['source']) for x in r.records if x['registry_close'] >= '2026-01-01'])"
    ```
+   A `cache miss` for a ticker means that source 404'd for it (e.g. dohod has no
+   YDEX page) — check that name by hand, it is not covered.
 4. **Footgun — never bulk-apply dohod.** With no date scope it drags in dohod's
    *entire* history (dozens of records per name). Rows that restate stored payouts
-   now collapse and rows that disagree are reported as conflicts, so nothing is
-   appended silently — but dohod restates some tickers to today's share count and
-   not others, so on a split name every pre-split payout shows up as a conflict
-   with a round ×10/×100 ratio. That ratio is the diagnosis, not a disagreement.
-   For each candidate the dry-run surfaces:
+   collapse and rows that disagree are reported as conflicts, but dohod restates
+   some tickers to today's share count and not others, so on a split name every
+   pre-split payout shows up as a conflict with a round ×10/×100 ratio. That ratio
+   is the diagnosis, not a disagreement. For each candidate:
    - Keep only records dated in the current window (this year / last few months).
-   - **Verify online** — disclosure / smart-lab / dohod must agree on record date
-     and amount.
+   - **Verify approval, not just the number.** Aggregators list the board
+     *recommendation*; the AGM can cut it or fail to meet. LVHK 2026-06-15: dohod
+     and smart-lab both said 0.1889, the issuer filing said 0.16. SVET/SVETP
+     2026-06: smart-lab listed a dividend whose AGM never took place. When sources
+     disagree, or only one carries it, read the issuer's «Начисленные доходы»
+     filing (disclosure.1prime.ru / e-disclosure.ru). Pages that need JS or a login
+     can't be read with curl — ask the user to open them and paste the text.
    - Check the ticker's CSV: if the payout is already there under another
-     source/date, **skip it** (duplicate). Mind `registry_close_source`: a
-     `yahoo_ex_div` row holds an **ex-dividend** date, a `tbank_reestr` row a
-     **registry close** date — the same payout sits 1–2 days apart across the two,
-     so equal amounts a couple of days apart are one payout, not two (POSI 28.08 at
-     05-15 vs 05-17).
+     source/date, **skip it** (duplicate). A `yahoo_ex_div` row holds an
+     **ex-dividend** date, a `tbank_reestr` row a **registry close** date — equal
+     amounts 1–2 days apart are one payout (POSI 28.08 at 05-15 vs 05-17).
    - **Exclude future record dates** (> today): declared-but-unpaid dividends must
      not enter total-return until the date passes.
-5. Add each verified, past-dated, genuinely-missing payout as one `augment` to
-   `data/dividends/_conflicts_resolved.json`:
-   ```json
-   {"ticker":"<TICKER>","registry_close":"<YYYY-MM-DD>","action":"augment",
-    "add":{"amount":<amount>,"currency":"RUB","source":"skill_fill_disclosure"},
-    "reason":"<what/when + which sources agree + why ISS lacks it>",
-    "resolved_at":"<today>"}
-   ```
-   Append surgically (edit the file's tail); don't rewrite the whole array. `augment`
-   has a 7-day / 1% near-dup guard, so it will not double-count.
-6. `momentum corporate apply-conflicts`; confirm each new row landed in its CSV.
+5. Names tbank serves arrive in Step 3 — don't `augment` them here or they
+   duplicate. Record the rest in `data/dividends/_conflicts_resolved.json`, appended
+   surgically to the tail:
+   - Verified missing payout → `augment` (`source: manual_disclosure`; `reason`
+     names the sources that agree). The 7-day / 1% near-dup guard prevents
+     double-counting.
+   - Phantom (stored or offered, never declared) → `drop` with
+     `match: {amount, source}`. **Never `ignore` a phantom**: `ignore` only
+     silences conflicts, and a row we don't store reaches fill as `new` and gets
+     written (`task 057`). A `drop` is idempotent: `apply-conflicts` removes the row
+     every time a fill run brings it back.
+   - Source disagrees with a stored, verified row → `ignore` with
+     `match: {source}` and `registry_close`, so it stops being reported.
+6. `momentum corporate apply-conflicts`; confirm each change landed in its CSV.
 
-⏸ **Checkpoint:** present verified adds, skipped duplicates, and excluded
+⏸ **Checkpoint:** present verified adds, drops, skipped duplicates, and excluded
 future-dated records; get the user's nod before the cascade.
 
-## Step 3 — yahoo / tbank catalog fold-in (cascade)
+## Step 3 — tbank fold-in (cascade)
 
 `scripts/backfill/cascade_merge_dividends.py`. Cache-based, **stateless** (re-derives
 the full cache-vs-CSV diff every run) and **source-order sensitive** — so it MUST be
@@ -86,12 +125,18 @@ dividends.
 
 1. Refresh the tbank cache first (yahoo is a frozen snapshot — leave it):
    ```bash
-   python scripts/backfill/fetch_tbank_dividends.py --refresh   # ~4 min, 2 req/s
+   SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
+     python scripts/backfill/fetch_tbank_dividends.py --refresh   # ~6 min, 2 req/s
    ```
-   Run in the background and monitor. Overwrites a snapshot only on a successful
-   fetch; a network miss or 404 keeps the old one. Delisted names are skipped —
-   tbank has no page for them; `--full` overrides. A handful of 404s among the
-   listed names is normal. On mass `net_err`, stop and escalate.
+   tbank.ru serves a certificate chained to the Минцифры `Russian Trusted Root CA`.
+   It must be installed in the system store (`raw_sources/certs/`,
+   `update-ca-certificates`), and `SSL_CERT_FILE` points httpx at that store —
+   by default httpx trusts only `certifi`. Without it every request fails with
+   `CERTIFICATE_VERIFY_FAILED` and shows as `net_err`.
+   Run in the background and monitor. A snapshot is overwritten only on a successful
+   fetch. Delisted names are skipped (`--full` overrides). A handful of 404s is
+   normal. On mass `net_err`, read `.fill_cache/tbank/_failures.json` for the reason,
+   then stop and escalate.
 2. Windowed dry-run:
    ```bash
    python scripts/backfill/cascade_merge_dividends.py --sources tbank --months 6
@@ -101,29 +146,26 @@ dividends.
    `--months N`, records older than the window.
 3. Interpret with suspicion — "clean_new" only means "no same-(year-month)
    collision"; it does **not** rule out a cross-month duplicate (same amount shifted
-   a quarter, e.g. an interim reprinted). Eyeball each proposed record against its
-   CSV neighbours before trusting it.
+   a quarter). Eyeball each proposed record against its CSV neighbours.
 4. `>1%` same-month conflicts are **not** auto-merged — they go to
    `cascade_conflicts.json` for manual resolution into `_conflicts_resolved.json`.
-   Genuinely-clean past-dated records → re-run with `--apply`. If nothing survives
-   scrutiny, apply nothing — a no-op is a valid, common outcome.
-5. **The cascade covers only names tbank serves** (~30% — the rest 404). After
-   `--apply`, diff the Step 2 dohod candidates against the cascade's ticker table:
-   whatever dohod found and tbank lacks still needs a manual `augment`, or it is
-   silently dropped. Real run (2026-08): VTBR 9.71 and NKHP 10.08 fell through
-   exactly this gap, and VTBR was caught only by re-checking the CSVs after apply.
+   Genuinely-clean past-dated records → re-run with `--apply`, then check the dates
+   in `git diff data/dividends`. A no-op is a valid outcome.
+5. **The cascade covers only names tbank serves** (liquid names; small caps 404).
+   Whatever Step 2 found and tbank lacks needs its own `augment`, or it is silently
+   dropped. Real runs: 2026-08 VTBR and NKHP fell through this gap; 2026-10 tbank
+   carried YDEX/DIAS/HEAD/OZPH but not GEMA/LVHK.
 
 ⏸ **Checkpoint:** present the cascade findings and the apply decision before
 recomputing.
 
 ## Why the ceremony (context that keeps you honest)
 
-- The cascade has no memory of "already decided" beyond the manual ignore list in
+- The cascade has no memory of "already decided" beyond the ignore list in
   `_conflicts_resolved.json`, which was curated for the yahoo→tbank ordering.
   Changing `--sources` or dropping `--months` reshuffles the whole candidate graph
-  and manufactures spurious "new" conflicts. Keep the window; prefer `tbank` for a
+  and manufactures spurious "new" conflicts. Keep the window; use `tbank` for a
   monthly pull.
-- Brokers list future-declared dividends (record date next month). A blind
-  `--apply` would inject them as realized — the future-date guard exists precisely
-  because a real run surfaced dozens of such records for liquid names in a single
-  month.
+- Brokers and aggregators list future-declared and board-recommended dividends. A
+  blind `--apply` or augment would book them as realized — the future-date guard
+  and the approval check exist because real runs surfaced both.

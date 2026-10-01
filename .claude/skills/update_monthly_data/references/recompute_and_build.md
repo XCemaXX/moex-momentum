@@ -69,5 +69,5 @@ incremental path guards against. Without it, drifted months trip the baseline ga
 Gitignored, so absent from `git status`: `data/momentum/**`, the built site under
 `docs/pages/`, and the generated detector reports (`data/splits/_suspicious.json`,
 `data/dividends/_gaps.json`). The visible data changes are the ingest deltas — prices,
-dividends, indices, manifest — plus any decision overlay you touched (`_acked.json`,
+dividends, indices, tickers — plus any decision overlay you touched (`_acked.json`,
 `_conflicts_resolved.json`) and the re-blessed `tests/reference/q_values_*.csv`.

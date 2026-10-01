@@ -89,6 +89,9 @@ momentum ingest indices
 momentum ingest dividends --force-refresh --months 3   # expected to fail; see task 054
 momentum corporate check-registers --since <last month>  # which payouts are missing
 momentum ingest fill-dividends --force-refresh -t <each ticker it named>
+# tbank's chain ends in the Минцифры root (raw_sources/certs/); httpx needs the system store.
+SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt python scripts/backfill/fetch_tbank_dividends.py --refresh
+python scripts/backfill/cascade_merge_dividends.py --sources tbank --months 6   # dry-run, then --apply
 
 # 4. Apply curated fixes (_conflicts_resolved.json): drops known ISS dups,
 #    applies disclosure corrections. Required after step 3.
@@ -127,8 +130,8 @@ Notes:
 
 ### Dividend reconciliation (recurring)
 
-ISS lags real payouts by months, so every cycle a few recent dividends are missing.
-Resolving them has sharp edges — which source may be trusted for which share class,
+ISS no longer serves dividends, so every cycle's new payouts must be found and closed
+by hand. Resolving them has sharp edges — which source may be trusted for which share class,
 when `augment` is safe, why a bulk fill drags in a name's entire history, and which
 caches must never be deleted. That procedure lives in
 `.claude/skills/update_monthly_data/references/reconcile_dividends.md`, together with
@@ -145,8 +148,8 @@ The entry point is `momentum` (`cli:app`). Every command is idempotent.
 | `momentum tickers mark-unavailable` | Move empty-history tickers to the unavailable log |
 | `momentum ingest prices` | Async fetch daily OHLCV from ISS (union of boards) |
 | `momentum ingest splits` | Splits + bonus issues (ISS + manual override). `--force-refresh` is required monthly — the ISS cache key carries no date |
-| `momentum ingest dividends` | Dividend payouts from ISS (`--months N` scopes the merge window); regenerate gap report |
-| `momentum ingest fill-dividends` | Fill gaps from external sources (dohod.ru, …) |
+| `momentum ingest dividends` | Dividend payouts from ISS — endpoint withdrawn, exits 1 by design (`task 054`) |
+| `momentum ingest fill-dividends` | Fill gaps from external sources (dohod.ru, smart-lab.ru) |
 | `momentum ingest indices` | Benchmark index series (default MCFTRR) |
 | `momentum corporate detect` | Split/dividend anomaly detector (WARN-only; `--strict` to exit non-zero) |
 | `momentum corporate apply-conflicts` | Apply `_conflicts_resolved.json` (drop/replace/augment) to dividend files |

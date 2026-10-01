@@ -10,3 +10,4 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2023-06-17,0.378,RUB,moex_iss,,
 2023-12-15,0.272,RUB,moex_iss,,
 2024-06-28,0.3,RUB,moex_iss,,
+2026-06-15,0.16,RUB,manual_disclosure,,

@@ -67,7 +67,8 @@ exact commands and the traps specific to that data type.
 3. `git status` — flag any unrelated staged changes before mutating data.
 
 Committed inputs are `data/prices_iss/`, `data/dividends/`, `data/indices/`,
-`data/splits/`, `data/manifest.json`, `data/tickers.json`. `data/momentum/**` is
+`data/splits/`, `data/tickers.json`, plus the decision overlays
+`data/dividends/_conflicts_resolved.json` and `data/splits/_acked.json`. `data/momentum/**` is
 gitignored and regenerated — never hand-edit it.
 
 ## Notes
