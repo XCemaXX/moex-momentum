@@ -1,8 +1,9 @@
 """Apply manual conflict resolutions (`_conflicts_resolved.json`) to dividend files.
 
 Used to surgically correct stale ISS records or augment with verified
-disclosure data. Actions: `replace` | `drop` | `augment`. Idempotent — a
-conflict whose target row no longer matches becomes a counted no-op.
+disclosure data. Actions: `replace` | `drop` | `augment` mutate the file;
+`ignore` only silences conflicts that fill reports. Idempotent — a conflict
+whose target row no longer matches becomes a counted no-op.
 """
 
 from __future__ import annotations
@@ -56,7 +57,7 @@ class ConflictApplyResult:
     skipped_no_match: int
 
 
-def _load_conflicts(path: Path) -> list[dict[str, Any]]:
+def load_conflicts(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
     with path.open(encoding="utf-8") as f:
@@ -85,6 +86,20 @@ def _load_conflicts(path: Path) -> list[dict[str, Any]]:
         if rec["action"] == "augment" and "add" not in rec:
             raise ValueError(f"{path}[{i}]: augment requires 'add' block")
     return data
+
+
+def drop_matches(entry: dict[str, Any], rec: dict[str, Any]) -> bool:
+    """True if `rec` is the row a `drop` verdict removes.
+
+    Exact date: a drop is keyed on the source's own date, so a nearby real
+    payout from another source survives.
+    """
+    match = entry["match"]
+    return (
+        rec["registry_close"] == entry["registry_close"]
+        and rec.get("source") == match.get("source", "moex_iss")
+        and _amount_close(float(rec["amount"]), float(match["amount"]))
+    )
 
 
 def should_ignore_conflict(
@@ -134,7 +149,6 @@ def apply_conflicts_to_file(  # noqa: PLR0912, PLR0915 — 3 action branches × 
         if c["ticker"] != ticker:
             continue
         if c["action"] == "ignore":
-            # ignore entries do not mutate the file — only filter cascade conflict-flagging
             continue
         reg = c["registry_close"]
         if c["action"] == "replace":
@@ -176,19 +190,8 @@ def apply_conflicts_to_file(  # noqa: PLR0912, PLR0915 — 3 action branches × 
             rows[idx] = new_rec
             applied += 1
         elif c["action"] == "drop":
-            match = c["match"]
-            src = match.get("source", "moex_iss")
-            amt = float(match["amount"])
             before = len(rows)
-            rows = [
-                r
-                for r in rows
-                if not (
-                    r["registry_close"] == reg
-                    and r.get("source") == src
-                    and _amount_close(float(r["amount"]), amt)
-                )
-            ]
+            rows = [r for r in rows if not drop_matches(c, r)]
             removed = before - len(rows)
             if removed:
                 applied += removed
@@ -223,7 +226,7 @@ def apply_conflicts_to_universe(
     dividends_dir: Path, conflicts_path: Path
 ) -> dict[str, ConflictApplyResult]:
     """Apply `_conflicts_resolved.json` across all affected tickers. Idempotent."""
-    conflicts = _load_conflicts(conflicts_path)
+    conflicts = load_conflicts(conflicts_path)
     by_ticker: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for c in conflicts:
         by_ticker[c["ticker"]].append(c)

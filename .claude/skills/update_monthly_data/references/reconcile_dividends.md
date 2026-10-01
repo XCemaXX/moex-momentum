@@ -26,32 +26,22 @@ source from a share that stopped paying.
 ## Step 1b — Which registers closed (MOEX export)
 
 ```bash
-momentum corporate check-registers --since <first day of last month>
+momentum corporate check-registers --since <Jan 1 of last year>   # wide: unconfirmed
+                                                                # rows surface late
 ```
 
-Lists register closings MOEX recorded that we have no payout for.
-
-**Blind spot (`task 056`):** it keeps only `закрытие реестра` rows and drops
-`закрытие реестра (рекомендуемая)` even after the date has passed. MOEX confirms
-closings late — on 2026-10-01 all five September closings and LVHK 2026-06-15 were
-still "рекомендуемая", and the report said `0 of 1048`. Until the task is fixed,
-list the past-dated recommended rows by hand:
-
-```bash
-python -c "
-import httpx,csv,io,datetime
-t = httpx.get('https://web.moex.com/moex-web-icdb-api/api/v1/export/register-closing-dates/csv?language=1&separator=1', timeout=60).content.decode('cp1251')
-today = datetime.date.today().isoformat()
-for r in csv.DictReader(io.StringIO(t)):
-    m,d,y = r['Дата события'][:10].split('/'); iso=f'{y}-{m}-{d}'
-    if 'рекоменд' in r['Тип события'] and '2025-01-01' <= iso <= today: print(iso, r['Эмитент'][:90])" | sort
-```
-
-For each name, check its CSV: a row within a few days of the date means covered.
+Lists register closings MOEX recorded that we have no payout for, in two blocks:
+confirmed, and **unconfirmed** («рекомендуемая»). MOEX promotes rows late or
+never — LVHK 2026-06-15 was paid and still unconfirmed months later — so an
+unconfirmed hit is usually a real payout to fill. Sometimes the AGM never adopted
+it (SVET/SVETP 2026-07-08): then ack that one date in
+`data/dividends/_acked_no_div.json` as `"YYYY-MM-DD": "<reason>"`. Never ack the
+whole year for a share that pays more than once a year — it hides its other
+closings.
 
 ## Step 2 — Fill recent payouts (dohod + smart-lab, live)
 
-1. Candidates = Step 1b output ∪ past-dated recommended rows ∪ the liquid universe
+1. Candidates = Step 1b output (both blocks) ∪ the liquid universe
    (latest month of `data/momentum/curve_fit/scores.csv`, 100 names). The register
    export also misses whole payouts (`task 054` found 10), hence the universe sweep.
 2. `momentum ingest fill-dividends -t A -t B ... --dry-run --force-refresh`.
@@ -106,9 +96,9 @@ For each name, check its CSV: a row within a few days of the date means covered.
      double-counting.
    - Phantom (stored or offered, never declared) → `drop` with
      `match: {amount, source}`. **Never `ignore` a phantom**: `ignore` only
-     silences conflicts, and a row we don't store reaches fill as `new` and gets
-     written (`task 057`). A `drop` is idempotent: `apply-conflicts` removes the row
-     every time a fill run brings it back.
+     silences conflicts and never filters new rows. A `drop` is honoured by
+     `fill-dividends` and the cascade too (`verdict_dropped=` in the output), and
+     `apply-conflicts` removes the row if it is already stored.
    - Source disagrees with a stored, verified row → `ignore` with
      `match: {source}` and `registry_close`, so it stops being reported.
 6. `momentum corporate apply-conflicts`; confirm each change landed in its CSV.

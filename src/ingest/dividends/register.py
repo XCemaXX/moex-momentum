@@ -9,6 +9,11 @@ first-party answer left to "did this share pay?".
 The response is cp1251 with no charset header, hence a bytes-in interface.
 Dates are `MM/DD/YYYY`. Rows from roughly 2021 on embed the SECID in the issuer
 string; older ones name the issuer only and are skipped.
+
+MOEX marks a closing `(рекомендуемая)` until it confirms it, and often never
+does — LVHK 2026-06-15 was paid and still unconfirmed months later. Such rows are
+kept with `confirmed=False`: most are real payouts, a few are recommendations an
+AGM never adopted (SVET/SVETP 2026-07-08).
 """
 
 from __future__ import annotations
@@ -33,16 +38,17 @@ REGISTER_URL = (
 # `ПАО "Татнефть" им. В.Д. Шашина - 2-03-00161-A, TATNP [Акция привилегированная]`
 _SECID_RE = re.compile(r",\s*([A-Z][A-Z0-9]{2,5})\s*\[")
 
-# Registers MOEX only recommends are not events that happened.
 _CONFIRMED_EVENT = "закрытие реестра"
+_RECOMMENDED_EVENT = "закрытие реестра (рекомендуемая)"
 
 
-def parse_register(payload: bytes) -> list[dict[str, str]]:
-    """`{"ticker", "record_date"}` per confirmed, SECID-tagged register closing."""
+def parse_register(payload: bytes) -> list[dict[str, Any]]:
+    """`{"ticker", "record_date", "confirmed"}` per SECID-tagged register closing."""
     text = payload.decode("cp1251", errors="replace")
-    out: list[dict[str, str]] = []
+    out: list[dict[str, Any]] = []
     for row in csv.DictReader(io.StringIO(text)):
-        if (row.get("Тип события") or "").strip() != _CONFIRMED_EVENT:
+        event = (row.get("Тип события") or "").strip()
+        if event not in (_CONFIRMED_EVENT, _RECOMMENDED_EVENT):
             continue
         m = _SECID_RE.search(row.get("Эмитент") or "")
         if not m:
@@ -53,7 +59,13 @@ def parse_register(payload: bytes) -> list[dict[str, str]]:
             when = date(year, month, day)
         except ValueError:
             continue
-        out.append({"ticker": m.group(1), "record_date": when.isoformat()})
+        out.append(
+            {
+                "ticker": m.group(1),
+                "record_date": when.isoformat(),
+                "confirmed": event == _CONFIRMED_EVENT,
+            }
+        )
     out.sort(key=lambda r: (r["record_date"], r["ticker"]))
     return out
 
@@ -69,14 +81,15 @@ def _first_price_date(path: Path) -> str | None:
     return first[header.index("date")]
 
 
-def missing_payouts(
-    register: list[dict[str, str]],
+def missing_payouts(  # noqa: PLR0913 — two independent ack granularities
+    register: list[dict[str, Any]],
     dividends_dir: Path,
     prices_dir: Path,
     *,
     since: str,
     until: str,
     acked: dict[str, set[int]] | None = None,
+    acked_dates: dict[str, set[str]] | None = None,
     date_tol_days: int = DATE_TOL_DAYS,
 ) -> list[dict[str, Any]]:
     """Register closings in `[since, until]` with no stored dividend near them.
@@ -87,13 +100,17 @@ def missing_payouts(
 
     The export is not purely dividend registers — CBOM's 2015 entry looks like a
     shareholder-meeting list — so `acked` suppresses (ticker, year) pairs confirmed
-    to have paid nothing.
+    to have paid nothing, and `acked_dates` single closings that never paid.
+    Each hit carries the row's `confirmed` flag.
     """
     acked = acked or {}
-    by_ticker: dict[str, list[str]] = defaultdict(list)
+    acked_dates = acked_dates or {}
+    by_ticker: dict[str, dict[str, bool]] = defaultdict(dict)
     for row in register:
         if since <= row["record_date"] <= until:
-            by_ticker[row["ticker"]].append(row["record_date"])
+            # A date listed under both types counts as confirmed.
+            seen = by_ticker[row["ticker"]].get(row["record_date"], False)
+            by_ticker[row["ticker"]][row["record_date"]] = seen or row["confirmed"]
 
     out: list[dict[str, Any]] = []
     for ticker, dates in sorted(by_ticker.items()):
@@ -108,10 +125,11 @@ def missing_payouts(
             for r in read_records(dividends_dir / f"{ticker}.csv", casts=DIV_CASTS)
         }
         acked_years = acked.get(ticker, set())
-        for when in sorted(dates):
+        acked_days = acked_dates.get(ticker, set())
+        for when, confirmed in sorted(dates.items()):
             if listed_from is not None and when < listed_from:
                 continue
-            if int(when[:4]) in acked_years:
+            if int(when[:4]) in acked_years or when in acked_days:
                 continue
             anchor = date.fromisoformat(when)
             window = {
@@ -119,5 +137,5 @@ def missing_payouts(
                 for k in range(-date_tol_days, date_tol_days + 1)
             }
             if not (window & stored):
-                out.append({"ticker": ticker, "record_date": when})
+                out.append({"ticker": ticker, "record_date": when, "confirmed": confirmed})
     return out

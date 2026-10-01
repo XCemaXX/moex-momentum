@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from ingest.dividends.conflicts import _load_conflicts, should_ignore_conflict
+from ingest.dividends.conflicts import load_conflicts, should_ignore_conflict
 
 
 def _entry(**kw: object) -> dict[str, object]:
@@ -111,7 +111,7 @@ def test_load_conflicts_accepts_ignore_without_registry_close(tmp_path: Path) ->
         ),
         encoding="utf-8",
     )
-    loaded = _load_conflicts(p)
+    loaded = load_conflicts(p)
     assert len(loaded) == 1
     assert loaded[0]["action"] == "ignore"
 
@@ -132,4 +132,4 @@ def test_load_conflicts_rejects_non_ignore_without_registry_close(tmp_path: Path
         encoding="utf-8",
     )
     with pytest.raises(ValueError, match="registry_close"):
-        _load_conflicts(p)
+        load_conflicts(p)

@@ -11,6 +11,7 @@ pattern as `detect.py` (suspicious returns) next door.
 from __future__ import annotations
 
 import json
+import re
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
@@ -33,20 +34,37 @@ def _div_years(divs: list[dict[str, Any]]) -> set[int]:
     return {date.fromisoformat(r["registry_close"]).year for r in divs}
 
 
-def load_acked(path: Path) -> dict[str, set[int]]:
-    """`_acked_no_div.json` schema: `{TICKER: {"YYYY": "reason", ...}, ...}`."""
+def _read_acked(path: Path) -> dict[str, dict[str, str]]:
+    """`_acked_no_div.json`: `{TICKER: {"YYYY" | "YYYY-MM-DD": "reason", ...}, ...}`."""
     if not path.exists():
         return {}
     with path.open(encoding="utf-8") as f:
         raw = json.load(f)
     if not isinstance(raw, dict):
         raise ValueError(f"{path}: expected a JSON object")
-    out: dict[str, set[int]] = {}
-    for ticker, years in raw.items():
-        if not isinstance(years, dict):
+    for ticker, keys in raw.items():
+        if not isinstance(keys, dict):
             raise ValueError(f"{path}[{ticker!r}]: expected object")
-        out[ticker.upper()] = {int(y) for y in years}
-    return out
+        for key in keys:
+            if not re.fullmatch(r"\d{4}(-\d{2}-\d{2})?", key):
+                raise ValueError(f"{path}[{ticker!r}]: key {key!r} is neither YYYY nor YYYY-MM-DD")
+    return {ticker.upper(): keys for ticker, keys in raw.items()}
+
+
+def load_acked(path: Path) -> dict[str, set[int]]:
+    """Whole years confirmed to have no dividend."""
+    return {
+        ticker: {int(k) for k in keys if len(k) == 4} for ticker, keys in _read_acked(path).items()
+    }
+
+
+def load_acked_dates(path: Path) -> dict[str, set[str]]:
+    """Single register dates confirmed to carry no payout.
+
+    Kept apart from years: a share that pays several times a year must not lose
+    its other closings that year to one cancelled register.
+    """
+    return {ticker: {k for k in keys if len(k) > 4} for ticker, keys in _read_acked(path).items()}
 
 
 def compute_gaps(

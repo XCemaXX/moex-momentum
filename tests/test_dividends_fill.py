@@ -12,9 +12,10 @@ import pytest
 
 from ingest.dividends.conflicts import (
     _has_near_duplicate,
-    _load_conflicts,
     apply_conflicts_to_file,
     apply_conflicts_to_universe,
+    drop_matches,
+    load_conflicts,
 )
 from ingest.dividends.dohod import DohodFetcher
 from ingest.dividends.fetchers import CachedHttpFetcher
@@ -474,10 +475,10 @@ def test_load_conflicts_validates(tmp_path: Path) -> None:
     p = tmp_path / "c.json"
     p.write_text('[{"ticker":"X","registry_close":"2024-01-01","action":"bogus","reason":"x"}]')
     with pytest.raises(ValueError, match="action="):
-        _load_conflicts(p)
+        load_conflicts(p)
     p.write_text('[{"ticker":"X","registry_close":"2024-01-01","action":"replace","reason":"x"}]')
     with pytest.raises(ValueError, match="replace requires"):
-        _load_conflicts(p)
+        load_conflicts(p)
 
 
 def test_apply_universe(tmp_path: Path) -> None:
@@ -828,9 +829,123 @@ def test_fill_dividends_silences_settled_conflicts(tmp_path: Path) -> None:
             "reason": "yahoo back-scales pre-cancellation dividends",
         }
     ]
-    quiet = fill_dividends("GMKN", fetchers=[fetcher], ignore_entries=verdict, **kwargs)
+    quiet = fill_dividends("GMKN", fetchers=[fetcher], verdicts=verdict, **kwargs)
     assert quiet.conflicts == [] and quiet.n_conflicts_ignored == 1
     assert quiet.n_new == 0
+
+
+def _drop(ticker: str, reg: str, amount: float, source: str) -> dict[str, Any]:
+    return {
+        "ticker": ticker,
+        "registry_close": reg,
+        "action": "drop",
+        "match": {"amount": amount, "source": source},
+        "reason": "phantom",
+    }
+
+
+def test_drop_matches_needs_exact_date_source_and_amount() -> None:
+    entry = _drop("SVETP", "2026-06-01", 0.1716, "skill_fill_smartlab")
+    assert drop_matches(entry, _row("2026-06-01", 0.1716, "skill_fill_smartlab"))
+    assert not drop_matches(entry, _row("2026-06-02", 0.1716, "skill_fill_smartlab"))
+    assert not drop_matches(entry, _row("2026-06-01", 0.1716, "skill_fill_dohod"))
+    assert not drop_matches(entry, _row("2026-06-01", 0.17, "skill_fill_smartlab"))
+    legacy = {"registry_close": "2022-07-11", "match": {"amount": 390.0}}
+    assert drop_matches(legacy, _row("2022-07-11", 390.0, "moex_iss"))
+
+
+def test_fill_dividends_drops_phantom_we_do_not_store(tmp_path: Path) -> None:
+    """A dropped phantom absent from the CSV would otherwise come back as new."""
+    div_dir = tmp_path / "d"
+    div_dir.mkdir()
+    _write(div_dir / "SVETP.csv", [_row("2025-12-30", 4.22, "manual_disclosure")])
+    fetcher = _StubFetcher(
+        "skill_fill_smartlab",
+        [
+            _row("2025-12-30", 4.22, "skill_fill_smartlab"),
+            _row("2026-06-01", 0.1716, "skill_fill_smartlab"),
+        ],
+    )
+    kwargs: dict[str, Any] = {
+        "tickers_dict": {},
+        "tickers_manual": [],
+        "prices_dir": tmp_path / "p",
+        "dividends_dir": div_dir,
+        "today": date(2026, 10, 1),
+    }
+    assert fill_dividends("SVETP", fetchers=[fetcher], **kwargs).n_new == 1
+
+    verdicts = [_drop("SVETP", "2026-06-01", 0.1716, "skill_fill_smartlab")]
+    result = fill_dividends("SVETP", fetchers=[fetcher], verdicts=verdicts, **kwargs)
+    assert result.n_new == 0 and result.n_verdict_dropped == 1
+
+    other = [_drop("SVET", "2026-06-01", 0.1716, "skill_fill_smartlab")]
+    assert fill_dividends("SVETP", fetchers=[fetcher], verdicts=other, **kwargs).n_new == 1
+
+
+def test_fill_dividends_drop_does_not_hide_lower_tier_row(tmp_path: Path) -> None:
+    """Filtering after reconcile would let the phantom win the cluster and
+    discard the real lower-tier row as its duplicate."""
+    div_dir = tmp_path / "d"
+    div_dir.mkdir()
+    _write(div_dir / "LVHK.csv", [])
+    fetchers = [
+        _StubFetcher("skill_fill_dohod", [_row("2026-06-15", 0.16, "skill_fill_dohod")]),
+        _StubFetcher("skill_fill_smartlab", [_row("2026-06-16", 0.16, "skill_fill_smartlab")]),
+    ]
+    result = fill_dividends(
+        "LVHK",
+        fetchers=fetchers,  # type: ignore[arg-type]
+        tickers_dict={},
+        tickers_manual=[],
+        prices_dir=tmp_path / "p",
+        dividends_dir=div_dir,
+        verdicts=[_drop("LVHK", "2026-06-15", 0.16, "skill_fill_dohod")],
+        today=date(2026, 10, 1),
+    )
+    assert result.n_verdict_dropped == 1
+    assert [(r["registry_close"], r["source"]) for r in result.records] == [
+        ("2026-06-16", "skill_fill_smartlab")
+    ]
+
+
+def test_fill_dividends_drop_matches_stored_scale(tmp_path: Path) -> None:
+    """Drop amounts are stored-scale, so a restating feed is matched after scaling."""
+    div_dir = tmp_path / "d"
+    div_dir.mkdir()
+    _write(div_dir / "GMKN.csv", [])
+    splits_dir = tmp_path / "s"
+    splits_dir.mkdir()
+    write_records_atomic(
+        splits_dir / "GMKN.csv",
+        [
+            {
+                "date": "2024-04-08",
+                "before": 1,
+                "after": 100,
+                "type": "forward",
+                "source": "moex_iss",
+            }
+        ],
+        fieldnames=SPLIT_FIELDS,
+    )
+
+    class _Restating(_StubFetcher):
+        restates_splits = True
+
+    raw = [_row("2021-06-01", 10.2122, "skill_fill_yahoo")]
+    result = fill_dividends(
+        "GMKN",
+        fetchers=[_Restating("skill_fill_yahoo", raw)],
+        tickers_dict={},
+        tickers_manual=[],
+        prices_dir=tmp_path / "p",
+        dividends_dir=div_dir,
+        splits_dir=splits_dir,
+        verdicts=[_drop("GMKN", "2021-06-01", 1021.22, "skill_fill_yahoo")],
+        today=date(2026, 9, 5),
+    )
+    assert result.n_new == 0 and result.n_verdict_dropped == 1
 
 
 def test_fill_dividends_rejects_foreign_currency_rows(tmp_path: Path) -> None:

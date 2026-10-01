@@ -1,8 +1,8 @@
 """Fill dividend gaps from external sources, predecessor-aware.
 
-For each ticker: drop pre-predecessor-cutoff and not-yet-paid records, then pull
-from every fetcher and hand the whole batch to `reconcile`, which decides what
-joins the stored rows. This module does not judge payout identity itself.
+For each ticker: drop pre-predecessor-cutoff, not-yet-paid and verdict-dropped
+records, then pull from every fetcher and hand the whole batch to `reconcile`,
+which decides what joins the stored rows. This module does not judge payout identity itself.
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from config import FOREIGN_CURRENCY_TICKERS
-from ingest.dividends.conflicts import should_ignore_conflict
+from ingest.dividends.conflicts import drop_matches, should_ignore_conflict
 from ingest.dividends.fetchers import DividendFetcher
 from ingest.dividends.merge import reconcile
 from ingest.dividends.scale import to_stored_scale
@@ -70,6 +70,7 @@ class FillResult:
     n_duplicates_dropped: int
     n_future_dropped: int
     n_foreign_dropped: int
+    n_verdict_dropped: int
     n_conflicts_ignored: int
     by_source: dict[str, int]
     records: list[dict[str, Any]]
@@ -90,6 +91,23 @@ def _filter_by_cutoff(
     return kept, dropped
 
 
+def _drop_ignored(
+    conflicts: list[dict[str, Any]], ignores: list[dict[str, Any]], ticker: str
+) -> tuple[list[dict[str, Any]], int]:
+    unresolved = [
+        c
+        for c in conflicts
+        if not should_ignore_conflict(
+            ignores,
+            ticker=ticker,
+            ym=c["registry_close"][:7],
+            registry_close=c["registry_close"],
+            source=c.get("source"),
+        )
+    ]
+    return unresolved, len(conflicts) - len(unresolved)
+
+
 def fill_dividends(
     ticker: str,
     *,
@@ -99,7 +117,7 @@ def fill_dividends(
     prices_dir: Path,
     dividends_dir: Path,
     splits_dir: Path | None = None,
-    ignore_entries: list[dict[str, Any]] | None = None,
+    verdicts: list[dict[str, Any]] | None = None,
     today: date | None = None,
 ) -> FillResult:
     """Fetch, filter, and reconcile against stored rows.
@@ -109,9 +127,10 @@ def fill_dividends(
     reported, never written.
 
     `splits_dir` only matters for fetchers that declare `restates_splits`.
-    `ignore_entries` are the `ignore` verdicts already recorded in
-    `_conflicts_resolved.json`; without them a settled disagreement is
-    re-reported every run and the report stops being read.
+    `verdicts` are the entries of `_conflicts_resolved.json`. A `drop` removes
+    the matching fetched row here too, or a phantom we don't store would come
+    back as new. An `ignore` silences a settled conflict that would otherwise be
+    re-reported every run; it never filters new rows.
     """
     cutoff = predecessor_cutoff(
         ticker,
@@ -126,8 +145,13 @@ def fill_dividends(
     if splits_dir is not None:
         splits = read_records(splits_dir / f"{ticker}.csv", casts=SPLIT_CASTS)
 
+    verdicts = verdicts or []
+    drops = [v for v in verdicts if v["action"] == "drop" and v["ticker"] == ticker]
+    ignores = [v for v in verdicts if v["action"] == "ignore"]
+
     proposed: list[dict[str, Any]] = []
     n_pre_cutoff = 0
+    n_verdict_dropped = 0
     n_future = 0
     n_foreign = 0
     for f in fetchers:
@@ -151,24 +175,15 @@ def fill_dividends(
             if (r.get("currency") or "RUB") != "RUB" and ticker not in FOREIGN_CURRENCY_TICKERS:
                 n_foreign += 1
                 continue
+            # Before reconcile: a phantom must not win a cluster and push out a
+            # real lower-tier row as its duplicate.
+            if any(drop_matches(d, r) for d in drops):
+                n_verdict_dropped += 1
+                continue
             proposed.append(r)
 
     accepted, duplicates, conflicts = reconcile(existing, proposed)
-    n_ignored = 0
-    if ignore_entries:
-        unresolved: list[dict[str, Any]] = []
-        for c in conflicts:
-            if should_ignore_conflict(
-                ignore_entries,
-                ticker=ticker,
-                ym=c["registry_close"][:7],
-                registry_close=c["registry_close"],
-                source=c.get("source"),
-            ):
-                n_ignored += 1
-            else:
-                unresolved.append(c)
-        conflicts = unresolved
+    conflicts, n_ignored = _drop_ignored(conflicts, ignores, ticker)
     by_source: dict[str, int] = defaultdict(int)
     for r in accepted:
         by_source[str(r.get("source", ""))] += 1
@@ -181,6 +196,7 @@ def fill_dividends(
         n_duplicates_dropped=len(duplicates),
         n_future_dropped=n_future,
         n_foreign_dropped=n_foreign,
+        n_verdict_dropped=n_verdict_dropped,
         n_conflicts_ignored=n_ignored,
         by_source=dict(by_source),
         records=accepted,

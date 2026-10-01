@@ -79,9 +79,13 @@ Carries **no amount** — it answers "did this share pay?", not "how much?".
 Rows from roughly 2021 embed the SECID and share class in the issuer string
 (`… - 2-03-00161-A, TATNP [Акция привилегированная]`), so no name matching is
 needed; older rows name the issuer only and are unusable. `Тип события` is
-`закрытие реестра` or `закрытие реестра (рекомендуемая)` — the latter is a
-recommendation, not an event: SVET/SVETP carry a recommended 2026-07-08 whose
-actual closing was 2026-06-01.
+`закрытие реестра` or `закрытие реестра (рекомендуемая)`. MOEX promotes rows to
+confirmed late or never: LVHK 2026-06-15 was paid and still "рекомендуемая" months
+later, as were all five September 2026 closings. So recommended past-dated rows are
+checked too, reported apart as unconfirmed (`task 056`). A few never happened:
+SVET/SVETP 2026-07-08 — the AGM of 2026-06-26 failed, no dividend was declared
+(smart-lab's 2026-06-01 row for it is a phantom). Those are acked by date in
+`_acked_no_div.json`.
 
 Measured against the period where our data was still complete (2024 to 2025-10):
 324 register closings on tickers we track, 322 matched a stored payout to the

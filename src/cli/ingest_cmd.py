@@ -298,7 +298,7 @@ def ingest_fill_dividends(
 
     import tickers as t_mod
     from config import FILL_HTTP_TIMEOUT_SECONDS, FILL_REQUEST_DELAY_SECONDS, FILL_USER_AGENT
-    from ingest.dividends.conflicts import _load_conflicts
+    from ingest.dividends.conflicts import load_conflicts
     from ingest.dividends.dohod import DohodFetcher
     from ingest.dividends.fill import fill_dividends
     from ingest.dividends.iss import _merge
@@ -332,11 +332,7 @@ def ingest_fill_dividends(
             return None
         return resp.text
 
-    ignore_entries = [
-        c
-        for c in _load_conflicts(dividends_dir / "_conflicts_resolved.json")
-        if c.get("action") == "ignore"
-    ]
+    verdicts = load_conflicts(dividends_dir / "_conflicts_resolved.json")
 
     source_set = {s.strip() for s in sources.split(",") if s.strip()}
     fetchers: list[object] = []
@@ -355,7 +351,7 @@ def ingest_fill_dividends(
                 prices_dir=prices_dir,
                 dividends_dir=dividends_dir,
                 splits_dir=splits_dir,
-                ignore_entries=ignore_entries,
+                verdicts=verdicts,
             )
             typer.echo(
                 f"{tk}: cutoff={result.cutoff or '-'} new={result.n_new} "
@@ -363,6 +359,7 @@ def ingest_fill_dividends(
                 f"duplicates_dropped={result.n_duplicates_dropped} "
                 f"future_dropped={result.n_future_dropped} "
                 f"foreign_dropped={result.n_foreign_dropped} "
+                f"verdict_dropped={result.n_verdict_dropped} "
                 f"conflicts={len(result.conflicts)} "
                 f"conflicts_ignored={result.n_conflicts_ignored} "
                 f"by_source={result.by_source}"

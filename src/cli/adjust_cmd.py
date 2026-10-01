@@ -89,7 +89,7 @@ def corporate_check_registers(
 
     import httpx
 
-    from adjustments.dividend_gaps import load_acked
+    from adjustments.dividend_gaps import load_acked, load_acked_dates
     from config import FILL_HTTP_TIMEOUT_SECONDS, FILL_USER_AGENT
     from ingest.dividends.register import REGISTER_URL, missing_payouts, parse_register
 
@@ -115,11 +115,22 @@ def corporate_check_registers(
         dividends_dir,
         prices_dir,
         acked=load_acked(acked_file),
+        acked_dates=load_acked_dates(acked_file),
         since=since,
         until=until or date.today().isoformat(),
     )
-    for m in missing:
+    confirmed = [m for m in missing if m["confirmed"]]
+    recommended = [m for m in missing if not m["confirmed"]]
+    for m in confirmed:
         typer.echo(f"  {m['record_date']}  {m['ticker']}", err=True)
-    typer.echo(f"register closings without a stored payout: {len(missing)} of {len(register)}")
+    if recommended:
+        # MOEX may never confirm a paid closing; an AGM may also have rejected it.
+        typer.echo("  unconfirmed by MOEX — check the AGM decision:", err=True)
+        for m in recommended:
+            typer.echo(f"  {m['record_date']}  {m['ticker']}", err=True)
+    typer.echo(
+        f"register closings without a stored payout: {len(confirmed)} confirmed + "
+        f"{len(recommended)} unconfirmed of {len(register)}"
+    )
     if strict and missing:
         raise typer.Exit(1)

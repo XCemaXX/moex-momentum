@@ -32,6 +32,7 @@ ROOT = Path(__file__).resolve().parents[2]  # scripts/backfill/ → repo root
 sys.path.insert(0, str(ROOT / "src"))
 
 import tickers as t_mod  # noqa: E402
+from ingest.dividends.conflicts import load_conflicts  # noqa: E402
 from ingest.dividends.fetchers import DividendFetcher  # noqa: E402
 from ingest.dividends.fill import fill_dividends  # noqa: E402
 from ingest.dividends.merge import DATE_TOL_DAYS  # noqa: E402
@@ -124,10 +125,7 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
             if "tbank" in excl:
                 tbank_blacklist.add(tk.upper())
 
-    ignore_entries: list[dict[str, Any]] = []
-    if CONFLICTS_RESOLVED_FILE.exists():
-        all_conflicts = json.loads(CONFLICTS_RESOLVED_FILE.read_text(encoding="utf-8"))
-        ignore_entries = [c for c in all_conflicts if c.get("action") == "ignore"]
+    verdicts = load_conflicts(CONFLICTS_RESOLVED_FILE)
     ignored_count = 0
 
     yf_real = YahooFetcher(_no_fetch, cache_dir=CACHE_ROOT)
@@ -173,7 +171,7 @@ def main() -> int:  # noqa: PLR0912, PLR0915 — one-shot script, linear orchest
             prices_dir=PRICES_DIR,
             dividends_dir=DIV_DIR,
             splits_dir=SPLITS_DIR,
-            ignore_entries=ignore_entries,
+            verdicts=verdicts,
         )
         clean_new = _in_window(result.records, since_ym)
 

@@ -6,5 +6,11 @@
     "2013": "Polymetal declared in USD. The payouts are real and MOEX's register export lists them, but `currency != RUB` records are dropped by design — see docs/methodology.md and task 035, which decided not to restore them because no FX series exists. Acked so the completeness check stops reporting a settled case; this is not a claim that nothing was paid.",
     "2014": "Polymetal declared in USD. The payouts are real and MOEX's register export lists them, but `currency != RUB` records are dropped by design — see docs/methodology.md and task 035, which decided not to restore them because no FX series exists. Acked so the completeness check stops reporting a settled case; this is not a claim that nothing was paid.",
     "2015": "Polymetal declared in USD. The payouts are real and MOEX's register export lists them, but `currency != RUB` records are dropped by design — see docs/methodology.md and task 035, which decided not to restore them because no FX series exists. Acked so the completeness check stops reporting a settled case; this is not a claim that nothing was paid."
+  },
+  "SVET": {
+    "2026-07-08": "FY2025 board recommendation 0.0448 never declared: the AGM of 2026-06-26 was declared failed (несостоявшимся). investmint: «Дивидендов за 2025 год не будет», record date cancelled. MOEX keeps the row as «рекомендуемая»."
+  },
+  "SVETP": {
+    "2026-07-08": "FY2025 board recommendation 0.1716 never declared: the AGM of 2026-06-26 was declared failed (несостоявшимся). investmint: «Дивидендов за 2025 год не будет», record date cancelled. MOEX keeps the row as «рекомендуемая»."
   }
 }

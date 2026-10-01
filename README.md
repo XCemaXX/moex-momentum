@@ -87,7 +87,7 @@ momentum ingest indices
 # 3. Dividends. MOEX withdrew the ISS handle in 2025-10, so this step now
 #    exits non-zero and only the external fill brings anything new.
 momentum ingest dividends --force-refresh --months 3   # expected to fail; see task 054
-momentum corporate check-registers --since <last month>  # which payouts are missing
+momentum corporate check-registers --since <Jan 1 of last year>  # which payouts are missing
 momentum ingest fill-dividends --force-refresh -t <each ticker it named>
 # tbank's chain ends in the Минцифры root (raw_sources/certs/); httpx needs the system store.
 SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt python scripts/backfill/fetch_tbank_dividends.py --refresh
