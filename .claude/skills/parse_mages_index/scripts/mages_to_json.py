@@ -10,8 +10,8 @@ Name resolution order (first hit wins):
   3. resolve_alias(data/tickers.json)         — dict canonical/alias exact match.
 An unresolved name aborts the run: add it to a table here, then re-run.
 
-A resolved share with canonical=null (real ticker, no price series) is emitted into
-`other` with type="otc" — not investable, so it stays out of `shares` and the weights.
+A resolved share with canonical=null (real ticker, no price series) or listed in
+OTC_ONLY is emitted into `other` with type="otc" — not investable, so it stays out of `shares` and the weights.
 """
 
 from __future__ import annotations
@@ -71,6 +71,9 @@ OTHER_KIND = {
 
 # Real MOEX tickers absent from data/tickers.json (OTC / outside price universe).
 EXTERNAL = {"Новошип ао": "NOMP", "Новошип ап": "NOMPP", "ВМТП": "VMTP", "БЭСК ап": "BESKP"}
+
+# In tickers.json, but MOEX trades them only on the OTC board (MTQR), which we do not load.
+OTC_ONLY = frozenset({"TGKJ"})
 
 # Authoritative blog-name -> SECID. Reviewed by hand (incl. Аренадата=DATA, not DIAS).
 SHARE_TO_TICKER = {
@@ -241,7 +244,7 @@ def build_quarter(path: Path, period: str, src: str, d, learned_sh, learned_ot) 
         elif val is None:
             unknown.append(name)
         else:
-            canonical = d[val]["canonical"] if val in d else None
+            canonical = d[val]["canonical"] if val in d and val not in OTC_ONLY else None
             if canonical is None:  # resolved ticker, no price series -> OTC, not investable
                 other.append({"ticker": val, "raw_name": name, "pct": pct, "type": "otc"})
             else:

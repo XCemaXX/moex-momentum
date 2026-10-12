@@ -39,6 +39,9 @@ print([(s,e['canonical']) for s,e in d.items() if 'самол' in (e['canonical'
   `EXTERNAL`. Because its `canonical` resolves to null (no price series), the script
   routes it into `other` with `type="otc"` (keeping the ticker), so it stays out of
   `shares` and the weights. Confirm the exact MOEX ticker by web search — do not guess.
+- If the ticker **is** in the dict but MOEX trades it only on the OTC board `MTQR`
+  (e.g. Форвард Энерго `TGKJ`): add it to `OTC_ONLY`. Check boards in
+  `/iss/securities/<SECID>.json`: no live `engine=stock` board means OTC only.
 
 ## Watch-outs
 
