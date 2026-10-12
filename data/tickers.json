@@ -16600,6 +16600,9 @@
     "type": "share"
   },
   "OKEY": {
+    "aliases": [
+      "Окей"
+    ],
     "canonical": "O'Key Group",
     "history": [
       {

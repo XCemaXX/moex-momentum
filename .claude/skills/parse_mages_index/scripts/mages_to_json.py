@@ -61,6 +61,8 @@ OTHER_KIND = {
     "МКБ ЗО-2027": "bond",
     "Полипласт П2Б5": "bond",
     "ВУШ 001Р-03": "bond",
+    "ВУШ 001Р-04": "bond",
+    "Селигдар GOLD01": "bond",  # gold-linked bond; bare "Селигдар" is the SELG share
     "Сегежа 002Р-05R": "bond",
     "Сегежа3Р7R": "bond",
     "Сегежа3P1R": "bond",
@@ -92,6 +94,7 @@ SHARE_TO_TICKER = {
     "Газпром": "GAZP",
     "Газпром нефть": "SIBN",
     "Лента": "LENT",
+    "Окей": "OKEY",
     "Ленэнерго ап": "LSNGP",
     "Россети-ФСК": "FEES",
     "Хедхантер": "HEAD",
