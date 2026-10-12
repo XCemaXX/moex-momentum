@@ -104,5 +104,6 @@ def site_build(
         indices_dir=indices_dir if indices_dir.exists() else None,
         mages_intro_md=mages_intro if mages_intro.exists() else None,
         mages_methodology_md=mages_methodology if mages_methodology.exists() else None,
+        tickers_manual_path=Path("data/tickers_manual.json"),
     )
     typer.echo(f"site {signal}: {len(pages)} artefacts → {out_dir}")

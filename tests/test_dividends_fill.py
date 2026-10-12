@@ -112,27 +112,25 @@ def test_predecessor_cutoff_iss_changeover_ignored(tmp_path: Path) -> None:
 
 
 def test_predecessor_cutoff_manual_wins_even_with_changeover(tmp_path: Path) -> None:
-    """VKCO has both an iss_changeover entry and a manual redomicile —
-    manual wins because the entity changed legally (NL→RU MKPAO)."""
     tickers = {
-        "VKCO": {
+        "NEWX": {
             "history": [
-                {"prev_ticker": "MAIL", "renamed": "2021-12-13", "source": "iss_changeover"}
+                {"prev_ticker": "OLDX", "renamed": "2021-12-13", "source": "iss_changeover"}
             ]
         }
     }
     manual = [
         {
-            "old_secid": "MAIL",
-            "new_secid": "VKCO",
+            "old_secid": "OLDX",
+            "new_secid": "NEWX",
             "renamed": "2021-10-12",
             "type": "redomicile",
-            "reason": "NL→RU redomicile",
+            "reason": "test",
         }
     ]
     assert (
         predecessor_cutoff(
-            "VKCO",
+            "NEWX",
             tickers_dict=tickers,
             tickers_manual=manual,
             prices_dir=tmp_path / "p",
@@ -239,6 +237,42 @@ def test_fill_dividends_predecessor_cutoff_drops(tmp_path: Path) -> None:
     assert result.n_pre_cutoff_dropped == 1
     assert result.n_new == 1
     assert result.by_source["skill_fill_dohod"] == 1
+
+
+def test_fill_dividends_predecessor_reads_successor_page(tmp_path: Path) -> None:
+    """FIVE's payouts live on X5's page; only rows before the redomicile are FIVE's."""
+    div_dir = tmp_path / "d"
+    div_dir.mkdir()
+    manual = [
+        {
+            "old_secid": "FIVE",
+            "new_secid": "X5",
+            "renamed": "2025-01-09",
+            "type": "redomicile",
+            "reason": "...",
+        }
+    ]
+
+    class _ByTicker(_StubFetcher):
+        def fetch(self, ticker: str) -> list[dict[str, Any]]:
+            return [dict(r) for r in self._records] if ticker == "X5" else []
+
+    dohod = _ByTicker(
+        "skill_fill_dohod",
+        [
+            {"registry_close": "2021-05-28", "amount": 110.49, "currency": "RUB"},
+            {"registry_close": "2025-07-09", "amount": 648.0, "currency": "RUB"},
+        ],
+    )
+    result = fill_dividends(
+        "FIVE",
+        fetchers=[dohod],
+        tickers_dict={},
+        tickers_manual=manual,
+        prices_dir=tmp_path / "p",
+        dividends_dir=div_dir,
+    )
+    assert [r["registry_close"] for r in result.records] == ["2021-05-28"]
 
 
 def test_fill_dividends_tier_priority(tmp_path: Path) -> None:

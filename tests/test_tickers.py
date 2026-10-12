@@ -13,6 +13,7 @@ from pathlib import Path
 import pytest
 
 import tickers
+from tests.conftest import DATA_DIR
 
 
 @pytest.fixture
@@ -301,3 +302,20 @@ def test_manual_rejects_non_array(tmp_path: Path) -> None:
     p.write_text("{}", encoding="utf-8")
     with pytest.raises(ValueError, match="JSON array"):
         tickers.load_manual(p)
+
+
+def test_redomicile_pair_has_no_changeover_edge() -> None:
+    """A changeover edge stitches prices, a redomicile cuts dividends.
+    One pair under both rules gets two policies for one security."""
+    edges = {
+        (h["prev_ticker"], secid)
+        for secid, rec in tickers.load(DATA_DIR / "tickers.json").items()
+        for h in rec.get("history", [])
+        if h.get("source") == "iss_changeover"
+    }
+    redomiciles = {
+        (r["old_secid"], r["new_secid"])
+        for r in tickers.load_manual(DATA_DIR / "tickers_manual.json")
+        if r["type"] == "redomicile" and r["old_secid"] != r["new_secid"]
+    }
+    assert edges & redomiciles == set()

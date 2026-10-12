@@ -8,7 +8,7 @@ from typing import Any
 import httpx
 import pytest
 
-from ingest.dictionary import bootstrap, merge_external_aliases
+from ingest.dictionary import _is_rub_tqbr_receipt, bootstrap, merge_external_aliases
 
 
 def _listing_payload(rows: list[list[Any]]) -> dict[str, Any]:
@@ -74,7 +74,7 @@ def _boards(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 r.get("history_from"),
                 r.get("history_till"),
                 r.get("is_primary", 0),
-                "RUB",
+                r.get("currencyid", "RUB"),
                 "M",
             ]
         )
@@ -280,6 +280,26 @@ def test_bootstrap_filters_non_equity(fake_iss) -> None:  # type: ignore[no-unty
     assert "T" in out
     assert "TCSG" in out
     assert "SBMX" not in out
+
+
+@pytest.mark.parametrize(
+    ("secid", "board", "currency", "history_from", "expected"),
+    [
+        # A US ISIN is normal for a receipt on TQBR, so the rule never looks at it.
+        ("FIVE", "TQBR", "RUB", "2018-02-01", True),
+        ("BABA-RM", "TQBR", "RUB", "2022-01-01", False),
+        ("TMKS", "TQNE", "RUB", "2012-01-01", False),
+        ("XUSD", "TQBR", "USD", "2020-01-01", False),
+        ("NEVER", "TQBR", "RUB", None, False),
+    ],
+)
+def test_receipt_needs_rub_tqbr_history(
+    secid: str, board: str, currency: str, history_from: str | None, expected: bool
+) -> None:
+    boards = _boards(
+        [{"secid": secid, "boardid": board, "currencyid": currency, "history_from": history_from}]
+    )
+    assert _is_rub_tqbr_receipt(secid, boards) is expected
 
 
 def test_bootstrap_drops_null_history_rows(fake_iss) -> None:  # type: ignore[no-untyped-def]

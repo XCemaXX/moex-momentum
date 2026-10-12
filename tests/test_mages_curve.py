@@ -8,8 +8,16 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from mages.curve import _panel_weights, mages_nav
+from mages.curve import (
+    _panel_weights,
+    flat_positions,
+    mages_nav,
+    redomicile_predecessors,
+    with_predecessors,
+)
 from mages.loader import MagesQuarter, load_quarters
+from tests.conftest import DATA_DIR, Computed
+from tickers import load_manual
 
 
 def _returns(data: dict[str, list[float]], months: list[str]) -> pd.DataFrame:
@@ -75,3 +83,55 @@ def test_load_quarters_weights_sum_to_one(tmp_path: Path) -> None:
     assert q.n_shares == 2
     assert q.weights == pytest.approx({"A": 0.6, "B": 0.4})
     assert q.period == pd.Period("2024-01", "M")
+
+
+def test_successor_takes_predecessor_return_up_to_redomicile_month() -> None:
+    nan = float("nan")
+    months = ["2024-05", "2024-06", "2024-07", "2024-08"]
+    panel = _returns({"YNDX": [0.01, 0.02, 0.03, nan], "YDEX": [nan, nan, nan, 0.04]}, months)
+    out = with_predecessors(panel, {"YDEX": ("YNDX", pd.Period("2024-07", "M"))})
+    assert out["YDEX"].tolist() == pytest.approx([0.01, 0.02, 0.03, 0.04])
+    assert out["YNDX"].isna().tolist() == [False, False, False, True]
+
+
+def test_predecessor_return_never_leaks_past_the_redomicile() -> None:
+    nan = float("nan")
+    panel = _returns({"OLD": [0.01, 0.02], "NEW": [nan, nan]}, ["2025-01", "2025-02"])
+    out = with_predecessors(panel, {"NEW": ("OLD", pd.Period("2025-01", "M"))})
+    assert out["NEW"].iloc[0] == pytest.approx(0.01)
+    assert pd.isna(out["NEW"].iloc[1])
+
+
+def test_flat_positions_lists_missing_months_per_quarter() -> None:
+    nan = float("nan")
+    months = ["2024-01", "2024-02", "2024-03", "2024-04"]
+    panel = _returns({"A": [0.1, 0.1, 0.1, 0.1], "B": [nan, 0.1, 0.1, nan]}, months)
+    q1 = MagesQuarter("2024-Q1", pd.Period("2024-01", "M"), "u", {"A": 0.5, "B": 0.5}, 2, [])
+    q2 = MagesQuarter("2024-Q2", pd.Period("2024-04", "M"), "u", {"A": 1.0}, 1, [])
+    flat = flat_positions([q1, q2], panel)
+    assert [(f.quarter, str(f.month), f.ticker) for f in flat] == [("2024-Q1", "2024-01", "B")]
+
+
+def test_no_mages_position_is_flat_while_data_exists(computed: Computed) -> None:
+    """A position may be booked as 0% only when neither it nor its predecessor
+    has a return that month."""
+    quarters = load_quarters(DATA_DIR / "mages")
+    predecessors = redomicile_predecessors(load_manual(DATA_DIR / "tickers_manual.json"))
+    raw = computed.panels[0]
+    filled = with_predecessors(raw, predecessors)
+    for f in flat_positions(quarters, filled):
+        legs = [f.ticker]
+        if f.ticker in predecessors and f.month <= predecessors[f.ticker][1]:
+            legs.append(predecessors[f.ticker][0])
+        for leg in legs:
+            assert leg not in raw.columns or pd.isna(raw.at[f.month, leg]), (f, leg)
+
+
+def test_known_redomicile_gaps_are_bridged(computed: Computed) -> None:
+    """2023-Q4..2024-Q2 snapshots name YDEX, RAGR, CNRU before they traded."""
+    quarters = load_quarters(DATA_DIR / "mages")
+    predecessors = redomicile_predecessors(load_manual(DATA_DIR / "tickers_manual.json"))
+    flat = flat_positions(quarters, with_predecessors(computed.panels[0], predecessors))
+    early = {f.ticker for f in flat if f.quarter in ("2023-Q4", "2024-Q1", "2024-Q2")}
+    # GEMC was halted; FIVE stopped trading 2024-04-03, months before X5 listed.
+    assert early <= {"GEMC", "X5"}

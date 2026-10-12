@@ -8,8 +8,10 @@
 {"secid": "DERZP", "reason": "ISS empty for all boards"}
 {"secid": "DIXY-003D", "reason": "ISS empty for all boards"}
 {"secid": "DLVBP", "reason": "ISS empty for all boards"}
+{"secid": "DMOB", "reason": "depositary receipt, a single trading day on TQBR"}
 {"secid": "ELIB", "reason": "ISS empty for all boards"}
 {"secid": "ELSI", "reason": "ISS empty for all boards"}
+{"secid": "EM44", "reason": "depositary receipt, too illiquid on TQBR to model; excluded by decision"}
 {"secid": "EMTI", "reason": "ISS empty for all boards"}
 {"secid": "ERAV", "reason": "ISS empty for all boards"}
 {"secid": "ERCO03", "reason": "ISS empty for all boards"}
@@ -19,6 +21,7 @@
 {"secid": "GCHE-001D", "reason": "ISS empty for all boards"}
 {"secid": "GRAZ-003D", "reason": "ISS empty for all boards"}
 {"secid": "GTSS", "reason": "ISS empty for all boards"}
+{"secid": "HMSG", "reason": "depositary receipt, too illiquid on TQBR to model; excluded by decision"}
 {"secid": "HYDR-014D", "reason": "ISS empty for all boards"}
 {"secid": "HYDR-015D", "reason": "ISS empty for all boards"}
 {"secid": "HYDR-016D", "reason": "ISS empty for all boards"}
@@ -90,6 +93,7 @@
 {"secid": "RBCI-002D", "reason": "ISS empty for all boards"}
 {"secid": "RBCM-001D", "reason": "ISS empty for all boards"}
 {"secid": "RVST", "reason": "ISS empty for all boards"}
+{"secid": "SFTL", "reason": "depositary receipt, too illiquid on TQBR to model; excluded by decision"}
 {"secid": "SLND", "reason": "ISS empty for all boards"}
 {"secid": "SPGRP", "reason": "ISS empty for all boards"}
 {"secid": "SVZB", "reason": "ISS empty for all boards"}
@@ -109,6 +113,7 @@
 {"secid": "TGKM-003D", "reason": "ISS empty for all boards"}
 {"secid": "TGVK", "reason": "ISS empty for all boards"}
 {"secid": "TKSM", "reason": "ISS empty for all boards"}
+{"secid": "TMKS", "reason": "depositary receipt, never traded on TQBR"}
 {"secid": "TPLF", "reason": "ISS empty for all boards"}
 {"secid": "TRAV", "reason": "ISS empty for all boards"}
 {"secid": "TRFM", "reason": "ISS empty for all boards"}

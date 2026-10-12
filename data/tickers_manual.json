@@ -14,13 +14,6 @@
     "reason": "NL→RU редомициляция X5 Retail Group. История разрывная, FIVE делистнут с MOEX 2024."
   },
   {
-    "old_secid": "MAIL",
-    "new_secid": "VKCO",
-    "renamed": "2021-10-12",
-    "type": "redomicile",
-    "reason": "Mail.ru Group → ВК. Юридически новая структура (МКПАО) при делистинге GDR. Разные ISIN, история разрывная."
-  },
-  {
     "old_secid": "HHRU",
     "new_secid": "HEAD",
     "renamed": "2024-09-25",
@@ -33,6 +26,34 @@
     "renamed": "2024-10-15",
     "type": "redomicile",
     "reason": "Polymetal делистнут с MOEX 2024-10-15. SECID не сменился, но торги прекратились — отметка нужна, чтобы фаза 4 знала когда обрезать prices. (По факту это не редомициляция, а делистинг — но format минимальный, type=redomicile с new=old подходит как маркер.)"
+  },
+  {
+    "old_secid": "AGRO",
+    "new_secid": "RAGR",
+    "renamed": "2025-02-17",
+    "type": "redomicile",
+    "reason": "Rusagro: GDR AGRO (Кипр) → акция МКПАО «Группа Русагро». Разные ISIN, ребра changeover нет. Дата = первый торговый день RAGR на TQBR. Цены не сшиваем."
+  },
+  {
+    "old_secid": "CIAN",
+    "new_secid": "CNRU",
+    "renamed": "2025-02-07",
+    "type": "redomicile",
+    "reason": "Cian: ADR CIAN → акция МКПАО «Циан». Разные ISIN, ребра changeover нет. Дата = первый торговый день CNRU на TQBR. Цены не сшиваем."
+  },
+  {
+    "old_secid": "FIXP",
+    "new_secid": "FIXR",
+    "renamed": "2025-07-09",
+    "type": "redomicile",
+    "reason": "Fix Price: GDR FIXP → акция ПАО «Фикс Прайс». Разные ISIN, ребра changeover нет. Дата = первый торговый день FIXR на TQBR. Цены не сшиваем."
+  },
+  {
+    "old_secid": "ENPL",
+    "new_secid": "ENPG",
+    "renamed": "2020-02-18",
+    "type": "redomicile",
+    "reason": "En+: GDR ENPL (En+ Group plc, Джерси) → акция МКПАО «ЭН+ ГРУП». Разные ISIN, ребра changeover нет. Дата = первый торговый день ENPG на TQBR. Цены не сшиваем."
   },
   {
     "old_secid": "BELU",

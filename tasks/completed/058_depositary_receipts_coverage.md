@@ -80,3 +80,21 @@
   для этого изменения снимается.
 - Якоря VSMO = 4.6458% и LKOH/SBER не сдвинулись (скор по тикеру от вселенной не зависит).
 - Отчёт о влиянии на бэктест и Магов в `agent_context/`.
+
+## Результат (2026-10-12)
+
+- Словарь: расписка входит, если торговалась на TQBR в рублях и без `-RM`. Добавлены RUALR, LNTA, AGRO,
+  ENPL, FIVE, HHRU, FIXP, CIAN и сама собой MAIL (ряд = сшитый VKCO, слот один; task 059).
+  QIWI/OKEY/GLTR перезаписаны из ISS. HMSG, SFTL, DMOB, EM44, TMKS — в `tickers_unavailable.jsonl`.
+- `tickers_manual.json`: AGRO→RAGR, CIAN→CNRU, FIXP→FIXR, ENPL→ENPG. Fill берёт выплаты предшественника
+  со страницы наследника (строки до `renamed`).
+- RUAL/RUALR: `SAME_ISSUER_LISTINGS` в `config.py`. RUALR = 10 акций RUSAL.
+- Дивиденды: Yahoo `.ME` мёртв, агрегаторы врут в единицах (AGRO ÷7, FIXP ÷158, RUALR ×1/10).
+  Суммы взяты из раскрытий эмитентов, вердикты в `_conflicts_resolved.json`.
+- Маги: наследник до месяца редомициляции берёт доходность предшественника; нули без данных —
+  предупреждение. Остаток: GEMC, X5 2024-05..2025-01, YDEX 2024-07, OZON 2025-10/11, TGKJ (task 060).
+- Детектор >30%: 9 флагов по новым тикерам, все `limit_move`.
+- Отчёт: `agent_context/dr_coverage_impact.md`. curve_fit Q1 CAGR 20.00 → 18.93%, спред −2.36 п.п.;
+  Маги CAGR 3.54 → 4.93%.
+- Найдено попутно: `momentum tickers refresh` без `--force-refresh` на кэше старше 7 дней помечает
+  все живые тикеры делистингом (263 штуки). Не исправлено.

@@ -19,7 +19,7 @@ from typing import cast
 
 import pandas as pd
 
-from config import UNIVERSE_MIN_MONTHLY_CLOSES
+from config import SAME_ISSUER_LISTINGS, UNIVERSE_MIN_MONTHLY_CLOSES
 from storage.records import read_records
 from storage.schemas import MONTHLY_CASTS
 from tickers import TickersDict
@@ -151,6 +151,24 @@ def _drop_renamed_duplicates(
     return sorted(keep)
 
 
+def _drop_same_issuer_duplicates(
+    candidates: list[str], medians: dict[str, float] | None
+) -> list[str]:
+    """One issuer, one slot, for listings `rename_edges` cannot see.
+
+    Without a value window the alphabetically first leg wins, so the result
+    stays deterministic.
+    """
+    keep = set(candidates)
+    for pair in SAME_ISSUER_LISTINGS:
+        present = [tk for tk in pair if tk in keep]
+        if len(present) < 2:
+            continue
+        ranked = sorted(present, key=lambda tk: (-(medians or {}).get(tk, 0.0), tk))
+        keep.difference_update(ranked[1:])
+    return sorted(keep)
+
+
 def universe_at(
     t: pd.Period,
     returns_panel: pd.DataFrame,
@@ -183,11 +201,16 @@ def universe_at(
     # the universe keeps its declared size.
     candidates = _drop_renamed_duplicates(candidates, tickers_dict, t)
 
-    if top_n is not None and value_panel is not None and not value_panel.empty:
+    medians = None
+    if value_panel is not None and not value_panel.empty:
         medians = _trailing_value_medians(value_panel, window_start, window_end, candidates)
-        if medians is not None:
-            ranked = sorted(medians, key=lambda tk: (-medians[tk], tk))
-            candidates = ranked[:top_n]
+    candidates = _drop_same_issuer_duplicates(candidates, medians)
+
+    if top_n is not None and medians is not None:
+        ranked = sorted(
+            (tk for tk in candidates if tk in medians), key=lambda tk: (-medians[tk], tk)
+        )
+        candidates = ranked[:top_n]
     return sorted(candidates)
 
 

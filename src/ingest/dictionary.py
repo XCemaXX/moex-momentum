@@ -39,6 +39,8 @@ LISTING_PATH = "/history/engines/stock/markets/shares/listing.json"
 CHANGEOVER_PATH = "/history/engines/stock/markets/shares/securities/changeover.json"
 
 EQUITY_TYPES = frozenset({"common_share", "preferred_share"})
+DEPOSITARY_RECEIPT_TYPE = "depositary_receipt"
+FOREIGN_DR_SUFFIX = "-RM"
 PLACEHOLDER_NEW_SECID = "XXXXXX"
 DELISTED_GAP_DAYS = 7
 ISS_REQUEST_DELAY_S = 0.03
@@ -133,6 +135,31 @@ def _parse_boards(block: Mapping[str, Any]) -> list[Board]:
     # ISS returns boards in no stable order, which churned the diff every refresh.
     out.sort(key=lambda x: (not x.get("is_primary", False), x.get("history_from", "")))
     return out
+
+
+def _is_rub_tqbr_receipt(secid: str, boards_block: Mapping[str, Any]) -> bool:
+    """A receipt counts as an equity only if it ever traded on TQBR in roubles.
+
+    Not filtered by ISIN: several receipts on TQBR carry a US ISIN.
+    """
+    if secid.endswith(FOREIGN_DR_SUFFIX):
+        return False
+    cols: list[str] = boards_block["columns"]
+    for row in boards_block["data"]:
+        rec = dict(zip(cols, row, strict=True))
+        if (
+            rec.get("boardid") == "TQBR"
+            and rec.get("history_from")
+            and rec.get("currencyid") == "RUB"
+        ):
+            return True
+    return False
+
+
+def _is_equity(secid: str, type_: str, boards_block: Mapping[str, Any]) -> bool:
+    if type_ == DEPOSITARY_RECEIPT_TYPE:
+        return _is_rub_tqbr_receipt(secid, boards_block)
+    return type_ in EQUITY_TYPES
 
 
 def _coarsen_history_till(boards: list[Board]) -> None:
@@ -263,8 +290,7 @@ def bootstrap(
             LOG.warning("secid %s: 404, skip", secid)
             continue
         desc = _pivot_kv(payload["description"])
-        type_ = desc.get("TYPE", "")
-        if type_ not in EQUITY_TYPES:
+        if not _is_equity(secid, desc.get("TYPE", ""), payload["boards"]):
             continue
         shortname = desc.get("SHORTNAME", "").strip()
         if not shortname:

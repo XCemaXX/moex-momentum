@@ -326,6 +326,30 @@
     ],
     "type": "share"
   },
+  "AGRO": {
+    "aliases": [
+      "ГДР ROS AGRO PLC ORD SHS",
+      "GDR ROS AGRO PLC ORD SHS"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2014-12-01",
+        "history_till": "2025-08-31",
+        "is_primary": true
+      }
+    ],
+    "canonical": "AGRO-гдр",
+    "delisted_after": "2025-08-18",
+    "history": [
+      {
+        "prev_ticker": "AGRO-ME",
+        "renamed": "2014-12-01",
+        "source": "iss_changeover"
+      }
+    ],
+    "type": "share"
+  },
   "AKHA": {
     "aliases": [
       "ОАО \"ПАВА\" ао",
@@ -2806,6 +2830,23 @@
     "delisted_after": "2008-03-20",
     "type": "share"
   },
+  "CIAN": {
+    "aliases": [
+      "АДР Cian PLC ORD SHS",
+      "ADR Cian PLC ORD SHS"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2021-11-05",
+        "history_till": "2025-04-30",
+        "is_primary": true
+      }
+    ],
+    "canonical": "CIAN-адр",
+    "delisted_after": "2025-04-02",
+    "type": "share"
+  },
   "CLGR": {
     "aliases": [
       "ао Челябинская генерир.компОАО",
@@ -4318,6 +4359,23 @@
     "canonical": "ЭН+ГРУП ао",
     "type": "share"
   },
+  "ENPL": {
+    "aliases": [
+      "ГДР МКПАО \"ЭН+ ГРУП\" ORD SHS",
+      "GDR En+Group ORD SHS"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2017-11-08",
+        "history_till": "2020-04-30",
+        "is_primary": true
+      }
+    ],
+    "canonical": "ENPL-гдр",
+    "delisted_after": "2020-04-17",
+    "type": "share"
+  },
   "ENRU": {
     "aliases": [
       "\"ЭЛ5-Энерго\" ПАО",
@@ -4840,6 +4898,53 @@
     ],
     "canonical": "НОВАТЭК-ао",
     "delisted_after": "2005-10-21",
+    "type": "share"
+  },
+  "FIVE": {
+    "aliases": [
+      "ГДР X5 RetailGroup N.V.ORD SHS",
+      "GDR X5 RetailGroup N.V.ORD SHS"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2018-02-01",
+        "history_till": "2024-11-30",
+        "is_primary": true
+      },
+      {
+        "board": "SPEQ",
+        "history_from": "2020-05-27",
+        "history_till": "2024-04-30",
+        "is_primary": false
+      }
+    ],
+    "canonical": "FIVE-гдр",
+    "delisted_after": "2024-11-22",
+    "history": [
+      {
+        "prev_ticker": "FIVE-ME",
+        "renamed": "2018-02-01",
+        "source": "iss_changeover"
+      }
+    ],
+    "type": "share"
+  },
+  "FIXP": {
+    "aliases": [
+      "ГДР FixPrice Group PLC ORD SHS",
+      "GDR FixPrice Group PLC ORD SHS"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2021-03-10",
+        "history_till": "2025-08-31",
+        "is_primary": true
+      }
+    ],
+    "canonical": "FIXP-гдр",
+    "delisted_after": "2025-08-05",
     "type": "share"
   },
   "FIXR": {
@@ -5409,10 +5514,26 @@
   },
   "GLTR": {
     "aliases": [
-      "Глобалтранс"
+      "Глобалтранс",
+      "ГДР Globaltrans Invest ORD SHS",
+      "GDR Globaltrans Inves ORD SHS"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2020-10-28",
+        "history_till": "2024-11-30",
+        "is_primary": true
+      },
+      {
+        "board": "SMAL",
+        "history_from": "2020-10-29",
+        "history_till": "2022-02-28",
+        "is_primary": false
+      }
     ],
     "canonical": "Globaltrans",
-    "delisted_after": "2024-09-30",
+    "delisted_after": "2024-11-11",
     "history": [
       {
         "prev_ticker": "GLTR-ME",
@@ -5856,6 +5977,23 @@
       }
     ],
     "canonical": "Хэдхантер",
+    "type": "share"
+  },
+  "HHRU": {
+    "aliases": [
+      "АДР HeadHunter Group ORD SHS",
+      "ADR HeadHunter Group ORD SHS"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2020-09-25",
+        "history_till": "2024-09-30",
+        "is_primary": true
+      }
+    ],
+    "canonical": "HHRU-адр",
+    "delisted_after": "2024-09-27",
     "type": "share"
   },
   "HIMC": {
@@ -9826,6 +9964,29 @@
     "canonical": "Ламбумиз",
     "type": "share"
   },
+  "LNTA": {
+    "aliases": [
+      "МКПАО Лента др",
+      "IPJSC Lenta dr"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2014-06-09",
+        "history_till": "2022-04-30",
+        "is_primary": true
+      },
+      {
+        "board": "TQNE",
+        "history_from": "2014-03-06",
+        "history_till": "2014-06-30",
+        "is_primary": false
+      }
+    ],
+    "canonical": "Лента др",
+    "delisted_after": "2022-04-18",
+    "type": "share"
+  },
   "LNZL": {
     "aliases": [
       "\"Лензолото\" ПАО ао",
@@ -10309,6 +10470,36 @@
     ],
     "canonical": "ММК-002D",
     "delisted_after": "2007-08-23",
+    "type": "share"
+  },
+  "MAIL": {
+    "aliases": [
+      "ГДР VK Company Limited ORD SHS",
+      "GDR VK Company Limited ORD SHS"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2020-07-02",
+        "history_till": "2021-12-31",
+        "is_primary": true
+      },
+      {
+        "board": "SPEQ",
+        "history_from": "2020-12-18",
+        "history_till": "2021-09-30",
+        "is_primary": false
+      }
+    ],
+    "canonical": "VK-гдр",
+    "delisted_after": "2021-12-13",
+    "history": [
+      {
+        "prev_ticker": "MAIL-ME",
+        "renamed": "2020-06-30",
+        "source": "iss_changeover"
+      }
+    ],
     "type": "share"
   },
   "MASZ": {
@@ -16601,7 +16792,23 @@
   },
   "OKEY": {
     "aliases": [
-      "Окей"
+      "Окей",
+      "ГДР OKEY Group S.A. ORD SHS",
+      "GDR OKEY Group ORD SHS"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2020-12-14",
+        "history_till": "2026-09-30",
+        "is_primary": true
+      },
+      {
+        "board": "SMAL",
+        "history_from": "2021-04-20",
+        "history_till": "2026-05-31",
+        "is_primary": false
+      }
     ],
     "canonical": "O'Key Group",
     "history": [
@@ -18259,8 +18466,23 @@
     "type": "share"
   },
   "QIWI": {
+    "aliases": [],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2014-06-06",
+        "history_till": "2025-11-30",
+        "is_primary": true
+      },
+      {
+        "board": "TQNE",
+        "history_from": "2013-10-08",
+        "history_till": "2014-06-30",
+        "is_primary": false
+      }
+    ],
     "canonical": "QIWI plc",
-    "delisted_after": "2023-09-25",
+    "delisted_after": "2025-11-19",
     "type": "share"
   },
   "RAGR": {
@@ -20183,6 +20405,41 @@
       }
     ],
     "canonical": "РУСАЛ ао",
+    "type": "share"
+  },
+  "RUALR": {
+    "aliases": [
+      "РДР Юнайтед Компани РУСАЛ Плс",
+      "RDR United Company RUSAL Plc"
+    ],
+    "boards": [
+      {
+        "board": "TQBR",
+        "history_from": "2013-09-02",
+        "history_till": "2017-09-30",
+        "is_primary": true
+      },
+      {
+        "board": "EQLV",
+        "history_from": "2010-12-24",
+        "history_till": "2011-03-31",
+        "is_primary": false
+      },
+      {
+        "board": "SMAL",
+        "history_from": "2011-03-01",
+        "history_till": "2017-08-31",
+        "is_primary": false
+      },
+      {
+        "board": "EQBR",
+        "history_from": "2011-04-01",
+        "history_till": "2013-08-31",
+        "is_primary": false
+      }
+    ],
+    "canonical": "Русал рдр",
+    "delisted_after": "2017-09-01",
     "type": "share"
   },
   "RUGR": {

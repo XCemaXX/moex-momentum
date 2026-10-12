@@ -42,6 +42,11 @@ TOP_K_CONCENTRATION: int = 15
 # the Nth name moves ~140× over 2013-2026).
 UNIVERSE_TOP_N_LIQUID: int = 100
 
+# Two listings of one issuer's same claim with no rename edge between them. In a
+# month where both are eligible only the more liquid one (window median value)
+# keeps the slot.
+SAME_ISSUER_LISTINGS: tuple[tuple[str, str], ...] = (("RUAL", "RUALR"),)
+
 # Pending-inclusion block (display-only): a young liquid ticker (<13 closes, no
 # q yet) gets a would-be-quartile estimate only once it has at least this many
 # months since listing. Below it, too few points for a meaningful score.

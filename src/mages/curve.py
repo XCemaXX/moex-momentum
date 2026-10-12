@@ -7,14 +7,18 @@ turnover, mirroring the quartile backtest so the two are comparable. Returns are
 total-return, equity sleeve only — non-investable instruments are already out of
 `shares` in data/mages.
 
-A held ticker with no return for a month contributes 0% (flat), same as the
-backtest engine. A share with no price panel at all is dropped and the quarter's
-weights re-normalized, with a WARN.
+Snapshots name a redomiciled issuer by its new ticker before that ticker
+trades; such months take the predecessor's return. A held ticker still without
+a return contributes 0% (flat), same as the backtest engine, and is reported by
+`flat_positions`. A share with no price panel at all is dropped and the
+quarter's weights re-normalized, with a WARN.
 """
 
 from __future__ import annotations
 
 import logging
+from collections.abc import Mapping
+from dataclasses import dataclass
 from pathlib import Path
 
 import pandas as pd
@@ -24,8 +28,65 @@ from mages.loader import MagesQuarter
 from momentum.benchmark import mcftrr_monthly_returns
 from momentum.nav import turnover
 from momentum.universe import load_panel
+from tickers import ManualEntry
 
 LOG = logging.getLogger(__name__)
+
+
+Predecessors = Mapping[str, tuple[str, pd.Period]]
+
+
+@dataclass(frozen=True)
+class FlatPosition:
+    quarter: str
+    month: pd.Period
+    ticker: str
+    weight: float  # quarter target weight
+
+
+def redomicile_predecessors(tickers_manual: list[ManualEntry]) -> dict[str, tuple[str, pd.Period]]:
+    """successor -> (predecessor, month of the redomicile)."""
+    out: dict[str, tuple[str, pd.Period]] = {}
+    for rec in tickers_manual:
+        old, new = rec.get("old_secid"), rec.get("new_secid")
+        if rec.get("type") == "redomicile" and old and new and old != new:
+            out[new] = (old, pd.Period(rec["renamed"], freq="M"))
+    return out
+
+
+def with_predecessors(returns_panel: pd.DataFrame, predecessors: Predecessors) -> pd.DataFrame:
+    """Fill a successor's missing months up to its redomicile month from the predecessor.
+
+    The redomicile month itself is included: the successor's first month has no
+    return, while the predecessor usually traded part of it.
+    """
+    out = returns_panel.copy()
+    for succ, (pred, renamed) in predecessors.items():
+        if pred not in out.columns:
+            continue
+        donor = out[pred].where(out.index <= renamed)
+        out[succ] = out[succ].fillna(donor) if succ in out.columns else donor
+    return out
+
+
+def flat_positions(quarters: list[MagesQuarter], returns_panel: pd.DataFrame) -> list[FlatPosition]:
+    """Held positions with no return in a month inside the panel — booked as 0%."""
+    if returns_panel.empty:
+        return []
+    cols = set(returns_panel.columns)
+    ordered = sorted(quarters, key=lambda q: q.period)
+    last = returns_panel.index.max()
+    out: list[FlatPosition] = []
+    for i, q in enumerate(ordered):
+        end = ordered[i + 1].period - 1 if i + 1 < len(ordered) else last
+        months = returns_panel.index[
+            (returns_panel.index >= q.period) & (returns_panel.index <= end)
+        ]
+        for tk, w in _panel_weights(q.weights, cols).items():
+            for t in months:
+                if pd.isna(returns_panel.at[t, tk]):
+                    out.append(FlatPosition(q.quarter, t, tk, w))
+    return out
 
 
 def _panel_weights(weights: dict[str, float], columns: set[str]) -> dict[str, float]:
@@ -100,11 +161,23 @@ def build_mages_frame(
     *,
     monthly_dir: Path,
     indices_dir: Path,
+    predecessors: Predecessors | None = None,
     commission_per_side: float = COMMISSION_PER_SIDE,
 ) -> pd.DataFrame:
     """DataFrame indexed Period[M] with columns Mages, MCFTRR — both NAV start 1."""
-    tickers = sorted({tk for q in quarters for tk in q.weights})
-    returns_panel = load_panel(monthly_dir, ticker_filter=tickers)[0]
+    predecessors = predecessors or {}
+    held = {tk for q in quarters for tk in q.weights}
+    tickers = sorted(held | {predecessors[tk][0] for tk in held if tk in predecessors})
+    returns_panel = with_predecessors(
+        load_panel(monthly_dir, ticker_filter=tickers)[0], predecessors
+    )
+    flat = flat_positions(quarters, returns_panel)
+    if flat:
+        LOG.warning(
+            "mages: %d position-month(s) without a return booked as 0%%: %s",
+            len(flat),
+            ", ".join(f"{f.ticker} {f.month} ({f.weight:.1%})" for f in flat),
+        )
     mages = mages_nav(quarters, returns_panel, commission_per_side=commission_per_side)
     if mages.empty:
         return pd.DataFrame()

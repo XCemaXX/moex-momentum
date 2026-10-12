@@ -61,6 +61,22 @@ def predecessor_cutoff(
     return max(cutoffs) if cutoffs else None
 
 
+def successor_page(ticker: str, tickers_manual: list[ManualEntry]) -> tuple[str, str] | None:
+    """(successor, renamed) when `ticker` is the old leg of a redomicile, else None.
+
+    Feeds key pages by the live ticker, so a receipt's payouts sit on its
+    successor's page. Only rows dated before `renamed` belong to the receipt.
+    """
+    for rec in tickers_manual:
+        if (
+            rec.get("type") == "redomicile"
+            and rec.get("old_secid") == ticker
+            and rec.get("new_secid") != ticker
+        ):
+            return rec["new_secid"], rec["renamed"]
+    return None
+
+
 @dataclass
 class FillResult:
     ticker: str
@@ -149,6 +165,8 @@ def fill_dividends(
     drops = [v for v in verdicts if v["action"] == "drop" and v["ticker"] == ticker]
     ignores = [v for v in verdicts if v["action"] == "ignore"]
 
+    successor = successor_page(ticker, tickers_manual)
+
     proposed: list[dict[str, Any]] = []
     n_pre_cutoff = 0
     n_verdict_dropped = 0
@@ -157,6 +175,9 @@ def fill_dividends(
     for f in fetchers:
         try:
             fetched = f.fetch(ticker)
+            if successor is not None:
+                succ, renamed = successor
+                fetched += [r for r in f.fetch(succ) if r["registry_close"] < renamed]
         except Exception as exc:
             LOG.warning("fetcher %s failed for %s: %s", f.source_tag, ticker, exc)
             continue

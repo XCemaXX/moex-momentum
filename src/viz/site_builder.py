@@ -22,7 +22,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from markdown_it import MarkdownIt
 
 from config import TOP_K_CONCENTRATION
-from mages.curve import build_mages_frame
+from mages.curve import build_mages_frame, redomicile_predecessors
 from mages.loader import load_quarters
 from mages.weighted_q1 import build_mages_table, build_weighted_frame
 from momentum.topn_fan import top_k_nav_from_scores
@@ -30,6 +30,7 @@ from momentum.transitions import Q_LABELS, sticky_tickers, transition_windows
 from storage.records import write_text_atomic
 from storage.schemas import SCORES_FIELDS
 from tickers import load as load_tickers
+from tickers import load_manual
 from viz.mages_charts import plot_mages_vs_mcftrr, plot_weighted_q1
 from viz.plotly_charts import (
     _COLORS,
@@ -324,13 +325,19 @@ def _mages_page_context(
     indices_dir: Path | None,
     mages_intro_md: Path | None,
     mages_methodology_md: Path | None,
+    tickers_manual_path: Path | None = None,
 ) -> dict[str, Any] | None:
     """Context for mages_index.html (task 002), or None when its inputs (data +
     price panel + benchmark) are absent — a repo without data/mages just omits it."""
     if not (mages_dir and monthly_dir and indices_dir and any(mages_dir.glob("*.json"))):
         return None
     quarters = load_quarters(mages_dir)
-    frame = build_mages_frame(quarters, monthly_dir=monthly_dir, indices_dir=indices_dir)
+    predecessors = (
+        redomicile_predecessors(load_manual(tickers_manual_path)) if tickers_manual_path else {}
+    )
+    frame = build_mages_frame(
+        quarters, monthly_dir=monthly_dir, indices_dir=indices_dir, predecessors=predecessors
+    )
     if frame.empty:
         return None
     wframe = build_weighted_frame(
@@ -421,6 +428,7 @@ def build_site(
     indices_dir: Path | None = None,
     mages_intro_md: Path | None = None,
     mages_methodology_md: Path | None = None,
+    tickers_manual_path: Path | None = None,
 ) -> dict[str, Path]:
     """Render the full site to `out_dir`. Returns map of logical name → path.
 
@@ -465,6 +473,7 @@ def build_site(
         indices_dir=indices_dir,
         mages_intro_md=mages_intro_md,
         mages_methodology_md=mages_methodology_md,
+        tickers_manual_path=tickers_manual_path,
     )
     compare_ready = bool(compare_simple_path and compare_curve_fit_path and compare_sweep_path)
     optional_rendered = {"mages_index.html"} if mages_ctx is not None else set()

@@ -1627,12 +1627,12 @@
     "registry_close": "2014-06-13",
     "action": "augment",
     "add": {
-      "amount": 21.28,
+      "amount": 11.14,
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "13.06.2014 | 2014 н/расп | 11.14 ; 02.06.2014 | 1кв 2014 | 10.14 [https://smart-lab.ru/q/QIWI/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "FY2013 final, USD 0.32 per ADS; RUB 11.14 per smart-lab. Was stored summed with the 2014-06-02 payout. [https://smart-lab.ru/q/QIWI/dividend/] [sec.gov/Archives/edgar/data/0001561566/000119312514222310/d737512dex991.htm]",
+    "resolved_at": "2026-10-12"
   },
   {
     "ticker": "QIWI",
@@ -2079,19 +2079,19 @@
     "resolved_at": "2026-05-17"
   },
   {
-    "ticker": "RAGR",
-    "registry_close": "2015-05-21",
+    "ticker": "AGRO",
+    "registry_close": "2015-05-22",
     "action": "augment",
     "add": {
-      "amount": 23.48,
+      "amount": 26.01,
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "May 21, 2015 | May 29, 2015 | 23.48355 | Final | 9.73% [https://www.investing.com/equities/ros-agro-plc-dividends]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB 26.01 per GDR; record 2015-05-22 (ex 05-21). Old 23.48 matched no issuer figure. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/281/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2015-10-02",
     "action": "augment",
     "add": {
@@ -2099,11 +2099,11 @@
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "02.10.2015 | 15.29 | RUB | Full Year 2014 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB 15.29 per GDR. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/355/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2016-05-27",
     "action": "augment",
     "add": {
@@ -2111,11 +2111,11 @@
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "27.05.2016 | 39.69 | RUB | Full Year 2015 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB 39.69 per GDR. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/509/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2016-09-23",
     "action": "augment",
     "add": {
@@ -2123,11 +2123,11 @@
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "23.09.2016 | 14.91 | RUB | 2Q 2016 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB 14.91 per GDR. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/553/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2017-04-13",
     "action": "augment",
     "add": {
@@ -2135,11 +2135,11 @@
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "13.04.2017 | 34.35 | RUB | Full Year 2016 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB 34.35 per GDR. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/657/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2017-09-14",
     "action": "augment",
     "add": {
@@ -2147,23 +2147,23 @@
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "14.09.2017 | 13.84 | RUB | 2Q 2017 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB 13.84 per GDR. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/715/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
-    "registry_close": "2018-04-12",
+    "ticker": "AGRO",
+    "registry_close": "2018-04-13",
     "action": "augment",
     "add": {
-      "amount": 16.27,
+      "amount": 16.53,
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "12.04.2018 | 16.27 | RUB | 4Q 2017 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB total / outstanding GDRs (treasury GDRs excluded) = 16.53, reproduces USD 0.29. Old 16.27 divided by issued GDRs; 04-12 was the ex-date. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/779/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2018-09-14",
     "action": "augment",
     "add": {
@@ -2171,35 +2171,35 @@
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "14.09.2018 | 7.63 | RUB | 2Q 2018 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB 7.63 per GDR. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/847/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2019-04-26",
     "action": "augment",
     "add": {
-      "amount": 25.24,
+      "amount": 25.64,
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "26.04.2019 | 25.24 | RUB | Full Year 2018 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB total / outstanding GDRs = 25.64, reproduces USD 0.39 (digrin agrees). Old 25.24 divided by issued GDRs. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/890/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2019-09-13",
     "action": "augment",
     "add": {
-      "amount": 12.5,
+      "amount": 12.52,
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "13.09.2019 | 12.5 | RUB | 2Q 2019 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). RUB total / outstanding GDRs = 12.52, reproduces USD 0.19. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/914/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2020-04-17",
     "action": "augment",
     "add": {
@@ -2207,11 +2207,11 @@
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "17.04.2020 | 21.18 | RUB | 4Q 2019 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). USD 0.32 x issuer rate 66.1854. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/953/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2020-09-18",
     "action": "augment",
     "add": {
@@ -2219,32 +2219,32 @@
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "18.09.2020 | 13.9 | RUB | 2Q 2020 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). USD 0.19 per GDR; RUB at the 2020-08-14 CBR rate (14.29 at the record-date rate). [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/978/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2021-04-16",
     "action": "augment",
     "add": {
-      "amount": 76.44,
+      "amount": 76.45,
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "16.04.2021 | 76.44 | RUB | 4Q 2020 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). USD 1.04 x issuer reference rate 73.5081. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/1026/]",
+    "resolved_at": "2026-10-12"
   },
   {
-    "ticker": "RAGR",
+    "ticker": "AGRO",
     "registry_close": "2021-09-10",
     "action": "augment",
     "add": {
-      "amount": 65.5,
+      "amount": 65.48,
       "currency": "RUB",
       "source": "manual_disclosure"
     },
-    "reason": "10.09.2021 | 65.5 | RUB | 2Q 2021 [https://smart-lab.ru/q/RAGR/dividend/]",
-    "resolved_at": "2026-05-17"
+    "reason": "Rusagro GDR-era payout (paid before the RAGR redomicile). USD 0.89 x issuer reference rate 73.5671. [https://www.rusagrogroup.ru/en/investors/news-events/press-releases/single-view/article/1070/]",
+    "resolved_at": "2026-10-12"
   },
   {
     "ticker": "OKEY",
@@ -4994,5 +4994,305 @@
     },
     "reason": "Same never-declared FY2025 dividend as SVETP 2026-06-01. Not stored now; this drop removes it if a fill run re-adds it from smart-lab.",
     "resolved_at": "2026-10-01"
+  },
+  {
+    "ticker": "QIWI",
+    "registry_close": "2014-06-02",
+    "action": "augment",
+    "add": {
+      "amount": 10.14,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "1Q 2014, USD 0.29 per ADS; RUB 10.14 per smart-lab. Separate record date from 2014-06-13. [https://smart-lab.ru/q/QIWI/dividend/] [sec.gov/Archives/edgar/data/0001561566/000119312514209093/d733415dex991.htm]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIVE",
+    "registry_close": "2018-05-25",
+    "action": "augment",
+    "add": {
+      "amount": 79.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RUB 79.5 per GDR (RUB 318 per share, ar2017.x5.ru). dohod X5 page carries the FIVE GDR-era rows; X5 declared RUB per GDR [https://www.dohod.ru/ik/analytics/dividend/x5] [investfunds.ru/stocks/X5-Retail-Group-dr/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIVE",
+    "registry_close": "2019-05-24",
+    "action": "augment",
+    "add": {
+      "amount": 92.06,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RUB 92.06 per GDR (ar2018.x5.ru). dohod X5 page carries the FIVE GDR-era rows; X5 declared RUB per GDR [https://www.dohod.ru/ik/analytics/dividend/x5] [investfunds.ru/stocks/X5-Retail-Group-dr/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIVE",
+    "registry_close": "2020-05-29",
+    "action": "augment",
+    "add": {
+      "amount": 110.47,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RUB 110.47 per GDR. dohod X5 page carries the FIVE GDR-era rows; X5 declared RUB per GDR [https://www.dohod.ru/ik/analytics/dividend/x5] [investfunds.ru/stocks/X5-Retail-Group-dr/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIVE",
+    "registry_close": "2020-12-18",
+    "action": "augment",
+    "add": {
+      "amount": 73.64,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RUB 73.645 per GDR (NSD notice). dohod X5 page carries the FIVE GDR-era rows; X5 declared RUB per GDR [https://www.dohod.ru/ik/analytics/dividend/x5] [investfunds.ru/stocks/X5-Retail-Group-dr/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIVE",
+    "registry_close": "2021-05-28",
+    "action": "augment",
+    "add": {
+      "amount": 110.49,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RUB 110.49 per GDR. dohod X5 page carries the FIVE GDR-era rows; X5 declared RUB per GDR [https://www.dohod.ru/ik/analytics/dividend/x5] [investfunds.ru/stocks/X5-Retail-Group-dr/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIVE",
+    "registry_close": "2021-12-17",
+    "action": "augment",
+    "add": {
+      "amount": 73.65,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RUB 73.65 per GDR (interim declared 2021-11-25, marketscreener). dohod X5 page carries the FIVE GDR-era rows; X5 declared RUB per GDR [https://www.dohod.ru/ik/analytics/dividend/x5] [investfunds.ru/stocks/X5-Retail-Group-dr/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "HHRU",
+    "registry_close": "2021-06-09",
+    "action": "augment",
+    "add": {
+      "amount": 40.05,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "USD 0.55 per ADS x CBR rate on the record date; paid 2021-07-16. [https://www.sec.gov/Archives/edgar/data/1721181/000110465921072697/tm2117688d1_ex99-1.htm]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "HHRU",
+    "registry_close": "2022-01-24",
+    "action": "augment",
+    "add": {
+      "amount": 64.42,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "USD 0.84 per ADS x CBR rate on the record date; paid 2022-02-10. [https://www.sec.gov/Archives/edgar/data/1721181/000110465922051053/hhr-20211231x20f.htm] note 31",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "HHRU",
+    "registry_close": "2021-07-16",
+    "action": "drop",
+    "match": {
+      "amount": 40.33,
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Payment date of the 2021-06-09 payout, dohod's own FX conversion.",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "HHRU",
+    "registry_close": "2022-02-10",
+    "action": "drop",
+    "match": {
+      "amount": 64.11,
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Payment date of the 2022-01-24 payout, dohod's own FX conversion.",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "ENPL",
+    "registry_close": "2017-11-30",
+    "action": "augment",
+    "add": {
+      "amount": 12.76,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "En+ interim USD 0.21875 per GDR x CBR rate on the record date; dohod ENPG page gives 12.93. [https://enplusgroup.com/ru/investors/shareholders/dividends/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "ENPL",
+    "registry_close": "2018-03-21",
+    "action": "augment",
+    "add": {
+      "amount": 6.87,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "En+ USD 0.1190 per GDR x CBR rate on the record date; dohod ENPG page gives 6.84. [https://enplusgroup.com/ru/investors/shareholders/dividends/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "ENPL",
+    "registry_close": "2017-11-30",
+    "action": "drop",
+    "match": {
+      "amount": 12.93,
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Same payout as the manual row; dohod's own FX conversion.",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "ENPL",
+    "registry_close": "2018-03-21",
+    "action": "drop",
+    "match": {
+      "amount": 6.84,
+      "source": "skill_fill_dohod"
+    },
+    "reason": "Same payout as the manual row; dohod's own FX conversion.",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIXP",
+    "registry_close": "2021-09-24",
+    "action": "augment",
+    "add": {
+      "amount": 11.5,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "H1 2021 interim, RUB 11.5 per GDR, paid 2021-09-28. FY2021 final 6.8 was cancelled 2022-09. [https://ir.fix-price.com/investors/dividends/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIXP",
+    "registry_close": "2024-01-26",
+    "action": "augment",
+    "add": {
+      "amount": 9.84,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "RUB 9.84 per GDR. [https://ir.fix-price.com/investors/dividends/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIXP",
+    "registry_close": "2024-12-13",
+    "action": "augment",
+    "add": {
+      "amount": 35.3137,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "2.58409 + 0.47936 + 32.25025 RUB per GDR (press release 2024-12-05). Price gap 206.0 -> 166.0 on 2024-12-13 confirms. [https://ir.fix-price.com/investors/dividends/]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIXP",
+    "registry_close": "2021-09-24",
+    "action": "drop",
+    "match": {
+      "amount": 0.0728,
+      "source": "skill_fill_dohod"
+    },
+    "reason": "dohod FIXR page: issuer RUB figure divided by ~158 (wrong unit).",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIXP",
+    "registry_close": "2024-01-26",
+    "action": "drop",
+    "match": {
+      "amount": 0.0623,
+      "source": "skill_fill_dohod"
+    },
+    "reason": "dohod FIXR page: issuer RUB figure divided by ~158 (wrong unit).",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "FIXP",
+    "registry_close": "2024-12-13",
+    "action": "drop",
+    "match": {
+      "amount": 0.2235,
+      "source": "skill_fill_dohod"
+    },
+    "reason": "dohod FIXR page: issuer RUB figure divided by ~158 (wrong unit).",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "RUALR",
+    "registry_close": "2015-10-28",
+    "action": "augment",
+    "add": {
+      "amount": 10.75,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "1 RDR = 10 RUSAL shares (RUALR 259 vs RUAL 25.9 on 2015-10-20). USD 0.01645 per share x 10 x CBR rate on the record date. Date as stored for RUAL. [rusal.ru dividends; HKEX FCBWR088529_20151016.pdf]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "RUALR",
+    "registry_close": "2016-09-30",
+    "action": "augment",
+    "add": {
+      "amount": 10.39,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "1 RDR = 10 RUSAL shares. USD 0.01645 per share x 10 x CBR rate on the NSD record date. [nfksber.ru/upload/iblock/6db/4oxdvkoolndtl7dlc32gnp9xlvebbgb5.pdf]",
+    "resolved_at": "2026-10-12"
+  },
+  {
+    "ticker": "OKEY",
+    "action": "ignore",
+    "registry_close": "2022-08-01",
+    "match": {
+      "source": "skill_fill_smartlab"
+    },
+    "applies_to_ym_pattern": "2022-08",
+    "reason": "smart-lab 1.77 vs stored 1.87 (dohod); one payout, stored row kept.",
+    "verified_at": "2026-10-12"
+  },
+  {
+    "ticker": "AGRO",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_dohod"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "RAGR page values are the issuer RUB per GDR divided by ~7, cause unknown. Stored rows come from Rusagro press releases.",
+    "verified_at": "2026-10-12"
+  },
+  {
+    "ticker": "AGRO",
+    "action": "ignore",
+    "match": {
+      "source": "skill_fill_smartlab"
+    },
+    "applies_to_ym_pattern": "*",
+    "reason": "RAGR page values are the issuer RUB per GDR divided by ~7, cause unknown. Stored rows come from Rusagro press releases.",
+    "verified_at": "2026-10-12"
   }
 ]

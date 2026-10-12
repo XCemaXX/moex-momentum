@@ -30,3 +30,21 @@
 - Для VKCO цены и дивиденды подчиняются одной политике.
 - Тест на инвариант: если пара `old → new` есть в `tickers_manual.json` как redomicile, changeover
   не сшивает её цены (или наоборот — по итогам п. 1).
+
+## Результат (2026-10-12)
+
+- ISS: MAIL — `TYPE = depositary_receipt` (ГДР VK Company Limited, ISIN US5603172082). Последний торговый день
+  MAIL — 2021-12-13, первый день VKCO — 2021-12-14. Разрыва нет: это changeover-переименование той же GDR.
+- 2021-10-12 — дата смены названия Mail.ru Group → VK, не смена юрлица. Запись `MAIL → VKCO` удалена из
+  `tickers_manual.json`. Цены и дивиденды VKCO теперь под одной политикой: сшивка через changeover.
+- Реальная редомициляция (GDR → акция МКПАО «ВК», ISIN RU000A106YF0) прошла осенью 2023 под тем же SECID VKCO:
+  разрыв торгов 2023-09-18 … 2023-10-20. Ряд VKCO через него непрерывен. Разрезать один SECID модель не умеет;
+  дивидендов у VK нет, влияния нет.
+- MAIL остаётся в словаре как старая нога changeover, как TCSG, EPLN и др. Один слот во вселенной держит
+  `_drop_renamed_duplicates`: MAIL до 2021-11, VKCO с 2021-12.
+- Тест `test_redomicile_pair_has_no_changeover_edge`: ни одна пара redomicile (old ≠ new) не совпадает с ребром
+  changeover. На прежнем `tickers_manual.json` падает на `(MAIL, VKCO)`.
+- `test_predecessor_cutoff_manual_wins_even_with_changeover` переведён на синтетическую пару.
+- `docs/methodology.md`: MAIL→VKCO перенесён из примеров редомициляций в примеры переименований.
+- Пересчёт с нуля: `data/momentum`, `docs/pages/data.json`, страница Магов и эталон `tests/reference` побайтно
+  не изменились.

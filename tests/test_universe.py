@@ -6,9 +6,12 @@ from pathlib import Path
 
 import pandas as pd
 
-from momentum.universe import load_panel, universe_at
+import tickers as t_mod
+from config import ANALYSIS_START_DATE, SAME_ISSUER_LISTINGS, UNIVERSE_TOP_N_LIQUID
+from momentum.universe import load_panel, rename_edges, universe_at
 from storage.records import write_records_atomic
 from storage.schemas import MONTHLY_FIELDS
+from tests.conftest import DATA_DIR, Computed
 
 
 def _write_monthly(
@@ -199,3 +202,41 @@ def test_self_referencing_history_is_not_a_rename(tmp_path: Path) -> None:
         pd.Period("2021-02", "M"), returns_panel, tickers, value_panel=value_panel, top_n=5
     )
     assert got == ["OLD"]
+
+
+def test_same_issuer_listings_keep_the_more_liquid_leg(tmp_path: Path) -> None:
+    """RUAL and RUALR are one claim on RUSAL with no rename edge between them."""
+    months = [str(pd.Period("2016-01", "M") + i) for i in range(13)]
+    returns: list[float | None] = [None, *[0.01] * 12]
+    _write_monthly(tmp_path, "RUAL", months, returns, monthly_value=1e9)
+    _write_monthly(tmp_path, "RUALR", months, returns, monthly_value=1e8)
+    _write_monthly(tmp_path, "OTHER", months, returns, monthly_value=1e7)
+    returns_panel, _c, value_panel = load_panel(tmp_path)
+    tickers = {tk: {"type": "share"} for tk in ("RUAL", "RUALR", "OTHER")}
+    t = pd.Period(months[-1], "M")
+
+    for top_n in (None, 2):
+        got = universe_at(t, returns_panel, tickers, value_panel=value_panel, top_n=top_n)
+        assert got == ["OTHER", "RUAL"], top_n
+
+
+def test_no_issuer_takes_two_slots(computed: Computed) -> None:
+    """Rename edges, redomiciles and same-issuer listings: never both legs in one month."""
+    tickers = t_mod.load(DATA_DIR / "tickers.json")
+    manual = t_mod.load_manual(DATA_DIR / "tickers_manual.json")
+    pairs = {(old, new) for old, new, _ in rename_edges(tickers)}
+    pairs |= {
+        (m["old_secid"], m["new_secid"])
+        for m in manual
+        if m["type"] == "redomicile" and m["old_secid"] != m["new_secid"]
+    }
+    # Listed here too: the rule lives in config, the test must not inherit its gaps.
+    pairs |= {*SAME_ISSUER_LISTINGS, ("RUAL", "RUALR")}
+    returns_panel, _c, value_panel = computed.panels
+    start = pd.Period(ANALYSIS_START_DATE, freq="M")
+    clashes: list[tuple[str, str, str, int | None]] = []
+    for t in returns_panel.index[returns_panel.index >= start]:
+        for top_n in (None, UNIVERSE_TOP_N_LIQUID):
+            got = set(universe_at(t, returns_panel, tickers, value_panel=value_panel, top_n=top_n))
+            clashes += [(str(t), a, b, top_n) for a, b in pairs if a in got and b in got]
+    assert clashes == []
