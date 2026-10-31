@@ -50,6 +50,7 @@ def computed(tmp_path_factory: pytest.TempPathFactory) -> Computed:
         splits_dir=DATA_DIR / "splits",
         output_dir=monthly_dir,
         from_scratch=True,
+        month_close_path=DATA_DIR / "month_close.json",
     )
     panels = load_panel(monthly_dir)
     tickers_dict = t_mod.load(DATA_DIR / "tickers.json")

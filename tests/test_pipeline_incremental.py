@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import logging
 from datetime import date, timedelta
 from pathlib import Path
@@ -261,6 +262,35 @@ def test_derive_as_of_is_the_day_after_the_last_bar_in_the_tree(tmp_path: Path) 
     _write_prices(d / "OLD.csv", [{"date": "2018-06-14", "close": 1.0, "value": 1.0, "volume": 1}])
     _write_prices(d / "NEW.csv", [{"date": "2026-09-04", "close": 1.0, "value": 1.0, "volume": 1}])
     assert derive_as_of(d) == pd.Timestamp("2026-09-05")
+
+
+@pytest.mark.parametrize(
+    ("last_bar", "expected"),
+    [
+        ("2026-10-30", "2026-11-01"),  # declared last trading day → October closed
+        ("2026-11-02", "2026-11-03"),  # data passed the month → mark is a no-op
+        ("2026-10-29", None),  # Friday bar missing → refuse
+        ("2026-10-31", None),  # trading Saturday arrived → refuse
+    ],
+)
+def test_derive_as_of_honours_the_month_close_mark(
+    tmp_path: Path, last_bar: str, expected: str | None
+) -> None:
+    d = tmp_path / "p"
+    _write_prices(d / "A.csv", [{"date": last_bar, "close": 1.0, "value": 1.0, "volume": 1}])
+    mark = tmp_path / "month_close.json"
+    mark.write_text(json.dumps({"month": "2026-10", "last_trading_day": "2026-10-30"}))
+    if expected is None:
+        with pytest.raises(ValueError, match="last stored bar"):
+            derive_as_of(d, mark)
+    else:
+        assert derive_as_of(d, mark) == pd.Timestamp(expected)
+
+
+def test_derive_as_of_without_a_mark_file_is_the_day_after(tmp_path: Path) -> None:
+    d = tmp_path / "p"
+    _write_prices(d / "A.csv", [{"date": "2026-10-30", "close": 1.0, "value": 1.0, "volume": 1}])
+    assert derive_as_of(d, tmp_path / "absent.json") == pd.Timestamp("2026-10-31")
 
 
 def test_derive_as_of_on_an_empty_tree_is_none(tmp_path: Path) -> None:

@@ -121,12 +121,17 @@ def _maybe_nan(v: object) -> float | None:
     return f
 
 
-def derive_as_of(prices_iss_dir: Path) -> pd.Timestamp | None:
+def derive_as_of(prices_iss_dir: Path, month_close_path: Path | None = None) -> pd.Timestamp | None:
     """Cutoff for the in-progress month, taken from the data instead of the clock.
 
     One value for the whole run, never per ticker: a delisted ticker's final
     month is partial by definition, so a per-ticker cutoff would strip the last
     month off roughly 700 of them and silently reshape the universe.
+
+    `month_close_path` lets a human close a month whose remaining days do not
+    trade, so it publishes before next month's bars exist. It applies only while
+    the last bar is inside that month, and only if it is the declared last
+    trading day: a missing Friday bar or a trading Saturday fails loudly.
     """
     last: pd.Timestamp | None = None
     for f in sorted(prices_iss_dir.glob("*.csv")):
@@ -135,7 +140,20 @@ def derive_as_of(prices_iss_dir: Path) -> pd.Timestamp | None:
             continue
         d = pd.Timestamp(str(rows[-1]["date"]))
         last = d if last is None else max(last, d)
-    return None if last is None else last + pd.Timedelta(days=1)
+    if last is None:
+        return None
+    if month_close_path is not None and month_close_path.exists():
+        mark = json.loads(month_close_path.read_text(encoding="utf-8"))
+        month = pd.Period(mark["month"], freq="M")
+        if last.to_period("M") == month:
+            declared = pd.Timestamp(mark["last_trading_day"])
+            if last != declared:
+                raise ValueError(
+                    f"{month_close_path}: closes {month} on {declared.date()}, "
+                    f"but the last stored bar is {last.date()}"
+                )
+            return month.end_time.normalize() + pd.Timedelta(days=1)
+    return last + pd.Timedelta(days=1)
 
 
 def compute_one(
@@ -201,11 +219,12 @@ def compute_all(
     from_scratch: bool = False,
     tax: float = DIVIDEND_TAX,
     as_of: pd.Timestamp | None = None,
+    month_close_path: Path | None = None,
 ) -> dict[str, MonthlyMeta]:
     output_dir.mkdir(parents=True, exist_ok=True)
     source = "explicit"
     if as_of is None:
-        as_of = derive_as_of(prices_iss_dir)
+        as_of = derive_as_of(prices_iss_dir, month_close_path)
         source = "from the price tree"
     if as_of is not None:
         LOG.info(

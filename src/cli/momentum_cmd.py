@@ -22,6 +22,11 @@ def compute_monthly(
     prices_iss_dir: Path = typer.Option(Path("data/prices_iss"), "--prices-iss-dir"),
     dividends_dir: Path = typer.Option(Path("data/dividends"), "--dividends-dir"),
     splits_dir: Path = typer.Option(Path("data/splits"), "--splits-dir"),
+    month_close: Path = typer.Option(
+        Path("data/month_close.json"),
+        "--month-close",
+        help="Declares a month closed before next month's bars exist.",
+    ),
     output_dir: Path = typer.Option(Path("data/momentum/monthly"), "--output-dir"),
     ticker: list[str] = typer.Option([], "--ticker", "-t"),
     from_scratch: bool = typer.Option(
@@ -51,6 +56,7 @@ def compute_monthly(
             ticker_filter=selected,
             from_scratch=from_scratch,
             as_of=as_of_ts,
+            month_close_path=month_close,
         )
     except IncrementalDriftError as exc:
         typer.echo(str(exc), err=True)

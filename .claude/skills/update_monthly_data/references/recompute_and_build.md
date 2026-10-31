@@ -6,6 +6,14 @@ recompute mid-run is wasted work.
 
 ## Recompute (runbook step 5)
 
+**Month-close mark.** If the run happens before the first trading day of the next
+month and the rest of the month does not trade, write
+`data/month_close.json` = `{"month": "YYYY-MM", "last_trading_day": "YYYY-MM-DD"}`
+(overwrite the old one; it is a committed input). Check the production calendar
+first — working Saturdays exist (2018-12-29, 2024-12-28). Without the mark the month
+stays unpublished and the re-blessed reference turns CI red. A mismatch between the
+mark and the last stored bar fails `compute monthly` loudly.
+
 ```bash
 momentum corporate detect                       # WARN-only anomaly detector
 momentum compute monthly --from-scratch         # rebless baselines after ingest
@@ -62,7 +70,11 @@ incremental path guards against. Without it, drifted months trip the baseline ga
    the mages page.
 2. Report what changed: new month-end, dividend adds/skips, cascade outcome,
    detector suspicion count.
-3. Suggest a one-line commit message — **the user commits.** Typical split:
+3. Mirror CI in the existing `.venv`: `uv lock --check`, `ruff format --check`,
+   `ruff check`, `mypy src`, `pytest`, then `compute monthly --from-scratch` with no
+   `--as-of` must still reach the new month. Not `uv sync --locked`: it removes
+   packages installed by hand (`pdfplumber` for the broker-report skill).
+4. Suggest a one-line commit message — **the user commits.** Typical split:
    - `chore: monthly data update through <YYYY-MM-DD>`
    - a separate `feat:`/`fix:` if any script/README/skill was touched this run.
 
