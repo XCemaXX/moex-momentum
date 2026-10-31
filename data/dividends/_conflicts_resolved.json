@@ -5294,5 +5294,17 @@
     "applies_to_ym_pattern": "*",
     "reason": "RAGR page values are the issuer RUB per GDR divided by ~7, cause unknown. Stored rows come from Rusagro press releases.",
     "verified_at": "2026-10-12"
+  },
+  {
+    "ticker": "BSPBP",
+    "registry_close": "2026-10-05",
+    "action": "augment",
+    "add": {
+      "amount": 0.22,
+      "currency": "RUB",
+      "source": "manual_disclosure"
+    },
+    "reason": "Fixed pref dividend for 1H 2026, same record date as BSPB 19.17. tbank has no BSPBP page. [dohod; investfuture.ru status approved]",
+    "resolved_at": "2026-10-31"
   }
 ]

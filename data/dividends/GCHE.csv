@@ -21,3 +21,4 @@ registry_close,amount,currency,source,registry_close_source,split_adjusted_back_
 2024-09-29,142.11,RUB,moex_iss,,
 2025-04-07,98.92,RUB,moex_iss,,
 2026-04-07,229.37,RUB,skill_fill_yahoo,yahoo_ex_div,
+2026-10-11,120.19,RUB,skill_fill_tbank,tbank_reestr,
