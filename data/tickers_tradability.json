@@ -1,0 +1,370 @@
+{
+  "AGRO": [
+    {
+      "from": "2024-12-03",
+      "till": null,
+      "reason": "redomicile: this listing stopped; the share trades as RAGR from 2025-02-17 (tickers_manual.json)"
+    }
+  ],
+  "AMEZ": [
+    {
+      "from": "2025-03-13",
+      "till": null,
+      "reason": "delisted after majority holder Ural-VK bought out the free float [eanews.ru 2025-02-03]"
+    }
+  ],
+  "AVAZ": [
+    {
+      "from": "2018-11-27",
+      "till": null,
+      "reason": "squeeze-out by Alliance Rostec Auto, then delisted [moex.com/n21673]"
+    }
+  ],
+  "AVAZP": [
+    {
+      "from": "2018-11-27",
+      "till": null,
+      "reason": "squeeze-out by Alliance Rostec Auto, then delisted [moex.com/n21673]"
+    }
+  ],
+  "BANE": [
+    {
+      "from": "2014-04-22",
+      "till": "2014-05-06",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "BANEP": [
+    {
+      "from": "2014-04-22",
+      "till": "2014-05-06",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "BSPBP": [
+    {
+      "from": "2013-05-08",
+      "till": "2021-04-19",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "CIAN": [
+    {
+      "from": "2025-02-06",
+      "till": null,
+      "reason": "redomicile: this listing stopped; the share trades as CNRU from 2025-02-07 (tickers_manual.json)"
+    }
+  ],
+  "FEES": [
+    {
+      "from": "2022-12-21",
+      "till": "2023-01-11",
+      "reason": "FSK/Rosseti reorganization; no trades in this window"
+    }
+  ],
+  "FIVE": [
+    {
+      "from": "2024-04-04",
+      "till": null,
+      "reason": "redomicile: this listing stopped; the share trades as X5 from 2025-01-09 (tickers_manual.json)"
+    }
+  ],
+  "FIXP": [
+    {
+      "from": "2025-06-21",
+      "till": null,
+      "reason": "redomicile: this listing stopped; the share trades as FIXR from 2025-07-09 (tickers_manual.json)"
+    }
+  ],
+  "FTRE": [
+    {
+      "from": "2020-01-16",
+      "till": null,
+      "reason": "squeeze-out by majority holder, delisted 2020-04 [moex.com/n26552]"
+    }
+  ],
+  "GLTR": [
+    {
+      "from": "2024-10-19",
+      "till": null,
+      "reason": "GDRs delisted from MOEX, listing moved to AIX; no MOEX successor [1prime.ru 2024-10-21]"
+    }
+  ],
+  "GRNT": [
+    {
+      "from": "2023-05-17",
+      "till": null,
+      "reason": "moved off the listed boards to unlisted ones; cause not confirmed by a MOEX notice"
+    }
+  ],
+  "HHRU": [
+    {
+      "from": "2024-08-10",
+      "till": null,
+      "reason": "redomicile: this listing stopped; the share trades as HEAD from 2024-09-25 (tickers_manual.json)"
+    }
+  ],
+  "IRAO": [
+    {
+      "from": "2014-12-19",
+      "till": "2015-01-20",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "KAZT": [
+    {
+      "tradable": "2014-05",
+      "reason": "thin name, next trade 2014-06-02"
+    }
+  ],
+  "LSNG": [
+    {
+      "from": "2020-03-17",
+      "till": "2020-05-18",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "LSNGP": [
+    {
+      "from": "2020-03-17",
+      "till": "2020-05-18",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "MDMG": [
+    {
+      "from": "2024-05-23",
+      "till": "2024-06-17",
+      "reason": "MD Medical redomicile, trading halted"
+    }
+  ],
+  "MNPZ": [
+    {
+      "from": "2014-07-23",
+      "till": null,
+      "reason": "squeeze-out of minorities by Gazprom Neft [moex.com/n5821]"
+    }
+  ],
+  "MOBB": [
+    {
+      "tradable": "2014-05",
+      "reason": "thin name, next trade 2014-06-09"
+    },
+    {
+      "tradable": "2014-06",
+      "reason": "thin name, next trade 2014-07-10"
+    },
+    {
+      "tradable": "2014-07",
+      "reason": "thin name, next trade 2014-08-04"
+    },
+    {
+      "tradable": "2014-08",
+      "reason": "thin name, next trade 2014-09-05"
+    }
+  ],
+  "MSTT": [
+    {
+      "from": "2020-09-19",
+      "till": "2020-10-14",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "MTSS": [
+    {
+      "from": "2014-09-20",
+      "till": "2014-10-03",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "OZON": [
+    {
+      "from": "2025-09-23",
+      "till": "2025-11-11",
+      "reason": "Ozon redomicile, trading halted"
+    }
+  ],
+  "PHST": [
+    {
+      "from": "2016-11-24",
+      "till": null,
+      "reason": "squeeze-out by Augment Investments, then delisted [moex.com/n14392]"
+    }
+  ],
+  "PIKK": [
+    {
+      "from": "2026-10-16",
+      "till": null,
+      "reason": "delisting approved 2026-10-13, squeeze-out at 551.4 by 2026-11-14"
+    }
+  ],
+  "POLY": [
+    {
+      "tradable": "2015-04",
+      "reason": "thin name, next trade 2015-05-05"
+    },
+    {
+      "from": "2023-07-26",
+      "till": "2023-09-19",
+      "reason": "Polymetal redomicile to AIX, trading halted"
+    },
+    {
+      "from": "2024-09-24",
+      "till": null,
+      "reason": "Solidcore (ex-Polymetal) delisted from MOEX, trades on AIX as CORE; no MOEX successor [forbes.kz]"
+    }
+  ],
+  "PRTK": [
+    {
+      "from": "2020-07-15",
+      "till": null,
+      "reason": "squeeze-out by controlling shareholder [investfuture.ru]"
+    }
+  ],
+  "RGSS": [
+    {
+      "tradable": "2014-11",
+      "reason": "thin name, next trade 2014-12-02"
+    }
+  ],
+  "RNHS": [
+    {
+      "from": "2014-04-17",
+      "till": null,
+      "reason": "squeeze-out by Rosneft after its offer reached 99.7% [interfax.ru/russia/353540]"
+    }
+  ],
+  "RNHSP": [
+    {
+      "from": "2014-04-17",
+      "till": null,
+      "reason": "squeeze-out by Rosneft after its offer reached 99.7% [interfax.ru/russia/353540]"
+    }
+  ],
+  "RTKM": [
+    {
+      "from": "2014-03-20",
+      "till": "2014-04-02",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "RTKMP": [
+    {
+      "from": "2014-03-20",
+      "till": "2014-04-02",
+      "reason": "ISS: zero trades on every board in this window"
+    }
+  ],
+  "RUALR": [
+    {
+      "from": "2017-08-09",
+      "till": null,
+      "reason": "Sberbank RDR program on RUSAL terminated; RUAL shares stayed listed [moex.com/n16607]"
+    }
+  ],
+  "SEMZ": [
+    {
+      "from": "2015-04-04",
+      "till": null,
+      "reason": "issuer declared bankrupt, delisted [moex.com/n9474]"
+    }
+  ],
+  "SKYC": [
+    {
+      "from": "2016-02-09",
+      "till": "2016-03-07",
+      "reason": "no trades for a month"
+    },
+    {
+      "tradable": "2016-03",
+      "reason": "thin name, next trade 2016-04-07"
+    },
+    {
+      "tradable": "2016-04",
+      "reason": "thin name, next trade 2016-05-13"
+    },
+    {
+      "from": "2016-05-14",
+      "till": "2016-11-22",
+      "reason": "no trades for six months"
+    }
+  ],
+  "TCSG": [
+    {
+      "from": "2024-02-16",
+      "till": "2024-03-18",
+      "reason": "TCS redomicile, trading halted"
+    }
+  ],
+  "TGKD": [
+    {
+      "from": "2022-09-14",
+      "till": null,
+      "reason": "squeeze-out of minorities, then delisted [moex.com/n51307]"
+    }
+  ],
+  "TGKO": [
+    {
+      "from": "2017-10-21",
+      "till": null,
+      "reason": "suspended: tax office moved to strike the issuer from the register; MOEX notice not seen [smart-lab forum]"
+    }
+  ],
+  "TRCN": [
+    {
+      "tradable": "2013-07",
+      "reason": "thin name, next trade 2013-08-05"
+    },
+    {
+      "from": "2020-07-15",
+      "till": null,
+      "reason": "squeeze-out by controlling shareholder [investfuture.ru]"
+    }
+  ],
+  "URKA": [
+    {
+      "from": "2019-09-18",
+      "till": null,
+      "reason": "squeeze-out by majority holder [moex.com/n25002]"
+    }
+  ],
+  "UTSY": [
+    {
+      "from": "2018-09-20",
+      "till": null,
+      "reason": "disclosure breach: moved to a restricted mode, then settlement codes removed [moex.com/n20951, n23493]"
+    }
+  ],
+  "VKCO": [
+    {
+      "from": "2023-09-19",
+      "till": "2023-10-20",
+      "reason": "VK redomicile, trading halted"
+    }
+  ],
+  "VRAO": [
+    {
+      "from": "2016-05-11",
+      "till": "2016-06-09",
+      "reason": "ISS: zero trades on every board in this window"
+    },
+    {
+      "from": "2016-06-15",
+      "till": null,
+      "reason": "squeeze-out after RusHydro offer (VRAOP notice moex.com/n12820; VRAO notice not seen)"
+    }
+  ],
+  "VRPH": [
+    {
+      "tradable": "2014-08",
+      "reason": "thin name, next trade 2014-09-01"
+    }
+  ],
+  "YNDX": [
+    {
+      "from": "2024-06-15",
+      "till": null,
+      "reason": "redomicile: this listing stopped; the share trades as YDEX from 2024-07-24 (tickers_manual.json)"
+    }
+  ]
+}

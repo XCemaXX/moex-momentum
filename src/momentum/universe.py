@@ -19,7 +19,7 @@ from typing import cast
 
 import pandas as pd
 
-from config import SAME_ISSUER_LISTINGS, UNIVERSE_MIN_MONTHLY_CLOSES
+from config import SAME_ISSUER_LISTINGS, STALE_CLOSE_TRADING_DAYS, UNIVERSE_MIN_MONTHLY_CLOSES
 from storage.records import read_records
 from storage.schemas import MONTHLY_CASTS
 from tickers import TickersDict
@@ -83,6 +83,47 @@ def _share_active(tickers_dict: TickersDict, tk: str, t: pd.Period) -> bool:
     if not entry or entry.get("type") != "share":
         return False
     return _is_active(cast(dict[str, object], entry), t)
+
+
+def _tradable(tickers_dict: TickersDict, tk: str, t: pd.Period) -> bool:
+    """False if the last day of month t falls in a manual untradable window."""
+    day = t.to_timestamp(how="end").normalize()
+    for w in (tickers_dict.get(tk) or {}).get("tradability") or ():
+        if "from" not in w:
+            continue
+        till = w.get("till")
+        if pd.Timestamp(w["from"]) <= day and (till is None or day < pd.Timestamp(till)):
+            return False
+    return True
+
+
+def stale_holdings(
+    holdings: dict[pd.Period, dict[str, list[str]]],
+    monthly_dir: Path,
+    calendar: pd.DatetimeIndex,
+    tickers_dict: TickersDict,
+) -> list[tuple[pd.Period, str, str, int]]:
+    """(month, ticker, last bar, trading days missed) for held names whose
+    month-end close is stale and that `tickers_tradability.json` does not ack."""
+    last_bar: dict[str, dict[str, str]] = {}
+    out: list[tuple[pd.Period, str, str, int]] = []
+    for t, buckets in sorted(holdings.items()):
+        days = calendar[calendar.to_period("M") == t]
+        for tk in sorted({tk for names in buckets.values() for tk in names}):
+            if tk not in last_bar:
+                rows = read_records(monthly_dir / f"{tk}.csv", casts=MONTHLY_CASTS)
+                last_bar[tk] = {str(r["month"]): str(r["month_end_date"]) for r in rows}
+            bar = last_bar[tk].get(str(t))
+            if bar is None:
+                continue
+            missed = int((days > pd.Timestamp(bar)).sum())
+            if missed < STALE_CLOSE_TRADING_DAYS:
+                continue
+            entries = (tickers_dict.get(tk) or {}).get("tradability") or ()
+            if any(e.get("tradable") == str(t) for e in entries):
+                continue
+            out.append((t, tk, bar, missed))
+    return out
 
 
 def _trailing_value_medians(
@@ -200,6 +241,9 @@ def universe_at(
     # Before the liquidity cut, so a freed slot is refilled by the next name and
     # the universe keeps its declared size.
     candidates = _drop_renamed_duplicates(candidates, tickers_dict, t)
+    # After the rename dedup: otherwise the successor's stitched file, with the
+    # same stale close, takes the halted predecessor's slot.
+    candidates = [tk for tk in candidates if _tradable(tickers_dict, tk, t)]
 
     medians = None
     if value_panel is not None and not value_panel.empty:

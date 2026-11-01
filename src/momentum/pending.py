@@ -25,7 +25,7 @@ import pandas as pd
 
 from config import PENDING_MIN_AGE_FOR_ESTIMATE, STDEV_DDOF
 from momentum.signals import geometric_mean
-from momentum.universe import _share_active
+from momentum.universe import _share_active, _tradable
 from tickers import TickersDict
 
 # 13 closes ending at t make a ticker q-able (age == 12). Below → candidate.
@@ -146,7 +146,7 @@ def compute_month_pending(
         age, run_start = run
         if age >= _QABLE_AGE:
             continue  # 13+ consecutive closes → q is computed in the universe
-        if not _share_active(tickers_dict, tk, t):
+        if not _share_active(tickers_dict, tk, t) or not _tradable(tickers_dict, tk, t):
             continue
         # Median over the current run only — same value convention as the
         # universe floor it is compared against.

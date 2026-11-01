@@ -45,7 +45,17 @@ class TickerEntry(TypedDict, total=False):
     boards: list[Board]
     history: list[Rebrand]
     delisted_after: str
+    # Attached by `with_tradability` for compute only; never saved to tickers.json.
+    tradability: list[TradabilityEntry]
 
+
+# A window `[from, till)` when the share could not be bought (`till` null = never
+# again), or `tradable: YYYY-MM` acking a stale month-end close as buyable.
+TradabilityEntry = TypedDict(
+    "TradabilityEntry",
+    {"from": str, "till": str | None, "tradable": str, "reason": str},
+    total=False,
+)
 
 TickersDict = dict[str, TickerEntry]
 
@@ -110,6 +120,32 @@ def save_unavailable(path: Path, data: dict[str, dict[str, str]]) -> None:
             f.write(json.dumps(rec, ensure_ascii=False))
             f.write("\n")
     tmp.replace(path)
+
+
+TRADABILITY_NAME = "tickers_tradability.json"  # next to tickers.json
+
+
+def with_tradability(tickers_dict: TickersDict, path: Path) -> TickersDict:
+    """Copy of `tickers_dict` with `data/tickers_tradability.json` attached.
+
+    A separate input because `tickers refresh` rewrites tickers.json from ISS,
+    and ISS keeps a halted share looking listed.
+    """
+    if not path.exists():
+        return tickers_dict
+    with path.open(encoding="utf-8") as f:
+        data: Any = json.load(f)
+    if not isinstance(data, dict):
+        raise ValueError(f"{path}: expected a JSON object")
+    out = dict(tickers_dict)
+    for tk, entries in data.items():
+        if not isinstance(entries, list):
+            raise ValueError(f"{path}: {tk}: expected a list")
+        for e in entries:
+            if not isinstance(e, dict) or ("from" in e) == ("tradable" in e):
+                raise ValueError(f"{path}: {tk}: each entry needs exactly one of from/tradable")
+        out[tk] = {**tickers_dict.get(tk, {}), "tradability": entries}
+    return out
 
 
 def load_manual(path: Path) -> list[ManualEntry]:

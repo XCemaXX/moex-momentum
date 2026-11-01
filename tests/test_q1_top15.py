@@ -96,7 +96,9 @@ def test_inline_top15_matches_topn_fan(computed: Computed) -> None:
     fan = topk_fan(
         panels,
         CurveFitSignal(),
-        t_mod.load(tickers_file),
+        t_mod.with_tradability(
+            t_mod.load(tickers_file), tickers_file.parent / t_mod.TRADABILITY_NAME
+        ),
         start=pd.Period(ANALYSIS_START_DATE, freq="M"),
         top_n=UNIVERSE_TOP_N_LIQUID,
         ks=[k],

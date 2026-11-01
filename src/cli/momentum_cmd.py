@@ -89,6 +89,7 @@ def compute_backtest(
     from config import ANALYSIS_START_DATE
     from momentum.backtest import backtest, write_backtest
     from momentum.signals import SIGNALS
+    from momentum.universe import stale_holdings
 
     if signal not in SIGNALS:
         typer.echo(f"unknown signal {signal!r}; valid: {sorted(SIGNALS)}")
@@ -99,6 +100,8 @@ def compute_backtest(
     if not tickers_dict:
         typer.echo(f"{tickers_file} is empty — run `momentum tickers refresh` first")
         raise typer.Exit(1)
+    tradability_file = tickers_file.parent / t_mod.TRADABILITY_NAME
+    tickers_dict = t_mod.with_tradability(tickers_dict, tradability_file)
 
     start_p = pd.Period(start, freq="M") if start else pd.Period(ANALYSIS_START_DATE, freq="M")
     end_p = pd.Period(end, freq="M") if end else None
@@ -113,6 +116,19 @@ def compute_backtest(
         universe_top_n=top_n if top_n > 0 else None,
         with_pending=(signal == "curve_fit"),
     )
+    calendar = pd.DatetimeIndex(pd.read_csv(indices_dir / "MCFTRR.csv")["date"])
+    stale = stale_holdings(result.holdings, monthly_dir, calendar, tickers_dict)
+    if stale:
+        for t, tk, bar, missed in stale:
+            typer.echo(
+                f"stale close: {t} {tk} last bar {bar}, {missed} trading days missed", err=True
+            )
+        typer.echo(
+            f"{len(stale)} held name(s) with a stale month-end close — add a window or a "
+            f"`tradable` ack to {tradability_file}",
+            err=True,
+        )
+        raise typer.Exit(2)
     out = output_dir / signal
     # pending.json (task 008) only for curve_fit: the block compares against
     # curve_fit boundaries and sits under the curve_fit holdings columns.
@@ -136,6 +152,9 @@ def _research_inputs(
     if not tickers_dict:
         typer.echo(f"{tickers_file} is empty — run `momentum tickers refresh` first", err=True)
         raise typer.Exit(1)
+    tickers_dict = t_mod.with_tradability(
+        tickers_dict, tickers_file.parent / t_mod.TRADABILITY_NAME
+    )
     panels = load_panel(monthly_dir)
     if panels[0].empty:
         typer.echo(f"no monthly panel at {monthly_dir} — run `momentum compute monthly`", err=True)

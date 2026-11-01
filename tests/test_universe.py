@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
 import tickers as t_mod
 from config import ANALYSIS_START_DATE, SAME_ISSUER_LISTINGS, UNIVERSE_TOP_N_LIQUID
-from momentum.universe import load_panel, rename_edges, universe_at
+from momentum.universe import load_panel, rename_edges, stale_holdings, universe_at
 from storage.records import write_records_atomic
 from storage.schemas import MONTHLY_FIELDS
 from tests.conftest import DATA_DIR, Computed
@@ -92,6 +94,64 @@ def test_universe_respects_delisted_after(tmp_path: Path) -> None:
     # Delisted after t-month-end → included.
     included = {"A": {"type": "share", "delisted_after": "2023-02-01"}}
     assert universe_at(t, panel, included) == ["A"]
+
+
+@pytest.mark.parametrize(
+    ("window", "eligible"),
+    [
+        ({"from": "2023-01-16", "till": None}, False),  # never traded again
+        ({"from": "2023-01-16", "till": "2023-02-06"}, False),  # halt spans month-end
+        ({"from": "2022-12-10", "till": "2023-01-20"}, True),  # resumed before month-end
+        ({"tradable": "2023-01"}, True),  # ack only
+    ],
+)
+def test_universe_respects_untradable_windows(
+    tmp_path: Path, window: dict[str, str | None], eligible: bool
+) -> None:
+    months = [str(pd.Period("2022-01", "M") + i) for i in range(13)]
+    _write_monthly(tmp_path, "A", months, [None] + [0.01] * 12)
+    panel, _, _v = load_panel(tmp_path)
+    tickers_dict = {"A": {"type": "share", "tradability": [window]}}
+    assert universe_at(pd.Period("2023-01", "M"), panel, tickers_dict) == (
+        ["A"] if eligible else []
+    )
+
+
+def test_halted_predecessor_does_not_hand_its_slot_to_the_successor(tmp_path: Path) -> None:
+    """Before the rename the successor's file is a stitched copy with the same stale close."""
+    monthly_dir, _ = _rename_panel(tmp_path)
+    returns_panel, _c, _v = load_panel(monthly_dir)
+    tickers = {
+        "OLD": {"type": "share", "tradability": [{"from": "2021-01-16", "till": "2021-02-15"}]},
+        "NEW": {
+            "type": "share",
+            "history": [
+                {"prev_ticker": "OLD", "renamed": "2021-02-10", "source": "iss_changeover"}
+            ],
+        },
+        "OTHER": {"type": "share"},
+    }
+    assert universe_at(pd.Period("2021-01", "M"), returns_panel, tickers) == ["OTHER"]
+
+
+def test_stale_holdings_flags_unacked_names_only(tmp_path: Path) -> None:
+    _write_monthly(tmp_path, "FRESH", ["2023-01"], [0.01])
+    for tk in ("STALE", "ACKED"):
+        _write_monthly(tmp_path, tk, ["2023-01"], [0.01])
+        p = tmp_path / f"{tk}.csv"
+        p.write_text(p.read_text().replace("2023-01-31", "2023-01-20"))
+    calendar = pd.bdate_range("2023-01-02", "2023-01-31")
+    holdings = {pd.Period("2023-01", "M"): {"Q1": ["FRESH", "STALE"], "Q2": ["ACKED"]}}
+    tickers = {"ACKED": {"type": "share", "tradability": [{"tradable": "2023-01"}]}}
+    got = stale_holdings(holdings, tmp_path, calendar, tickers)
+    assert got == [(pd.Period("2023-01", "M"), "STALE", "2023-01-20", 7)]
+
+
+def test_with_tradability_rejects_an_entry_without_from_or_tradable(tmp_path: Path) -> None:
+    p = tmp_path / "u.json"
+    p.write_text(json.dumps({"A": [{"till": "2023-01-01"}]}))
+    with pytest.raises(ValueError, match="exactly one of"):
+        t_mod.with_tradability({"A": {"type": "share"}}, p)
 
 
 def test_universe_excludes_ticker_with_nan_in_window(tmp_path: Path) -> None:

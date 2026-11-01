@@ -53,7 +53,9 @@ def computed(tmp_path_factory: pytest.TempPathFactory) -> Computed:
         month_close_path=DATA_DIR / "month_close.json",
     )
     panels = load_panel(monthly_dir)
-    tickers_dict = t_mod.load(DATA_DIR / "tickers.json")
+    tickers_dict = t_mod.with_tradability(
+        t_mod.load(DATA_DIR / "tickers.json"), DATA_DIR / t_mod.TRADABILITY_NAME
+    )
     start = pd.Period(ANALYSIS_START_DATE, freq="M")
     for name in SIGNALS_UNDER_TEST:
         result = backtest(

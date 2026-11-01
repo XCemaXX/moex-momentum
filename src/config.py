@@ -42,6 +42,11 @@ TOP_K_CONCENTRATION: int = 15
 # the Nth name moves ~140× over 2013-2026).
 UNIVERSE_TOP_N_LIQUID: int = 100
 
+# A held name whose last bar in month t is this many market trading days or more
+# before the month's last trading day fails the backtest until
+# data/tickers_tradability.json says whether it could be bought (task 061).
+STALE_CLOSE_TRADING_DAYS: int = 4
+
 # Two listings of one issuer's same claim with no rename edge between them. In a
 # month where both are eligible only the more liquid one (window median value)
 # keeps the slot.
